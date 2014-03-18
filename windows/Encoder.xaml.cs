@@ -1163,7 +1163,7 @@ namespace XviD4PSP
 
             string line;
             double fps = Calculate.ConvertStringToDouble(m.outframerate);
-            Regex r = new Regex(@"time=(\d+.\d+)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            Regex r = new Regex(@"time=(\d+:\d+:\d+\.?\d*)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
             Match mat;
 
             //первый проход
@@ -1177,7 +1177,9 @@ namespace XviD4PSP
                     mat = r.Match(line);
                     if (mat.Success)
                     {
-                        worker.ReportProgress((int)(Calculate.ConvertStringToDouble(mat.Groups[1].Value) * fps));
+                        TimeSpan time;
+                        TimeSpan.TryParse(mat.Groups[1].Value, out time);
+                        worker.ReportProgress((int)(time.TotalSeconds * fps));
                     }
                     else
                     {
@@ -1918,8 +1920,8 @@ namespace XviD4PSP
                 if (outext == ".lpcm" || instream.codec == "LPCM")
                     forceformat = " -f s16be";
 
-                info.Arguments = "-map 0." + instream.ff_order + " -i \"" + m.infilepath +
-                    "\" -vn -acodec copy" + forceformat  + " \"" + outfile + "\"";
+                info.Arguments = " -i \"" + m.infilepath + "\" -map 0:" + instream.ff_order +
+                    " -vn -acodec copy" + forceformat  + " \"" + outfile + "\"";
 
                 SetLog("Demuxing audio stream to: " + outstream.audiopath);
                 SetLog(instream.codecshort + " " + instream.bitrate + "kbps " + instream.channels + "ch " + instream.bits + "bit " + instream.samplerate + "khz" +

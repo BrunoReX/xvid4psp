@@ -446,7 +446,7 @@ namespace XviD4PSP
                 encoderProcess.Start();
 
                 string line;
-                string pat = @"time=(\d+.\d+)";
+                string pat = @"time=(\d+:\d+:\d+\.?\d*)";
                 Regex r = new Regex(pat, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
                 Match mat;
 
@@ -460,7 +460,9 @@ namespace XviD4PSP
                         mat = r.Match(line);
                         if (mat.Success == true)
                         {
-                            double ctime = Calculate.ConvertStringToDouble(mat.Groups[1].Value);
+                            TimeSpan time;
+                            TimeSpan.TryParse(mat.Groups[1].Value, out time);
+                            double ctime = time.TotalSeconds;
                             double pr = ((double)ctime / (double)seconds) * 100.0;
                             worker.ReportProgress((int)pr);
                         }
@@ -604,9 +606,9 @@ namespace XviD4PSP
             string _vmap = "", _amap = "";
             if (atracks.Count > 0 && atrack > 0 && atracks.Count >= atrack && acodec != acodecs.DISABLED)
             {
-                _amap = " -map 0." + (int)atracks[atrack - 1];
+                _amap = " -map 0:" + (int)atracks[atrack - 1];
                 if (vtracks.Count > 0 && vcodec != vcodecs.DISABLED)
-                    _vmap = " -map 0." + (int)vtracks[0];
+                    _vmap = " -map 0:" + (int)vtracks[0];
             }
 
             string _srate = "";
@@ -624,15 +626,15 @@ namespace XviD4PSP
             string text = "";
 
             //Сначала удаляем все " -map 0:x"
-            text = Regex.Replace(text_cli.Text, @"\s-map\s0\.\d+", "", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled).Trim();
+            text = Regex.Replace(text_cli.Text, @"\s-map\s0:\d+", "", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled).Trim();
 
             //Определяем, нужно ли вписывать -map
             string map = "";
             if (atracks.Count > 0 && atrack > 0 && atracks.Count >= atrack && acodec != acodecs.DISABLED)
             {
-                map = " -map 0." + (int)atracks[atrack - 1];
+                map = " -map 0:" + (int)atracks[atrack - 1];
                 if (vtracks.Count > 0 && vcodec != vcodecs.DISABLED)
-                    map = " -map 0." + (int)vtracks[0] + map;
+                    map = " -map 0:" + (int)vtracks[0] + map;
 
                 //Ищем, куда бы вписать..
                 int index = -1;
@@ -1155,7 +1157,7 @@ namespace XviD4PSP
 
                 //Удаляем все " -map 0:x", т.к. эта опция зависит от исходника
                 if (combo_atrack.SelectedIndex > 0)
-                    text += Regex.Replace(text_cli.Text, @"\s-map\s0\.\d+", "", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+                    text += Regex.Replace(text_cli.Text, @"\s-map\s0:\d+", "", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
                 else
                     text += text_cli.Text;
 

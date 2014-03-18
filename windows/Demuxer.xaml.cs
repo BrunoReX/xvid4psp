@@ -181,7 +181,7 @@ namespace XviD4PSP
                 else if (outext == ".wav") { acodec = "pcm_s16le"; forceformat = " -f wav"; }
                 else if (outext == ".truehd") forceformat = " -f truehd";
 
-                info.Arguments = "-map 0." + s.ff_order + " -i \"" + source_file + "\" -vn -acodec " + acodec + forceformat + " \"" + outfile + "\"";
+                info.Arguments = " -i \"" + source_file + "\" -map 0:" + s.ff_order + " -vn -acodec " + acodec + forceformat + " \"" + outfile + "\"";
             }
             else if (mode == DemuxerMode.ExtractVideo)
             {
@@ -196,7 +196,7 @@ namespace XviD4PSP
             encoderProcess.Start();
 
             string line;
-            string pat = @"time=(\d+.\d+)";
+            string pat = @"time=(\d+:\d+:\d+\.?\d*)";
             Regex r = new Regex(pat, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
             Match mat;
 
@@ -210,7 +210,9 @@ namespace XviD4PSP
                     mat = r.Match(line);
                     if (mat.Success)
                     {
-                        double ctime = Calculate.ConvertStringToDouble(mat.Groups[1].Value);
+                        TimeSpan time;
+                        TimeSpan.TryParse(mat.Groups[1].Value, out time);
+                        double ctime = time.TotalSeconds;
                         worker.ReportProgress((int)((ctime / m.induration.TotalSeconds) * 100.0));
                     }
                     else

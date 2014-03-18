@@ -174,7 +174,7 @@ namespace XviD4PSP
                 encoderProcess.StartInfo = info;
                 encoderProcess.Start();
 
-                string line, pat = @"time=(\d+.\d+)";
+                string line, pat = @"time=(\d+:\d+:\d+\.?\d*)";
                 Regex r = new Regex(pat, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
                 Match mat;
 
@@ -188,7 +188,9 @@ namespace XviD4PSP
                         mat = r.Match(line);
                         if (mat.Success)
                         {
-                            double ctime = Calculate.ConvertStringToDouble(mat.Groups[1].Value);
+                            TimeSpan time;
+                            TimeSpan.TryParse(mat.Groups[1].Value, out time);
+                            double ctime = time.TotalSeconds;
                             double pr = ((double)ctime / (double)seconds) * 100.0;
                             worker.ReportProgress((int)pr);
                         }
