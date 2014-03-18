@@ -49,12 +49,11 @@ namespace XviD4PSP
            TS,
            M2TS,
            BluRay,
-           PmpAvc,
            DpgNintendoDS,
            Custom
        }
 
-       public enum Muxers { ffmpeg = 1, mp4box, mkvmerge, pmpavc, virtualdubmod, tsmuxer, dpgmuxer, Disabled };
+       public enum Muxers { ffmpeg = 1, mp4box, mkvmerge, virtualdubmod, tsmuxer, dpgmuxer, Disabled };
        public enum Demuxers { ffmpeg, mp4box, pmpdemuxer, mkvextract, tsmuxer, dpgmuxer };
 
        public static string EnumToString(ExportFormats formatenum)
@@ -94,7 +93,6 @@ namespace XviD4PSP
            if (formatenum == ExportFormats.Mpeg1PS) return "MPEG1 PS";
            if (formatenum == ExportFormats.Mpeg2NTSC) return "MPEG2 NTSC";
            if (formatenum == ExportFormats.Mpeg2PAL) return "MPEG2 PAL";
-           if (formatenum == ExportFormats.PmpAvc) return "PMP AVC";
            if (formatenum == ExportFormats.M2TS) return "M2TS";
            if (formatenum == ExportFormats.TS) return "TS";
            if (formatenum == ExportFormats.DpgNintendoDS) return "DPG Nintendo DS";
@@ -141,7 +139,6 @@ namespace XviD4PSP
            if (stringformat == "MPEG1 PS") return ExportFormats.Mpeg1PS;
            if (stringformat == "MPEG2 NTSC") return ExportFormats.Mpeg2NTSC;
            if (stringformat == "MPEG2 PAL") return ExportFormats.Mpeg2PAL;
-           if (stringformat == "PMP AVC") return ExportFormats.PmpAvc;
            if (stringformat == "M2TS") return ExportFormats.M2TS;
            if (stringformat == "TS") return ExportFormats.TS;
            if (stringformat == "DPG Nintendo DS") return ExportFormats.DpgNintendoDS;
@@ -173,9 +170,6 @@ namespace XviD4PSP
 
                case ExportFormats.BluRay:
                    return new string[] { "MPEG2", "x264", "x262" };
-
-               case ExportFormats.PmpAvc:
-                   return new string[] { "x264", "MPEG4", "XviD" };
            }
 
            if (Formats.GetDefaults(format).IsEditable)
@@ -205,8 +199,6 @@ namespace XviD4PSP
                case ExportFormats.BluRay:
                    return new string[] { "PCM", "AC3" };
 
-               case ExportFormats.PmpAvc:
-                   return new string[] { "MP3", "AAC" };
            }
 
            if (Formats.GetDefaults(format).IsEditable)
@@ -451,14 +443,7 @@ namespace XviD4PSP
                        limited_to_stereo = Formats.GetDefaults(m.format).LimitedToStereo;
                }
 
-               if (m.format == ExportFormats.PmpAvc)
-               {
-                   if (instream.channels != 2 && n != 2)
-                       instream.channelconverter = AudioOptions.ChannelConverters.ConvertToDolbyProLogicII;
-                   if (instream.channels == 2 && n != 0)
-                       instream.channelconverter = AudioOptions.ChannelConverters.KeepOriginalChannels;
-               }
-               else if (outstream.codec == "MP2" || outstream.codec == "MP3" || limited_to_stereo)
+               if (outstream.codec == "MP2" || outstream.codec == "MP3" || limited_to_stereo)
                {
                    if (instream.channels == 1 && n == 6 || instream.channels == 1 && n == 1)
                        instream.channelconverter = AudioOptions.ChannelConverters.KeepOriginalChannels;
@@ -535,9 +520,7 @@ namespace XviD4PSP
 
        public static string[] GetValidSampleratesList(Massive m)
        {
-           if (m.format == ExportFormats.PmpAvc)
-               return new string[] { "44100" };
-           else if (m.format == ExportFormats.DpgNintendoDS)
+           if (m.format == ExportFormats.DpgNintendoDS)
                return new string[] { "32000", "48000" }; //"32768"
            else if (Formats.GetDefaults(m.format).IsEditable)
            {
@@ -639,9 +622,6 @@ namespace XviD4PSP
        {
            switch (m.format)
            {
-               case ExportFormats.PmpAvc:
-                   return ".pmp";
-
                case ExportFormats.Mpeg1PS:
                    return ".mpg";
 
@@ -897,14 +877,6 @@ namespace XviD4PSP
                reswlist.Add(1440);
                reswlist.Add(1920);
            }
-           else if (m.format == ExportFormats.PmpAvc)
-           {
-               while (n < 480 + step)
-               {
-                   reswlist.Add(n);
-                   n = n + step;
-               }
-           }
            else if (m.format == ExportFormats.DpgNintendoDS)
            {
                while (n < 256 + step)
@@ -961,15 +933,6 @@ namespace XviD4PSP
                reshlist.Add(576);
                reshlist.Add(720);
                reshlist.Add(1080);
-           }
-           else if (m.format == ExportFormats.PmpAvc)
-           {
-               step = 16;
-               while (n < 272 + step)
-               {
-                   reshlist.Add(n);
-                   n = n + step;
-               }
            }
            else if (m.format == ExportFormats.DpgNintendoDS)
            {
@@ -1105,14 +1068,6 @@ namespace XviD4PSP
 
            if (instream.audiopath == null && ext == ".avs" || aext == ".avs") return "Source - AVS-script";
            else if (instream.audiopath == null && ext == ".grf" || aext == ".grf") return "Source - GRF-file";
-           else if (m.format == ExportFormats.PmpAvc)
-           {
-               if (instream.codecshort != "AAC" && instream.codecshort != "MP3")
-                   return "Codec - " + instream.codecshort;
-               else if (instream.samplerate != "44100")
-                   return "Samplerate - " + instream.samplerate;
-               else return null;
-           }
            else if (m.format == ExportFormats.Mp4PSPAVC || m.format == ExportFormats.Mp4PSPASP || m.format == ExportFormats.Mp4PSPAVCTV)
            {
                if (instream.codecshort != "AAC")
@@ -1208,8 +1163,7 @@ namespace XviD4PSP
            else if (ext == ".d2v") return "Source - DGIndex-project";
            else if (ext == ".dga") return "Source - DGAVCIndex-project";
            else if (ext == ".dgi") return "Source - DGIndexNV-project";
-           else if (m.format == ExportFormats.PmpAvc ||
-                    m.format == ExportFormats.Mp4PSPAVC ||
+           else if (m.format == ExportFormats.Mp4PSPAVC ||
                     m.format == ExportFormats.Mp4PSPASP)
            {
                if (m.inresw > 480 || m.inresh > 272)
@@ -1450,8 +1404,7 @@ namespace XviD4PSP
                format == ExportFormats.Mp4BlackBerry8100 ||
                format == ExportFormats.Mp4BlackBerry8800 ||
                format == ExportFormats.Mp4MotorolaK1 ||
-               format == ExportFormats.Mp4Prada ||
-               format == ExportFormats.PmpAvc)
+               format == ExportFormats.Mp4Prada)
                return "AAC-LC ABR 128k";
            else
                return "AAC-LC VBR 0.45";
@@ -1461,8 +1414,6 @@ namespace XviD4PSP
        {
            if (m.format == ExportFormats.Audio)
                return Muxers.Disabled;
-           else if (m.format == Format.ExportFormats.PmpAvc)
-               return Muxers.pmpavc;
            else if (m.format == ExportFormats.Mpeg1PS)
                return Muxers.ffmpeg;
            else if (m.format == ExportFormats.BluRay)
@@ -1672,9 +1623,6 @@ namespace XviD4PSP
            if (m.format == ExportFormats.BluRay)
                return new string[] { "1.3333 (4:3)", "1.7778 (16:9)", "1.8500", "2.3529" };
 
-           else if (m.format == ExportFormats.PmpAvc)
-               return new string[] { "1.3333 (4:3)", "1.7647 (16:9)", "1.8500", "2.3529" };
-
            else if (Formats.GetDefaults(m.format).IsEditable)
            {
                if (Formats.GetDefaults(m.format).Aspects_IsEditable)
@@ -1874,7 +1822,6 @@ namespace XviD4PSP
        {
            if (m.format == ExportFormats.Mp4PSPAVC ||
                m.format == ExportFormats.Mp4PSPAVCTV ||
-               m.format == ExportFormats.PmpAvc ||
                m.format == ExportFormats.Mp4AppleTV ||
                m.format == ExportFormats.Mov ||
                m.format == ExportFormats.Mp4Archos5G ||
@@ -1894,7 +1841,6 @@ namespace XviD4PSP
                m.format == ExportFormats.Mp4iPod55G ||
                m.format == ExportFormats.Mp4PSPAVC ||
                m.format == ExportFormats.Mp4PSPAVCTV ||
-               m.format == ExportFormats.PmpAvc ||
                m.format == ExportFormats.Mov)
                return "3.0";
            else if (m.format == ExportFormats.Mp4PS3 ||

@@ -150,14 +150,7 @@ namespace XviD4PSP
             }
 
             //муксинг
-            if (muxer == Format.Muxers.pmpavc)
-            {
-                steps++;
-                steps++;
-                steps++;
-                steps++;
-            }
-            else if (muxer != Format.Muxers.Disabled && muxer != 0 && !DontMuxStreams)
+            if (muxer != Format.Muxers.Disabled && muxer != 0 && !DontMuxStreams)
                 steps++;
 
             //точка отсчёта
@@ -566,8 +559,6 @@ namespace XviD4PSP
             string executable = "";
             if (is_x262)
                 info.FileName = Calculate.StartupPath + "\\apps\\x262\\x262.exe";
-            else if (m.format == Format.ExportFormats.PmpAvc)
-                info.FileName = Calculate.StartupPath + "\\apps\\x264_pmp\\x264.exe";
             else
             {
                 if (bdepth != 8) in_depth = "--input-depth " + bdepth + " ";
@@ -1601,7 +1592,6 @@ namespace XviD4PSP
             if (m.vencoding == "Disabled") outstream.audiopath = m.outfilepath;
 
             string ext = Path.GetExtension(m.infilepath).ToLower();
-            if (outstream.codec == "Copy" && ext == ".pmp") return;
 
             string aext;
             if (outstream.codec == "Copy")
@@ -1709,10 +1699,7 @@ namespace XviD4PSP
 
                 if (outstream.codec == "AAC")
                 {
-                    if (m.format == Format.ExportFormats.PmpAvc)
-                        avs.encoderPath = Calculate.StartupPath + "\\apps\\neroAacEnc_pmp\\neroAacEnc.exe";
-                    else
-                        avs.encoderPath = Calculate.StartupPath + "\\apps\\neroAacEnc\\neroAacEnc.exe";
+                    avs.encoderPath = Calculate.StartupPath + "\\apps\\neroAacEnc\\neroAacEnc.exe";
                 }
                 else if (outstream.codec == "QAAC")
                     avs.encoderPath = Calculate.StartupPath + "\\apps\\qaac\\qaac.exe";
@@ -1780,10 +1767,7 @@ namespace XviD4PSP
             encoderProcess = new Process();
             ProcessStartInfo info = new ProcessStartInfo();
 
-            if (m.format == Format.ExportFormats.PmpAvc)
-                info.FileName = Calculate.StartupPath + "\\apps\\neroAacEnc_pmp\\neroAacEnc.exe";
-            else
-                info.FileName = Calculate.StartupPath + "\\apps\\neroAacEnc\\neroAacEnc.exe";
+            info.FileName = Calculate.StartupPath + "\\apps\\neroAacEnc\\neroAacEnc.exe";
 
             info.WorkingDirectory = Path.GetDirectoryName(info.FileName);
             info.UseShellExecute = false;
@@ -2342,7 +2326,7 @@ namespace XviD4PSP
                 {
                     AudioStream stream = new AudioStream();
                     stream.audiopath = Settings.TempPath + "\\" + m.key + ".m4a";
-                    File.Copy(Calculate.StartupPath + "\\apps\\pmp_muxer_avc\\fake.m4a",
+                    File.Copy(Calculate.StartupPath + "\\apps\\Custom\\fake.m4a",
                         stream.audiopath);
                     m.outaudiostreams.Add(stream);
                 }
@@ -3555,195 +3539,6 @@ namespace XviD4PSP
             encoderProcess = null;
         }
 
-        private void make_pmp()
-        {
-            IsNoProgressStage = true;
-
-            if (m.outaudiostreams.Count == 0)
-            {
-                AudioStream stream = new AudioStream();
-                stream.audiopath = Settings.TempPath + "\\" + m.key + ".m4a";
-                File.Copy(Calculate.StartupPath + "\\apps\\pmp_muxer_avc\\fake.m4a",
-                    stream.audiopath);
-                m.outaudiostreams.Add(stream);
-            }
-            AudioStream outstream = (AudioStream)m.outaudiostreams[m.outaudiostream];
-
-            SafeDelete(m.outfilepath);
-
-            busyfile = Path.GetFileName(m.outfilepath);
-            step++;
-
-            //проверка на правильное расширение
-            string testext = Path.GetExtension(m.outvideofile);
-            if (testext == ".h264")
-            {
-                string goodpath = Calculate.RemoveExtention(m.outvideofile, true) + ".264";
-                File.Move(m.outvideofile, goodpath);
-                m.outvideofile = goodpath;
-            }
-
-            //info строка
-            SetLog("Video file: " + m.outvideofile);
-            SetLog("Audio file: " + outstream.audiopath);
-            SetLog("Muxing to: " + m.outfilepath);
-            SetLog(Languages.Translate("Please wait") + "...");
-
-            encoderProcess = new Process();
-            ProcessStartInfo info = new ProcessStartInfo();
-
-            info.FileName = Calculate.StartupPath + "\\apps\\pmp_muxer_avc\\pmp_muxer_avc.exe";
-            info.WorkingDirectory = Path.GetDirectoryName(info.FileName);
-            info.UseShellExecute = false;
-            info.RedirectStandardOutput = true;
-            info.RedirectStandardError = true;
-            info.CreateNoWindow = true;
-
-            string rate = "-r " + m.outframerate.Replace(".", "") + " ";
-            if (m.outvcodec == "Copy")
-            {
-                if (m.inframerate != null)
-                    rate = "-r " + m.inframerate.Replace(".", "") + " ";
-                else
-                    rate = "";
-            }
-
-            string ovext = Path.GetExtension(m.outvideofile).ToLower();
-            if (ovext == ".h264")
-            {
-                File.Move(m.outvideofile, Calculate.RemoveExtention(m.outvideofile, true) + ".264");
-                m.outvideofile = Calculate.RemoveExtention(m.outvideofile, true) + ".264";
-            }
-
-            info.Arguments = rate + 
-                "-w " + m.outresw.ToString() + 
-                " -h " + m.outresh + " -s 1000" +
-                " -v \"" + m.outvideofile + "\"" +
-                " -a \"" + outstream.audiopath + "\""
-                + " -o \"" + m.outfilepath + "\"";
-
-            //прописываем аргументы командной строки
-            SetLog("");
-            if (Settings.ArgumentsToLog)
-            {
-                SetLog("pmp_muxer_avc.exe:" + " " + info.Arguments);
-                SetLog("");
-            }
-
-            SetLog("...import video...");
-
-            encoderProcess.StartInfo = info;
-            encoderProcess.Start();
-            SetPriority(Settings.ProcessPriority);
-
-            string line = "";
-            string pat = @"(\d+)";
-            Regex r = new Regex(pat, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-            Match mat;
-            bool IsNum;
-            int aframes = 0;
-
-            //первый проход
-            //while (!encoderProcess.HasExited)
-            while (line != null)
-            {
-                locker.WaitOne();
-                line = encoderProcess.StandardOutput.ReadLine();
-
-                if (line == null)
-                    break;
-
-                    mat = r.Match(line);
-
-                    try
-                    {
-                        int n = Int32.Parse(line);
-                        IsNum = true;
-                    }
-                    catch
-                    {
-                        if (line.Contains(" / ") && 
-                            !line.Contains("unused_bytes") &&
-                            !line.Contains("difference"))
-                            IsNum = true;
-                        else
-                            IsNum = false;
-                    }
-
-                    if (line.Contains("first frame at"))
-                    {
-                        step++;
-                        SetLog("...import audio...");
-                        string[] separator = new string[] { " " };
-                        string[] a = line.Split(separator, StringSplitOptions.None);
-                        aframes = Convert.ToInt32(a[3]);
-                    }
-
-                    if (line.Contains("Interleaving ..."))
-                    {
-                        step++;
-                        SetLog("...interleaving...");
-                    }
-
-                    if (line.Contains("Writing ..."))
-                    {
-                        step++;
-                        SetLog("...writing...");
-                    }
-
-                    if (mat.Success && IsNum)
-                    {
-                        if (line.Contains(" / ") && !line.Contains("unused_bytes"))
-                        {
-                            string[] separator = new string[] { "/" };
-                            string[] a = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                            worker.ReportProgress((m.outframes / Convert.ToInt32(a[1])) * Convert.ToInt32(a[0]));
-                        }
-                        else
-                        {
-                            if (aframes == 0)
-                                worker.ReportProgress(Convert.ToInt32(mat.Groups[1].Value));
-                            else
-                                worker.ReportProgress((m.outframes / aframes) * Convert.ToInt32(mat.Groups[1].Value));
-                        }
-                    }
-                    else
-                    {
-                        if (line.StartsWith("Status:"))
-                        {
-                            AppendEncoderText(line);
-                            //SetLog(line);
-                        }
-                    }
-            }
-
-            //обнуляем прогресс
-            ResetProgress();
-
-            //чистим ресурсы
-            encoderProcess.Close();
-            encoderProcess.Dispose();
-            encoderProcess = null;
-
-            if (IsAborted || IsErrors) return;
-
-            //проверка на удачное завершение
-            if (!File.Exists(m.outfilepath) || new FileInfo(m.outfilepath).Length == 0)
-            {
-                IsErrors = true;
-                ErrorException(encodertext.ToString());
-            }
-            else
-            {
-                //Удаление лога муксера
-                File.Delete(m.outfilepath + ".log");
-            }
-
-            encodertext.Length = 0;
-
-            SetLog("");
-        }
-
         private void SafeDelete(string file)
         {
             try
@@ -4266,8 +4061,7 @@ namespace XviD4PSP
                     SetLog("MUXING");
                     SetLog("------------------------------");
 
-                    if (muxer == Format.Muxers.pmpavc) make_pmp();
-                    else if (muxer == Format.Muxers.mkvmerge) make_mkv();
+                    if (muxer == Format.Muxers.mkvmerge) make_mkv();
                     else if (muxer == Format.Muxers.ffmpeg) make_ffmpeg_mux();
                     else if (muxer == Format.Muxers.virtualdubmod)
                     {
@@ -4295,9 +4089,7 @@ namespace XviD4PSP
                 IsNoProgressStage = true;
 
                 //THM
-                if (m.format == Format.ExportFormats.PmpAvc)
-                    make_thm(144, 80, true, "png");
-                else if (Formats.GetDefaults(m.format).IsEditable)
+                if (Formats.GetDefaults(m.format).IsEditable)
                 {
                     string thm_def = Formats.GetDefaults(m.format).THM_Format;
                     string thm_format = Formats.GetSettings(m.format, "THM_Format", thm_def);

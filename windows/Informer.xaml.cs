@@ -109,19 +109,7 @@ namespace XviD4PSP
                     }
 
                     //забиваем аудио потоки
-                    if (ext == ".pmp" && Settings.EnableAudio)
-                    {
-                        AudioStream stream = new AudioStream();
-                        stream.codec = "AAC";
-                        stream.codecshort = "AAC";
-                        stream.samplerate = "44100";
-                        stream.bits = 16;
-                        stream.channels = 2;
-                        stream.language = "English";
-                        m.inaudiostreams.Add(stream.Clone());
-                        m.inaudiostream = 0;
-                    }
-                    else if (ext == ".dpg")
+                    if (ext == ".dpg")
                     {
                         dpgmuxer dpg = new dpgmuxer();
                         dpgmuxer.DPGHeader header = dpg.ReadHeader(m.infilepath_source);

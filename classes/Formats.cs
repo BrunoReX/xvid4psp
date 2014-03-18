@@ -1585,7 +1585,7 @@ namespace XviD4PSP
                 this.LimitedToStereo = false;
                 this.LimitedToStereo_IsEditable = true;
 
-                this.Muxers = new string[] { "virtualdubmod", "ffmpeg", "mkvmerge", "mp4box", "tsmuxer", "pmpavc", "dpgmuxer" };
+                this.Muxers = new string[] { "virtualdubmod", "ffmpeg", "mkvmerge", "mp4box", "tsmuxer", "dpgmuxer" };
                 this.Muxer = "mkvmerge";
 
                 this.CLI_ffmpeg = "";
@@ -1594,7 +1594,7 @@ namespace XviD4PSP
                 this.CLI_tsmuxer = "[v]lang=English[/v][a]lang=%lang%[/a][o]--no-pcr-on-video-pid --new-audio-pes --vbr --vbv-len=500[/o]";
                 this.CLI_virtualdubmod = "[v]title=\"%out_name%\"[/v][a]title=\"Audio stream #1\" language=\"%lang%\"[/a][o]interleave=\"1, 500, 1, 0\"[/o]";
 
-                this.Extensions = new string[] { "*", "avi", "flv", "mkv", "3gp", "mp4", "m4v", "mov", "mpg", "ts", "m2ts", "pmp", "dpg" };
+                this.Extensions = new string[] { "*", "avi", "flv", "mkv", "3gp", "mp4", "m4v", "mov", "mpg", "ts", "m2ts", "dpg" };
                 this.Extension = "mkv";
                 this.Splitting = "Disabled";
                 this.DontMuxStreams = false;

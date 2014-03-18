@@ -6052,13 +6052,7 @@ namespace XviD4PSP
                     s.Title = Languages.Translate("Select unique name for output file:");
 
                     int thm_w = 0, thm_h = 0; bool fix_ar = false;
-                    if (m.format == Format.ExportFormats.PmpAvc)
-                    {
-                        thm_w = 144; thm_h = 80; fix_ar = true;
-                        s.Filter = "PNG " + Languages.Translate("files") + "|*.png";
-                        s.FileName = Path.GetFileNameWithoutExtension(m.infilepath) + ".png";
-                    }
-                    else if (Formats.GetDefaults(m.format).IsEditable)
+                    if (Formats.GetDefaults(m.format).IsEditable)
                     {
                         string thm_def = Formats.GetDefaults(m.format).THM_Format;
                         string thm_format = Formats.GetSettings(m.format, "THM_Format", thm_def);

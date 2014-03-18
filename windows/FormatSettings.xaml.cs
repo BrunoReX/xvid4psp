@@ -552,7 +552,7 @@ namespace XviD4PSP
                 " Auto | 22050, 32000, 44100, 48000, 96000, 192000, ...\r\n" + Languages.Translate("Separate by comma.") + _def + StringArrayToString(def.Samplerates);
             if (check_stereo.IsEnabled) check_stereo.ToolTip = Languages.Translate("Maximum numbers of audio channels for this format is 2") + _def + " " + (def.LimitedToStereo ? _on : _off);
             if (combo_Muxer.IsEnabled) combo_Muxer.ToolTip = Languages.Translate("Use this muxer for multiplexing the streams") + ((format == Format.ExportFormats.Custom) ? ".\r\n" + Languages.Translate("Supported formats") +
-                ":\r\n\r\nvirtualdubmod - avi\r\nffmpeg - all formats\r\nmkvmerge - mkv, webm\r\nmp4box - 3gp, mp4, m4v, mov\r\ntsmuxer - ts, m2ts\r\npmpavc - pmp\r\ndpgmuxer - dpg" : "") + _def + def.Muxer;
+                ":\r\n\r\nvirtualdubmod - avi\r\nffmpeg - all formats\r\nmkvmerge - mkv, webm\r\nmp4box - 3gp, mp4, m4v, mov\r\ntsmuxer - ts, m2ts\r\ndpgmuxer - dpg" : "") + _def + def.Muxer;
             if (combo_Extension.IsEnabled) combo_Extension.ToolTip = combo_Extension.Tag = Languages.Translate("Use this extension") + _def + def.Extension;
             if (def.Splitting != "None") combo_split.ToolTip = combo_split.Tag = Languages.Translate("Only for this muxers:") + " mkvmerge, mp4box, tsmuxer" + _def + def.Splitting;
             if (combo_thm_format.IsEnabled)
