@@ -549,7 +549,7 @@ namespace XviD4PSP
                     case ("VirtualDubMod"): mn_apps_Click(menu_virtualdubmod, null); break;
                     case ("AVI-Mux"): mn_apps_Click(menu_avimux, null); break;
                     case ("tsMuxeR"): mn_apps_Click(menu_tsmuxer, null); break;
-                    case ("MKVExtract"): mn_apps_Click(menu_mkvextract, null); break;
+                    case ("MKVcleaver"): mn_apps_Click(menu_mkvcleaver, null); break;
                     case ("MKVMerge"): mn_apps_Click(menu_mkvmerge, null); break;
                     case ("Yamb"): mn_apps_Click(menu_yamb, null); break;
                     //Other
@@ -1044,7 +1044,7 @@ namespace XviD4PSP
                 else if (sender == menu_virtualdubmod) path += "\\apps\\VirtualDubMod\\VirtualDubMod.exe";
                 else if (sender == menu_avimux) path += "\\apps\\AVI-Mux\\AVIMux_GUI.exe";
                 else if (sender == menu_tsmuxer) path += "\\apps\\tsMuxeR\\tsMuxerGUI.exe";
-                else if (sender == menu_mkvextract) path += "\\apps\\MKVtoolnix\\MKVExtractGUI2.exe";
+                else if (sender == menu_mkvcleaver) path += "\\apps\\MKVtoolnix\\MKVcleaver.exe";
                 else if (sender == menu_mkvmerge) path += "\\apps\\MKVtoolnix\\mmg.exe";
                 else if (sender == menu_yamb) path += "\\apps\\MP4Box\\Yamb.exe";
                 else if (sender == menu_directx_update) path += "\\apps\\DirectX_Update\\dxwebsetup.exe";
@@ -1060,7 +1060,7 @@ namespace XviD4PSP
                 else if (sender == folder_virtualdubmod) path += "\\apps\\VirtualDubMod";
                 else if (sender == folder_avimux) path += "\\apps\\AVI-Mux";
                 else if (sender == folder_tsmuxer) path += "\\apps\\tsMuxeR";
-                else if (sender == folder_mkvextract) path += "\\apps\\MKVtoolnix";
+                else if (sender == folder_mkvcleaver) path += "\\apps\\MKVtoolnix";
                 else if (sender == folder_mkvmerge) path += "\\apps\\MKVtoolnix";
                 else if (sender == folder_yamb) path += "\\apps\\MP4Box";
                 else if (((Image)sender).Tag != null) path = ((Image)sender).Tag.ToString();
@@ -2333,7 +2333,7 @@ namespace XviD4PSP
                 menu_virtualdubmod.InputGestureText = HotKeys.GetKeys("VirtualDubMod");
                 menu_avimux.InputGestureText = HotKeys.GetKeys("AVI-Mux");
                 menu_tsmuxer.InputGestureText = HotKeys.GetKeys("tsMuxeR");
-                menu_mkvextract.InputGestureText = HotKeys.GetKeys("MKVExtract");
+                menu_mkvcleaver.InputGestureText = HotKeys.GetKeys("MKVcleaver");
                 menu_mkvmerge.InputGestureText = HotKeys.GetKeys("MKVMerge");
                 menu_yamb.InputGestureText = HotKeys.GetKeys("Yamb");
 
@@ -2533,7 +2533,7 @@ namespace XviD4PSP
                 folder_virtualdubmod.ToolTip = open_folder;
                 folder_avimux.ToolTip = open_folder;
                 folder_tsmuxer.ToolTip = open_folder;
-                folder_mkvextract.ToolTip = open_folder;
+                folder_mkvcleaver.ToolTip = open_folder;
                 folder_mkvmerge.ToolTip = open_folder;
                 folder_yamb.ToolTip = open_folder;
             }

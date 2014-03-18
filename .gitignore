@@ -8,3 +8,4 @@
 *.vspx
 /.git-rewrite
 /bin
+/obj
