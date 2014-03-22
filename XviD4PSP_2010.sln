@@ -1,7 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XviD4PSP", "XviD4PSP_2010.csproj", "{6AC85262-C5F1-46AA-9A7E-CADCAAF33107}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XviD4PSP_2010", "XviD4PSP_2010.csproj", "{6AC85262-C5F1-46AA-9A7E-CADCAAF33107}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4ACA5109-F1C3-46A6-A504-B706D8E26FE4} = {4ACA5109-F1C3-46A6-A504-B706D8E26FE4}
+		{160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B} = {160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_VideoPlayer_2010", "WPF_VideoPlayer\WPF_VideoPlayer_2010.csproj", "{160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeOpenDialog_2010", "SafeOpenDialog\SafeOpenDialog\SafeOpenDialog_2010.csproj", "{4ACA5109-F1C3-46A6-A504-B706D8E26FE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +23,14 @@ Global
 		{6AC85262-C5F1-46AA-9A7E-CADCAAF33107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC85262-C5F1-46AA-9A7E-CADCAAF33107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC85262-C5F1-46AA-9A7E-CADCAAF33107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160CD7F6-3B6B-4434-9AA7-A81BACFDEA3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ACA5109-F1C3-46A6-A504-B706D8E26FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACA5109-F1C3-46A6-A504-B706D8E26FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACA5109-F1C3-46A6-A504-B706D8E26FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACA5109-F1C3-46A6-A504-B706D8E26FE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

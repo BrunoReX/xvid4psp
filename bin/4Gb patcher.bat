@@ -3,28 +3,34 @@
 @goto editb
 
 :check_vs2010
-@if "%VS100COMNTOOLS%"=="" goto check_vs2011
+@if "%VS100COMNTOOLS%"=="" goto check_vs2012
 @call "%VS100COMNTOOLS%vsvars32.bat"
 @goto editb
 
-:check_vs2011
-@if "%VS110COMNTOOLS%"=="" goto error_no_vs
+:check_vs2012
+@if "%VS110COMNTOOLS%"=="" goto check_vs2013
 @call "%VS110COMNTOOLS%vsvars32.bat"
+
+:check_vs2013
+@if "%VS120COMNTOOLS%"=="" goto error_no_vs
+@call "%VS120COMNTOOLS%vsvars32.bat"
 
 :editb
 @call editbin /LARGEADDRESSAWARE XviD4PSP.exe
 @if errorlevel 1 @pause
+@call editbin /LARGEADDRESSAWARE WPF_VideoPlayer.exe
+@if errorlevel 1 @pause
 
-@goto end
+@goto :eof
 
 :error_no_vs
-@echo ERROR: VS90COMNTOOLS, VS100COMNTOOLS or VS110COMNTOOLS variables aren't set.
+@echo ERROR: VS90COMNTOOLS, VS100COMNTOOLS, VS110COMNTOOLS, VS120COMNTOOLS variables aren't set.
 @echo ERROR: Can't determine where to find Visual Studio Tools directory!
 @echo ERROR: Run "editbin.exe /LARGEADDRESSAWARE XviD4PSP.exe" by yourself..
+@echo ERROR: Run "editbin.exe /LARGEADDRESSAWARE WPF_VideoPlayer.exe" by yourself..
 @pause
 
-:end
-@exit
+@goto :eof
 
 ----------
 
