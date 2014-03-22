@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--bitrate 768 --level 3.0 --bframes 0 --b-pyramid none --weightp 0 --ref 1 --no-mixed-refs --no-cabac --subme 6 --trellis 0 --partitions p8x8,b8x8,i4x4 --no-8x8dct --qpmin 10

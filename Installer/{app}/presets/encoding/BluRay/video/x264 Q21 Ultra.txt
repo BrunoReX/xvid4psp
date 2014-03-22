@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 21 --level 4.1 --b-pyramid strict --weightp 0 --partitions all --subme 6 --me umh --nal-hrd vbr --vbv-maxrate 40000 --vbv-bufsize 30000 --aud --keyint 24 --bluray-compat --open-gop

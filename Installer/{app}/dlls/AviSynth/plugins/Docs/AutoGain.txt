@@ -1,0 +1,25 @@
+
+function AutoGain(clip, ext_clip, dark_limit, bright_limit, gamma_limit, input_tv, output_tv)
+---------------------------------------------------------------------------------------------
+by LaTo INV.
+
+
+Changelog:
+----------
+alpha1 - First draft
+alpha2 - SSE2 code, analyze clip, gamma limit
+alpha3 - added dark_min/bright_min
+alpha4 - fixed gamma processing
+alpha5 - reworked dark/bright/gamma limit
+
+
+Parameters:
+-----------
+ext_clip = external analyze clip (if not set, TemporalSoften is used internally)
+
+dark_limit   = amount of allowed change for dark pixels [default: 1.5, range: 1.0~inf]
+bright_limit = amount of allowed change for bright pixels [default: 1.5, range: 1.0~inf]
+gamma_limit  = amount of allowed change for gamma [default: 1.5, range: 1.0~inf]
+
+input_tv  = input range, true = tv range / false = full range [default: true]
+output_tv = output range, true = tv range / false = full range [default: true]

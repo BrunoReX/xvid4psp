@@ -1,0 +1,6 @@
+video codec:
+XviD
+
+video cli:
+-vhqmode 4 -bvhq -lumimasking -max_bframes 1 -nopacked
+-bitrate 3000 -vhqmode 4 -bvhq -lumimasking -max_bframes 1 -nopacked -imin 1 -bmin 1 -pmin 1

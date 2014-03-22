@@ -1,0 +1,960 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MC_Spuds parameter list</title>
+<style type="text/css">
+.style1 {
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: underline;
+}
+.style2 {
+	border: 1px solid #000000;
+}
+.style3 {
+	text-align: center;
+	border: 1px solid #000000;
+}
+.style4 {
+	font-size: large;
+	border: 1px solid #000000;
+}
+.style5 {
+	text-align: center;
+	font-size: large;
+	border: 1px solid #000000;
+}
+.style7 {
+	text-align: center;
+	font-size: large;
+	border: 1px solid #000000;
+	background-color: #00FFFF;
+}
+.style8 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.style9 {
+	text-align: center;
+	border-style: solid;
+	border-width: 1px;
+}
+.style11 {
+	border-style: solid;
+	border-width: 1px;
+}
+.style12 {
+	text-align: center;
+	font-size: large;
+}
+.style14 {
+	font-style: normal;
+}
+.style16 {
+	border: 1px solid #000000;
+	text-align: left;
+}
+.style17 {
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<p class="style17"><strong>Description</strong></p>
+<p class="style8">This script will provide a wide array of denoising videos utilizing 
+motion compensated (mvtools) methods and mask (masktools).&nbsp;&nbsp; To simplify usage a named parameter strength 
+will set many defaults so you don&#39;t have to.&nbsp; Of course they are all 
+override-able should you wish to fine tune and play.&nbsp; </p>
+<p class="style17"><strong>Required Functions</strong></p>
+<p class="style8">There are many tools needed to run the script, using them all 
+correctly and in conjunction with one another is part of what the script does 
+for you.&nbsp; Not all of these functions are used every time, some are unique 
+to various special modes that you can apply to your video, so if you want to 
+utilize everything the script offers then you should get all of these tools.</p>
+<table style="width: 100%" class="style2">
+	<tr>
+		<th class="style16">Function</th>
+		<th class="style16">Code</th>
+		<th class="style16">Discussion</th>
+	</tr>
+	<tr>
+		<td class="style2">mt_masktools: Ver 2.0.32+ </td>
+		<td class="style2"><a href="http://manao4.free.fr/masktools-v2.0a32.zip">
+		Masktools-v2.0a32.zip</a></td>
+		<td class="style2">
+	<a href="http://forum.doom9.org/showthread.php?t=98985">
+	http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td class="style2">removegrain: Ver 1.0 (8/2005) </td>
+		<td class="style2"><a href="http://www.removegrain.de.tf">Removegrain</a></td>
+		<td class="style2">
+	<a href="http://forum.doom9.org/showthread.php?s=&amp;threadid=79751">
+	http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td colspan="3" class="style3">There is an issue with repairsse3 in 
+		removegrain, only use repair.dll</td>
+	</tr>
+	<tr>
+		<td class="style2">removedirt: Ver 0.9 </td>
+		<td class="style2"><a href="http://www.removedirt.de.tf">
+		Removedirt</a></td>
+		<td class="style2">
+	<a href="http://forum.doom9.org/showthread.php?s=&amp;threadid=70856">
+	http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td class="style2">mvtools: Ver 1.9.5.7+</td>
+		<td class="style2"><a href="http://avisynth.org.ru/fizick.html">Mvtools</a></td>
+		<td class="style2">
+	<a href="http://forum.doom9.org/showthread.php?t=84770">
+	http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td class="style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Ver 1.9.6.7+ for mc_spuds_mvt</td>
+		<td class="style2">MVtools</td>
+		<td class="style2">
+	&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">limitedsharpenfaster.avsi</td>
+		<td class="style2">
+		<a href="http://avisynth.org/mediawiki/upload/2/2d/LimitedSharpenFaster.avs">
+		LimitedSharpenFaster</a></td>
+		<td class="style2"><a href="http://forum.doom9.org/showthread.php?t=84196">
+		http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td class="style2">unfilter: Ver 0.0.1.5</td>
+		<td class="style2"><a href="http://www6.impacthosting.com/trbarry/downloads.htm">
+		Unfilter</a> </td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">despot: Ver 3.4.1</td>
+		<td class="style2"><a href="http://avisynth.org.ru/fizick.html">DeSpot</a> </td>
+		<td class="style2"><cite class="style14">
+		<a href="http://forum.doom9.org/showthread.php?s=&amp;threadid=59388">
+		http://forum.doom9.org/</a></cite></td>
+	</tr>
+	<tr>
+		<td class="style2">undot: Ver V 0.0.1.1 </td>
+		<td class="style2"><a href="http://www6.impacthosting.com/trbarry/UnDot.zip">Undot</a></td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">addgrain: Ver 1.4</td>
+		<td class="style2"><a href="http://foxyshadis.slightlydark.com/random/AddGrainC.zip">
+		AddGrain</a> </td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">
+<p>deblock_qed </p>
+		</td>
+		<td class="style2">&nbsp;</td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">
+<p>FFT3dfilter ver 2.1.1+ or FFT#DGPU</p>
+		</td>
+		<td class="style2"><a href="http://avisynth.org.ru/fizick.html">FFT3DFilter</a> </td>
+		<td class="style2"><a href="http://forum.doom9.org/showthread.php?t=85790">
+		http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td class="style2">Dfttest ver 1.1+</td>
+		<td class="style2"><a href="http://web.missouri.edu/~kes25c/dfttest.zip">DftTest</a></td>
+		<td class="style2"><a href="http://forum.doom9.org/showthread.php?t=132194">
+		http://forum.doom9.org/</a></td>
+	</tr>
+	<tr>
+		<td class="style2">hqdn3d ver 0.11+</td>
+		<td class="style2"><a href="http://akuvian.org/src/avisynth/hqdn3d/hqdn3d-0.11.zip">
+		Hqdn3d</a></td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">awarpsharp</td>
+		<td class="style2" ><a href="http://avisynth.org/warpenterprises/">
+		Awarpsharp</a></td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="style2">xsharpen</td>
+		<td class="style2"><a href="http://www.geocities.co.jp/SiliconValley-PaloAlto/2382/">Original</a><br />
+		<a href="http://seraphy.fam.cx/~seraphy/program/WarpSharp/index.html">
+		Modified</a></td>
+		<td class="style2">&nbsp;</td>
+	</tr>
+</table>
+<p class="style17"><strong>What the script does:</strong></p>
+<ul>
+	<li>
+	<p class="style8">Preprocess (optional) for motion vector detection (This 
+	step 
+	is used for improved improved motion search, not for final usage).&nbsp; This can provide some very powerful results.&nbsp; 
+By cleaning the clip before motion detection the MV engine can focus on real 
+motion and not be distracted by noise / grain dancing.&nbsp; The pre processed 
+clip is very calm and only used by the motion search.&nbsp; </p>
+	</li>
+	<li>
+	<p class="style8">Get motion vectors with MVAnalyse</p>
+	</li>
+	<li>
+	<p class="style8">For frames = 1, 2, 3 or 4 use the motion vectors to MVDegrain</p>
+	</li>
+	<li>
+	<p class="style8">For frames = 1,2,3 or 4 with flow=true option use the vectors to create a long 
+temporal clip with MV Compensate.&nbsp; This clip is then denoised and the key (center) 
+frame returned.&nbsp; A much different noise removal then MVDegrain and can 
+	provide very good results but can also cause some oil painting.&nbsp; The denoiser is ff3dfilter or dfttest 
+	depending on the number of frames being used.</p>
+	</li>
+	<li>
+	<p class="style8">Aggressive (optional) .&nbsp; This will 
+	cause two passes through the function, the first pass is mild while the 
+	second pass is as defined by strength or the parameters passed to the 
+	function.</p>
+	</li>
+	<li>
+	<p class="style8">Temporal (optional).&nbsp; This is also a two pass through 
+	the degraining function but with a special limiting clamp to avoid removing 
+	to much detail.&nbsp; Good for dancing grain.</p>
+	</li>
+	<li>
+	<p class="style8">Next it will create a motion mask and static mask&nbsp; 
+	based on the now degrained / denoised 
+frame</p>
+	</li>
+	<li>
+	<p class="style8">Apply sharpening (either contra, limitedsharpenfaster, 
+	motion compensated or 
+	none) to the static mask (ie 
+sharpen only what is not moving).&nbsp; With contra and motion compensated it makes sure it does not 
+	add back more than what it removed.</p>
+	</li>
+	<li>
+	<p class="style8">Compute a conservative edgemask and dering those edges to 
+	remove artifacts and noise that appear on edges</p>
+	</li>
+	<li>
+	<p class="style8">Optional post process if you really have a bad clip.&nbsp; With post it is 
+limited in how much it can change since at this point the clip been worked on 
+quite a bit.</p>
+	</li>
+	<li>
+	<p class="style8">That is the basic flow, but there are many additional options 
+	as listed below</p>
+	</li>
+</ul>
+<p class="style1"><strong>MC_Spuds parameter list</strong></p>
+<table style="width: 100%" class="style2" cellspacing="4" cellpadding="2">
+	<tr class="style4">
+		<td class="style2"><strong>Mode</strong></td>
+		<td class="style3"><strong class="style4">Frames</strong></td>
+		<td class="style3"><strong>Strength</strong></td>
+		<td class="style3"><strong>Temporal</strong></td>
+		<td class="style3"><strong>Anime</strong></td>
+		<td class="style3"><strong>Aggressive</strong></td>
+		<td class="style3"><strong>Prefilter</strong></td>
+		<td class="style3"><strong>Starfield</strong></td>
+		<td class="style3"><strong>Chro</strong></td>
+	</tr>
+	<tr>
+		<td style="height: 27px" class="style2"><strong>very low</strong></td>
+		<td style="height: 27px" class="style3">1</td>
+		<td style="height: 27px" class="style3">1</td>
+		<td style="height: 27px" class="style3">False</td>
+		<td style="height: 27px" class="style3">False</td>
+		<td style="height: 27px" class="style3">False</td>
+		<td style="height: 27px" class="style3">0</td>
+		<td style="height: 27px" class="style3">False</td>
+		<td style="height: 27px" class="style3">False</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>low</strong></td>
+		<td class="style3">1</td>
+		<td class="style3">2</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">1</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>medium</strong></td>
+		<td class="style3">2</td>
+		<td class="style3">3</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">2</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>medium high</strong></td>
+		<td class="style3">3</td>
+		<td class="style3">4</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">2</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>high</strong></td>
+		<td class="style3">3</td>
+		<td class="style3">4</td>
+		<td class="style3">True</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">2</td>
+		<td class="style3">True</td>
+		<td class="style3">True</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>very high</strong></td>
+		<td class="style3">4</td>
+		<td class="style3">5</td>
+		<td class="style3">False</td>
+		<td class="style3">False</td>
+		<td class="style3">True</td>
+		<td class="style3">3</td>
+		<td class="style3">True</td>
+		<td class="style3">True</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>anime low</strong></td>
+		<td class="style3">2</td>
+		<td class="style3">2</td>
+		<td class="style3">False</td>
+		<td class="style3">True</td>
+		<td class="style3">False</td>
+		<td class="style3">2</td>
+		<td class="style3">True</td>
+		<td class="style3">False</td>
+	</tr>
+	<tr>
+		<td class="style2"><strong>anime high</strong></td>
+		<td class="style3">3</td>
+		<td class="style3">3</td>
+		<td class="style3">True</td>
+		<td class="style3">True</td>
+		<td class="style3">False</td>
+		<td class="style3">2</td>
+		<td class="style3">True</td>
+		<td class="style3">True</td>
+	</tr>
+</table>
+<p>&nbsp;</p>
+<table style="width: 100%" cellspacing="4" cellpadding="2" class="style2">
+	<tr>
+		<td class="style4"><strong>Name</strong></td>
+		<td class="style4"><strong>Values</strong></td>
+		<td class="style5" style="width: 60px"><strong>Default</strong></td>
+		<td class="style4"><strong>Description</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">Mode</td>
+		<td class="style2">see above</td>
+		<td class="style3" style="width: 60px">Medium</td>
+		<td class="style2">See above</td>
+	</tr>
+	<tr>
+		<td class="style2">frames</td>
+		<td class="style2">1,2,3,4</td>
+		<td class="style3" style="width: 60px">2</td>
+		<td class="style2">Number of forward and backward frames to search for motion vectors as well as what routine will be used to 
+		denoise.<br />
+		<table style="width: 74%" align="center">
+			<tr>
+				<td>Frames=1</td>
+				<td>Mvdegrain or Mvcompensate (flow=true)</td>
+			</tr>
+			<tr>
+				<td>Frames=2</td>
+				<td>Mvdegrain2 or Mvcompesate (flow=true)</td>
+			</tr>
+			<tr>
+				<td>Frames=3</td>
+				<td>Mvdegrain3 or Mvcompensate (flow=true)</td>
+			</tr>
+			<tr>
+				<td>Frames=4</td>
+				<td>vMvdegrain4 or Mvcompensate (flow=true)</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="style2">strength</td>
+		<td class="style2">0,1,2,3,4,5,6</td>
+		<td class="style3" style="width: 60px">3</td>
+		<td class="style2">Collection of presets to make calling the function 
+		easier.&nbsp; See below for values</td>
+	</tr>
+	<tr>
+		<td class="style2">pel</td>
+		<td class="style2">1,2,4</td>
+		<td class="style3" style="width: 60px">2</td>
+		<td class="style2">Accuracy of the motion estimation, 2=1/2 pixel, See 
+		MVAnalyse for usage</td>
+	</tr>
+	<tr>
+		<td class="style2">search</td>
+		<td class="style2">0,1,2,3</td>
+		<td class="style3" style="width: 60px">2</td>
+		<td class="style2">Type of search to use for finding motion blocks, See 
+		MVAnalyse for usage</td>
+	</tr>
+	<tr>
+		<td class="style2">blocksize</td>
+		<td class="style2">4,8,16</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the blocksize=value.&nbsp; Large blocks are stronger 
+		noise removers and faster but can leave artifacts.&nbsp; Compensate with 
+		a larger overlap or smaller block.&nbsp; See MVAnalyse for usage</td>
+	</tr>
+	<tr>
+		<td class="style2">overlap</td>
+		<td class="style2">1/2 blocksize</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the overlap=value.&nbsp; Lower overlap is faster but 
+		can leave artifacts. See MVAnalyse for usage </td>
+	</tr>
+	<tr>
+		<td class="style2">thsad</td>
+		<td class="style2">0-255</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the thsad=value.&nbsp; Higher values tend to increase 
+		noise removal lower decrease.&nbsp; To high and you&nbsp; will get 
+		artifacts. See MVAnalyse for usage</td>
+	</tr>
+	<tr>
+		<td class="style2">pnew</td>
+		<td class="style2">int 0-255</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the pnew=value.&nbsp; See MVAnalyse for usage</td>
+	</tr>
+	<tr>
+		<td class="style2">dct</td>
+		<td class="style2">1,2,3,4,5</td>
+		<td class="style3" style="width: 60px">0</td>
+		<td class="style2">Use and change with extreme caution.&nbsp; See 
+		MVAnalyse for usage</td>
+	</tr>
+	<tr>
+		<td class="style2">thSCD1</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the thSCD1=value.&nbsp; Scene detection threshold. 
+		See MVTools&nbsp; for usage </td>
+	</tr>
+	<tr>
+		<td class="style2">limit</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the limit=value.&nbsp; Used for frames=1,2,3 to limit 
+		how much the denoised frame can change from the original frame. See 
+		MVDegrain&nbsp; for usage.</td>
+	</tr>
+	<tr>
+		<td class="style2">thSCD2</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the thSCD2=value.&nbsp; Scene detection threshold. 
+		See MVTools&nbsp; for usage </td>
+	</tr>
+	<tr>
+		<td class="style2">ml</td>
+		<td class="style2">0-255</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the ml=value.&nbsp; Higher values reduce what is seen 
+		as motion, lower increase what is seen as motion. See MVMask for usage.</td>
+	</tr>
+	<tr>
+		<td class="style2">chro</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Perform denoising of the luma only (false) or luma 
+		and chroma plans (true).&nbsp; True will be MUCH slower.</td>
+	</tr>
+	<tr>
+		<td class="style2">truemotion</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">true</td>
+		<td class="style2">Defines a set of preset parameters values used in 
+		motion search.&nbsp; The 4 values affected are below.&nbsp; They can be 
+		set as a group with truemotion=true/false or independantly.</td>
+	</tr>
+	<tr>
+		<td class="style2">lamdba</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">varies</td>
+		<td class="style2">Coherence of the field of vectors.&nbsp; 256&nbsp; 
+		when truemotion=true and strength &lt;= 3, 512 when truemotion=true and 
+		strength &gt; 3.&nbsp;&nbsp; 32 when truemotion false</td>
+	</tr>
+	<tr>
+		<td class="style2">lsad</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">varies</td>
+		<td class="style2">SAD limit for lamdba. = (375*blocksize*bocksize/64) 
+		for truemotion=false and = (1150*blocksize*blocksize/64) for 
+		truemotion=true</td>
+	</tr>
+	<tr>
+		<td class="style2">plevel</td>
+		<td class="style2">0,1,2</td>
+		<td class="style3" style="width: 60px">1/0</td>
+		<td class="style2">penalty factor lamdba level scaling mode.&nbsp; 0 for 
+		truemotion=false and 1 for truemotion=true</td>
+	</tr>
+	<tr>
+		<td class="style2">mvglobal</td>
+		<td class="style2">true,false</td>
+		<td class="style3" style="width: 60px">true/false</td>
+		<td class="style2">default follows truemotion flag</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Starfield Protection</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">starfield</td>
+		<td class="style2">true,false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Creates a mask of the frames white spots and re inserts 
+		them into the denoised frame IF the luma value of the created mask is above the thStar threshold.&nbsp; If real noise is getting through increase thStar 
+		or if stars are still being removed decrease thStar.&nbsp; Its very 
+		sensitive and can cause noise to remain since to a filter a spot is a 
+		spot. </td>
+	</tr>
+	<tr>
+		<td class="style2">lumathres</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">150</td>
+		<td class="style2">Cut off value for luma.&nbsp; All&nbsp; identified 
+		spots that are above this luma value will be added to the star mask.&nbsp; 
+		The total luma value of this&nbsp; mask is validated against thStar 
+		which prevents a mask with a few spots from being accepted as valid.&nbsp; 
+		Do not go below 130 for this value, lower values will all more stars to 
+		be included.</td>
+	</tr>
+	<tr>
+		<td class="style2">thStar</td>
+		<td class="style2">float</td>
+		<td class="style3" style="width: 60px">0.0925</td>
+		<td class="style2">Luma threshold for keeping a star mask or discarding 
+		it as noise.</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Anime / Toon processing</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">anime</td>
+		<td class="style2">true,false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Sets various processing parameters that are good for 
+		anime / toon sources ie keeping lines intact, scene change detection, 
+		etc.&nbsp; Also turns on a artifact prevention routine for larger 
+		blocksizes.</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Adding Grain</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">addnoise</td>
+		<td class="style2">true,false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Adds random grain to dark areas of the frame, this 
+		can help prevent blocking when the file is encoded.&nbsp; Grain is added 
+		to areas with luma below shadow_l and does a linear transition from adding 
+		grain to no grain adding between shadow_l and shadow_h.&nbsp; Above shadow_h no 
+		grain is added. </td>
+	</tr>
+	<tr>
+		<td class="style2">shadow_l</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">24</td>
+		<td class="style2">low limit for add noise, luma below this value will 
+		get grain added</td>
+	</tr>
+	<tr>
+		<td class="style2">shadow_h</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">42</td>
+		<td class="style2">high limit for add noise, luma above this value is 
+		untouched.&nbsp; </td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Focus</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">focus</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">May or may not help provide a crisp edge where a 
+		blurry one exists</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Aggressive</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">aggressive</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">true</td>
+		<td class="style2">Does a two pass denoising.&nbsp; The first pass is a 
+		lite first pass and the second a normal (as specified) noise removal. 
+		The style of denoising will be the same for both passes (ie mvdegrain or 
+		mvcompensate) Slow 
+		but aggressive.</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Sharpening</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">sharpp</td>
+		<td class="style2">0,1,2,3</td>
+		<td class="style3" style="width: 60px">1</td>
+		<td class="style2">1 = Use contra sharpening&nbsp; 2 = Use limited 
+		sharpen faster, 3= Use MC sharpening,&nbsp; 0=No sharpening.&nbsp; Sharpening is only applied to the 
+		static (non moving) areas of a frame.</td>
+	</tr>
+	<tr>
+		<td class="style2">ss_x</td>
+		<td class="style2">float</td>
+		<td class="style3" style="width: 60px">1.25</td>
+		<td class="style2">Passed to limited sharpen faster, this value is a 
+		smode=4 value</td>
+	</tr>
+	<tr>
+		<td class="style2">ss_y</td>
+		<td class="style2">float</td>
+		<td class="style3" style="width: 60px">1.25</td>
+		<td class="style2">Passed to limited sharpen faster, this value is a 
+		smode=4 value</td>
+	</tr>
+	<tr>
+		<td class="style2">lsfstr</td>
+		<td class="style2">int</td>
+		<td class="style3" style="width: 60px">80</td>
+		<td class="style2">Limitedsharpenfaster strength</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Block Removal via deblock_qed</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">removeblocks</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">If true initiates a call to deblock_qed&nbsp;&nbsp; 
+		with quant1, quant2 and uv as defined below</td>
+	</tr>
+	<tr>
+		<td class="style2">quant1</td>
+		<td class="style2">0-60</td>
+		<td class="style3" style="width: 60px">0</td>
+		<td class="style2">Quant1 value for deblock_qed</td>
+	</tr>
+	<tr>
+		<td class="style2">quant2</td>
+		<td class="style2">0-60</td>
+		<td class="style3" style="width: 60px">45</td>
+		<td class="style2">Quant2 value for deblock_qed</td>
+	</tr>
+	<tr>
+		<td class="style2">uv</td>
+		<td class="style2">&nbsp;</td>
+		<td class="style3" style="width: 60px">1</td>
+		<td class="style2">UV value for deblock_qed</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Correct Color Bleeding</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">colorbleed</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Removes some level of color bleeding, use if color 
+		bleeding is present</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>MVFlow MVCompensate Processing</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">flow</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Used&nbsp; to determine if it will use 
+		mvcompensated or mvdegrained noise removal.&nbsp; Each have their 
+		strengths and weakness so see what you like.&nbsp; Frames=4 is always 
+		flow=true.&nbsp; Flow will create a long temporal clip that it denoises 
+		and then it will pull out the cleaned key frame and discard the wing 
+		frames.</td>
+	</tr>
+	<tr>
+		<td class="style2">fs1,fs2,fs3,fs4</td>
+		<td class="style2">float</td>
+		<td class="style3" style="width: 60px">3,4,3,2</td>
+		<td class="style2">Sigma values for denosing the long temporal clip.&nbsp; 
+		Note the temporal clip is already been denoised with mvcompensate!</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Post Processing</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">postprocess</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Option to run a second cleaning operation on the 
+		clip.&nbsp; Can be useful if the clip is very noisy.&nbsp; The amount of change is 
+		limited to help prevent over smoothing of the image</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Pre Processing</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">prefilter</td>
+		<td class="style2">0,1,2,3,4</td>
+		<td class="style3" style="width: 60px">2</td>
+		<td class="style2">Easy way to set preprocessing options.&nbsp; 0=None, 
+		1=Fast, 2=Normal strength based, 3=Max, 4=Motion compensated</td>
+	</tr>
+	<tr>
+		<td class="style2">preprocess</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">Default based on strength value, can override the 
+		default by passing the prepreocess=true/false.&nbsp; Preprocess cleans 
+		the input clip so that MVAnalyse can do a better job finding motion and 
+		not getting distracted by noise.&nbsp; If the clip is very clean you can 
+		set this to false, otherwise leave it true.</td>
+	</tr>
+	<tr>
+		<td class="style2">premax</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">override strength setting and use full strength 
+		preprocessing to improve motion search</td>
+	</tr>
+	<tr>
+		<td class="style2">prefast</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">fast mode preprocess function.&nbsp; Increases speed 
+		of function but will not clean as well.</td>
+	</tr>
+	<tr>
+		<td class="style2">premc</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">true</td>
+		<td class="style2">Apply prefiltering with a motion mask to avoid 
+		removing details in the moving areas while still calming the static 
+		areas. Set on with prefilter=2 or 4</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Temporal</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">temporal</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">false</td>
+		<td class="style2">Turns on temporal processing which can help with 
+		videos that have &#39;dancing&#39; or very heavy grain.&nbsp; Its a special 
+		limiting function that prevents mvtools from removing more from an area 
+		then what a very strong non motion compensated denoising would.&nbsp; 
+		Helps remove dancing grain.</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>Debug</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">debug</td>
+		<td class="style2">1,2,3,4,5,6,7,8,9</td>
+		<td class="style3" style="width: 60px">0</td>
+		<td class="style2">Various and cool outputs so you can see what the 
+		script is doing, try them all to see what they do</td>
+	</tr>
+	<tr>
+		<td class="style7" colspan="4"><strong>De Ringing</strong></td>
+	</tr>
+	<tr>
+		<td class="style2">edgeclean</td>
+		<td class="style2">true/false</td>
+		<td class="style3" style="width: 60px">strength</td>
+		<td class="style2">If true will build a conservative edge mask and apply 
+		de ringing to those edges.&nbsp; Useful for cleaning up ringing around 
+		edges that mvtools can find.</td>
+	</tr>
+	<tr>
+		<td class="style2">edm_lo</td>
+		<td class="style2">int 0-255</td>
+		<td class="style3" style="width: 60px">55</td>
+		<td class="style2">Low lut threshold for inclusion in the deringing 
+		mask, linear gradient between lo and hi</td>
+	</tr>
+	<tr>
+		<td class="style2">edm_hi</td>
+		<td class="style2">int 0-255</td>
+		<td class="style3" style="width: 60px">255</td>
+		<td class="style2">High lut threshold for inclusion in the deringing 
+		mask, linear gradient between lo and hi</td>
+	</tr>
+</table>
+<p class="style12"><strong>Strength Settings</strong></p>
+<table style="width: 100%" class="style2">
+	<tr>
+		<td class="style11"><strong>Strength</strong></td>
+		<td class="style9"><strong>0</strong></td>
+		<td class="style9"><strong>1</strong></td>
+		<td class="style9"><strong>2</strong></td>
+		<td class="style9"><strong>3</strong></td>
+		<td class="style9"><strong>4</strong></td>
+		<td class="style9"><strong>5</strong></td>
+		<td class="style9"><strong>6</strong></td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Block Size</strong></td>
+		<td class="style9">8</td>
+		<td class="style9">8</td>
+		<td class="style9">8</td>
+		<td class="style9">16</td>
+		<td class="style9">16</td>
+		<td class="style9">16</td>
+		<td class="style9">16</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Overlap</strong></td>
+		<td class="style9">2</td>
+		<td class="style9">2</td>
+		<td class="style9">2</td>
+		<td class="style9">4</td>
+		<td class="style9">8</td>
+		<td class="style9">8</td>
+		<td class="style9">8</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Pnew</strong></td>
+		<td class="style9">32</td>
+		<td class="style9">32</td>
+		<td class="style9">32</td>
+		<td class="style9">32</td>
+		<td class="style9">32</td>
+		<td class="style9">32</td>
+		<td class="style9">32</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Thsad</strong></td>
+		<td class="style9">100</td>
+		<td class="style9">300</td>
+		<td class="style9">400</td>
+		<td class="style9">425</td>
+		<td class="style9">450</td>
+		<td class="style9">450</td>
+		<td class="style9">500</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Thscd1</strong></td>
+		<td class="style9">400</td>
+		<td class="style9">400</td>
+		<td class="style9">500</td>
+		<td class="style9">600</td>
+		<td class="style9">600</td>
+		<td class="style9">600</td>
+		<td class="style9">600</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Thscd2&nbsp; Regular/Anime</strong></td>
+		<td class="style9">105/130</td>
+		<td class="style9">105/130</td>
+		<td class="style9">105/130</td>
+		<td class="style9">105/130</td>
+		<td class="style9">105/130</td>
+		<td class="style9">105/130</td>
+		<td class="style9">105/130</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>ml</strong></td>
+		<td class="style9">130</td>
+		<td class="style9">130</td>
+		<td class="style9">120</td>
+		<td class="style9">110</td>
+		<td class="style9">100</td>
+		<td class="style9">90</td>
+		<td class="style9">90</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>limit</strong></td>
+		<td class="style9">48</td>
+		<td class="style9">96</td>
+		<td class="style9">102</td>
+		<td class="style9">128</td>
+		<td class="style9">156</td>
+		<td class="style9">225</td>
+		<td class="style9">255</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Pre Process</strong></td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Post Process</strong></td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">true</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>Edge Clean</strong></td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">false</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+		<td class="style9">true</td>
+	</tr>
+	<tr>
+		<td class="style11"><strong>dct Regular/Anime</strong></td>
+		<td class="style9">0/3</td>
+		<td class="style9">0/3</td>
+		<td class="style9">0/3</td>
+		<td class="style9">0/0</td>
+		<td class="style9">0/0</td>
+		<td class="style9">0/0</td>
+		<td class="style9">0/0</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

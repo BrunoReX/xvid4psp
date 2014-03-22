@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--bitrate 768 --level 3.0 --subme 5 --b-pyramid none --partitions p8x8,b8x8,i4x4 --no-8x8dct --rc-lookahead 30

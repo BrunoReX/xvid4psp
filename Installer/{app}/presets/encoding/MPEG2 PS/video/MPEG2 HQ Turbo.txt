@@ -1,0 +1,5 @@
+video codec:
+MPEG2
+
+video cli:
+-an -vcodec mpeg2video -qscale 1 -bf 2 -vtag MPEG

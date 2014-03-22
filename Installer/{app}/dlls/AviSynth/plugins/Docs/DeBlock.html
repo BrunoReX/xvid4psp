@@ -1,0 +1,112 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <title>Filter for reducing "blocking-artifact" in video data/ VirtualDub MSU Deblocking Filter </title>
+</head>
+<body text="#000000" bgcolor="#E9E9E9">
+
+<center>
+<h1>VirtualDub MSU Deblocking Filter v2.2<br> </h1>
+<h4><i>
+    <a href="http://www.compression.ru/video/">MSU Graphics & Media Lab (Video Group)</a>
+</i></h4>
+</center>
+
+
+<p align=right>
+<font size=3><i>
+    Algorithm: Dmritriy Vatolin<br>
+    Implementation: Sergey Grishin	
+</i></font>
+
+
+<p><font size=3>
+     Filter is intended for recovering quality of video ripped from DVD
+     (for example, when it contains 4 hours of video data),  VideoCD or after
+     decompressing by H.261, H.263, DivX 3, DivX 4, XviD.
+</font>
+<p><font size=3>
+	Filter automatically determines the blockiness's strength on the frame and
+	in the concrete part of it, preserving the maximum of details. Thus, 
+	filter will process marginally when on scenes with slow motion, while it will smooth very hard
+	in the case of fast motion in the same film.
+</font>
+<p><font size=3>
+	The main advantage of the filter is that it raise the integral quality in
+	the most widespread PSNR metric in comparison with original film. That is, a film
+	after decompression in comparison with original achieves the lower quality than a film 
+	after decompression and deblocking. (But for all that the original film is not used nowise, 
+	only decompressed data is used.)
+</font>
+
+<p>
+<h3>What's new in version v2.0?</h3>
+<font size=3>
+<ul>
+    <LI> New version in "High quality" mode works 2.1 times faster than v1.2  and  2.4 times faster in "High speed" mode.
+    </LI>
+	<ul>
+	    <LI>Conversions of color spaces optimized (SSE).
+	    </LI>
+	    <LI>Horizontal deblocking optimized (ллу).
+	    </LI>
+	    <LI>New option of adjusting speed/quality parameter are available (25% speed improvement).
+	    </LI>
+	</ul>
+    <LI>Quality raised.
+    </LI>
+	<ul>
+	    <LI>Algorithm of automatic detection of blockiness level improved (more details are preserved).
+	    </LI>
+	    <LI>Chrominance components processing significantly improved.
+	    </LI>
+	    <LI>All basic deblocking methods changed. Discontinuities along borders of blocks is now absent, image looks more "naturally".
+	    </LI>
+	</ul>
+</ul>
+</font>
+
+<h3>What's new in version v2.1?</h3>
+<font size=3>
+<ul>
+    <LI>SSE optimization used only if it is supported by processor and OS
+    </LI>
+    <LI>Bug fixed: log is not created now
+    </LI>
+    <LI>Bug fixed: there is now no crashes during processing of frequences in high resolution
+    </LI>
+</ul>
+</font>
+
+<h3>What's new in version v2.2?</h3>
+<font size=3>
+<ul>
+    <LI>Bug fixed: automatic SSE support detection is now works correctly
+    </LI>
+    <LI>Possibility of manual SSE instructions disabling in case SSE is supported by CPU and OS
+    </LI>
+</ul>
+</font>
+
+<p>
+<h3>Settings</h3>
+<font size=3>
+	Filter's interface allows to adjust the quality and the speed of processing.
+ 	In "High speed" mode optimized version of horizontal deblocking works, which has slightly lower quality
+	in comparison to "High quality" mode. In "High speed" mode filter works 25% faster. 
+	Using U-deblock & V-deblock it is possible to turn on/off the 
+	processing of chrominance components (turning these parameters on 
+	noticeably raise the visual quality). 
+	Using "SSE instructions" parameter it is possible to disable SSE if it is supported by the CPU and OS.
+</font>
+
+<p>
+<h3>Filter homepage</h3>
+<ul>
+    <LI> <a href="http://www.compression.ru/video/deblocking/index_en.html">Additional information about this filter</a>
+    </LI>
+</ul>
+
+</body>
+</html>
+

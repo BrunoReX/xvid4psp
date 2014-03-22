@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --size 1000 --ref 5 --deblock -1:-1 --direct auto --b-adapt 2 --trellis 2 --no-fast-pskip --no-dct-decimate --psy-rd 1.0:0.2 --partitions all --me umh --rc-lookahead 50
+--pass 2 --size 1000 --ref 5 --deblock -1:-1 --direct auto --b-adapt 2 --trellis 2 --no-fast-pskip --no-dct-decimate --psy-rd 1.0:0.2 --partitions all --me umh --rc-lookahead 50

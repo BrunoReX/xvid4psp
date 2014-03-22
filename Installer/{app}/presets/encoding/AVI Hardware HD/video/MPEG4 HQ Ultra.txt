@@ -1,0 +1,5 @@
+video codec:
+MPEG4
+
+video cli:
+-vcodec mpeg4 -an -qscale 3.0 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag DIVX -flags +aic+umv

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Smoother HiQ for AviSynth</title>
+                                  
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+</head>
+  <body>
+         
+<h1>Smoother HiQ for AviSynth</h1>
+         
+<pre>v1.01<br></pre>
+        Plugin for <b>AviSynth</b> by <a href="mailto:kp@interact.dk">Klaus 
+ Post</a>.<br>
+    <br>
+       
+<h2>Introduction:</h2>
+     This filter performs smoothing on video material to eliminate noise
+and   MPEG artifacts. The filter has many different settings, so it can do
+smoothing  without destroying too many details. This filter makes it possible
+to blur  out noise and still  retain a fair amount of detail. Rewritten on
+basis of  Smart Smoother HiQ for Virtual Sub.  This is an YUV-version of
+the filter, that will only  work with AviSynth.<br>
+    <br>
+         
+<h2>Download:</h2>
+    <a href="smoothhiq_10.zip">[Download   binaries]</a> Smoother HiQ v1.01<br>
+    <a href="smoothhiq_10_src.zip">[Download   source code]</a> Smoother
+HiQ v1.0  (MSVC 6 + preprocessor pack 5).<br>
+    <br>
+       
+<h2>Installation:</h2>
+     Unzip (Using <a href="http://www.winzip.com">WinZip</a>, <a
+ href="http://www.rarsoft.com/">WinRar</a> or <a
+ href="http://www.ghisler.com/">Windows Commander</a>) into the AviSynth
+installation directory, or anywhere else you'd like.<br>
+    <br>
+       
+<h2>Usage:</h2>
+    The filter works by blurring areas that seems to be connected. That means
+  that the images will still maintain the overall structure, but loose small
+  details, such as noise and MPEG-artifacts. The filter operates in a frame
+  around each pixel. Each of the pixels are tested against the current pixel.
+  If &nbsp;the difference between the current pixel and the tested pixel
+is   below a given threshold these two pixels are blurred.<br>
+    <br>
+    Remember to import the filter before using it. Add the following line 
+to  your .AVS script:<br>
+       
+<pre>LoadPlugin("c:\AviSynth\smoothhiq.dll")</pre>
+    With the correct path to where you unzippped the DLL.<br>
+    Use the following syntax to activate the filter:<br>
+       
+<pre>SmoothHiQ(Diameter, Luma Threshold, Chroma threshold, Amount, Maintain Difference)<br><br></pre>
+   <b>Diameter<br>
+   </b>Defines on how big a diameter the filter works. Diameter can be 3,5,7,9,11 
+ or 13. The greater the diameter, the more smooth will the video appear. Has
+ especially influence on big evenly colored surfaces. The greater the diameter,
+ the slower will the filter operate. Recommended settings are 5 or 7.<br>
+<br>
+   <b>Thresholds<br>
+   </b>The threshold defines how different the light value (luma) or the
+color  (chroma) may be, to influence the current pixel. The value can be
+from 1 to 255. Small thresholds give little blurring and larger will give
+a more blurred image. In general it is recommended to set the Chroma threshold
+higher than Luma threshold, since there often is more color noise. Recommended
+settings  are Luma threshold: 15-25 and Chroma threshold: 15-35.<br>
+<br>
+   <b>Amount</b><br>
+   Amount specifies how much influence the blur at maximum can have on the
+ result. The value can be 1 to 256. It can be seen as a blend factor between
+ the blurred &nbsp;image and the original image. When amount is set to 256,
+ the blurred image is returned as output. Setting a smaller value will retain
+ more details (and noise) from the original image. Experiment with &#8216;amount&#8217;
+ &#8211; much material can bear quite high amount &#8211; and other material get very
+washed out. Experiment by setting thresholds first, and adjust amount after
+that. In general a high (more than 200) amount is recommended on noisy material.<br>
+<br>
+   <b>Maintain Difference</b><br>
+  Maintain difference will makes the filter use maximum blur on all pixels
+ that has differences below this threshold. The is ideal for removing small
+ differences in evenly colored areas.<br>
+  Maintain difference should be small (0 to 10), since larger values will 
+produce  &#8216;exaggerated&#8217; blurring.&nbsp; Using a value equal to or greater than
+luma  threshold will disable the difference weighing, and will remove much
+detail.<br>
+   <br>
+   <br>
+     
+<h2>Notes:</h2>
+   
+<ul>
+     <li>Find more info on the settings on the <a
+ href="http://sauron.mordor.net/dgraft/">Smart Smoother HiQ for Virtual Dub</a>
+ pages (in the Hosted section). &nbsp;It is also easier to experiment with
+ the Virtual Dub filter, since it provides a GUI and live updating and blur
+ visualization.</li>
+    <li>The Avisynth and the Virtual Dub version will produce different results.
+ That's because they operate in different colorspaces. The Avisynth version
+ will most often produce the most compressible result, because it operates
+ in the same color-space as the codec's.<br>
+    </li>
+     
+</ul>
+       
+<h2>Todo:</h2>
+       
+<ul>
+      <li>MMX-optimize all algorithms.</li>
+      <li>Implement variable threshold based on luma.
+      <li>Implement temporal tests.
+      <li>Implement Average mode.<br>
+      </li>
+       
+</ul>
+      
+<h2>Other</h2>
+   Special thanks to Thomas Daniel for excellent feedback and help!<br>
+ - Donald Graft for hosting my filters.<br>
+ And also a special thanks to dividee for giving me an AviSynth 101.<br>
+     
+<p> Also thanks to: Leuf, Acaila, TT, _Outpinged, -h, poopety poop, Rudolf
+ Gro&szlig;, T&oslash;sen, VIC, Christian Senft &amp; Avery Lee for help, 
+support, suggestions and other stuff this couldn't have been done without.<br>
+  </p>
+   
+<h2>Contact</h2>
+   
+<p>Contact Klaus Post at <a href="mailto:kp@interact.dk">kp@interact.dk</a>
+ for bugs, suggestions, comments, etc... </p>
+   
+<p> </p>
+   
+<p> New versions of the filter should be downloadable from <a
+ href="http://sauron.mordor.net/dgraft/">Donald Graft's filter page</a>. </p>
+  <br>
+ <br>
+</body>
+</html>

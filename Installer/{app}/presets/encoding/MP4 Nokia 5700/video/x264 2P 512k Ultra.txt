@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --bitrate 512 --level 1.3 --ref 6 --no-cabac --direct none --no-b-adapt --weightp 0 --partitions none --subme 1 --me dia
+--pass 2 --bitrate 512 --level 1.3 --ref 6 --no-cabac --direct none --no-b-adapt --weightp 0 --partitions p8x8,b8x8,i4x4,p4x4 --subme 6 --me umh

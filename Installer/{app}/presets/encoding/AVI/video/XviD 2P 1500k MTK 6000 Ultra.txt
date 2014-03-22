@@ -1,0 +1,6 @@
+video codec:
+XviD
+
+video cli:
+-qtype 1 -vhqmode 1 -nopacked -bquant_ratio 162 -bquant_offset 0 -max_bframes 1 -max_key_interval 250 -quality 5 -zones 0,q,3.0 -notrellis -nochromame -turbo
+-qtype 1 -vhqmode 4 -nopacked -bquant_ratio 162 -bquant_offset 0 -max_bframes 1 -max_key_interval 250 -quality 6 -fourcc DX50 -bitrate 1500 -bvhq -vbvmax 7281300 -vbvsize 4718592 -notrellis -kboost 10 -chigh 15 -clow 6 -imin 1 -pmin 1 -bmin 1 -imax 5 -pmax 5 -bmax 7

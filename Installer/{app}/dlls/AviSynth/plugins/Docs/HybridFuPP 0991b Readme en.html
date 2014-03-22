@@ -1,0 +1,3696 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>HybridFuPP version 0.991b</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20040911;13540000">
+	<META NAME="CHANGED" CONTENT="20090619;14400900">
+	<META NAME="Info 1" CONTENT="">
+	<META NAME="Info 2" CONTENT="">
+	<META NAME="Info 3" CONTENT="">
+	<META NAME="Info 4" CONTENT="">
+	<!-- ---- 11/09/2004, 13:54 ----
+by FuPP -->
+	<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:HyphenationZone>21</w:HyphenationZone>
+ </w:WordDocument>
+</xml><![endif]-->
+	<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027">
+  <o:colormru v:ext="edit" colors="#ffffe5,#e5fffe,#bbefdb,#c9e1de"/>
+  <o:colormenu v:ext="edit" fillcolor="#c9e1de"/>
+ </o:shapedefaults></xml><![endif]-->
+	<!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+	<!--[if gte vml 1]><v:background id="_x0000_s1025" o:bwmode="white"
+ fillcolor="#c9e1de" o:targetscreensize="800,600">
+ <v:fill src="HybridFuPP%20version%2004b_fichiers\image001.jpg" color2="fill darken(213)"
+  angle="-135" method="linear sigma" focus="50%" type="gradient"/>
+</v:background><![endif]-->
+	<STYLE TYPE="text/css">
+	<!--
+		TD P { color: #000000 }
+		H1 { color: #000000 }
+		P { color: #000000 }
+		H2 { color: #000000 }
+		H3 { color: #000000 }
+		P.retrait-du-corps-de-texte- { margin-left: 0.5cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-GB" TEXT="#000000" BGCOLOR="#c9e1de" BACKGROUND="/D:/tmp/HybridFuPP%20088b%20Lisezmoi%20fr_fichiers/image001.jpg" DIR="LTR">
+<H2 ALIGN=CENTER STYLE="border: none; padding: 0cm"><FONT SIZE=6>HybridFuPP
+version 0.991b</FONT></H2>
+<P><BR><BR>
+</P>
+<P><FONT COLOR="#0047ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>INTRODUCTION</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>This
+Avisynth script allows both resizing and filtering of your videos.
+Distinct filters can be applied on different parts of a same picture
+(edges, static areas, motion, dark and bright areas, skin...) :
+HybridFuPP is a kind of adaptive processor, allowing picture
+cleaning, general perception improvements and compressibility gain.</B></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Main idea
+consists in filtering strongly the less visible parts of the picture,
+and very softly the more visible. HybridFuPP uses masks to detect
+areas to process. </B></FONT></FONT>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>In most
+recent versions, HybridFuPP proposes a more aggressive &ldquo;psychovisual&rdquo;
+approach (although very empirical), allowing to &ldquo;force&rdquo;
+codecs, used while re-encoding output clip, to allocate more bits
+where and when it is considered to be critical, especially at low
+bitrates (dark scenes, skinned areas...). All of these new features
+are of course optional.</B></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Standard
+processings proposed are : resizing (8 possibilities), denoising
+(optionally motion-compensated), dark and bright areas denoising and
+/ or enhancing, edges sharpening or softening (distinct horizontal
+and vertical settings), edges brightness control, deringing (removing
+artefacts around edges), deblocking (removing blocks effect generated
+by mpeg compression) and skin processing.</B></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Although
+HybridFuPP has been originally designed to process rather clean
+materials, filtering package used is flexible and powerful enough to
+be used with more noisy materials too (depending on noise type) :
+increasing default settings could be though required.</B></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>HybridFuPP
+is provided with some presets allowing beginners to use the script
+easily and other people to use these presets as basis for their
+explorations. Moreover, HybridFuPP allows users to define their own
+processing chains : lot of things become then possible !</B></FONT></FONT></P>
+<H1><BR><BR>
+</H1>
+<H1><FONT COLOR="#0047ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>PREREQUISITES</B></FONT></FONT></FONT></H1>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>HybridFuPP
+requires Avisynth v 2.58.</B></FONT></FONT></P>
+<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Put
+HybridFuPP.avsi and provided filters in your avisynth plug-ins
+directory (by default : C:\Program Files\AviSynth 2.5\plugins).
+FFT3DFilter.dll requires an additional dll (FFTW3.dll) that must
+placed into you windows\system32.</B></FONT></FONT></P>
+<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I><B>NB
+: these DLLs are included in some compressed files, you need first to
+extract them from each archive</B></I></FONT></FONT></P>
+<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Be
+sure that UnFilter.dll (v1.5), Deen.dll (v1.0 beta 1),
+FFT3DFilter.dll (2.1.1), MVTools2.dll (2.4.2), MT_Masktools.dll
+(v2.0.36), Deblock (v1.2) and Addgrain (v1.0) are loaded in your main
+script.</B></FONT></FONT></P>
+<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I><U><B>C
+A U T I O N : You MUST use filters versions provided with HybridFuPP,
+or you will probably get unexpected results or errors !</B></U></I></FONT></FONT></P>
+<H1 STYLE="margin-left: 1.71cm; text-indent: -1.68cm"><BR><BR>
+</H1>
+<H1 STYLE="margin-left: 1.71cm; text-indent: -1.68cm"><FONT COLOR="#0047ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4>LIST
+OF INCLUDED PROCESSINGS</FONT></FONT></FONT></H1>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Resizing
+(with optional adaptive switching)</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Standard
+or motion-compensated denoising</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Chroma
+denoising</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Edges
+sharpening or smoothing (independent settings for horizontal and
+vertical axis)</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Deringing</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Deblocking</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Dark
+and bright areas special processing</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Dark
+scenes details enhancement processing</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Skinned
+areas (faces) processing</B></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 1.71cm; text-indent: -1.68cm"><BR><BR>
+</P>
+<H1><FONT COLOR="#0047ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4>SYNTAX</FONT></FONT></FONT></H1>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT FACE="Arial Narrow, sans-serif"><B><FONT SIZE=4>HybridFuPP</FONT>(
+clip <FONT COLOR="#5c8526"><FONT SIZE=4>clip</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>width</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>height</FONT></FONT>,
+string <FONT COLOR="#5c8526"><FONT SIZE=4>Preset, </FONT></FONT>int
+<FONT COLOR="#5c8526"><FONT SIZE=4>Resizer</FONT></FONT>, bool <FONT COLOR="#5c8526"><FONT SIZE=4>Fast</FONT></FONT>,
+<FONT COLOR="#000000"><FONT SIZE=3>bool</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#5c8526"><FONT SIZE=4>ARAdjust, </FONT></FONT>bool
+<FONT COLOR="#5c8526"><FONT SIZE=4>Dering</FONT></FONT><FONT COLOR="#000000">,</FONT>
+bool <FONT COLOR="#5c8526"><FONT SIZE=4>Deblock</FONT></FONT>, <FONT COLOR="#000000"><FONT SIZE=3>bool</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#5c8526"><FONT SIZE=4>DB_M_Only, </FONT></FONT><FONT COLOR="#000000"><FONT SIZE=3>bool</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#5c8526"><FONT SIZE=4>Skin, </FONT></FONT><FONT COLOR="#000000"><FONT SIZE=3>int
+</FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>Enh_Str, </FONT></FONT><FONT COLOR="#000000"><FONT SIZE=3>int
+</FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>D_Mode</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=3>,</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#000000"><FONT SIZE=3>int </FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>MP_Mode</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=4>,</FONT></FONT><FONT COLOR="#5c8526">
+</FONT>int <FONT COLOR="#5c8526"><FONT SIZE=4>S_Str</FONT></FONT>,
+int <FONT COLOR="#5c8526"><FONT SIZE=4>T_Str</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>S_Radius</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=4>,</FONT></FONT><FONT COLOR="#5c8526">
+</FONT>int <FONT COLOR="#5c8526"><FONT SIZE=4>S_Dist</FONT></FONT>,
+int <FONT COLOR="#5c8526"><FONT SIZE=4>C_Str</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>M_Thr</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>M_SCD</FONT></FONT><FONT SIZE=4>,
+</FONT>int <FONT COLOR="#5c8526"><FONT SIZE=4>M_Str</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=4>,</FONT></FONT>
+<FONT COLOR="#000000"><FONT SIZE=3>int </FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>M_TRadius</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=3>,</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#000000"><FONT SIZE=3>int </FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>Bl_Size,</FONT></FONT><FONT COLOR="#ff0000">
+</FONT><FONT COLOR="#000000"><FONT SIZE=3>int</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#5c8526"><FONT SIZE=4>ME_Resizer, </FONT></FONT>bool
+<FONT COLOR="#5c8526"><FONT SIZE=4>E_Auto_Str</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>EM_Mode</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>E_Thr</FONT></FONT>,
+int <FONT COLOR="#5c8526"><FONT SIZE=4>E_Str_X</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>E_Str_Y</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>E_Str_B</FONT></FONT>, int
+<FONT COLOR="#5c8526"><FONT SIZE=4>E_Str_N</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>DR_Str</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT><FONT SIZE=3>int</FONT> <FONT COLOR="#5c8526"><FONT SIZE=4>DR_Radius</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT><FONT SIZE=3>int</FONT> <FONT COLOR="#5c8526"><FONT SIZE=4>D_Thr</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT><FONT SIZE=3>int</FONT> <FONT COLOR="#5c8526"><FONT SIZE=4>B_Thr</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT><FONT SIZE=3>int</FONT> <FONT COLOR="#5c8526"><FONT SIZE=4>LP_Str</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=4>,</FONT></FONT>
+<FONT SIZE=3>bool</FONT> <FONT COLOR="#5c8526"><FONT SIZE=4>DS_Enh,
+</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=3>int</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#5c8526"><FONT SIZE=4>DS_Enh_Thr,</FONT></FONT><FONT COLOR="#5c8526">
+</FONT><FONT COLOR="#000000"><FONT SIZE=3>int </FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>DB_Q</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT><FONT COLOR="#000000"><FONT SIZE=3>int </FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4>DB_Off_a</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT><FONT COLOR="#000000"><FONT SIZE=3>int </FONT></FONT><FONT COLOR="#5c8526"><FONT SIZE=4 STYLE="font-size: 16pt">DB_Off_b</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+</FONT>string <FONT COLOR="#5c8526"><FONT SIZE=4>show</FONT></FONT>,
+int <FONT COLOR="#5c8526"><FONT SIZE=4>N1</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>N2</FONT></FONT>,
+int <FONT COLOR="#5c8526"><FONT SIZE=4>M</FONT></FONT><FONT COLOR="#5c8526">,</FONT>
+int <FONT COLOR="#5c8526"><FONT SIZE=4>E1</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>E2</FONT></FONT>,
+int <FONT COLOR="#5c8526"><FONT SIZE=4>LP</FONT></FONT>, int <FONT COLOR="#5c8526"><FONT SIZE=4>DR
+</FONT></FONT>)</B></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><FONT FACE="Arial"><B><FONT COLOR="#3366ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4>AVAILABLE
+PARAMETERS</FONT></FONT></FONT><FONT COLOR="#3366ff"> </FONT><FONT SIZE=2>(all
+of them are optional)</FONT></B></FONT></P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>General
+parameters : </B></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 0.03cm; font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>use
+them to set output size, resizing algorithm or to display all
+parameters used and the way they will affect your clip. You can also
+use presets ! </I></FONT></FONT></FONT>
+</P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=47*>
+	<COL WIDTH=169*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H1 ALIGN=CENTER><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>Parameters</B></FONT></FONT></H1>
+			</TD>
+			<TD WIDTH=18%>
+				<H1 ALIGN=CENTER><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3>Possible
+				values</FONT></FONT></H1>
+			</TD>
+			<TD WIDTH=66%>
+				<H1 ALIGN=CENTER><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>Comments</B></FONT></FONT></H1>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Resizer</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0
+				- 8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 4.97cm; text-indent: -4.97cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Resizer
+				algorithms</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.65cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0
+				: bilinear ( sharpness - - - / compressibility + + + )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1
+				: bicubic ( sharpness - - / compressibility + + )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm; text-indent: 0.02cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2 : bicubic
+				( sharpness - / compressibility + )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>3
+				: bicubic ( sharpness + / compressibility - )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>4
+				: bicubic ( sharpness + + / compressibility - - )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.65cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5
+				: lanczos ( sharpness + + + / compressibility - - - - )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.65cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>6
+				: spline 16 ( sharpness + + + / compressibility - - -)</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.65cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>7
+				: spline 36 ( sharpness + + + / compressibility - - - -)</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.65cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8
+				: spline 64 ( sharpness + + + / compressibility - - - -) </B></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>ARAdjust</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 4.97cm; text-indent: -4.97cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>When
+				True, the script switches to a less sharp resizer in areas it
+				estimates not loosing too much details (improves compression)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Width</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Output
+				clip width. It has to be divisible by 4 ( by 8 if you want to use
+				motion processing). It is though advised to use values divisible
+				by 16 because of speed gain.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Height</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Output
+				clip height. it has to be divisible by 4 ( by 8 if you want to
+				use motion processing). It is though advised to use values
+				divisible by 16 because of speed gain.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Fast</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>When
+				True, dark areas, bright areas and motion masks are computed from
+				an already denoised and resized picture (allow HybridFuPP to save
+				time). When False, these masks are computed from a resized but
+				unprocessed picture</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Enh_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..10</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>This
+				parameter will be used for some processings such like dark scenes
+				improvement or skin areas enhancement. A special clip is created
+				with over-enhanced details and some noise is then added to it.
+				This special clip is then overlayed to the original clip using
+				masks techniques. This will oblige codecs to allocate more bits
+				in these areas.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Preset</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Very
+				low</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Low</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Medium</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>High</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Very
+				High</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>HybridQ</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Anime1</B></FONT></FONT></P>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Anime2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I><B>Presets
+				allow to use HybridFuPP very quickly and easily while all
+				parameters remain tweakable</B></I></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>&laquo;
+				Very Low &raquo; or &laquo; Very High &raquo; are quality
+				related. For instance, &laquo; Very low &raquo; will deliver a
+				rather strongly denoised picture and weak sharpness
+				(compressibility will be therefore better)</B></FONT></FONT></P>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>HybridQ
+				will use spline 16 resizing algorithm, will add edge sharpening
+				and some other features designed to improve perceptual quality.
+				It will then deliver a good visual impression while maintaining a
+				good compressibility</B></FONT></FONT></P>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Presets
+				Anime1 and Anime2 have been designed for anime materials. Anime2
+				is very useful for very noisy materials but will deliver a less
+				detailed picture</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Show</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E,
+				M, D, B, R, X, S, A, -, |, /, P, F</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 3.81cm; text-indent: -3.81cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Displays
+				masks and / or values of all parameters :</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.65cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E
+				: Edge mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M
+				: Motion mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>D
+				: Dark areas mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>B
+				: Bright areas mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>R
+				: Deringing mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>X
+				: Dark Scenes details enhancer mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>S
+				: Skinned areas mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>A
+				: Automatic Resizer Adjustment mask</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>-
+				: Stack vertically source and processed clip in order to be
+				compared</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>|
+				: Stack horizontally source and processed clip in order to be
+				compared</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>/
+				: Interleave source and processed clip in order to be compared</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>P
+				: displays values used ( &laquo;mod&raquo; will appear closed to
+				the preset name if some default parameters have been modified )</B></FONT></FONT></P>
+				<P STYLE="margin-left: 1.63cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>F
+				: displays used filters chains (N1, N2, E1, E2, M, LP, DR) </B></FONT></FONT>
+				</P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I><B>All
+				commands can be combined (except P and F that can not be used at
+				the same time)</B></I></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 3.61cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I><B>Ex :
+				HybridFuPP(448, 320, Show=&quot;MDB&quot;) displays motion, dark
+				and bright areas</B></I></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><BR><BR>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Denoising
+: </B></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm; font-weight: normal">
+<FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>Use
+these parameters to clean your clip and/or to gain compressibility.</I></FONT></FONT></FONT></P>
+<P STYLE="font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>HybridFuPP
+can natively call 3 different denoisers : deen, mdegrain or
+Fft3DFilter. It is possible to switch between them using 'D_Mode'
+parameter. Some parameters are common for all of them, some others
+are specific to one mode</I></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.05cm; font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>Mdegrain
+(D_Mode = 2) is natively a motion-compensated denoiser. But what is
+really new from HybridFuPP 0.99a is the ability to use motion
+compensation whatever denoiser you decide to use. It is of course
+true when using Deen or Fft3DFilter (D_Mode=1 or D_Mode=3). But it is
+even possible to use any temporal or spatio-temporal denoiser with
+HybridFuPP, using N1 or N2 parameters (see section 'Advanced
+Parameters'), and get it motion-compensated ; you will have then to
+set motion compensation parameters, ie M_TRadius and Bl_Size for the
+most. </I></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm; font-weight: normal">
+<FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>Temporal
+radius, ie number of consecutive frames taken into account for motion
+computation, has to be set using parameter M_TRadius </I></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 2.57cm; text-indent: -0.03cm; font-weight: normal">
+<FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>M_TRadius
+= 0 means no motion compensation (not allowed when D_Mode=2)</I></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 2.54cm; font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>M_TRadius
+set between 1 and 3 indicates the number of frames before and after
+the current frame that must be taken into account for motion
+compensation computation</I></FONT></FONT></FONT></P>
+<P STYLE="font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>NB
+: if you want to use an external denoiser (using N1 or N2 parameters)
+which is internally already motion compensated, you should then
+deactivate HybridFuPP's motion compensation to avoid double work (and
+maybe unexpected results). Use M_TRadius = 0 for that.</I></FONT></FONT></FONT></P>
+<P STYLE="font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>Caution
+: Motion compensation is very time consuming. The higher the temporal
+radius, the higher the processing time !</I></FONT></FONT></FONT></P>
+<P><BR><BR>
+</P>
+<P STYLE="font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>See
+below all denoising parameters available :</I></FONT></FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=47*>
+	<COL WIDTH=169*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>D_Mode</B></FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1..3</B></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=66%>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Denoiser
+				selection :</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.63cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1 : Deen
+				(default for anime presets)</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.61cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2 :
+				Mdegrain[1-3] (default in most presets)</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.61cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>3 :
+				FFT3DFilter (default for 'Very High' preset)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=47*>
+	<COL WIDTH=169*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>S_Str</B></FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..100</B></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=66%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Spatial
+				filtering strength (used when D_Mode = 1 or D_Mode = 3)</B></FONT></FONT></H3>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>S_Radius</FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>0..3</FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=66%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Radius
+				for spatial filtering (only used when D_Mode = 1)</B></FONT></FONT></H3>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>S_Dist</FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>0.0
+				..1.0</FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=66%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Parameter
+				influencing spatial filtering threshold. The weaker, the more
+				edges are preserved (only used when D_Mode = 1)</B></FONT></FONT></H3>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>T_Str</B></FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..100</B></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=66%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Temporal
+				filtering strength (only used when D_Mode = 1)</B></FONT></FONT></H3>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>C_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..100</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>chroma
+				filtering (only used when D_Mode = 1)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>MP_Mode</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Motion
+				processing mode :</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.67cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0 : no
+				motion processing</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.67cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1 :
+				motion-compensated temporal or spatio-temporal denoising
+				(default)</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.61cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2 : apply
+				only spatial denoising to motion ('motion blur')</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.61cm">
+				<BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_TRadius</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..3</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Temporal
+				Radius for motion compensation (ie number of frames before and
+				after a given frames to take into account for motion compensation
+				computation). 0 means no motion compensation. M_TRadius can not
+				be set to 0 when using Mdegrain (D_Mode = 2). M_TRadius is
+				automatically set to 1 when using MP_Mode = 2 (motion blur)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Bl_Size</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>4,
+				8 or 16</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Block
+				size for motion estimation</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>ME_Resizer</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Resizer
+				used for super-clip transformation (used for motion estimation in
+				all cases, but also directly used by Mdegrain for denoising). </B></FONT></FONT>
+				</P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 0cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>This
+				parameter can be useful when using Mdegrain denoiser (D_Mode = 2)
+				to gain more details. It should be let to its default value (0)
+				in all other cases. Change it only if you understand what you do.
+				Resizer values are those described in section 'General
+				Parameters'</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..255</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Motion
+				detection threshold</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_SCD</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..999</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Scene
+				change detection threshold</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..300</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Spatial
+				denoising strength (used only when MP_Mode = 2)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Edges
+processing (accentuation and deringing) : </B></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm; font-weight: normal">
+<FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>you
+may want to sharpen edges (or smooth them). You may also want to
+remove ringing artefacts around edges.</I></FONT></FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=46*>
+	<COL WIDTH=170*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>EM_Mode</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Edge
+				mask mode</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.67cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1 :
+				optimized for filmed content</B></FONT></FONT></P>
+				<P CLASS="retrait-du-corps-de-texte-" STYLE="margin-left: 6.67cm">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2 :
+				optimized for animes</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Thr</B></FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..255</B></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=66%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Edges
+				detection threshold (default : 135)</B></FONT></FONT></H3>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<H3 STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Auto_Str</B></FONT></FONT></FONT></H3>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<H3 STYLE="text-indent: -0.03cm; page-break-after: avoid"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>When
+				True, the script makes an automatic computation for both
+				following parameters (nb : if you set E_Auto_Str = True, but
+				define E_Str_X and/or E_Str_Y in your HybridFuPP Command line,
+				these 2 parameters will be ignored)</B></FONT></FONT></H3>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_X
+				</B></FONT></FONT></FONT>
+				</P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>-50..50</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 3.81cm; text-indent: -3.81cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Horizontal
+				sharpening strength</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_Y</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>-50..50</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 3.81cm; text-indent: -3.81cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Vertical
+				sharpening strength</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_B</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>-200..200</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Edges
+				brightness</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_N</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..20</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Adds
+				grain on edges in order to force the codec (when encoding) to
+				allocate more bits on edges</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dering
+				</B></FONT></FONT></FONT>
+				</P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 0.02cm; text-indent: -0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>This
+				allows to remove artefacts around edges on source materials. This
+				setting is disactivated in all presets (except Anime1) by
+				default. It slows down precessing speed significantly.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DR_Radius</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..10</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 0.02cm; text-indent: -0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deringing
+				radius</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DR_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..100</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="margin-left: 0.02cm; text-indent: -0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deringing
+				strength</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><BR><BR>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Dark
+and bright areas : </B></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 0.05cm; font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>very
+dark and very bright areas can be processed in order to gain
+compressibility without noticeable quality loss. At the opposite, it
+is possible to improve codecs behaviour in dark scenes, enhancing
+details </I></FONT></FONT></FONT>
+</P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=46*>
+	<COL WIDTH=170*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>D_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..255</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark
+				areas detection threshold</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>B_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..255</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Bright
+				areas detection threshold. Something between 160 and 180 should
+				be fine</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>LP_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark and
+				bright areas filtering strength</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DS_Enh</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark
+				scenes details enhancer. Thresholding is set using parameter
+				below (DS_Enh_Str)</B></FONT></FONT></P>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Use
+				'Enh_Str' parameter (see 'General Parameters') to set enhancement
+				strength ; be aware that Enh_Str is shared with skin processing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DS_Enh_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>40..70</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark
+				scenes details enhancer threshold</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><BR><BR>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Deblocking
+: </B></FONT></FONT></FONT>
+</P>
+<P STYLE="font-weight: normal"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>this
+process can be used to remove blocking effect from a badly compressed
+input clip (blocks are well known mpeg compression related
+artefacts).</I></FONT></FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=46*>
+	<COL WIDTH=170*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deblock</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Allow
+				blocks smoothing. Be careful : if you need to crop your input,
+				cropping must use mod 4 values</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_Q</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..60</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deblocking
+				strength</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_Off_a</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..51</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Edges
+				sensitivity</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_Off_b</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0..51</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Affects
+				both detection threshold and processing strength</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_M_Only</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>If true,
+				only moving parts of a frame will be deblocked</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><BR><BR>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>Skin
+Processing : </B></FONT></FONT></FONT>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm; font-weight: normal">
+<FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I>if
+you don't like washy faces on your encodes, this is the way to go,,,</I></FONT></FONT></FONT></P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: avoid">
+	<COL WIDTH=40*>
+	<COL WIDTH=46*>
+	<COL WIDTH=170*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=16%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Skin</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=18%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True
+				/ false</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=66%>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>This
+				allows Skin Processing : the script try to detect skin on picture
+				and apply accentuation and grain on those areas. When encoded,
+				faces are better detailed, improving psychovisual perception. Use
+				Enh_Str parameter (see 'General Parameters') to set enhancement
+				strength ; be aware that Enh_Str is shared with Dark Scenes
+				enhancement processing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><I><B><FONT FACE="Arial">NB
+: parameters N1, N2, E1, E2, M, LP</FONT> <FONT FACE="Arial">et DR</FONT>
+<FONT FACE="Arial, sans-serif">are described in section</FONT>
+&lsquo;<FONT FACE="Arial">ADVANCED PARAMETERS&rsquo;.</FONT></B></I></FONT></FONT></P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B><FONT COLOR="#3366ff"><FONT SIZE=4>PRESETS
+</FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Arial"><FONT SIZE=2>(be
+careful, associated parameters could change as HybridFuPP is still in
+alpha or beta stage) : </FONT></FONT></FONT></B></FONT>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Presets
+names are generally related to the final quality (&laquo;&nbsp;High&nbsp;&raquo;
+means High Quality). The higher (i.e. better quality), the less
+compressible. You can temporarily change any parameter included in
+presets by specifying it or them in the command line</B></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I>ex :
+HybridFuPP(preset = &quot;very high&quot;, E_Thr = 133, dering =
+true)</I></FONT></FONT></P>
+<P><BR><BR>
+</P>
+<TABLE WIDTH=526 BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=75>
+	<COL WIDTH=37>
+	<COL WIDTH=40>
+	<COL WIDTH=44>
+	<COL WIDTH=42>
+	<COL WIDTH=39>
+	<COL WIDTH=51>
+	<COL WIDTH=50>
+	<COL WIDTH=46>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>presets
+				</B></FONT></FONT>
+				</P>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>parameters</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Very Low</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Low</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Medium</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>High
+				<FONT SIZE=1 STYLE="font-size: 8pt">(default)</FONT></B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Very
+				High</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51>
+				<P STYLE="margin-right: 0.16cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>HybridQ</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Anime1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46>
+				<P STYLE="margin-right: 0.11cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Anime2</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Resizer</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="3" SDNUM="1036;">
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>3</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="6" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>6</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="8" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="6" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>6</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>ARAdjust</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Fast</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Enh_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 SDVAL="3" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>3</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>D_Mode</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 SDVAL="3" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>3</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>S_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="1,7" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1,7</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="7" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>7</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="20" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>20</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>S_Radius</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>S_Dist</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="0,1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0,1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="0,1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0,1</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>T_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="6" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>6</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="15" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>15</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>C_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="9" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>9</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="9" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>9</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>MP_Mode</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Bl_Size</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="8" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="8" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="8" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="8" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="16" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>16</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="8" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>8</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>ME_Resizer</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="5" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="5" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="5" SDNUM="1036;">
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="5" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="5" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="5" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>5</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_SCD</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="260" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>260</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="260" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>260</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="260" SDNUM="1036;">
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>260</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="260" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>260</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="260" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>260</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="260" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>260</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>M_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>EM_Mode</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="135" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>135</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="135" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>135</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="135" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>135</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Auto_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_X</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="46" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>46</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="46" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>46</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_Y</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="46" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>46</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="46" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>46</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_B</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="-2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>-2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="-2" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>-2</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>E_Str_N</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="7" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>7</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>dering</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DR_Radius</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="1" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>1</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DR_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="60" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>60</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>D_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="32" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>32</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="32" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>32</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="28" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>28</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="28" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>28</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="28" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>28</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="24" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>24</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>B_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="180" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>180</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="0" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>0</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>LP_Str</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="30" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>30</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM SDVAL="40" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>40</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM SDVAL="40" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>40</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DS_Enh</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DS_Enh_Thr</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM SDVAL="48" SDNUM="1036;">
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>48</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deblock</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=75>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_M_Only</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_Q</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_Off_a</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>DB_Off_b</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>N/A</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=75 VALIGN=TOP>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Skin</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=37 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=40 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=44 VALIGN=BOTTOM>
+				<P LANG="de-DE" ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=42 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=39 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=51 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>True</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=50 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=46 VALIGN=BOTTOM>
+				<P ALIGN=RIGHT><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>False</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><FONT COLOR="#3366ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>ADVANCED
+PARAMETERS</B></FONT></FONT></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>HybridFuPP allows you to
+define your own filtering chains, after the resizer for dark and
+bright areas processing, before or after the resizer for edges and
+denoising. </B></FONT>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>Resizing remains
+processed by the main script (but can be defined using the Resizer
+parameter)</B></FONT></P>
+<TABLE WIDTH=645 BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=26>
+	<COL WIDTH=592>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>N1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain
+				(denoisning), applied <I>before</I> resizing </B></FONT>
+				</P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>N2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain
+				(denoising), applied <I>after</I> resizing </B></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>E1</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain for
+				edges, applied <I>before</I> resizing </B></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>E2</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain for
+				edges, applied <I>after</I> resizing </B></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>M</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain on
+				motion (only used for optional motion blur, ie when MP_Mode is
+				set to 2)</B></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>LP</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain for
+				dark and bright areas</B></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=26>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><B>DR</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=592>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>filtering chain for
+				deringing</B></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<H2><BR><BR>
+</H2>
+<H2><FONT FACE="Arial"><FONT SIZE=3><I><B>NB : filtering chains have
+to be defined using quotes</B></I></FONT></FONT></H2>
+<P><FONT FACE="Arial Narrow, sans-serif"><I>Ex : HybridFuPP(640, 480,
+preset = &quot;medium&quot;, N2 =<FONT COLOR="#ff0000"> </FONT><FONT COLOR="#ff0000"><FONT SIZE=2>&quot;</FONT></FONT>deen()<FONT COLOR="#ff0000"><FONT SIZE=2>&quot;
+</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=2>)</FONT></FONT></I></FONT></P>
+<P><FONT FACE="Arial"><B>if the filtering chain contains quotes, then
+it has to be defined using triple quotes </B></FONT>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><I>ex : HybridFuPP(640, 480,
+preset = &quot;medium&quot;, N2 =<FONT COLOR="#ff0000"> </FONT><FONT COLOR="#ff0000"><FONT SIZE=2>&quot;</FONT></FONT>deen()<FONT COLOR="#ff0000"><FONT SIZE=2>&quot;
+</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=2>, </FONT></FONT><FONT COLOR="#000000">Dering
+= true, </FONT>DR =<FONT COLOR="#ff0000"> &quot;&quot;&quot;</FONT>BlindPP(quant=
+2, cpu2 = &quot;xxxxxx&quot;, moderate_h = 40, moderate_v = 80)<FONT COLOR="#ff0000">&quot;&quot;&quot;</FONT><FONT COLOR="#000000">)</FONT></I></FONT></P>
+<P><BR><BR>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>All advanced
+parameters which are not explicitly defined are then replaced by
+HybridFuPP default processing chains (see further). </B></FONT></FONT>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>It is
+therefore possible to re-define only some of the advanced parameters
+(ex : you can define only N1, N2 and LP ; other advanced parameters,
+i.e. M, E1, E2 and DR, will use default HybridFuPP&rsquo;s processing
+chains). </B></FONT></FONT>
+</P>
+<P><FONT FACE="Arial"><I><B>To cancel a default processing chain
+without defining a new one, you have to use double quotes, and write
+XX = <FONT SIZE=2>&quot;&quot;, </FONT>where XX is an advanced
+parameter (ex : E2 = &quot;&quot; )</B></I></FONT></P>
+<P><FONT FACE="Arial"><FONT SIZE=3><B>Caution : it is not possible to
+add a filter to a default chain ; the whole chain must be entirely
+redefined.</B></FONT></FONT></P>
+<P><BR><BR>
+</P>
+<P STYLE="margin-left: 2.62cm; text-indent: -2.62cm"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>HybridFuPP&rsquo;s
+default processing chains</B></FONT></FONT></FONT></P>
+<TABLE WIDTH=668 BORDER=1 CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=27>
+	<COL WIDTH=614>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>N1</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;&quot;</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>N2</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>If
+				D_Mode = 1 &rarr; &quot;&quot;&quot;Deen(&quot;a3d&quot;,
+				S_Radius, S_Str, 3*C_Str, T_Str, C_Str, S_Dist, 9)&quot;&quot;&quot;</B></FONT></FONT></P>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>If
+				D_Mode = 2 </B></FONT></FONT>&rarr; <FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;Mdegrain&quot;
+				+ string(M_TRadius) + &quot;(sc, b, f, &quot;+ (M_TRadius &gt; 1
+				? &quot;b2, f2, &quot; : &quot;&quot;)</B></FONT></FONT></P>
+				<P STYLE="margin-left: 8.84cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>\
+				+ (M_TRadius &gt; 2 ? &quot;b3, f3, &quot; : &quot;&quot;)</B></FONT></FONT></P>
+				<P STYLE="margin-left: 8.84cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>\
+				+ &quot;thsad = scd, plane=4)&quot;</B></FONT></FONT></P>
+				<P><FONT FACE="Arial Narrow, sans-serif"><B>If D_Mode = 3 </B></FONT>&rarr;
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;fft3dfilter(bt=3,
+				sigma=S_Str, plane=4)&quot;</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P LANG="de-DE"><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>E1</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P LANG="de-DE"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;UnFilter(E_Str_X,
+				E_Str_Y).Addgrain(E_Str_N,0,0)&quot;</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>E2</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P>&ldquo;<FONT FACE="Arial Narrow, sans-serif"><B>ColorYUV(off_Y
+				= E_Str_L)&rdquo;</B></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>M</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;&quot;&quot;Deen(&quot;a2d&quot;,
+				1, M_Str, 0, 0, 0, 0, 0)&quot;&quot;&quot;</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>LP</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;&quot;&quot;Deen(&quot;a2d&quot;,
+				2, LP_Str, 0, 0, 0, 0, 0)&quot;&quot;&quot;</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=27>
+				<P><FONT COLOR="#5c8526"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>DR</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=614>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=3><B>&quot;&quot;&quot;Deen(&quot;a2d&quot;,
+				2, DR_Str, 0, 0, 0, 0, 0)&quot;&quot;&quot;</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><FONT COLOR="#0047ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>EXAMPLES</B></FONT></FONT></FONT></P>
+<TABLE WIDTH=932 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=3 STYLE="page-break-inside: avoid">
+	<COL WIDTH=765>
+	<COL WIDTH=140>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320 )</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 14.92cm; text-indent: -14.92cm; font-weight: normal">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320, use
+				default values. Is therefore equivalent to HybridFuPP(448, 320,
+				preset = &quot;high&quot;)</FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, preset=&quot;low&quot; ) </B></FONT></FONT>
+				</P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="font-weight: normal"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320,
+				use low quality preset</FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, preset=&quot;medium&quot;, E_Str_X= 40, E_Str_Y = 10 )</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 0.01cm; font-weight: normal"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320,
+				preset medium, but applying oversharpening (using a stronger
+				value on horizontal axis, in order to get better aspect for SVCDs
+				for instance)</FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(preset
+				= &quot;very high&quot;, D_Mode = 1, S_Str = 8, T_Str = 5, C_Str
+				= 0 )</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320,
+				using preset &quot;very high&quot;, except for denoising :
+				Denoiser Mode has been set to 1 (using deen), S_Str (spatial
+				filtering strength) and T_Str (temporal filtering strength) have
+				been set respectively to 8 and 5. Chroma channels will not be
+				processed </FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, MP_Mode = 2, M_Str = 160, dering = true )</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 14.92cm; text-indent: -14.92cm; font-weight: normal">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320, uses
+				default values (see preset&nbsp; &quot;high&quot;), except for
+				M_Str (motion filtering strength) and dering</FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, MP_Mode = 2, M_Str = 160, dering = true, show = &quot;M&quot;
+				)</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 14.92cm; text-indent: -14.92cm; font-weight: normal">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>Same than the
+				previous one, but motion mask is displayed</FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, preset = &quot;very high&quot;, LP = &quot;&quot; )</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 14.92cm; text-indent: -14.92cm; font-weight: normal">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320, using
+				preset &ldquo;very high&rdquo;. Dark and bright areas processing
+				is though disactivated.</FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, show = &quot;MDB&quot;, B_Thr = 165 )</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 14.92cm; text-indent: -14.92cm; font-weight: normal">
+				<FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320,
+				displays motion (M), dark areas (D) and bright areas (B). Bright
+				areas detection threshold is set to 165</FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=765>
+				<P STYLE="margin-left: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2 STYLE="font-size: 9pt"><B>HybridFuPP(
+				448, 320, N2 = &quot;temporalsoften(2,3,3,6,2)&quot;, M_TRadius =
+				2, deblock = true)</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=140>
+				<P STYLE="margin-left: 0.01cm; font-weight: normal"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2>448x320.
+				HybridFuPP's default N2 processing is replaced with
+				temporalsoften, using 2 frames before and after the current one
+				for motion compensation. Deblocking has been activated.</FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<H1><FONT COLOR="#0047ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4>THANKS
+TO</FONT></FONT></FONT></H1>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>Manao (a lot) for his
+work on Masktools and MVTools</B></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>Fizick for continuing to
+improve MVTools anf for FFT3DFilter</B></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>MarcFD and trbarry for
+their filters</B></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>Beiji, CAS, ThomN2H,
+Cyberyeye, Did&eacute;e, Bond, Jorel, Audioslave and Scharfis_brain
+(for tips, ideas and feedback)</B></FONT></P>
+<P><FONT FACE="Arial Narrow, sans-serif"><B>And all other people who
+tried or use this script...</B></FONT></P>
+<P><BR><BR>
+</P>
+<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4><B>- FuPP -</B></FONT></FONT></P>
+<P><BR><BR>
+</P>
+<H1><FONT COLOR="#0000ff"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=4>HISTORY</FONT></FONT></FONT></H1>
+<TABLE WIDTH=638 BORDER=0 CELLPADDING=4 CELLSPACING=0 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: avoid">
+	<COL WIDTH=93>
+	<COL WIDTH=529>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.991b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Fixed
+				filtering strength when D_Mode = 3 : parameter S_Str was not
+				taken into account</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Valid
+				range of values for Enh_Str parameter is now checked</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Bl_Size
+				value is now displayed when using Show = ''P''</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Some
+				corrections on the doc (and french doc has been completely
+				updated)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.99a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>3
+				modes for denoising are now available. D_Mode = 1 uses Deen,
+				D_Mode = 2 (default for most presets) uses Mdegrain, D_Mode = 3
+				uses FFT3DFilter</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Implemented
+				the ability to use motion compensation for any temporal or spatio
+				temporal denoiser thrown at HybridFuPP (those used natively by
+				HybridFuPP, or any denoiser you may define using N1 or N2
+				parameters)</B></FONT></FONT></P>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Some
+				new parameters have been added : M_TRadius (temporal radius for
+				motion compensation, ME_Resizer (resizer used for super clip
+				generation), Bl_Size (block size for motion computation) </B></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Skin
+				processing has been improved and should generate less grain</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Edges
+				processing has been improved</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>EM_Mode
+				(Edge Mask Type) parameter has been re-introduced (EM_Mode = 2
+				should give better results for animes)</B></FONT></FONT> 
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>There
+				is again only one parameter (Enh_Str : enhancement strength) used
+				for skin and dark scenes processing (regression from 0.895a)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added
+				Spline16Resize (Resizer = 6). </B></FONT></FONT>
+				</P>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Spline36Resize
+				is now : Resizer = 7, and Spline64Resize : Resizer = 8</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Some
+				other internal changes</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.985a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Automatic
+				calculation of edges sharpening strength (E_Auto_Str = true)
+				should work better</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Show=&rdquo;F&rdquo;
+				will display used filtering chains</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark
+				scenes details enhancer and Skinned areas enhancer have now each
+				their own strength parameter (DS_Enh_Str for dark scenes,
+				S_Enh_Str for Skin processing)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.984a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added
+				Spline64Resize (Resizer = 7)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.983a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added
+				the possibility to compare input and output clips, stacking them
+				horizontally or vertically, or interleaving them (1 picture of 2)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Although
+				EM_Mode parameter (Edge Mask Mode) still exists, it is not active
+				anymore. Only one kind of edge mask will be computed by the
+				script</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.98a
+				to 0.982a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Non
+				official alpha versions</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.98a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added
+				:</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Skin
+				processing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark
+				scenes details enhancer</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Automatic
+				resizer switching</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Automatic
+				calculation of edges sharpening parameters</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Motion
+				only deblocking</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>HybridFuPP
+				*should* be now compatible with MT, SetMTMode(2,0) only</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.93a
+				to 0.97a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Non
+				official alpha versions</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.92b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2
+				modes are available for motion precessing : motion compensated
+				temporal denoising, or spatial denoising. Spatial denoising
+				(default) is faster, but quality is a bit lower.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>MM_Type
+				parameter removed (motion mask type) </B></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Two
+				edges mask modes (parameter EM_Mode) : 1 is rather for films, 2
+				for animes</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				deringing processing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deblocking
+				mode added (parameters Deblock, DB_Q, DB_Off_a and DB_Off_b)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dark
+				areas processing has been modified</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Bright
+				areas processing has been inactivated by default in all presets</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				parameters S_Str et T_Str manage now distinctively spatial and
+				temporal filtering strength (parameter ST_Str has been removed)
+				for static areas</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>In
+				order to get better efficiency when denoising static areas, 2 new
+				parameters have been added : S_Radius and S_Dist. The first one
+				is related to filtering radius, and the second one influences
+				spatial filtering threshold (The weaker, the more edges are
+				preserved)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				parameter E_Str_B : edges brightness</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				parameter Fast (true / false). When True, dark areas, lit areas
+				and motion (only if MP_Mode = 2) masks are computed from an
+				already denoised and resized picture (enabling HybridFuPP to save
+				time). If False, these masks are computed from a simply resized
+				picture</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>2
+				new presets : anime1 and anime2</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				preset HybridQ that allows sharp edges while maintaining good
+				compressibility</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Parameter
+				L_Thr has been renamed in B_Thr</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				parameters available for 'Show' : &ldquo;R&rdquo; (displays areas
+				that will be deringed) and &ldquo;P&rdquo; (displays all the
+				parameters used)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><I><B>Be
+				careful : range of valid values have been modified for a few
+				parameters. Please have a look on the documentation above. </B></I></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.9a
+				to 0.917a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Non
+				official alpha versions</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.89a
+				to 0.897a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Non
+				official alpha versions</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.882b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Bug
+				fixed when width or height were lee than 256</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.881b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deringing
+				bug fixed</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.17cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.88b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>No more
+				multiple resizing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.64cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Standard
+				filtering chains have been changed a lot</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Like
+				dark areas, bright areas are now processed too </B></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Chroma
+				processing has been improved</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New and
+				more efficient motion detection engine (thanks Manao). The old
+				one, and an improved version of it, are though available too (use
+				parameter MM_Type)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				presets : &ldquo;very low&rdquo;, &ldquo;low&rdquo;, &ldquo;medium&rdquo;,
+				&ldquo;high&rdquo; (default), &ldquo;very high&rdquo; and &ldquo;anime&rdquo;
+				</B></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>&laquo;
+				Debug &raquo; mode is now called &laquo; Show &raquo;. As
+				previously, it allows to display masks. Using it is easier too.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>New
+				parameters (C_Str = chroma filtering strength, L_Thr = lit areas
+				threshold, LP_Str = dark and lit areas filtering strength). Some
+				others are no more used (chroma, dark, D_Str, Eresizer, Nresizer,
+				CH&hellip;)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Dering
+				no more returns an error when used with non mod 16 destination
+				width and height. It will simply be disactivated if needed.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 3.18cm; text-indent: -0.32cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.15cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.85a
+				to 0.87a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Non
+				official alpha versions</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.15cm; margin-right: 0.01cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="text-indent: 0.02cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P STYLE="margin-left: 0.15cm; margin-right: 0.01cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.84b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>It is
+				now possible to create personal processing chains</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Advanced
+				debug mode (displayed with colors, modes can be now combined)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added a
+				strength parameter for dark areas processing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>More
+				speed</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>No more
+				limits concerning final size for chroma and dark (called
+				&lsquo;special&rsquo; in 0.7x versions) modes</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Deringing
+				(optional) is now done after resizing. Mod 16 size limit concerns
+				now only final size.</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Be
+				careful : some parameters have been renamed (ex&nbsp;: special -&gt;
+				dark). </B></FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Parameters
+				order has changed&nbsp;! so be careful if you used&nbsp; unnamed
+				parameters in previous releases. ex :
+				HybridFuPP(448,320,12,7,10,30,9,32,17,1,5,true,true,true,30,0)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.80a
+				to 0.83a</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Non
+				official alpha versions</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.71b:</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added a
+				threshold parameter for special mode (i.e. dark areas processing)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.7b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Special
+				processing of dark areas, i.e. soft resizing + strong filtering
+				(optional). Compressibility&nbsp;: up to 12% more</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>It is
+				now possible to choose resizing algorithm for edges</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Motion
+				spatial filtering has been re-introduced (because of users
+				request)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>A little
+				bit less speed if dark areas processing is used (activated by
+				default), a little bit more than 0.6b if it is not used</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.6b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Resizing
+				algorithm and settings can be now selected for picture parts
+				displaying no motion nor edges</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Edge
+				detection algorithm changed (uses Msharpen now)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="margin-left: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Default
+				values have been changed</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Presets
+				have been changed</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>It is
+				now possible to override parameters included in a preset</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="text-indent: -0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Spatial
+				filtering has been removed when processing motion (offered a very
+				weak compressibility gain)</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>General
+				picture quality improvements</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Speed
+				improvement</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.5b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added
+				presets</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Changed
+				defaults for better quality</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Changed
+				spatio-temporal filter position in the chain</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.4b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Added
+				parameters for both spatio-temporal and spatial filtering</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Changed
+				default value for Edge detection threshold from 15 to 10</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Chroma
+				smoothing is now done after resizing. Deringing is still done
+				before. Will see later...</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.3b</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=529>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>Errors
+				with non mod16 sources are better managed</B></FONT></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=93 HEIGHT=11>
+				<P><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=1 STYLE="font-size: 8pt"><B>0.2b
+				</B></FONT></FONT>
+				</P>
+			</TD>
+			<TD WIDTH=529>
+				<P STYLE="text-indent: 0.03cm"><FONT FACE="Arial Narrow, sans-serif"><FONT SIZE=2><B>First
+				downloadable version</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

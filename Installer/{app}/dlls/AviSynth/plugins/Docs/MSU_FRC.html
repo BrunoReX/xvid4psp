@@ -1,0 +1,106 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <title> AviSynth MSU Frame Rate Conversion Filter</title>
+<!--#include virtual="/__meta_en.htm" -->
+</head>
+
+<body text="#000000" bgcolor="#E9E9E9" background="/images/m_backgrnd.gif">
+<!--#include virtual="/__header_en.htm" -->
+
+
+<!-------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------->
+<center>
+<h1> AviSynth MSU Frame Rate Conversion Filter</h1>
+<h4><i>
+    <a href="http://compression.ru/video/index.htm">MSU Graphics & Media Lab (Video Group)</a>
+</i></h4>
+</center>
+
+<p align="right">
+<font size=3><i>
+   Project, idea: Dmitriy Vatolin<br>
+   Algorithm: Karen Simonyan, Sergey Grishin<BR>
+   Implementation: Karen Simonyan<BR>
+</i></font>
+
+<P>
+<font size=2>
+<I>
+<B>
+MSU FRC 0.5:<BR>
+</B>
+&nbsp;&nbsp;&nbsp;The first public release<BR>
+</I>
+</font>
+
+
+<!-------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------->
+
+<p>
+<font size=3>
+    The filter is intended for video frame rate up-conversion. It increases the frame rate
+	integer times. It allows, for example, to convert a video with 15 fps into a video with
+	30 fps.
+</font>
+
+<!--#include virtual="/__headline_begin.htm" -->
+<h3>Usage</h3>
+<!--#include virtual="/__headline_end.htm" -->
+<P>
+To use the plugin you should copy MSU_FRC.dll file to 'plugins' directory in AviSynth install folder
+or use the function <I>LoadPlugin</I> directly from the script.
+<P>
+
+AviSynth script example:
+<font size=4>
+<pre>
+<I>AviSource("video.avi")
+ConvertToYV12().MSU_FRC(4, "slow")</I>
+</pre>
+</font>
+<P>
+The input video must be in YV12 colorspace.<BR>
+To convert a video into YV12 colorspace use <I>ConvertToYV12.</I><BR>
+<P>
+The width and the height of the input video must be multiples of 16.<BR>
+To resize a video use <I>Crop</I> and/or <I>AddBorders.</I><BR>
+<P>
+<TABLE BORDER = 2 width = 100%>
+<caption><B>Parameters</B></caption>
+<THEAD>
+	<TD width = 5%>#</TD>
+	<TD width = 35%>Description</TD>
+	<TD width = 60%>Allowed values</TD>
+</THEAD>
+<TBODY>
+<TR>
+	<TD>1</TD>
+	<TD>Interpolation factor</TD>
+	<TD>
+	Any positive number
+	</TD>
+</TR>
+<TR>
+	<TD>2</TD>
+	<TD>Preset</TD>
+	<TD>
+	<I>fast</I> -higher speed, lower quality<BR>
+	<I>medium</I> - medium speed, medium quality<BR>
+	<I>slow</I> - lower speed, better quality<BR>
+	<BR>
+	<I>slow</I> preset is used by default
+	</TD>
+</TR>
+</TBODY>
+</TABLE><BR>
+<P>
+<B>AviSynth webpage </B><a href="http://avisynth.org"> http://avisynth.org</a>
+<P>
+<font size="3"><h3>Filter homepage</h3>
+<a href="http://www.compression.ru/video/frame_rate_conversion/index_en_msu.html">AviSynth MSU Frame Rate Conversion Filter</a></font>
+
+</body>
+</html>

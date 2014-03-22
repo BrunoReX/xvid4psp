@@ -1,0 +1,5 @@
+audio codec:
+MP3
+
+audio cli:
+-m s -b 128 -q 2

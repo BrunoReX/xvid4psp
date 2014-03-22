@@ -1,0 +1,5 @@
+audio codec:
+PCM
+
+audio cli:
+-acodec pcm_s16le

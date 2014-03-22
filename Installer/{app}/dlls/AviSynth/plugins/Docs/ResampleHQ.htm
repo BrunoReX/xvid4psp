@@ -1,0 +1,470 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML lang=en-US 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>ResampleHQ</TITLE>
+<META content="text/html; charset=windows-1251" http-equiv=Content-Type></HEAD>
+<BODY class=hyphenate>
+<DIV id=content>
+<H1>ResampleHQ</H1>
+<P>ResampleHQ provides gamma&#8208;aware resizing and colorspace conversion.</P>
+<UL>
+  <LI><B>author</B>: Cory Nelson (<A 
+  href="mailto:phrosty@gmail.com">phrosty@gmail.com</A>) (<A 
+  href="http://twitter.com/scalablecory">@scalablecory</A>) (PhrostByte on 
+  Doom9)</LI>
+  <LI><B>version</B>: v8 for 32&#8208;bit</LI>
+  <LI><B>download</B>: <A 
+  href="http://sourceforge.net/projects/int64/files/ResampleHQ/ResampleHQ-v7.zip/download">http://sourceforge.net/projects/int64/files/ResampleHQ/ResampleHQ-v7.zip/download</A></LI>
+  <LI><B>discussion</B>: <A 
+  href="http://forum.doom9.org/showthread.php?p=1484392">http://forum.doom9.org/showthread.php?p=1484392</A></LI>
+  <LI><B>license</B>: GPLv3</LI></UL>
+<H2>Usage</H2><PRE>ResampleHQ(clip
+           [, int width]
+           [, int height]
+           [, string dstcolorspace]
+           [, string srcmatrix]
+           [, string dstmatrix]
+           [, bool dither]
+           [, float src_left]
+           [, float src_top]
+           [, float src_width]
+           [, float src_height]
+           [, string kernel]
+           [, float karg1]
+           [, float karg2]
+           [, float kblur_x]
+           [, float kblur_y]
+           [, string chroma_kernel]
+           [, float chroma_karg1]
+           [, float chroma_karg2])</PRE>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TH>Parameter</TH>
+    <TH>Description</TH></TR>
+  <TR>
+    <TD>width</TD>
+    <TD class=wrap>The target width. If target colorspace is "YV12" or "YUY2", 
+      must be a multiple of 2. Default is source width. </TD></TR>
+  <TR>
+    <TD>height</TD>
+    <TD class=wrap>The target height. If target colorspace is "YV12", must be 
+      a multiple of 2. Default is source height. </TD></TR>
+  <TR>
+    <TD>dstcolorspace</TD>
+    <TD class=wrap>The colorspace to convert to. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#colorspaces">Colorspaces 
+      table</A> for possible values. Default is source colorspace. </TD></TR>
+  <TR>
+    <TD>srcmatrix</TD>
+    <TD class=wrap>The source matrix. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#matrices">Matrices 
+      table</A> for possible values. Default is "TV.601". Ignored if source 
+      colorspace is RGB. </TD></TR>
+  <TR>
+    <TD>dstmatrix</TD>
+    <TD class=wrap>The target matrix. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#matrices">Matrices 
+      table</A> for possible values. Default is source matrix. Ignored if target 
+      colorspace is RGB. </TD></TR>
+  <TR>
+    <TD>dither</TD>
+    <TD class=wrap>If true, the output is dithered. If false, the output is 
+      rounded. Dithering improves quality at the cost of speed and 
+      compressibility. It will not help with pre&#8208;existing banding. Default is 
+      false. </TD></TR>
+  <TR>
+    <TD>src_left</TD>
+    <TD class=wrap>A sub&#8208;pixel offset to crop the source from the left. 
+      Default 0. </TD></TR>
+  <TR>
+    <TD>src_top</TD>
+    <TD class=wrap>A sub&#8208;pixel offset to crop the source from the top. Default 
+      0. </TD></TR>
+  <TR>
+    <TD>src_width</TD>
+    <TD class=wrap>A sub&#8208;pixel width to crop the source to. If negative, 
+      specifies offset from the right. Default is <I>source width &#8722; 
+      src_left</I>. </TD></TR>
+  <TR>
+    <TD>src_height</TD>
+    <TD class=wrap>A sub&#8208;pixel height to crop the source to. If negative, 
+      specifies offset from the bottom. Default is <I>source height &#8722; 
+      src_top</I>. </TD></TR>
+  <TR>
+    <TD>kernel</TD>
+    <TD class=wrap>The kernel to use while resizing. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#kernels">Kernels 
+      table</A> for possible values. Default is "Spline36". </TD></TR>
+  <TR>
+    <TD>karg1</TD>
+    <TD class=wrap>The first argument to give to the kernel. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#kernels">Kernels 
+      table</A> for possible values. </TD></TR>
+  <TR>
+    <TD>karg2</TD>
+    <TD class=wrap>The second argument to give to the kernel. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#kernels">Kernels 
+      table</A> for possible values. </TD></TR>
+  <TR>
+    <TD>kblur_x</TD>
+    <TD class=wrap>Alters the kernel support scale along the x axis. If 
+      positive, &lt; 1.0 will sharpen the image while &gt; 1.0 will blur the 
+      image. If negative, specifies the scale directly. Default is 1.0, or 
+      <I>&#8722;min(width &#8725; src_width, 1.0)</I>. </TD></TR>
+  <TR>
+    <TD>kblur_y</TD>
+    <TD class=wrap>Alters the kernel support scale along the y axis. If 
+      positive, &lt; 1.0 will sharpen the image while &gt; 1.0 will blur the 
+      image. If negative, specifies the scale directly. Default is 1.0, or 
+      <I>&#8722;min(height &#8725; src_height, 1.0)</I>. </TD></TR>
+  <TR>
+    <TD>chroma_kernel</TD>
+    <TD class=wrap>The kernel to use when processing sub&#8208;sampled chroma. See 
+      the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#kernels">Kernels 
+      table</A> for possible values. Default is "Bilinear". </TD></TR>
+  <TR>
+    <TD>chroma_karg1</TD>
+    <TD class=wrap>The first argument to give to the chroma kernel. See the <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#kernels">Kernels 
+      table</A> for possible values. </TD></TR>
+  <TR>
+    <TD>chroma_karg2</TD>
+    <TD class=wrap>The second argument to give to the chroma kernel. See the 
+      <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#kernels">Kernels 
+      table</A> for possible values. </TD></TR></TBODY></TABLE>
+<H3>Notes</H3>
+<UL>
+  <LI>ResampleHQ is compatible with all modes of SetMTMode. </LI>
+  <LI>Dithering is not currently supported for YV12 and YUY2. This may come in 
+  the next version. </LI>
+  <LI>Information about the different resizing kernels can be found at the <A 
+  href="http://avisynth.org/mediawiki/Resize">Avisynth Wiki</A>. </LI></UL>
+<H3 id=kernels>Kernels</H3>
+<P>The right choice of kernel depends highly on the source and your own personal 
+preference—there is no "best" kernel. If you're not sure which one to use, start 
+from Spline36 and use the graphs on the <A 
+href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/kernels.html">visual 
+analysis</A> page to tune your selection. </P>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TH>kernel</TH>
+    <TH>karg1</TH>
+    <TH>karg2</TH>
+    <TH>Notes</TH></TR>
+  <TR>
+    <TD>Bicubic</TD>
+    <TD class=wrap>The 'b' or 'B&#8208;spline' curve. Larger values will cause 
+      blurring. Default is <I>1 &#8725; 3</I>.</TD>
+    <TD class=wrap>The 'c' or 'Cardinal' curve. Larger values will cause 
+      ringing. Default is <I>1 &#8725; 3</I>.</TD></TR>
+  <TR>
+    <TD>CatmullRom</TD>
+    <TD class=empty></TD>
+    <TD class=empty></TD>
+    <TD class=wrap>Equivalent to Bicubic with 'b' = 0 and 'c' = 0.5.</TD></TR>
+  <TR>
+    <TD>MitchellNetravali</TD>
+    <TD class=empty></TD>
+    <TD class=empty></TD>
+    <TD class=wrap>Equivalent to Bicubic with 'b' = <I>1 &#8725; 3</I> and 'c' = 
+      <I>1 &#8725; 3</I>.</TD></TR>
+  <TR>
+    <TD>SoftCubic</TD>
+    <TD class=wrap>The 'softness' value. Default is 100.</TD>
+    <TD class=empty></TD>
+    <TD class=wrap>Equivalent to Bicubic with 'b' = <I>softness &#8725; 100</I> and 
+      'c' = <I>1.0 &#8722; b</I>. SoftCubic filter from madVR.</TD></TR>
+  <TR>
+    <TD>Hermite</TD>
+    <TD class=empty></TD>
+    <TD class=empty></TD>
+    <TD class=wrap>Equivalent to Bicubic with 'b' = 0 and 'c' = 0.</TD></TR>
+  <TR>
+    <TD>Robidoux</TD>
+    <TD class=empty></TD>
+    <TD class=empty></TD>
+    <TD class=wrap>Equivalent to Bicubic with 'b' = 0.3782 and 'c' = 
+  0.3109.</TD></TR>
+  <TR>
+    <TD>Bilinear</TD></TR>
+  <TR>
+    <TD>Blackman</TD>
+    <TD class=wrap rowSpan=3>The number of lobes to use. Larger values will 
+      increase sharpness and ringing. Default is 2.</TD></TR>
+  <TR>
+    <TD>Lanczos</TD></TR>
+  <TR>
+    <TD>Sinc</TD></TR>
+  <TR>
+    <TD>Spline16</TD>
+    <TD class=empty></TD>
+    <TD class=empty></TD>
+    <TD class=wrap rowSpan=3>Spline filters from Avisynth.</TD></TR>
+  <TR>
+    <TD>Spline36</TD></TR>
+  <TR>
+    <TD>Spline64</TD></TR>
+  <TR>
+    <TD>Gaussian</TD>
+    <TD class=wrap>The 'p' or 'sharpness' value. Default is 
+30.</TD></TR></TBODY></TABLE>
+<H3 id=colorspaces>Colorspaces</H3>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TH>Colorspace</TH>
+    <TH colSpan=2>Notes</TH></TR>
+  <TR>
+    <TD>RGB</TD>
+    <TD class=wrap>Equivalent to RGB32.</TD></TR>
+  <TR>
+    <TD>RGB24</TD>
+    <TD class=wrap>R&#8242;G&#8242;B&#8242; packed into 24 bits. ResampleHQ can work with RGB24 
+      without taking any peformance hit—in fact, it will be slightly faster than 
+      RGB32, even when the alpha channel is ignored. </TD></TR>
+  <TR>
+    <TD>RGB32</TD>
+    <TD class=wrap>R&#8242;G&#8242;B&#8242;A packed into 32 bits. If both the source and 
+      destination colorspace are RGB32, the alpha channel is processed and 
+      presumed to be linear. Otherwise it is ignored and treated as fully 
+      opaque. </TD></TR>
+  <TR>
+    <TD>YV12</TD>
+    <TD class=wrap>A planar Y&#8242;UV 4:2:0 format, with chroma (UV) sub&#8208;sampled to 
+      half the size of luma (Y&#8242;). Both width and height must be mod&#8208;2. This is 
+      the format usually used with H.264, MPEG&#8208;4, and web video formats. </TD>
+    <TD class=wrap rowSpan=2>
+      <P>It is very important to provide the correct <A 
+      href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/index.html#matrices">matrix</A> 
+      when using Y&#8242;UV colorspaces, as the results will otherwise come out 
+      slightly wrong. </P>
+      <P>Despite the actual requirements of these Y&#8242;UV colorspaces, Avisynth 
+      requires the final output of your script be of mod&#8208;4 width. Because of 
+      this, most filters also require these colorspaces to be of mod&#8208;4 width. 
+      The ability to use mod&#8208;2 widths is kept as an expert option in ResampleHQ. 
+      </P></TD></TR>
+  <TR>
+    <TD>YUY2</TD>
+    <TD class=wrap>A packed Y&#8242;UV 4:2:2 format, with chroma (UV) sub&#8208;sampled to 
+      half the width of luma (Y&#8242;). Width must be mod&#8208;2. </TD></TR></TBODY></TABLE>
+<H3 id=matrices>Matrices</H3>
+<P>Y&#8242;UV colorspaces have an associated matrix that defines RGB coefficients and 
+Y&#8242;CbCr encoding ranges. It is very important to specify the correct matrix, or 
+the video will be improperly processed and come out with slightly different 
+brightness and colors. </P>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TH>Matrix</TH>
+    <TH>Description</TH>
+    <TH>Red coefficient</TH>
+    <TH>Green coefficient</TH>
+    <TH>Blue coefficient</TH>
+    <TH>Luma range</TH>
+    <TH>Chroma range</TH>
+    <TH>Notes</TH></TR>
+  <TR>
+    <TD>TV.601</TD>
+    <TD rowSpan=2>ITU&#8208;R BT.470-2<BR>ITU&#8208;R BT.601<BR>SMPTE 170M</TD>
+    <TD rowSpan=2>0.299</TD>
+    <TD rowSpan=2>0.587</TD>
+    <TD rowSpan=2>0.114</TD>
+    <TD>16–235 (normal)</TD>
+    <TD>16–240 (normal)</TD>
+    <TD class=wrap>Most sources will be this. YouTube expects this for all 
+      videos, even HD.</TD></TR>
+  <TR>
+    <TD>PC.601</TD>
+    <TD>0–255 (full)</TD>
+    <TD>0–255 (full)</TD></TR>
+  <TR>
+    <TD>TV.709</TD>
+    <TD rowSpan=2>ITU&#8208;R BT.709</TD>
+    <TD rowSpan=2>0.2125</TD>
+    <TD rowSpan=2>0.7154</TD>
+    <TD rowSpan=2>0.0721</TD>
+    <TD>16–235 (normal)</TD>
+    <TD>16–240 (normal)</TD>
+    <TD class=wrap>Usually used only for HDTV sources.</TD></TR>
+  <TR>
+    <TD>PC.709</TD>
+    <TD>0–255 (full)</TD>
+    <TD>0–255 (full)</TD></TR>
+  <TR>
+    <TD>TV.240</TD>
+    <TD rowSpan=2>SMPTE 240M</TD>
+    <TD rowSpan=2>0.212</TD>
+    <TD rowSpan=2>0.701</TD>
+    <TD rowSpan=2>0.087</TD>
+    <TD>16–235 (normal)</TD>
+    <TD>16–240 (normal)</TD>
+    <TD class=wrap>Mainly used by old HDTVs.</TD></TR>
+  <TR>
+    <TD>PC.240</TD>
+    <TD>0–255 (full)</TD>
+    <TD>0–255 (full)</TD></TR>
+  <TR>
+    <TD>TV.FCC</TD>
+    <TD rowSpan=2>FCC</TD>
+    <TD rowSpan=2>0.3</TD>
+    <TD rowSpan=2>0.59</TD>
+    <TD rowSpan=2>0.11</TD>
+    <TD>16–235 (normal)</TD>
+    <TD>16–240 (normal)</TD></TR>
+  <TR>
+    <TD>PC.FCC</TD>
+    <TD>0–255 (full)</TD>
+    <TD>0–255 (full)</TD></TR></TBODY></TABLE>
+<H2>Description</H2>
+<P>Our eyes don't perceive light linearly. Twice the photons will not appear 
+twice as bright. To account for this, colorspaces with small bit widths (all the 
+ones in Avisynth) are gamma&#8208;compressed to give a more eye&#8208;friendly 
+representation, ensuring bits are evenly distributed across all perceived 
+intensities. </P>
+<P>These gamma&#8208;compressed colors must be converted back to a linear colorspace 
+prior to blending, or you get incorrect results. None of Avisynth's filters do 
+this correctly. For rare scenes with a lot of sharp contrast this causes very 
+pronounced errors. For most other scenes the errors are more subtle. It can also 
+effect the quality of anti-aliasing on edges with a lot of contrast (such as in 
+outline&#8208;heavy anime and cartoons). </P>
+<P>As an example, lets find out the brightness we'd get when blending two 
+gamma&#8208;compressed values: 0.1 and 0.9. If we add these two values as they are, 
+we'd get 1.0: 100% white. But this is incorrect. To find out the real value, we 
+must first uncompress the values to find their linear brightness. Doing so, we 
+get 0.01 and 0.79. When we add these together and re&#8208;compress the result, we get 
+0.905: that's about 10% darker (perceptually) than what we got using the 
+incorrect method! </P>
+<P>ResampleHQ produces correct results using a high&#8208;precision 100% linear 
+pipeline. Because colorspace conversion and resizing are often essentially the 
+same thing, we can perform both operations at once for higher performance and 
+better quality. </P>
+<H2>Examples</H2>
+<P>Here is <A href="http://visibleearth.nasa.gov/view_rec.php?id=1438">"Earth's 
+City Lights"</A>, courtesy of NASA and Visible Earth. Note how the ResampleHQ 
+image is much brighter overall, and shows faint light in completely new places 
+around Canada, Alaska, western United States, and along coastlines. </P>
+<P>This image was cherry&#8208;picked to show the detrimental effects gamma&#8208;ignorant 
+resizers have on images with high contrast. It also has an extremely high&#8208;res 
+source (4800&#215;2400), which compounds the issue futher as more pixels are blended 
+to get the final result. </P>
+<DIV id=examples>
+<DIV>
+<P class=head>Avisynth resizers</P>
+<P>convert <A 
+href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/earthlights_big.jpg">earthlights_big.jpg</A> 
+-resize 600x300 <A 
+href="img/earthlights_small1.png">earthlights_small1.png</A></P><IMG 
+alt="Image resized with Avisynth" src="img/earthlights_small1.png"> 
+</DIV>
+<DIV>
+<P class=head>ResampleHQ</P>
+<P>convert -colorspace sRGB <A 
+href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/earthlights_big.jpg">earthlights_big.jpg</A> 
+-resize 600x300 <A 
+href="img/earthlights_small2.png">earthlights_small2.png</A></P><IMG 
+alt="Image resized with ResampleHQ" 
+src="img/earthlights_small2.png"> </DIV></DIV>
+<H2>Implementation</H2>
+<P>True sRGB gamma conversion is used, not the gamma 2.2 approximation. 
+Sub-sampled Y&#8242;UV formats are internally converted out of necessity to linear 
+sRGB. </P>
+<P>Dithering uses a modified version of the Floyd–Steinberg error diffusion 
+algorithm. Modifications include serpentine scanning as well as an altered 
+diffusion pattern to better suit serpentine. </P>
+<P>All operations are performed in 32&#8208;bit floating&#8208;point. This is definitely 
+overkill, but makes things easier to prototype. It may be more performant to use 
+16&#8208;bit integers when possible. </P>
+<H2>TODO</H2>
+<UL>
+  <LI>Dithered Y&#8242;UV output?</LI>
+  <LI>Use OpenCL.</LI>
+  <LI>AVX horizontal resampler.</LI>
+  <LI>1-pass loop blocked resampler.</LI>
+  <LI>Optimize memory usage.</LI>
+  <LI>Don't resize if not needed.</LI>
+  <LI>Avisynth 2.6 formats (Y8/YV411/YV16/YV24).</LI></UL>
+<H2>Thanks</H2>
+<UL>
+  <LI><B>Dark Shikari</B> for explaining the basics of sinc resampling.</LI>
+  <LI><B>Nicolas Robidoux</B> for explaining finer details of resampling.</LI>
+  <LI><B>madshi</B> for sharing SoftCubic details and other useful 
+  information.</LI>
+  <LI><B>Dogway</B> for thorough initial testing and uncovering bugs.</LI>
+  <LI><B>ChaosKing</B> for testing and benchmarking AVX implementation.</LI></UL>
+<H2>License</H2>
+<P>Copyright © 2011 Cory Nelson</P>
+<P>This program is free software: you can redistribute it and/or modify it under 
+the terms of version 3 of the GNU General Public License as published by the 
+Free Software Foundation. </P>
+<P>This program is distributed in the hope that it will be useful, but WITHOUT 
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. 
+</P>
+<P>You should have received a copy of the GNU General Public License along with 
+this program. If not, see &lt;<A class=donthyphenate 
+href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</A>&gt;. </P>
+<H2>Changelog</H2>
+<H3>Version 8</H3>
+<UL>
+  <LI>RGB8-specialized gamma corrections—15% faster color conversions.</LI>
+  <LI>New gamma correction approximations—200% faster color conversions.</LI>
+  <LI>SSE horizontal resampler—25% faster.</LI>
+  <LI>Cache optimizations to vertical resampler—10% faster.</LI>
+  <LI>Experimental FMA4 color conversions for AMD Bulldozer.</LI>
+  <LI>Reduced memory usage.</LI>
+  <LI>Remove automatic multithreading in favor of SetMtMode.</LI>
+  <LI>Bug fix: handle very tiny row widths.</LI></UL>
+<H3>Version 7</H3>
+<UL>
+  <LI>Multi&#8208;core optimizations.</LI>
+  <LI>SSE/AVX vertical resampler.</LI>
+  <LI>AVX implementations of all conversions.</LI>
+  <LI>Optimizations to SSE RGB conversions.</LI>
+  <LI>Significant memory use reduction and minor optimizations to dithered RGB 
+  output.</LI>
+  <LI>Better compatibility with Avisynth built&#8208;in resizers.</LI>
+  <LI>Add <A 
+  href="file:///C:/Documents%20and%20Settings/Администратор/Local%20Settings/Temp/Rar$EX99.784/ResampleHQ/ResampleHQ%20Docs/kernels.html">kernel 
+  visualization</A> docs.</LI>
+  <LI>Remove 64&#8208;bit version temporarily.</LI></UL>
+<H3>Version 6</H3>
+<UL>
+  <LI>SSE Y'CbCr output conversions. All conversions now have SSE 
+  implementations.</LI>
+  <LI>Bug fix: correct rounding in SSE output conversions.</LI>
+  <LI>Bug fix: allocate dithering error buffers.</LI>
+  <LI>Bug fix: Hermite and Robidoux kernels are now enabled.</LI>
+  <LI>Bug fix: correct spelling of Spline36 and Mitchell–Netravali.</LI></UL>
+<H3>Version 5</H3>
+<UL>
+  <LI>Catmull–Rom, Gaussian, Hermite, Mitchell–Netraveli, Robidoux, Sinc, and 
+  SoftCubic kernels.</LI>
+  <LI>SMPTE 240M and FCC matrices.</LI>
+  <LI>Customization of kernel support scale.</LI>
+  <LI>Customization of chroma kernel.</LI>
+  <LI>Support for SetMTMode(1). 
+  <LI>More SSE versions of colorspace conversions.</LI>
+  <LI>Bug fix: make SSE paths work with unaligned sources.</LI>
+  <LI>Bug fix: scale chroma correctly.</LI></UL>
+<H3>Version 4</H3>
+<UL>
+  <LI>Bug fix: clamp out of range values caused by resizing.</LI>
+  <LI>Bug fix: don't process padding in RGB output.</LI></UL>
+<H3>Version 3</H3>
+<UL>
+  <LI>Sub&#8208;pixel cropping.</LI>
+  <LI>Bilinear, Bicubic, Spline16, Spline64, Lanczos, and Blackman kernels.</LI>
+  <LI>SSE2/SSSE3 RGB -&gt; linear conversion.</LI>
+  <LI>Minor optimizations.</LI></UL>
+<H3>Version 2</H3>
+<UL>
+  <LI>Bug fix: correct chroma conversion.</LI>
+  <LI>Bug fix: preserve RGB32 alpha channel.</LI>
+  <LI>Dithered output for RGB.</LI></UL>
+<H3>Version 1</H3>
+<UL>
+  <LI>Initial release!</LI></UL>
+</DIV></BODY></HTML>

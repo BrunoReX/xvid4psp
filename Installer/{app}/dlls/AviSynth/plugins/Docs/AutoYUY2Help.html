@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>AutoYUY2 Plugin for Avisynth</title>
+</head>
+
+<body>
+<h2 align=center>AutoYUY2 Plugin for Avisynth<br>
+(Version 1.0.1)</h2>
+
+<h3 align=center>by Donald A. Graft</h3>
+<h3 align=center>Optimizations by Jean-Philippe Scotto Di Rinaldi</h3>
+<p><hr><p>
+<h3>Introduction</h3>
+
+<p>Traditional YV12 to YUY2 upsamplers operate either in the progressive or interlaced mode, and
+the upsampler must be told which mode to use. This paradigm can be unsatisfactory in several cases:
+<ul>
+<li>The user is unsure of, or unable to determine, which mode to use.
+<li>Segments of a clip are sampled progressively, while others are sampled interlaced.
+<li>There are frames which have areas sampled progressively, while others are sampled interlaced.
+</ul>
+Commonly encountered instances are field blending conversions and 3:2 pulldown of progressively sampled video.
+The former results in parts of frames being effectively interlaced, while the latter results in a mixture
+of progressive and interlaced frames.
+</ul>
+Use of a traditional upsampler in these cases will result in the wrong upsampling being performed
+on some frames or frame areas. The result will be the chroma upsampling error (CUE) if a
+progressively sampled area is upsampled interlaced, or destruction of interlacing (DOI) if an
+interlaced area is upsampled progressively. The AutoYUY2() filter avoids these problems by
+detecting interlaced frame areas and then applying either progressive or interlaced upsampling
+as required.
+<p>
+The distribution ZIP files contains three screen shots that illustrate the problem. They are taken from a
+video clip supplied by <i>scharfis_brain</i>. The 'interlaced.bmp' shot is upsampled as interlaced. You can see that
+the interlacing is properly preserved but there is bad CUE throughout the frame. The 'progressive.bmp' shot is upsampled as
+progressive. You can see that the CUE is eliminated, but the interlacing is destroyed. The 'autoyuy2.bmp' shot
+is upsampled adaptively using AutuYUY2(). You can see that the CUE is eliminated and the interlacing is preserved.
+If you look hard, you may find small areas where there is remaining CUE or DOI, due to imperfections in the
+detection of interlacing.
+<p>
+Version 1.0.1 is a proof-of-concept version. I plan to improve the interlace detection in future versions.
+I also plan to create an AutoRGB() filter that performs the same function but outputs RGB.
+<p>
+This filter was inspired by a discussion with <i>scharfis_brain</i>, who demonstrated an Avisynth script that
+performs this function. I wanted to create a native filter for this functionality.
+<p><hr size=2 width="100%" align=center>
+
+<h3>Function Syntax</h3>
+
+<p>AutoYUY2() takes two named parameter:</p>
+
+<p><b><i>mode</i></b> (integer, default 0) This defines the mode of operation:
+<p>
+mode 0: Interlacing is detected and either progressive or interlaced upsampling is adaptively applied.<br>
+mode 1: Same as mode 0 but show interlaced areas as flat gray.<br>
+mode 2: Progressive upsampling is always used.<br>
+mode 3: Interlaced upsampling is always used.
+
+<p><b><i>threshold</i></b> (integer, default 7) This defines the threshold for detection of interlacing.
+To bias the filter towards declaring areas as interlaced, lower the threshold. No interlace detector can
+be perfect and so any failures may allow CUE or DOI to occur. This parameter allows for
+the user to tradeoff between these two. A lower thresold will tend to produce more CUE and less DOI.
+A higher thresold will tend to produce more DOI and less CUE. Use the mode=1 to visualize
+the areas detected as interlaced to assist in tweaking the threshold. The default threshold works well
+for most video.
+<p><hr size=2 width="100%" align=center>
+
+<p>Copyright &copy; 2005-2007, Donald A. Graft, All Rights Reserved.</p>
+
+<p>For updates and other filters/tools, visit my web site:<br>
+<a href="http://neuron2.net" target="_top">http://neuron2.net</a>
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 18.0 --ref 16 --deblock -1:-1 --merange 24 --bframes 4 --direct auto --b-adapt 2 --trellis 2 --no-fast-pskip --partitions all --subme 10 --me umh --rc-lookahead 60

@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 21.0 --level 3.1 --ref 8 --deblock -2:-1 --merange 32 --direct auto --b-adapt 2 --trellis 2 --psy-rd 1.0:0.2 --vbv-bufsize 14000 --vbv-maxrate 17500 --partitions p8x8,b8x8,i4x4,i8x8 --subme 10 --me tesa --rc-lookahead 60

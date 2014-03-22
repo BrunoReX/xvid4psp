@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 21 --level 3.0 --ref 2 --partitions none --subme 1 --me dia

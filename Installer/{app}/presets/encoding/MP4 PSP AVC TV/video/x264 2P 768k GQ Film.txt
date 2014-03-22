@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --bitrate 768 --level 3.0 --direct auto --b-adapt 2 --no-fast-pskip --b-pyramid none --psy-rd 1.0:0.1 --partitions p8x8,b8x8,i4x4 --no-8x8dct
+--pass 2 --bitrate 768 --level 3.0 --direct auto --b-adapt 2 --no-fast-pskip --b-pyramid none --psy-rd 1.0:0.1 --partitions p8x8,b8x8,i4x4 --no-8x8dct

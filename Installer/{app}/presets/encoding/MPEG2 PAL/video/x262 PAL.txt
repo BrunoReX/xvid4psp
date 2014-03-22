@@ -1,0 +1,5 @@
+video codec:
+x262
+
+video cli:
+--mpeg2 --bitrate 8500 --profile main --level main --vbv-maxrate 15000 --vbv-bufsize 1835 --dc 10 --altscan --preset veryslow --open-gop --bframes 2 --aq-mode 2 --colorprim bt470bg --colormatrix bt470bg --transfer bt470bg --keyint 12 --sar 16:9 --extra: --fps 25

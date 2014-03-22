@@ -1,0 +1,58 @@
+Like a document of Mosquito NR ver.120210
+
+
+Were transplanted into the avisynth filter is a "mosquito noise reduction filter" plug-ins for AviUtl.
+
+That said, even being tested here to some extent, also wrote a plug-in avisynth,
+This is the first time since I wrote on their own also a multi-threaded code, I do not know what will happen.
+Again no warranty. Please use only the person who can understand thereabouts.
+
+If you find a bug or would appreciate it if you could throw, but even to twitter, depending on what is the corresponding I
+May not have enough skill. Well to the extent possible will support.
+
+
+syntax: MosquitoNR (clip, int strength, int restore, int radius, int threads)
+
+strength
+
+Sets the strength of smoothing.
+The stronger the effect of noise reduction The larger the number, the stronger the side effects at the same time
+So, please set the parameters with care.
+
+restore
+
+Sets how much you want to restore the low-frequency components of smoothing before.
+When set to 128, when synthesizing the low frequency component and high frequency component, low-frequency smoothing before
+Use only the component. When set to 0, the low frequency component of the smoothing is not used before,
+Will have the same effect as a stand-alone for use in the smoothing filter.
+
+To adjust the strength of the filter by adjusting this parameter, in the method of adjustment is very good
+No. In addition, if the parameter is 128 is also just a little faster processing.
+
+Convenience has been processed in integer arithmetic, the maximum value of the set is turned 128. Therefore, the low-
+Restoration of the filter parameters and frequency component protection is compatible with the value that is 1.28 times.
+
+radius
+
+Expand the scope of the blur
+
+Will expand to 2 pixels from a pixel radius, the range of blur in the smoothing process.
+
+
+Or operating environment:
+• Since the avisynth 2.5
+(Do not know how to program a 64-bit ...) 32-bit
+· CPU can use the SSE2
+· Supported formats: YUY2, YV12
+-Interlaced material can not be successfully processed, please SeparateFields even bite ()
+• The Crop to fall just before if () does not do as align = true
+Height and must be an even number
+· There may be other restrictions too maybe
+
+
+The distribution and tentatively under the GPL v2.
+
+
+
+twitter: @ B_Inary
+e-mail: oinari17@gmail.com

@@ -1,0 +1,5 @@
+audio codec:
+AAC
+
+audio cli:
+-q 0.40 -lc

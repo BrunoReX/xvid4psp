@@ -1,0 +1,9 @@
+FRFun3b - A Denoiser for Avisynth
+
+frfun3b(T,Tuv,S)
+
+T=Luma threshold
+Tuv=Chroma threshold
+S=Subsampling
+
+Note: FrFun7 needs YV12 input!

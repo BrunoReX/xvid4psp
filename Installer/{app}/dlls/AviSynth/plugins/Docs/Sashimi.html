@@ -1,0 +1,867 @@
+<html>
+<head>
+<title>Sashimi</title>
+<style type="text/css">
+body      { font-family: verdana, arial, helvetica, sans-serif; color: #000000; 
+            font-size: 12px; background-color: #C8D4D8; text-align: Left; 
+            line-height: 150%;
+            padding: 0px;
+            margin: 6px;}
+
+h1        { font-family: verdana, arial, helvetica, sans-serif; font-size: 26px; 
+            line-height: 150%; color: #000000;
+            padding: 0px 0px 0px 8px
+            margin-left: 0px; margin-right: 0px; margin-top: 12px; margin-bottom: 12px;}
+
+h2        { font-family: verdana, arial, helvetica, sans-serif; font-size: 22px; 
+            line-height: 150%; color: #000000; 
+            background-color: #90A0C0;
+            padding:  0px 0px 0px 8px;
+            margin-left: 0px; margin-right: 0px; margin-top: 12px; margin-bottom: 12px; 
+            border: #8080D0; border-style: solid;
+            border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+
+h3        { font-family: verdana, arial, helvetica, sans-serif; font-size: 18px; 
+            line-height: 150%; color: #000000;
+            padding: 0px 0px 0px 8px;
+            margin-left: 0px; margin-right: 0px; margin-top: 12px; margin-bottom: 12px;
+            border: #8080D0; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+
+h4        { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;
+            font-style: normal; font-weight: bold; text-decoration: underline}
+
+a         { color: #005090; text-decoration: none; font-family: verdana, arial, helvetica, sans-serif }
+a:link    { color: #005090}
+a:visited { color: #005090}
+a:hover   { background-color: #FF6060; color: #005090}
+
+table     { font-size: 12px; margin-left: 0px; margin-top: 12px; margin-bottom: 12px;
+            line-height: 150% }
+
+pre       { font-size: 12px; font-family: Courier, mono;
+            margin-top: 10px; margin-bottom: 10px; 
+            background-color: #D0D0C0;
+            padding-left: 12px; padding-top: 12px; padding-right: 12px; padding-bottom: 12px;
+            border: #908030; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+
+code      { font-family: Courier, mono; font-size: 12px; letter-spacing: 1px; color: #660033}
+var       { font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: normal; font-size: 12px;
+            font-style: italic; letter-spacing: 1px; color: #660033}
+tt        { font-family: Courier, mono; font-size: 12px}
+em        { font-family: Courier, mono; font-weight: normal; color: #FFFFFF; font-style: normal}
+strong    { font-family: Courier, mono; font-weight: bold; color: #FFFF66; font-style: normal}
+cite      { border: 1px #3030A0 dotted; padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px}
+kbd       { color: #808000; font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: normal; font-size: 10px; font-style: normal}
+</style>
+</head>
+<body>
+<h1>Sashimi</h1>
+<h2>Abstract</h2>
+<b>author:</b> Peter Pakulski
+<br><b>version:</b> 0.85, September 2011 - please report bugs to <a href="http://forum.doom9.org/showthread.php?p=1403600">the forum</a>, or directly to <a href="mailto:peter.pakulski@gmail.com">peter.pakulski@gmail.com</a>
+<br><b>download:</b> <a href="http://sites.google.com/site/ourenthusiasmsasham/soft">Here</a> and <a href="http://forum.doom9.org/showthread.php?p=1403600">here</a><br>
+<b>requirements:</b> None.<br>
+<b>license:</b> GPLv2
+<hr>
+<h2>Quick Guide</h2>
+This documentation is long because:
+<ul>
+  <li>There are a lot of options and possible configurations</li>
+  <li>Some code examples are included on this page (please check the examples folder for more)</li>
+</ul>
+The core of Sashimi is built around two functions (plus support functions, read below):
+<ul>
+  <li><a href="#rawreader"><code>RawReader (filename, format, width, height, numframes, packing, filehead, framehead, flip)</code></a></li>
+  <li><a href="#rawwriter"><code>RawWriter (clip, filename, format, packing, filehead, framehead, flip, overwrite, truncate) </code></a></li>
+</ul>
+<h2>Table of contents</h2>
+<ul>
+  <li><a href="#mvtools"    >I) About Sashimi</a></li>
+  <li><a href="#formatnotes">II) Format notes</a></li>
+  <li><a href="#usenotes"   >III) Usage notes</a></li>
+  <ul>
+	  <li><a href="#multiplefiles">a) - Multiple Files</a></li>
+	  <li><a href="#otherorders"  >b) - Other Colour Orders</a></li>
+	  <li><a href="#multispectral">c) - Multispectral Data</a></li>
+  </ul>
+  <li><a href="#functions">IV) Function descriptions</a></li>
+  <ul>
+	  <li><a href="#commonparams"          >a) - Common Parameters</a></li>
+	  <li><a href="#rawreader"             >b) - <code>RawReader</code>()</a></li>
+	  <li><a href="#rawreadinterleaved"    >c) - <code>RawReadInterleaved</code>()</a></li>
+	  <li><a href="#rawreadplanar"         >d) - <code>RawReadPlanar</code>()</a></li>
+	  <li><a href="#rawwriter"             >e) - <code>RawWriter</code>()</a></li>
+	  <li><a href="#rawwriteinterleaved"   >f) - <code>RawWriteInterleaved</code>()</a></li>
+	  <li><a href="#rawwriteplanar"        >g) - <code>RawWritePlanar</code>()</a></li>
+	  <li><a href="#planarconversions"     >h) - Planar Conversions</a></li>
+	  <li><a href="#interleavedYUV"        >i) - Interleaved YUV Formats</a></li>
+	  <li><a href="#interleavedconversions">j) - Interleaved Conversions</a></li>
+  </ul>
+  <li><a href="#examples">V) Examples</a></li>
+  <ul>
+	  <li><a href="#simple"              >a) - Simple</a></li>
+	  <li><a href="#writeallnative"      >b) - Write All Native Formats</a></li>
+	  <li><a href="#readallnative"       >c) - Read All Native Formats</a></li>
+	  <li><a href="#writeallplanar"      >d) - Write All Planar Formats</a></li>
+	  <li><a href="#readallplanar"       >e) - Read All Planar Formats</a></li>
+	  <li><a href="#writeallinterleaved" >f) - Write All Interleaved Formats</a></li>
+	  <li><a href="#readallinterleaved"  >g) - Read All Interleaved Formats</a></li>
+	  <li><a href="#writeexotic"         >h) - Write Exotic Format in Multiple Passes</a></li>
+	  <li><a href="#readexotic"          >i) - Read Exotic Format in Multiple Passes</a></li>
+  </ul>
+  <li><a href="#otherformats">VI) Other Format Support</a></li>
+  <ul>
+	  <li><a href="#imagemagick2sashimi" >a) - ImageMagick To Sashimi Without Colourspace Conversion</a></li>
+	  <li><a href="#avisynth2imagemagick">b) - AVISynth To ImageMagick Without Colourspace Conversion</a></li>
+  </ul>
+  <li><a href="#disclaimer">VII) License and Disclaimer (don't skip that part, but we don't force you to learn it either)</a></li>
+  <li><a href="#revisions" >VIII) Revisions</a></li>
+</ul>
+<h2><a name="Sashimi"></a>I) About Sashimi</h2>
+
+<p>Sashimi plugin for AviSynth 2.5 is an AVISynth plugin and a collection of functions for reading and writing raw (uncompressed) files in a variety of formats.  <b>To install</b>, drop the dll and the three .avsi files into your plugin directory.
+<ul>
+  <li>All of the supported formats assume, or will convert to 8 bits per value - AVISynth does not support anything else.
+  <li>AVISynth has two YUV modes: 4:2:2 and 4:2:0.  It does not support 4:4:4.  Although Sashimi will read and write 4:4:4, please be aware that AVISynth will subsample your chroma internally.  If you don't understand this, don't worry - This will almost certainly not matter to you.
+  <li>The above happen transparently, hence you should be careful.  Additionally, Sashimi doesn't support AVISynth's YUY2 format, but you will get an error message about this if you try.
+</ul>
+</p>
+<p><b>IMPORTANT:</b> "Raw files" here refers to files with uncompressed planar or interleaved data.  It does <i>not</i> refer to "raw format" lossless-mode photographs or digital negatives as taken by some cameras (eg: .CRW, .CR2, .DNG) files.  Those files have complex internal structures, frequently use lossless compression techniques for some of the content, and are usually un-demosiaced raw image sensor data.  You need special software to "develop" these to normal pictures.  Start your research with <i>Lightbox</i> and <i>Picasa</i> after reading up about it all at Wikipedia.
+</p>
+
+<p>This plugin is still under (occasional) development. Some things such as planar formats are entirely handled as greyscale and converted by <a href="#planarconversions">the supplied planar conversion scripts</a>.  This may remain as a permanent feature though - it works just fine.  Similarly, only interleaved RGB, BGR, RGBA, BGRA video is supported directly (for both reading and writing).  For reading and writing YUV interleaved formats, use the <a href="#interleaved">additional script functions provided</a>
+<br><br>This plugin has been used quite extensively by the author and no bugs are known, but nothing is perfect.  If you do find a bug, please <a href="http://forum.doom9.org/showthread.php?p=1403600">Post on the Doom9 forums</a> or find my email address and <a href="http://sites.google.com/site/ourenthusiasmsasham/contributions/open-source-software">email me</a>.
+</ul>
+</p>
+
+<p>Planned future work, in approximate order of priority:
+<ul>
+  <li>Endian-ness conversion
+  <li>(Maybe) Custom pallettes (from file, or input) for greyscale content
+  <li>Supporting scripts / examples for YUV4MPEG, similar to the ImageMagick support at present.
+  <li>Supporting scripts / examples for Quicktime v210, similar to the ImageMagick support at present.
+  <li>Supporting scripts / examples multiple files with ScriptClip() and FrameEvaluate().
+  <li>Supporting scripts / examples demonstrating other colourspaces.
+  <li>(Maybe) Native multiple-file input / output a-la ImageSource
+</ul>
+</p>
+
+<h2><a name="formatnotes"></a>II) Format Notes</h2>
+
+<h3>8 Bits per Channel Only</h3>
+<p>AVISynth 2.5.8 only supports 8 bits per channel (as does a lot of software).  This means 8 bits each for R, G, and B, and 8 bits only for Y, U, and V or just Y (greyscale).  Support for more is coming in v2.6, but not yet available.  Accordingly, Sashimi can only give you a video with 8 bits - whatever you started with.  If you load more that 8 bits using the bitpacking commands, you will only get 8 into AVISynth.</p>
+
+<h3><a name="upsidedown"></a>Upside-Down Images</h3>
+<p>AVISynth is a Windows program, and in the windows world, colour images are stored upside-down while greyscale images are stored right-way up.  Why?  Lots of historical reasons, look it up.
+<br>AVISynth keeps its RGB movies upside-down but its YUV movies (and hence greyscale) right-way up.  This is all hidden from you but can be confusing when importing data.
+<br>To keep Sashimi usage flexible, the "flip" argument has been provided, and to keep it simple, it doesn't try do anything too clever for you - image will always be "right way up" in memory unless you use "flip".  When loading or saving colour movies you will usually want to set flip=true to save your colour movies upside-down (the standard way to do it), but unless you do, they will be stored the right way up as you'd expect.</p>
+
+<h3><a name="oddwidth"></a>Odd-width RGB24 Images</h3>
+<p>Sashimi <b>does not</b> pad the image width for you - it would be confusing to have extra pixels floating about if you didn't want or expect them.  If you understand odd-width issues, you can jump to the next heading now.  If you need an explanation, then read on.
+<br>Usually, in the Windows world, RGB images which are an odd-number of pixels wide (odd = "non-even", odd != "strange") are padded out to be an even number of pixels wide for writing, and treated as though they are padded when loading.  This again is a legacy of some very old problems in Windows' display routines.  This only affects 24-bit RGB videos, not 32-bit or 8-bit videos, and only if the width is an odd number.  Just beware of the convention when using odd-width RGB24 images.  Use <code>AddBorders(0,0,1,0)</code> when writing an odd-width image, and add 1 to the width and crop if reading an odd-width image.
+<br>Generally speaking, you should stick to the default behaviour when working with images in Windows that have an odd width - all software will pad internally for display, and corruption and other issues are common when working with odd-width videos.  NASA will often release videos with strange widths on their website, I suspect partly to hinder any copying attempts.  If you are having trouble with an odd-width RGB (of BGR) video, please check the original source also.
+<br>There is no issue with odd heights (for RGB images anyway - see below).</p>
+
+<h3><a name="oddheight"></a>Odd-height Planar YUV Images</h3>
+<p>Planar YUV422 formats store their chroma channels as interlaced half-width frames below the current frame.  Because this chroma is interleaved, it must be seperable, so the image must have an even width.  Furthermore, YUV420 images store the chroma at half vertical resolution, so the height needs to be divisible by 4!
+<br>There is no issue with odd widths for YUV444 images, but those aren't supported in AVISynth, and obviously the width needs to be even for YUV422 and YUV420 images.</p>
+
+<h3><a name="nogreyscale"></a>No True Greyscale in AVISynth</h3>
+<p>AVISynth does not have a native greyscale type.  This is a feature set to arrive in AVISynth 2.6 but this was not yet available at the time at which this plugin was written, so greyscale data is handled via the internal YV12 format.
+<br>When saving RGB movies with <code>RawWriter</code>(), the r, g, and b, of the RGB data will simply be averaged to get the grey values for saving as Greyscale.  This is not a correct greyscale conversion, but it leads to a file that looks more as most people will expect.  If you want a more correct greyscale conversion then call <code>ConvertToYV12</code>() (and <code>Greyscale</code>() if you like) before calling <code>RawWriter</code>().  This will first convert to Y (intensity) and U and V (colour) using your choice of colour matrix (<i>default is Rec.601 - see the documentation for <code>ConvertToYV12</code>()</i>).  The Y channel of YV12 data is what is written to the file.
+<br>When reading greyscale data from file with <code>RawReader</code>(), the data is placed in the Y channel of a YV12 format clip, while the U and V channels are set to neutral 128 everywhere, which is what you get from calling <code>Greyscale</code>() on a YV12() movie.</p>
+
+<h3><a name="noYUV"></a>No Un-sub-sampled YUV in AVISynth</h3>
+<p>AVISynth does not have a YUV type that doesn't subsample the chroma channels at least horizontally.  If you know about chroma subsampling, you'll know that this isn't really an issue 99.99% of the time anyway. If you're loading a YUV444 movie, be aware that Sashimi will subsample it for you by simply averaging neighbouring U and V values so that AVISynth can handle it.  If this is really a problem in some obscure scientific application, then just "trick" Sashimi by telling it that you have an RGB file.  Your image will look strange, but you can read and save your sequence without changing a byte.</p>
+<p>Some of the subsampling done in the scripts might look odd, but it's deliberate, see <a href="http://msdn.microsoft.com/en-us/library/ms867704.aspx#yuvformats_yuvsampling">http://msdn.microsoft.com/en-us/library/ms867704.aspx#yuvformats_yuvsampling</a>.
+
+<h2><a name="usenotes"></a>III) Usage Notes</h2>
+
+<h3><a name="multiplefiles"></a>Multiple Files</h3>
+<p>The plugin only works for a single file at a time, because support for handling multiple files is difficult (everyone expects different behaviour and options).  To read multiple separate files, you have two options:  Append your files into one, or use <code>ScriptClip()</code>.  To write multiple files, you have to use <code>ScriptClip()</code> or <code>FrameEvaluate()</code>..  See the <a href="#imagemagick2sashimi">ImageMagick To Sashimi Without Colourspace Conversion</a> example.
+<h4>Appending multiple files together</h4>
+Appending files into one movie file is easy in all Windows versions.  From a DOS prompt, eg:
+<pre>copy /b pic1.raw + pic2.raw + pic3.raw  movie.raw</pre>
+or:
+<pre>copy /b pic*.raw  movie.raw</pre>
+</p>
+
+<h3><a name="otherorders"></a>Other Colour Orders</h3>
+<p>Notice that U and V are always in the same order for both reading and writing.  If you wish to have them the other way around, please use the internal function <code>SwapUV</code>() after loading, or before writing.</p>
+<p>Similarly, RGB and BGR are both directly supported because they are common, but if you have something exotic such as RBG, use the internal functions <code>ShowRed</code>(), <code>ShowGreen</code>(), and <code>ShowBlue</code>() (and <code>ShowAlpha</code>()) to split up and reorder the colour channels, then reassemble the clip with <code>MergeRGB</code>() (or <code>MergeARGB</code>()).</p>
+<p>For complete control over YUV formats and for switching between them and RGB, you can also use the internal functions <code>Greyscale</code>(), <code>UToY</code>(), and <code>VToY</code>(), for getting individual channels, and then to get the equivalents of the RGB merging functions, use <code>YToUV</code>(), <code>ColorYUV</code>(), <code>MergeChroma</code>(), and <code>MergeLuma</code>().</p>
+<p>For very exotic / unusual raw files, you can even use multiple calls to RawSource to assemble what you want.  See the <a href="#writeexotic">Write Exotic Format in Multiple Passes</a> and <a href="#readexotic">Read Exotic Format in Multiple Passes</a> examples.<br>
+You can also take a look at the source code of the provided <a href="#planarconversions">planar conversions</a> for examples of how to manipulate this data.</p>
+
+<h3><a name="multispectral"></a>More than 3 Colour channels</h3>
+<p>Multi-spectral data?  Five colour channels?  Many separate wavelengths of data?  No problem.</p>
+<p>Is you data planar?  Easy!  Load as Y8 and use <code>SelectEvery</code>().  Is your data interleaved?  See the <a href="#interleavedconversions">Interleaved Conversions</a> section for help.</p>
+
+<h2><a name="functions"></a>IV) Function descriptions</h2>
+
+<h3><a name="commonparams"></a>Common parameters</h3>
+
+<p>
+<var>string filename</var> : The path (both relative and absolute are okay) to the file to be read or written to.<br>
+No default, must be specified.
+</p>
+
+<p>
+<var>format</var> : This specifies the format of the raw file.  Options are:
+<ul>
+  <li>"RGB" or "rgb" - 24 bits per pixel (3 bytes) in order.  When reading a raw file, the output of the filter is an RGB24 clip.
+  <li>"BGR" or "bgr" - 24 bits per pixel (3 bytes) in order.  When reading a raw file, the output of the filter is an RGB24 clip.
+  <li>"RGBA" or "rgba" - 32 bits per pixel (4 bytes) in order.  When reading a raw file, the output of the filter is an RGB32 clip.
+  <li>"ARGB" or "argb" - 32 bits per pixel (4 bytes) in order.  When reading a raw file, the output of the filter is an RGB32 clip.
+  <li>"BGRA" or "bgra" - 32 bits per pixel (4 bytes) in order.  When reading a raw file, the output of the filter is an RGB32 clip.
+  <li>"ABGR" or "abgr" - 32 bits per pixel (4 bytes) in order.  When reading a raw file, the output of the filter is an RGB32 clip.
+  <li>"Y8" or "y8" or "GREY" or "grey" or "GRAY" or "gray" - 8 bits per pixel (1 byte) greyscale.  When reading a raw file, the output of this filter is a YV12 clip, with all colour information set to neutral.  Native Y8 content is not presently supported in AVISynth (planned feature for v2.6, current version at time of development is 2.58).
+</ul>
+No default, must be specified.
+</p>
+
+<p>
+<var>packing</var> : A packing format string, FEATURE IN BETA - PLEASE REPORT ISSUES.<br>
+The format is a list of of triples, optionally with whitespace, separated by semicolons.  Each triple (the second and third numbers are optional) spells out the total number of bits, then inside that total, how many to skip, and how many to use, ie:<br>
+<code>"total:skip:use; total2:skip:use2; etc".</code><br>
+So in a total of 12 bits, if you want to skip the first 3, and use the next 5 (ignoring the last 4), you would use "12:3:5" - that's XXX4 3210 XXXX to give the bit positions.<br>
+Because AVISynth only keeps / represents 8 bits, the "use" value will be treated as 8 even if more is specified.  More can be specified because it makes specifications much easier to write, and because future versions of AVISynth might allow more.<br>
+The packing resets at the end of every row, so trailing bits are skipped over and the next row starts at the next full byte.<br>
+Any packing specified for a planar format will be applied equally to each plane, not to the elements of the plane in order, so if you have, for example, 12-bit luma, but 8-bit chroma, you will need to read or write your file in multiple passes.  See <a href="#readexotic">Read Exotic</a> and <a href="#writeexotic">Write Exotic</a>.<br>
+Examples:
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/Highcolor#16-bit_high_color">16-bit "High Colour"</a> is packed as 5 bits of red, then 6 bits of green, and 5 bits of blue.  The packing string is "5;6;5", equivalent to "5:0:5; 6:0:6; 5:0:5".  Format "RGB".
+  <li><a href="http://developer.apple.com/quicktime/icefloe/dispatch019.html#v210">10-bit v210 raw format</a> would be "12:2:10; 10; 10" (the repeating happens for free).  Format UYVY I think - I can't obtain a sample file.  Use <code>RawReadInterleaved</code>("UYVY") or <code>RawReadInterleavedUYVY</code>() or <code>RawWriteInterleaved</code>("UYVY") or <code>RawWriteInterleavedUYVY</code>().
+  <li>16-bit video is <b>not</b> a good example - you can just load it without a packing string and use <code>TurnRight</code>().<code>AssumeFrameBased</code>().<code>AssumeTFF</code>().<code>SeparateFields</code>().<code>SelectEven</code>().<code>TurnLeft</code>().  It may even be faster - you'd have to benchmark it.  If you want to use it, say packing="16:0:16" or "16:0:8" - they're equivalent.
+</ul>
+Default = No string, or "".  Packing defaults to 8-bit samples.
+</p>
+
+<p>
+<var>filehead</var> : When reading, it is the length (in bytes) of a file header to skip over.  When writing, Sashimi will insert this many null bytes at the start of the file.<br>
+Default = 0.
+</p>
+
+<p>
+<var>framehead</var> : When reading, it is the length (in bytes) of a a frame header to skip over.  When writing, Sashimi will insert this many null bytes before each frame of data.<br>
+Default = 0.
+</p>
+
+<p>
+<var>flip</var> : Whether or not to flip the frame upside-down.  This is a useful feature, because many colour formats are stored upside-down.<br>
+Default = false.
+</p>
+
+<h3><a name="rawreader"></a>RawReader</h3>
+<p>
+<code>RawReader</code> (<var>string "filename", string "format", int "width", int "height", int "numframes", string "packing", int "filehead", int "framehead", bool "flip"</var>)
+</p>
+<p>
+Reads in a raw file, interpreting the arguments as given.  The number of frames is estimated from the file length but can be overridden to a smaller value.  <var>filehead</var> and <var>framehead</var> are file and frame header lengths to be skipped over.
+</p>
+
+<p>
+<var>width</var> : The width of each frame, in pixels.<br>
+No default, must be specified.
+</p>
+<p>
+<var>height</var> : The height of each frame, in pixels.<br>
+No default, must be specified.
+</p>
+<p>
+<var>numframes</var> : The number of frames to load.  If zero or negative, it will be ignored and the number of frames will be the number available in the file (based on file size).  If greater than the number of frames available, RawReader will return an error.  Otherwise numframes limits the number of frames to load.<br>
+Default = -1.
+</p>
+<p>&nbsp;</p>
+
+
+<h3><a name="rawreadinterleaved"></a>RawReadInterleaved</h3>
+<p>
+<code>RawReadInterleaved</code> (<var>string "filename", string "format", int "width", int "height", int "numframes", int "filehead", int "framehead", bool "flip"</var>)
+</p>
+<p>
+This is implemented in the supplied script YUVInterleaved.avsi (not directly in the plugin).  The syntax  is as for RawReader, with the following types supported: "YUV", "AYUV", "YUY2", "UYVY".
+</p>
+<p>&nbsp;</p>
+
+
+<h3><a name="rawreadplanar"></a>RawReadPlanar</h3>
+<p>
+<code>RawReadPlanar</code> (<var>string "filename", string "format", int "width", int "height", int "numframes", int "filehead", int "framehead", bool "flip"</var>)
+</p>
+<p>
+This is implemented in the supplied script PlanarConversions.avsi (not directly in the plugin).  The syntax  is as for RawReader, with the following types supported: "RGB", "ARGB", "YUV444", "YUV422", "YUV420".
+</p>
+<p>&nbsp;</p>
+
+
+<h3><a name="rawwriter"></a>RawWriter</h3>
+<p>
+<code>RawWriter</code> (<var>clip, string "filename", string "format", string "packing", int "filehead", int "framehead", bool "flip", bool "overwrite", bool "truncate"</var>)
+</p>
+<p>
+writes the raw frame data to a file.  Does not write any header information.  Before calling, use the built-in AVISynth functions:
+<ul>
+  <li><var>ConvertToRGB24</var>(), or</li>
+  <li><var>ConvertToRGB32</var>(), or</li>
+  <li><var>ConvertToYV12</var>()<i> - only uses the greyscale data, not the colour channels</i></li>
+</ul>
+</p>
+<p>
+<var>overwrite</var> : Overwrites the output file if one already exists.  Otherwise, Sashimi throws an error if you try to overwrite a file.<br>
+Default = false.
+</p>
+<p>
+<var>truncate</var> : When overwriting a file, truncate (default true) removes the old file content before you start writing.  You can also set it to false though, which allows you to create an output file in multiple passes of different data (set frame and file header lengths appropriately).<br>
+Default = true.
+</p>
+<p>&nbsp;</p>
+
+
+<h3><a name="rawwriteinterleaved"></a>RawWriteInterleaved</h3>
+<p>
+<code>RawWriteInterleaved</code> (<var>clip, string "filename", string "format", int "filehead", int "framehead", bool "flip"</var>)
+</p>
+<p>
+This is implemented in the supplied script YUVInterleaved.avsi (not directly in the plugin).  The syntax  is as for RawWriter, with the following types supported: "YUV", "AYUV", "YUY2", "UYVY".
+</p>
+<p>&nbsp;</p>
+
+
+<h3><a name="rawwriteplanar"></a>RawWritePlanar</h3>
+<p>
+<code>RawWritePlanar</code> (<var>clip, string "filename", string "format", int "filehead", int "framehead", bool "flip"</var>)
+</p>
+<p>
+This is implemented in the supplied script PlanarConversions.avsi (not directly in the plugin).  The syntax  is as for RawWriter, with the following types supported: "RGB", "ARGB", "YUV444", "YUV422", "YUV420".
+</p>
+<p>&nbsp;</p>
+
+
+<h3><a name="planarconversions"></a>Planar Conversions</h3>
+The following functions are included with Sashimi to generate planar image formats (Place the .avsi file in your plugins directory along with the dll and you will automatically have the following functions available to you):
+<ul>
+  <li><code>RGB_To_PlanarRGB</code>()</li>
+  <li><code>RGB_To_PlanarARGB</code>()</li>
+</ul>
+<ul>
+  <li><code>PlanarRGB_To_RGB24</code>() - when loading planarRGB from file, specify frame height * 3 (eg: if it's 288 high, ask for a 288*3=864 high frame)</li>
+  <li><code>PlanarARGB_To_RGB32</code>() - when loading planarARGB from file, specify frame height * 4</li>
+</ul>
+<ul>
+  <li><code>YUY2_To_PlanarYUV444</code>()</li>
+  <li><code>YUY2_To_PlanarYUV422</code>()</li>
+  <li><code>YV12_To_PlanarYUV420YV12</code>()</li>
+  <li><code>YV12_To_PlanarYUV420IMC2</code>() - this is different from the above in that U and V are interleaved with each other in memory, which has the nice effect that it looks nicer as a single image</li>
+</ul>
+<ul>
+  <li><code>PlanarYUV444_To_YUY2</code>() - when loading planarRGB from file, specify frame height * 3</li>
+  <li><code>PlanarYUV422_To_YUY2</code>() - when loading planarRGB from file, specify frame height * 2</li>
+  <li><code>PlanarYUV420IMC2_To_YV12</code>() - when loading planarRGB from file, specify frame height * 3 / 2</li>
+  <li><code>PlanarYUV420YV12_To_YV12</code>() - when loading planarRGB from file, specify frame height * 3 / 2</li>
+</ul>
+What these functions do is create greyscale blocks of planar data for you (which can be then written or read) in the appropriate formats.
+
+
+<h3><a name="interleavedYUV"></a>Interleaved YUV Formats</h3>
+The following functions are included with Sashimi to read interleaved YUV image formats (Place the .avsi file in your plugins directory along with the dll and you will automatically have the following functions available to you):
+<ul>
+  <li><code>RawWriteInterleavedYUV</code>() - writes an un-subsampled YUVYUVYUV image</li>
+  <li><code>RawReadInterleavedYUVToYUY2</code>()</li>
+</ul>
+<ul>
+  <li><code>RawWriteInterleavedAYUV</code>() - writes an un-subsampled AYUVAYUVAYUV image from YUV data with a blank alpha channel</li>
+  <li><code>RawWriteInterleavedAYUV</code>() - writes an un-subsampled AYUVAYUVAYUV image from YUV data with the alpha channel passed as a second clip input.</li>
+  <li><code>RawReadInterleavedAYUVToYUY2</code>() - reads an un-subsampled AYUVAYUVAYUV image and discards the alpha channel</li>
+  <li><code>RawReadInterleavedAYUVToRGB32</code>() - reads an un-subsampled AYUVAYUVAYUV image and keeps the alpha channel but inserts it by converting the YUV image to RGB32.</li>
+</ul>
+<ul>
+  <li><code>RawWriteInterleavedYUY2</code>() - writes an un-subsampled YUYVYUYVYUYV image</li>
+  <li><code>RawReadInterleavedYUY2</code>()</li>
+</ul>
+<ul>
+  <li><code>RawWriteInterleavedUYVY</code>() - writes an un-subsampled UYVYUYVYUYVY image</li>
+  <li><code>RawReadInterleavedUYVYToYUY2</code>()</li>
+</ul>
+
+
+<h3><a name="interleavedconversions"></a>Interleaved Conversions</h3>
+The following functions are included with Sashimi as examples and to help with some of the more-exotic conversions (Place the InterleavedConversions.avsi file in your plugins directory along with the dll and you will automatically have the following functions available to you):
+<ul>
+  <li><code>ExpandRGBATo4ChannelGrey</code>()</li>
+  <li><code>ExpandRGBTo3ChannelGrey</code>() - Three different ways to expand colour data to horizontally-interleaved pixel values, shown as Greyscale in the Y channel of YUV frames.</li>
+  <li><code>ExpandChromaTo2ChannelGrey</code>()</li>
+</ul>
+<ul>
+  <li><code>Collapse4ChannelToRGBA</code>()</li>
+  <li><code>Collapse3ChannelToRGB</code>() - Three different ways to fold multi-channel data into colour images.</li>
+  <li><code>Show2ChannelsAsYV12Colour</code>()</li>
+</ul>
+What if you have 5, 6, or 7 channels / bands / wavelengths / spectra in your video?  If you have thermal, far infra-red, near infra-red, red, blue, green, and ultraviolet all for the same image... Cool!  Do you work for NASA or Landsat or something?  I'm jealous.  Again, see that InterleavedConversions.avsi file, it has everything that you need.  It also shows you how to horizontally weave rows of data together or separate them, keywords for searching: <code>Weave3</code>(), <code>Separate3Fields</code>().
+
+
+<h2><a name="examples"></a>V) Examples</h2>
+
+
+<h3><a name="simple"></a>Simple Example</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+
+<font color=228822>#
+# First get a sample image in.
+#</font>
+<code>ImageSource</code>("sample.jpg")
+
+<font color=228822>#
+# Now write it to a file
+#</font>
+<code>RawWriter</code>("sample.raw", "rgb", overwrite=true)
+</pre>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+
+<font color=228822>#
+# Now read it back from the file
+#</font>
+<code>RawReader</code>("sample.raw", "rgb", 488, 368)
+</pre>
+<br>
+
+
+<h3><a name="writeallnative"></a>Write All Native Formats</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+
+<font color=228822>#
+# An example of every supported write mode
+# (excluding other orderings of RGB, ARGB)
+#</font>
+<code>AVISource</code>("C:\Myfiles\Sample.avi")
+
+<code>ConvertToRGB32</code>()
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.rgb32_argb", "argb", flip=true)
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.rgb32_rgb",  "rgb",  flip=true)
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.rgb32_grey", "grey")
+
+<code>ConvertToRGB24</code>()
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.rgb24_argb", "argb", flip=true)
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.rgb24_rgb",  "rgb",  flip=true)
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.rgb24_grey", "grey")
+
+<code>ConvertToYV12</code>()
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.grey_argb", "argb", flip=true)
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.grey_rgb",  "rgb",  flip=true)
+<code>RawWriter</code>("C:\Myfiles\rawout\test_output.grey_grey", "grey")
+</pre>
+<br>
+
+
+<h3><a name="readallnative"></a>Read All Native Formats</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+
+<font color=228822>#
+# An example of every supported read mode
+# (to match the writing example above)
+#</font>
+a = <code>RawReader</code>("C:\Myfiles\rawout\test_output.rgb32_argb", "argb", 384, 288, flip=true)
+b = <code>RawReader</code>("C:\Myfiles\rawout\test_output.rgb32_rgb",  "rgb",  384, 288, flip=true)
+c = <code>RawReader</code>("C:\Myfiles\rawout\test_output.rgb32_grey", "grey", 384, 288)
+
+d = <code>RawReader</code>("C:\Myfiles\rawout\test_output.rgb24_argb", "argb", 384, 288, flip=true)
+e = <code>RawReader</code>("C:\Myfiles\rawout\test_output.rgb24_rgb",  "rgb",  384, 288, flip=true)
+f = <code>RawReader</code>("C:\Myfiles\rawout\test_output.rgb24_grey", "grey", 384, 288)
+
+g = <code>RawReader</code>("C:\Myfiles\rawout\test_output.grey_argb", "argb", 384, 288, flip=true)
+h = <code>RawReader</code>("C:\Myfiles\rawout\test_output.grey_rgb",  "rgb",  384, 288, flip=true)
+i = <code>RawReader</code>("C:\Myfiles\rawout\test_output.grey_grey", "grey", 384, 288)
+
+<code>StackVertical</code>\
+( \
+    <code>StackHorizontal</code>\
+    ( \
+    	a.<code>Subtitle</code>("RGB32 to ARGB"), \
+    	b.<code>Subtitle</code>("RGB32 to RGB").<code>convertToRGB32</code>(), \
+    	c.<code>Subtitle</code>("RGB32 to GREY").<code>convertToRGB32</code>() \
+    ), \
+    <code>StackHorizontal</code>\
+    ( \
+    	d.<code>Subtitle</code>("RGB24 to ARGB"), \
+    	e.<code>Subtitle</code>("RGB24 to RGB").<code>convertToRGB32</code>(), \
+    	f.<code>Subtitle</code>("RGB24 to GREY").<code>convertToRGB32</code>() \
+    ), \
+    <code>StackHorizontal</code>\
+    ( \
+    	g.<code>Subtitle</code>("GREY to ARGB"), \
+    	h.<code>Subtitle</code>("GREY to RGB").<code>convertToRGB32</code>(), \
+    	i.<code>Subtitle</code>("GREY to GREY").<code>convertToRGB32</code>() \
+    ) \
+)
+</pre>
+
+
+<h3><a name="writeallplanar"></a>Write All Planar Formats</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+<code>Import</code>("PlanarConversions.avsi")
+
+<font color=228822>#
+# An example of every planar write mode in the included script functions
+#</font>
+src = <code>ImageSource</code>("sample.jpg").<code>ReduceBy2</code>()
+
+a = <code>RawWritePlanar</code>(<code>ConvertToYUY2</code>(src), "test_output.YUV444p", "YUV444")
+b = <code>RawWritePlanar</code>(<code>ConvertToYUY2</code>(src), "test_output.YUV422p", "YUV422")
+c = <code>RawWritePlanar</code>(<code>ConvertToYV12</code>(src), "test_output.YUV420_YV12p", "YUV420")
+d = <code>RawWriter</code>(<code>YV12_To_PlanarYUV420IMC2</code>(<code>ConvertToYV12</code>(src)), "test_output.YUV420_IMC2p", "Y8")
+e = <code>RawWritePlanar</code>(<code>ConvertToRGB24</code>(src), "test_output.rgb24p", "RGB")
+f = <code>RawWritePlanar</code>(<code>ConvertToRGB32</code>(src), "test_output.rgb32p",  "ARGB")
+
+<code>StackHorizontal</code> \
+( \
+    <code>StackVertical</code>(a, b, c, d), \
+    <code>StackVertical</code>(e, f, <code>ConvertToYV12</code>(<code>BlankClip</code>(src))) \
+)
+</pre>
+<br>
+
+
+<h3><a name="readallplanar"></a>Read All Planar Formats</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+<code>Import</code>("PlanarConversions.avsi")
+
+<font color=228822>#
+# An example of every planar read mode in the included script functions
+# (to match the writing example)
+#</font>
+a = <code>RawReadPlanar</code>("test_output.YUV444p",      "YUV444", 244, 184).<code>AddBorders</code>(2, 2, 2, 2)
+b = <code>RawReadPlanar</code>("test_output.YUV422p",      "YUV422", 244, 184).<code>AddBorders</code>(2, 2, 2, 2)
+c = <code>RawReadPlanar</code>("test_output.YUV420_YV12p", "YUV420", 244, 184).<code>AddBorders</code>(2, 2, 2, 2)
+d = <code>PlanarYUV420IMC2_To_YV12</code>(<code>RawReader</code>("test_output.YUV420_IMC2p", "y8", 244, 184*3/2)).<code>AddBorders</code>(2, 2, 2, 2)
+e = <code>RawReadPlanar</code>("test_output.rgb24p",       "RGB",    244, 184).<code>AddBorders</code>(2, 2, 2, 2)
+f = <code>RawReadPlanar</code>("test_output.rgb32p",       "ARGB",   244, 184).<code>AddBorders</code>(2, 2, 2, 2)
+
+<code>StackVertical</code>\
+( \
+    <code>StackHorizontal</code>\
+    ( \
+    	a.<code>Subtitle</code>("Planar YUV 4:4:4").<code>convertToRGB24</code>(), \
+    	b.<code>Subtitle</code>("Planar YUV 4:2:2").<code>convertToRGB24</code>() \
+    ), \
+    <code>StackHorizontal</code>\
+    ( \
+    	c.<code>Subtitle</code>("Planar YUV 4:2:0 YV12").<code>convertToRGB24</code>(), \
+    	d.<code>Subtitle</code>("Planar YUV 4:2:0 IMC2").<code>convertToRGB24</code>() \
+    ), \
+    <code>StackHorizontal</code>\
+    ( \
+    	e.<code>Subtitle</code>("Planar RGB24").<code>convertToRGB24</code>(), \
+    	f.<code>Subtitle</code>("Planar RGB32").<code>convertToRGB24</code>() \
+    ) \
+)
+</pre>
+<br>
+
+
+<h3><a name="writeallinterleaved"></a>Write All Interleaved Formats</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+<code>Import</code>("YUVInterleaved.avsi")
+
+<font color=228822>#
+# An example of every interleaved write mode in the included script functions
+#</font>
+src = <code>ImageSource</code>("sample.jpg").<code>ConvertToYUY2</code>()
+
+a = <code>RawWriteInterleaved</code>(src, "test_output.YUV",  "YUV" )
+b = <code>RawWriteInterleaved</code>(src, "test_output.AYUV", "AYUV")
+c = <code>RawWriteInterleaved</code>(src, "test_output.YUY2", "YUY2")
+d = <code>RawWriteInterleaved</code>(src, "test_output.UYVY", "UYVY")
+
+<code>StackHorizontal</code> \
+( \
+    <code>StackVertical</code>(a, b), \
+    <code>StackVertical</code>(c, d) \
+)
+</pre>
+<br>
+
+
+<h3><a name="readallinterleaved"></a>Read All Interleaved Formats</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+<code>Import</code>("YUVInterleaved.avsi")
+
+<font color=228822>#
+# An example of every interleaved read mode in the included script functions
+# (to match the writing example)
+#</font>
+a = <code>RawReadInterleaved</code>("test_output.YUV",  "YUV",  488, 368).<code>AddBorders</code>(2, 2, 2, 2)
+b = <code>RawReadInterleaved</code>("test_output.AYUV", "AYUV", 488, 368).<code>AddBorders</code>(2, 2, 2, 2)
+c = <code>RawReadInterleaved</code>("test_output.YUY2", "YUY2", 488, 368).<code>AddBorders</code>(2, 2, 2, 2)
+d = <code>RawReadInterleaved</code>("test_output.UYVY", "UYVY", 488, 368).<code>AddBorders</code>(2, 2, 2, 2)
+
+<code>StackVertical</code>\
+( \
+    <code>StackHorizontal</code>\
+    ( \
+    	a.<code>Subtitle</code>("Interleaved YUV" ).<code>convertToYUY2</code>(), \
+    	b.<code>Subtitle</code>("Interleaved AYUV").<code>convertToYUY2</code>() \
+    ), \
+    <code>StackHorizontal</code>\
+    ( \
+    	c.<code>Subtitle</code>("Interleaved YUY2").<code>convertToYUY2</code>(), \
+    	d.<code>Subtitle</code>("Interleaved UYVY").<code>convertToYUY2</code>() \
+    ) \
+)
+</pre>
+<br>
+
+
+<h3><a name="writeexotic"></a>Write Exotic Format in Multiple Passes</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+<code>ImageSource</code>("sample.jpg", 0, 14)
+
+<font color=228822>#
+# Mess with the image to generate a short animation
+# Want to make sure that you create every frame?  Use RequestEveryFrame.exe!  Just drag-drop this script onto it.
+#</font>
+<code>ScriptClip</code>("""<code>LanczosResize</code>(<code>AddBorders</code>(current_frame * 8, current_frame * 8, current_frame * 8, current_frame * 8), <code>Width</code>(), <code>Height</code>())""")
+<code>ConvertToRGB24</code>()
+
+<font color=228822>#
+# Separate out the channels to invent the exotic file format,
+# and write it to the file in multiple passes.
+#</font>
+g = <code>ShowGreen</code>()
+r = <code>ShowRed</code>().<code>ReduceBy2</code>()
+b = <code>ShowBlue</code>().<code>ReduceBy2</code>()
+
+g = g.<code>RawWriter</code>("exotic.file", "grey", filehead=-<code>Width</code>(g)*<code>Height</code>(g)/2, framehead=<code>Width</code>(g)*<code>Height</code>(g)/2,   overwrite=true, truncate=false)
+r = r.<code>RawWriter</code>("exotic.file", "grey", filehead=0,                      framehead=<code>Width</code>(g)*<code>Height</code>(g)/4*5, overwrite=true, truncate=false)
+b = b.<code>RawWriter</code>("exotic.file", "grey", filehead=-<code>Width</code>(g)*<code>Height</code>(g)/4, framehead=<code>Width</code>(g)*<code>Height</code>(g)/4*5, overwrite=true, truncate=false)
+
+<font color=228822>#
+# AVISynth only executes necessary lines,
+# so you have to request each variable for RawWriter to be called.
+#</font>
+<code>StackVertical</code>(g, <code>StackHorizontal</code>(r, b))
+</pre>
+<br>
+
+
+<h3><a name="readexotic"></a>Read Exotic Format in Multiple Passes</h3>
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+
+<font color=228822>#
+# Read the content in from the file in multiple reading passes
+#</font>
+g = <code>RawReader</code>("exotic.file", "grey", 488,   368,   filehead=-488*368/2,            framehead=488*368/2)
+r = <code>RawReader</code>("exotic.file", "grey", 488/2, 368/2, filehead=0,                     framehead=<code>Width</code>(g)*<code>Height</code>(g)/4*5)
+b = <code>RawReader</code>("exotic.file", "grey", 488/2, 368/2, filehead=-<code>Width</code>(g)*<code>Height</code>(g)/4, framehead=<code>Width</code>(g)*<code>Height</code>(g)/4*5)
+
+<code>MergeRGB</code>(r.<code>BilinearResize</code>(<code>Width</code>(g), <code>Height</code>(g)), g, b.<code>BilinearResize</code>(<code>Width</code>(g), <code>Height</code>(g)))
+</pre>
+<br>
+
+
+
+<h2><a name="otherformats"></a>VI) Other Format Support</h2>
+
+
+
+<h3><a name="imagemagick2sashimi"></a>ImageMagick To Sashimi Without Colourspace Conversion</h3>
+First step out of ImageMagick is a BATCH FILE!  The below is not AVISynth code!:
+<pre>
+<code>@ECHO OFF
+SETLOCAL ENABLEDELAYEDEXPANSION
+ECHO</code> <font color=228822>Progress shown in the title bar of this command window...</font>
+<code>FOR</code> /L %%I <code>IN</code> (0,1,14) <code>DO</code> (
+    <code>SET</code> /A VAL=%%I% * 8
+    <code>SET</code> STR=000%%I%
+    <code>SET</code> STR=!!STR:~-3!
+    <code>TITLE</code> <font color=228822>Saving sample_</font>!STR!<font color=228822>.jpg with border</font> !!VAL!
+    convert.exe sample.jpg -border !!VAL! -resize 488x368^^! -depth 8 image_!STR!.YCbCr
+)
+<code>TITLE</code> <font color=228822>Done</font>
+<code>ENDLOCAL
+@ECHO ON</code>
+</pre>
+<br>
+
+After you have run the batch file, you may import into AVISynth via Sashimi:
+<pre>
+<code>LoadPlugin</code>("Sashimi.dll")
+<code>import</code>("YUVInterleaved.avsi")
+
+<font color=228822>#
+# First create a clip of the correct colourspace, dimensions, and length...
+#</font>
+<code>BlankClip</code>(15, 488, 368, pixel_type="YUY2")
+
+<font color=228822>#
+# Then replace every frame with Sashimi image reading calls
+#</font>
+<code>ScriptClip</code>("""<code>RawReadInterleavedYUVToYUY2</code>(<code>String</code>(current_frame, "image_%03.0f.YCbCr"), 488, 368)""")
+</pre>
+<br>
+
+
+<h3><a name="avisynth2imagemagick"></a>AVISynth To ImageMagick Without Colourspace Conversion</h3>
+IMPORTANT:  You don't need Sashimi!<br>
+Since I was documenting everything else, I thought I'd throw this in, but actually you can read in AVISynth's built-in EBMP format.  If you had trouble finding this out by searching around, my heart goes out to you:  ImageMagick can be a real bugger to use.  Anyway, here's how to do it:
+<pre>
+<code>ImageSource</code>("sample.jpg", 0, 14)
+
+<font color=228822>#
+# Mess with the image to generate a short animation
+# Want to make sure that you create every frame?  Use RequestEveryFrame.exe!  Just drag-drop this script onto it.
+#</font>
+<code>ScriptClip</code>("""<code>LanczosResize</code>(<code>AddBorders</code>(current_frame * 8, current_frame * 8, current_frame * 8, current_frame * 8), <code>Width</code>(), <code>Height</code>())""")
+
+<font color=228822>#
+# Just dump the files as AVISynth's built-in EBMP format!
+# First in RGB...
+#</font>
+<code>ConvertToRGB24</code>()
+<code>ImageWriter</code>("rgb24_", type="ebmp")
+
+<font color=228822>#
+# Then in YUY2.
+#</font>
+<code>ConvertToYUY2</code>(matrix="PC.601").<code>SwapUV</code>()
+<code>ImageWriter</code>("yuy2_", type="ebmp")
+</pre>
+<br>
+
+Then read into ImageMagick with a BATCH FILE!  The below is not AVISynth code!:
+<pre>
+<code>@ECHO OFF
+REM</code> Sashimi code for ImageWriter EBMP format - 53 bytes of header then memory dump:
+<code>ECHO</code> <font color=228822>Progress shown in the title bar of this command window...</font>
+
+<code>FOR</code> %%f <code>IN</code> (rgb24_*.ebmp) <code>DO</code> (
+    <code>TITLE</code> <font color=228822>Converting</font> %%f <font color=228822>to</font> %%~nf<font color=228822>.bmp</font>
+    convert.exe -size 488x368 %%f %%~nf.bmp
+)
+
+<code>FOR</code> %%f <code>IN</code> (yuy2_*.ebmp) <code>DO</code> (
+    <code>TITLE</code> <font color=228822>Converting</font> %%f <font color=228822>to</font> %%~nf<font color=228822>.jpg</font>
+    convert.exe -size 488x368+53 pal:%%f -sampling-factor 2x1 %%~nf.jpg
+)
+
+<code>TITLE</code> <font color=228822>Done</font>
+<code>@ECHO ON</code>
+</pre>
+<br>
+
+
+<h2><a name="disclaimer"></a>VII) Disclaimer
+</h2>
+<p>This plugin is distributed under terms of the GNU GPLv2 license, without any warranty. See 'license.txt'.<br>
+Documentation is distributed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CreativeCommons BY-SA 3.0 license.</a><br><br>
+Please note that the <a href="http://www.flickr.com/photos/suanie/3762829370/">sample image provided with Sashimi</a> is subject to the following licensing terms:
+<div xmlns:cc="http://creativecommons.org/ns#" about="http://www.flickr.com/photos/suanie/3762829370/"><a rel="cc:attributionURL" href="http://www.flickr.com/photos/suanie/">http://www.flickr.com/photos/suanie/</a> / <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.0/">CC BY-NC-SA 2.0</a></div>
+</p>
+
+<h2><a name="revisions"></a>VIII) Revisions</h2>
+
+<small>
+<p>0.85 (2011.09.17 By Peter)</p>
+<ul>
+<li>Found that use of YUY2 causes trouble because it's interleaved of course!  There's no other internal code support for interleaved greyscale, so the use of the format has simply been disabled.</li>
+<li>Updated examples to avoid YUY2 bug, updated documentation.</li>
+</ul>
+<p>0.82 - BETA (2011.08.06 By Peter)</p>
+<ul>
+<li>Updated documentation</li>
+<li>Updated example scripts</li>
+<li>Updated found and fixed bugs in bitpacking</li>
+</ul>
+<p>0.81 - BETA (2011.03.22 By Peter)</p>
+<ul>
+<li>Added feedback for packing string format errors, and updated documentation</li>
+<li>Releasing initially as beta for testing.  Please report problems!</li>
+</ul>
+<p>0.80 (2011.03.21 By Peter)</p>
+<ul>
+<li>Major new feature worked on for a while:  Different bit-packings.</li>
+<li>Releasing initially as beta for testing.  Please report problems!</li>
+</ul>
+<p>0.78 (2011.03.18 By Peter)</p>
+<ul>
+<li>Documentation updates.</li>
+<li>Added test cases and examples for the interleaved conversions.</li>
+</ul>
+<p>0.76 (2011.03.13 By Peter)</p>
+<ul>
+<li>Developed and added InterleavedConversions.avsi.</li>
+<li>Minor updates to documentation.</li>
+</ul>
+<p>0.75 (2011.02.24 By Peter)</p>
+<ul>
+<li>Added "truncate" flag for more control when writing files in multiple passes</li>
+<li>Spent lots of time discovering that directly reading gzipped files is unfortunately problematic and slow.  No change.</li>
+</ul>
+<p>0.74 (2010.06.05 By Peter)</p>
+<ul>
+<li>Major overhaul of examples</li>
+<li>Documentation updates</li>
+<li>Fixed error message when failing to supply dimensions to the reader</li>
+<li>Allowed negative file headers (as long as cancelled out by the frame header)</li>
+</ul>
+<p>0.73 (2010.05.29 By Peter)</p>
+<ul>
+<li>Minor bugs in project file setup fixed.</li>
+<li>Files are no-longer always created as read-only.</li>
+<li>Added "overwrite" flag to RawWriter()</li>
+</ul>
+<p>0.72 (2010.02.03 By Peter)</p>
+<ul>
+<li>Fixed compilation flag which caused the plugin to fail to load on some machines.  The dll is now much larger (104kb instead of 16.5kb).</li>
+<li>Extended helper scripts and documentation.</li>
+<li>Added sample script.</li>
+</ul>
+<p>0.70 (2010.02.01 By Peter)</p>
+<ul>
+<li>Fixed and planar conversions, updated documentation.</li>
+<li>Added interleaved YUV conversions, updated documentation.</li>
+</ul>
+<p>0.68 (2010.01.31 By Peter)</p>
+<ul>
+<li>More clean-up and code reorganisation.  Integration of old code into one internally-consistent and clean codebase is complete, a couple of really minor possible bugs found and fixed in the process.</li>
+<li>Updated this document, notably to point to the new home of Sashimi and to get the stylesheet business right.</li>
+<li>Added planar conversions.</li>
+</ul>
+<p>0.62 (2009.8.26 By Peter)</p>
+<ul>
+<li>Some slight internal clean-ups, bugfixes, and documentation and example updates.</li>
+</ul>
+<p>0.60 (2009.8.25 By Peter)</p>
+<ul>
+<li>BGR, RGBA, ARGB, BGRA, ABGR, GREY all now supported as outputs also.</li>
+</ul>
+<p>0.58 (2009.2.6 By Peter)</p>
+<ul>
+<li>Integrated existing conversion library.  BGR, RGBA, ARGB, BGRA, ABGR all now supported as inputs.</li>
+</ul>
+<p>0.48 (2009.2.5 By Peter)</p>
+<ul>
+<li>First cleanup of the writing code - works, but not well checked.</li>
+</ul>
+<p>0.42 (2009.2.3 By Peter)</p>
+<ul>
+<li>Second release - works in RGB and Y8, some debugging attempted.</li>
+<li>Now buffers a full frame from the file instead of multiple reads per row.</li>
+</ul>
+<p>0.3 (2009.2.2 By Peter)</p>
+<ul>
+<li>First release - only works in RGB, not fully tested.</li>
+</ul>
+</small>
+
+</body>
+</html>

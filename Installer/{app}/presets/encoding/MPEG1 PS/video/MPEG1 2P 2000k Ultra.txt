@@ -1,0 +1,6 @@
+video codec:
+MPEG1
+
+video cli:
+-vcodec mpeg1video -an -b 2000000 -bf 2 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag MPEG -flags +umv
+-vcodec mpeg1video -an -b 2000000 -bf 2 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag MPEG -flags +umv

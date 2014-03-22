@@ -1,0 +1,5 @@
+video codec:
+HUFF
+
+video cli:
+-vcodec ffvhuff -an -pix_fmt yuv420p -vtag HFYU

@@ -1,0 +1,5 @@
+video codec:
+MJPEG
+
+video cli:
+-vcodec mjpeg -an -b 3000000

@@ -1,0 +1,14 @@
+GNoise - A Noise Generator for Avisynth
+
+
+Usage:
+
+GNoise(Sigma,Seed,Color,Temporal)
+
+
+Sigma = Amount of the noise
+Seed = Gives you deterministic noise for the given resolution
+
+Color = Will create noise in U/V planes too
+
+Temporal = False produces static noise / true gives dynamic noise

@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --bitrate 16384 --level 4.1 --direct auto --b-pyramid strict --partitions none --subme 1 --me dia --weightp 0 --nal-hrd vbr --vbv-maxrate 40000 --vbv-bufsize 30000 --aud --keyint 24 --bluray-compat --open-gop
+--pass 2 --bitrate 16384 --level 4.1 --direct auto --b-pyramid strict --partitions none --subme 1 --me dia --weightp 0 --nal-hrd vbr --vbv-maxrate 40000 --vbv-bufsize 30000 --aud --keyint 24 --bluray-compat --open-gop

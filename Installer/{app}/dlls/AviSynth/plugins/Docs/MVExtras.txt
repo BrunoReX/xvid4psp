@@ -1,0 +1,168 @@
+==================
+MVExtras 0.2
+by Vit
+==================
+
+Plugin containing various helper functions for MVTools motion vectors
+
+
+
+-------------
+MScaleVectors
+-------------
+
+INFO
+
+Rescales motion vectors / blocksize. Main purpose is to allows vectors to be used on a differently sized clip than they were analyzed from.
+
+Example steps
+1. Use MAnalyze on a half-sized clip at block size 16
+2. Use this plugin to scale the vectors by 2 to block size 32
+3. Use resulting vectors for MFlowFPS, MDegrain,... on the full sized frame. 
+Saves doing the MAnalyze on the full size frame, which may be faster and saves memory (good for multi-threading).
+
+Note that you need a super clip for each frame size. The padding (hpad, vpad) on each super clip must be manually 
+scaled to match the vector scaling (can be easier to set hpad=0 and vpad=0 everywhere). See the example below.
+
+Similar functionality was available in MVTools through the function MVIncrease, but it was removed.
+
+
+SYNTAX
+
+MScaleVectors( clip vectors, float scale, float scaleV, int mode, bool flip )
+
+Returns a new motion vector clip
+
+  vectors :
+    Motion vectors returned from MAnalyse or MRecalculate 
+    [No default]
+
+  scale, scaleV :
+    The amount to scale the vectors, scale is the horizontal scaling, scaleV is the vertical scaling. Exact meaning depends on mode.
+    [Default scale = 2, scaleV = scale]
+
+  mode :
+    mode = 0: Increase scale of vectors and blocksize. Only scale values of 1, 2, 4 or 8 are allowed
+    mode = 1: Decrease scale of vectors and blocksize. Only scale values of 1, 2, 4 or 8 are allowed
+    mode = 2: Only scale vectors, leave blocksize unchanged. Any floating point scale value is allowed (including negative)
+    [Default mode = 0]
+
+    Mode 0 allows you to MAnalyse at a smaller size, then process (MDeGrain, MFlowFPS, whatever) at full size
+    Mode 1 allows you to MAnalyse at full size, but have some subsequent processes run at a smaller size
+    Mode 2 is for esoteric uses, for example approximating backward vectors from forward ones, or for extrapolation
+
+  flip :
+    Whether to flag forward vectors as backward vectors, and vice versa. Only applies to mode=2.
+    [Default flip = true if scale is negative and equal to scaleV. I.e. if you reverse the vectors it will default to flip their direction]
+
+  adjustSubPel : 
+    Set to true in mode=0,1 to perform scaling by adjusting subpel rather than scaling vectors. scale must = scalev. Experimental.
+    [Default adjustSubPel = false]
+	
+
+EXAMPLE
+
+clip = YourSource( "Your\Video" )
+clipScaled = clip.BicubicResize( clip.Width()/2, clip.Height()/2 )  # Half size clip
+
+superScaled = clipScaled.MSuper( pel=2, hpad=16/2,vpad=16/2 )  # Half size padding (may be easier to always set hpad and vpad to 0)
+bVecScaled  = superScaled.MAnalyse( blksize=8, isb=true )      # Analyze half-size clip - faster, uses less memory
+fVecScaled  = superScaled.MAnalyse( blksize=8, isb=false )
+
+bVec = bVecScaled.MScaleVectors( 2 ) # Scale vectors increasing block size to 16 for use on full size clip
+fVec = fVecScaled.MScaleVectors( 2 )
+
+super = clip.MSuper( pel=2, hpad=16,vpad=16 ) # Full size clip, full size padding
+clip.MFlowFPS( super, bVec, fVec, den=0 )     # Use scaled vectors to operate on full size clip
+
+
+
+-------------
+MStoreVectors
+-------------
+
+INFO
+
+Stores (multiple) motion vectors in a encodable clip. Allows you to encode vectors to a file (must use lossless RGBA format, suggest Lagarith)
+Convenient for splitting up very slow scripts (e.g. calculate vectors and save in pass 1, load vectors and process in stage 2)
+Can also use to process the same footage in multiple ways. Use MRestoreVectors to get the motion vectors back out of the clip
+
+You can store as many sets of vectors as you wish in a single clip. The clip will be RGB32; its width and height will vary depending
+on the contained clips, but will always be divisible by 4
+
+
+SYNTAX
+
+MStoreVectors( clip vectors, ... )
+
+Returns an RGB32 clip that contains the provided motion vectors
+
+  vectors :
+    MVTools vectors clip, you may pass as many clips as you wish
+
+
+EXAMPLE
+
+clip = YourSource( "Your\Video" )
+super = clip.MSuper()
+bVec1 = super.MAnalyse( isb=true )
+fVec1 = super.MAnalyse( isb=false )
+vectors = MStoreVectors( bVec1, fVec1 )
+# Losslessly encode the 'vectors' clip to a file (e.g. Lagarith)
+
+
+
+---------------
+MRestoreVectors
+---------------
+
+INFO
+
+Fetches a single motion vector clip from a special clip prepared earlier by MStoreVectors (see above)
+Call multiple times if there are several clips stored.
+
+
+SYNTAX
+
+MRestoreVectors( clip store, int "index" )
+
+Returns a single motion vectors clip
+
+  store :
+    A clip created by MStoreVectors
+    [No default]
+
+  index :
+    The zero-based index of the vectors to restore, used when multiple vector clips were stored. I.e. index 0 recovers the 
+    first vectors stored in the clip, index 1 the second, etc.
+    [Default index=0]
+
+
+EXAMPLE
+
+clip = YourSource( "Your\Video" )
+vectors = AviSource( "MotionVectors.avi" ) # Created using MStoreVectors above, losslessly encoded
+bVec1 = vectors.MRestoreVectors( 0 )       # See example above for MStoreVectors, gets the first of the two stored vector clips
+fVec1 = vectors.MRestoreVectors( 1 )
+clip.MFlowFPS( super, bVec1, fVec1, den=0 )
+
+
+
+~~~~~~~~~~~~~~~
+VERSION HISTORY
+~~~~~~~~~~~~~~~
+
+v0.21
+- Bug fixes
+- Experimental adjustSubPel setting for MScaleVectors
+
+v0.2
+- Plugin renamed to MVExtras. Now contains MStoreVectors, MRestoreVectors in addition to MScaleVectors
+- MScaleVectors now handles any scaling value for mode=2, allowing reversed or increased size vectors
+
+v0.11
+- Scale SAD as well as vectors
+
+v0.1
+- Released
+

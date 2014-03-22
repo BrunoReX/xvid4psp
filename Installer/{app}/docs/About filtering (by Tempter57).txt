@@ -1,0 +1,363 @@
+Данный архив рекомендован для совместной работы с программой XviD 4PSP 5.0.37.6, по крайней мере, хотя бы в части
+создания скрипта AviSynth.
+
+1. Скопируйте из архива папку plugins в папку c:\Program Files\Winnydows\XviD4PSP5\dlls\AviSynth (предварительно
+   удалите там имеющуся аналогичную)
+2. Скопируйте из архива папку filtering в папку c:\Program Files\Winnydows\XviD4PSP5\presets (предварительно
+   удалите там имеющуся аналогичную)
+
+
+В настоящий момент существует 3 версии плагина MVTools: две официальные- старая версия MVTools v.1.11.4.5 и новая
+MVTools v.2.5.11.3 с созданием супер клипа MSuper и без параметра idx. Помимо прочего  josey_wells создал так называемую
+мультиверсию неофициальную MVTools v.1.9.7.7. 
+Некоторые глобальные скрипты шумоподавления применяют библиотеку с MVTools v.1.9.7.7 . Поэтому я решил, что будет
+достаточно удобно, если архив Plugins_Filtering будет включать все 3 версии данного плагина и соответственно 
+фильтровые пресеты под них.
+Предупреждение: по-умолчанию библиотеки названы так:
+MVTools v.1.11.4.5 - mvtools.dll
+MVTools v.2.5.11.3 - mvtools2.dll by Fizick
+MVTools v.2.5.14.2 - mvtools2.dll by 06_taro
+MVTools v.2.5.11.9 - mvtools2SVP.dll for InterFrame.avsi
+MVTools v.2.6.0.5 - mvtools2mod.dll for Dither.avs
+MVTools v.1.9.7.7 - mvtoolsMT.dll
+Причём библиотека mvtoolsMT.dll принудительно переименована так из mvtools.dll , которая взята в данном конкретном
+случае из папки MSVC08-SSE2 (подходит для большинства CPU) MVTools v.1.9.7.7, поэтому подберите её под свой CPU
+из 6 различных вариантов MVTools.
+
+Скрипт AnimeIVTC - v1[1].06.1mod.avs модернизирован в плане задействования nnedi3, toon-v.1.1, awarpsharm2 и производных функций от них
+
+Для нормальной загрузки EEDI3.dll помимо vcredist_x86-2005sp1.exe нужно ещё установить в систему:
+http://www.microsoft.com/downloads/en/details.aspx?...8F5-770A549FD78C
+http://www.microsoft.com/downloads/en/details.aspx?...p;displaylang=en
+
+Дополнение по подключению yadif при деинтерлейсе: 
+"Реализован как Avisynth C-плагин (не обычный Avisynth плагин).
+Должен загружаться командой Load_Stdcall_plugin("yadif.dll") или LoadCplugin("yadif.dll") (не LoadPlugin !).
+Не используйте автозагрузку. (Замечание: в Avisynth v2.5.8
+нет необходимости явной загрузки Avisynth_c.dll пользователем для таких плагинов.)"
+
+Примечание: В случае, если вас не устроит скорость обработки фильтрами на основе плагина MVTools, можно в 
+строке MVAnalyse изменить размер блока blksize=8 на 16. Но контролируйте при этом thSAD на предмет появления артефактов, в случае их наличия следует снижать значение thSAD. Вместо fft3dfilter можно включать fft3dgpu при наличии мощного GPU.
+Во многих пресетах для этих целей достаточно открыть нужную строку в скрипте и закрыть другую знаком #
+Шумоподавитель dfttest представляет интерес, как наиболее качественный, но уступает по скорости обработки fft3dfilter. Его также можно подключать.
+Поэтому рекомендую просмотреть выбранный вами пресет в блокноте и определиться с тем выбором фильтров, который вам предоставлен, иначе
+закрытые строки вы не увидите в скрипте, который вам сформирует XviD 4PSP 5.0
+
+Предупреждение: при использовании пресетов Anime, уберите в скрипте строку деинтерлейса (если его результат вас не удовлетворит),
+которую вам автоматом выдаст XviD 4PSP 5.0, и подберите свой вариант вручную из нескольких предложеных в пресете, убирая # 
+который блокирует выполнение командной строки.Помимо этогов пресете имеются 4 варианта анти-айлизинга и 2 варианта затемнения линий,
+а также вариант подавления радужных помех. Пробуйте различные варианты и сочитания.
+Если вас не удовлетворяют и эти варианты, то переходите к изучению документации и скрипта AnimeIVTC.
+
+--------------------------------------------------------------------------------------------------
+Предпочительные ресайзеры при создании рипов:
+
+1) BicubicResize(dest_x,dest_y,0,0.5)
+2) LanczosResize(dest_x,dest_y)
+3) Lanczos4Resize(dest_x,dest_y)
+4) BlackmanResize(dest_x,dest_y,taps=4)
+5) spline36resize(dest_x,dest_y)
+6) spline64resize(dest_x,dest_y) for AviSynth 2.5.8
+7) spline144resize(dest_x,dest_y) требует добавление плагина SplineResize.dll  в  C:\Program Filles\ AviSynth 2.5\plugins
+--------------------------------------------------------------------------------------------------
+
+Немного о кропе словами Alex_sander:
+ 
+Различие между 720 и 704. 720 - стандартное (стандарт оцифровки по ITU) количество отсчетов строки, оно выходит за пределы активной 
+части строки и охватывает часть обратного хода. 704 (округление из 702 для PAL) - число отсчетов. приходящееся на активную часть строки;
+576 - число активных строк PAL. 704x576 после оцифровки соответсвуют пропорциям изображения 4/3, остальное дополняется полями до 720,
+либо отбрасывается (допустимый для DVD вариант). Это несколько педантично и не всегда соблюдается, но считается наиболее правильным.
+Значения кропа вычисляются из таких соображений. Имеется изображение, представленное неким количеством пикселов по горизонтали/вертикали 
+(например, для PAL DVD это 704x576). Понадобилось от этого размера отрезать что-то в одном из направлений для сокрытия дефектов и 
+в конечном счете остатки предполагается растянуть в те же 704x576, показываемые как 4/3 (или 16/9). Поскольку после первого отреза пропорции
+нарушаются, их нужно восстановить, отрезав в другом направлении ту же относительную величину. Например, если по вертикали отрезано 
+16 пикселов (1/36 высоты), то по горизонтали от 704 нужно отрезать 20 пикселов (1/36 длины). С учетом полной длины строки (720) - еще 16,
+т.е. всего 36. Затем то что получилось, растягивается в тот размер (по пикселам), который в той или иной системе отображения показывается
+как те же 4/3 (или 16/9). Например, для DVD это будут 704x576 (+ добавленные вертикальные поля 8+8). Для 720р это будет часть экрана,
+занимаемая изображением 4/3 (960x720, остальное - поля с дополнением до 1280x720), либо весь экран (в случае исходного 16:9).
+Вам наверняка будут попадаться рекомендации использовать в расчетах так называемые PAR (pixel aspect ratio, их придумали дизайнеры,
+которым на экране мерещатся кирпичи), игнорируйте эти методики. В лучшем случае подобные числа сократятся, в остальных случаях приведут
+к ошибке. Знание пропорций из начальных классов и здравый смысл - гарантия правильности и точности в расчетах.
+--------------------------------------------------------------------------------------------------
+
+Дополнения:
+
+ 1) Документация AnimeIVTC на русском и английском языках
+ 2) х264 Настройки 
+ 3) Мануалка к скрипту MC_spuds
+ 4) Мануалка к скрипту HybridFuPP 0985a
+ 5) Transcode_Wiki Calculating Frame Size And Aspect Ratio.files
+ 6) DGDecodeNV
+ 7) Колориметрия и применение Colormatrix
+ 8) IVTC, интерлейс и прогрессив
+ 9) Создание BDRip в формате MKV
+10) Особенности кодирования кодеком XviD+ VAQ, пресеты для XviD 1.3.0 находятся в папке video.
+-------------------------------------------------------------------------------------------------
+Рекомендации:
+
+предпочитаю процесс создания DVDRip по такой схеме:
+
+1. Создание скрипта AviSynth и подбор пресета фильтрации в программе XviD4PSP5.0.37.8    Когда вы сохраните скрипт, то обязательно 
+   отредактируйте его, вписав в начале скрипта строку, которая позволят вам увеличить
+   скорость обработки в случае применения плагина mvtools2 за счёт (в случае возникновения
+   сбоев на вашем комьютере этого не следует делать, особо это касается пресетов-шарперов S, SD, MS и SL):
+
+SetMTmode(5) или в идеале для 2-х ядерников SetMTmode(5,3) и для 4-х ядерников SetMTmode(5,6), т.е. количество ядер х 1,5. Но помните, что такая загрузка CPU может привести к сбою работы в процессе кодирования.
+ПРЕДУПРЕЖДЕНИЕ: для пресетов МТ вписывать такую строку в скрипт нельзя!!!
+
+2. Далее, для контроля, открываю скрипт в программе AvsP, подстраиваю параметры    настройки фильтров и сохраняю скрипт.
+3. Затем открываю полученный скрипт в Megui и там кодирую х264 .
+4. Звук, если надо, можно перекодировать в программе BeHappy
+5. Микширую видео и звук в MKVMerge
+   Хотя последние 2 пункта можно делать непосредственно и в Megui 
+
+--------------------------------------------------------------------------------
+Если ваш BD в формате VC-1, то необходимо выполнить следующую инструкцию:
+
+ Шаг 1: (tsMuxer &  DGIndexNV.exe)
+
+1. Извлеките потоки из контейнера  с помощью tsMuxer в режиме Demux, а потом    используйте DGIndexNV.exe (вместо DGIndex). 
+   находится в папке C:\Program Files\megui\tools\dgindexnv
+2. В DGIndexNV нажмите File -> Open, выбираете свой .vc1 (полученный после Demux-а), сохраняете ваш проект File -> Save Project.
+   Получаете файл с расширением .dgi.
+3. Создаёте текстовый файл в Notepad с расширением .avs и следующим содержимым:
+
+   LoadPlugin("C:\Program Files\megui\tools\dgindexnv\DGDecodeNV.dll") # Находится в папке с DGIndexNV.exe
+   DGSource("E:\vc1\ваш файл.dgi",fieldop=0) 
+
+ Шаг 2: (Создание скрипта AviSynth) 
+
+ Скрипт будет выглядеть, отредактированный применительно к файлам .VC1):
+
+1. Откройте блокнот и скопируйте в него следующее заменяя path\to путём, где у вас хранятся нужные плагины.
+2. В строке для исxодника (Source) укажите путь к .dgv файлу который вы получили после второго шага.
+3. Соxраните файл с расширением .avs" Код:
+
+# PLUGINS
+LoadPlugin("C:\Program Files\megui\tools\dgindexnv\DGDecodeNV.dll")
+
+# Source
+DGSource("E:\vc1\ваш файл.dgi",fieldop=0)
+
+#deinterlace здесь его место в случае интерлейсного видео
+
+# CROPPING & RESIZING
+
+crop( 0, 140, 0, -140) # данные внутри скобок приведены для примера
+Spline64Resize(1024,432) # данные внутри скобок приведены для примера
+
+# DENOISING: (если присутствует шум)
+#Применяйте фильтровые пресеты для BD из папки filtering 
+
+---------------------------------------------------------------------------------------
+
+Если ваш BD в формате AVC x264, то необходимо выполнить следующую инструкцию:
+
+   Шаг 1: (tsMuxer & DGAVCIndex)
+
+1. Извлеките потоки из контейнера  с помощью tsMuxer в режиме Demux, а потом используйте DGAVCIndex (вместо DGIndex). 
+   Можно и сразу открыть в DGAVCIndex, не прибегая к tsMuxer
+2. В DGAVCIndex нажмите File -> Open, выбираете свой h264 (полученный после Demux-а), сохраняете ваш проект File -> Save Project.
+   Получаете файл с расширением .dga.
+3. Создаёте текстовый файл в Notepad с расширением .avs и следующим содержимым:
+
+   loadplugin(Путь к файлу\"DGAVCDecode.dll") # Находится в папке с программой DGAVCIndex
+   AVCSource(Путь к файлу\"ваш файл.dga")
+
+   Шаг 2: (Создание скрипта AviSynth) 
+
+Скрипт будет выглядеть отредактированный применительно к файлам .h264 AVC):
+
+1. Откройте блокнот и скопируйте в него следующее заменяя path\to путём, где у вас хранятся нужные плагины.
+2. В строке для исxодника (Source) укажите путь к .dga файлу который вы получили после второго шага.
+3. Соxраните файл с расширением .avs" Код:
+
+# PLUGINS
+LoadPlugin("C:\path\to\DGAVCDecode.dll")
+LoadPlugin("C:\path\to\TIVTC.dll")
+#и прочие плагины, необходимые для вашего фильтрового пресета
+
+# SOURCE
+AVCSource("путь к файлу .dga")
+
+# IVTC TIVTC # Деинтерлейс(варианты смотрите выше) в случае интерлейсного видео
+#tfm().tdecimate()
+
+# CROPPING & RESIZING
+
+crop( 0, 140, 0, -140) # данные внутри скобок приведены для примера
+Spline64Resize(1024,432) # данные внутри скобок приведены для примера
+
+# DENOISING: (если присутствует шум)
+#Применяйте фильтровые пресеты для BD из папки filtering 
+
+   Шаг 3: (MeGUI)
+
+1. Откройте ваш скрипт .avs в MeGUI.На заднем плане должна появится картинка из фильма.
+2. Выберите пресет для кодирования в Megui или самостоятельно задайте параметры настройки х264.
+3. Дальше идём в Tools > BitRate Calulator Тут вам предстоит выбрать желаемый размер/битрэйт. Для фильма продолжительностью
+   в 1 час 40 минут выберите DVD-5(4GB), а для фильма продолжительностью в 2 часа 20 минут -> DVD-9 (8GB).
+4. В Container выберите mkv и нажмите на Enqueue
+5. Переходим в окно Queue, жмём на самое верxнее задание, а затем жмём на start
+
+   Шаг 4: (MKVMerge) (микширование изображения и звука)
+
+   Запустите mkvmerge GUI
+1. Добавьте файл .mkv, полученый после шага 3
+2. Добавьте необходимую звуковую дорожку .ac3 или .dts или .mp3, полученную после первого шага, в окошко input files
+2. Кликнете на аудио файл и поставте галочку на "Make default track", выберите соответствующий язык, Trackname.
+3. Заполните окошко DELAY тем значением, которое стоит в вашем аудио файле DELAY -***ms.
+4. Нажмите на Start Muxing
+______________________________________________________________________________
+ 
+ СКРИПТ для приготовления DVD\PAL на базе BDRip для интерлейсного AVC 
+
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\DGAVCDecode.dll")
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\AutoYUY2.dll")
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\ColorMatrix.dll")
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\LeakKernelDeint.dll")
+AVCSource("D:\my file.dga", deblock=false)
+ConvertToYV12(interlaced=true)
+LeakKernelBob(order=1, threshold=7)
+BicubicResize(720, hhh, 0, 0.5) # где hhh = 576 * AR * Ho/Wo (округляем до ближайшего числа, кратного 8),где BDRip с размерами Wo x Ho 
+#spline64resize(720, hhh) 
+AddBorders (0,bb,0,bb) # где bb = (576 - hhh)/2
+ColorMatrix(mode="Rec.709->Rec.601", inputFR=false, clamp=0) #корректировка цветовой шкалы, если проверка показывает 16-232
+#ColorMatrix(mode="Rec.709->Rec.601", inputFR=true, clamp=0) #корректировка цветовой шкалы, если проверка показывает 0-255
+AssumeTFF().separatefields().SelectEvery(4,0,3).Weave()
+AutoYUY2() #смена цветового пространства
+
+______________________________________________________________________________
+
+СКРИПТ для приготовления DVD\PAL на базе BDRip для прогрессивного AVC  
+
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\DGAVCDecode.dll")
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\AutoYUY2.dll")
+LoadPlugin("C:\Program Files\AviSynth 2.5\plugins\ColorMatrix.dll")
+AVCSource("D:\my file.dga", deblock=false)
+AssumeFPS(25) # изменение частоты кадров под стандарт PAL 25 кадров/сек
+#AssumeFPS(24000,1001) # изменение частоты кадров под стандарт NTSC 23,976 кадров/сек
+BicubicResize(720, hhh, 0, 0.5) # где hhh = 576 * AR * Ho/Wo (округляем до ближайшего числа, кратного 8),где BDRip с размерами Wo x Ho 
+#BicubicResize(720, hhh, 0, 0.5) # где hhh = 480 * AR * Ho/Wo для NTSC
+#spline64resize(720, hhh) 
+AddBorders (0,bb,0,bb) # где bb = (576 - hhh)/2 для PAL и bb = (480 - hhh)/2 для NTSC
+ColorMatrix(mode="Rec.709->Rec.601", inputFR=false, clamp=0) #корректировка цветовой шкалы, если проверка показывает 16-232
+#ColorMatrix(mode="Rec.709->Rec.601", inputFR=true, clamp=0) #корректировка цветовой шкалы, если проверка показывает 0-255
+AutoYUY2() #смена цветового пространства
+------------------------------------------------------------------------------------
+
+Oбработка видео различными фильтрами
+
+Avisourse(ваш.avi)
+
+temp=last
+trim(temp,1,n)
+script1()
+a1=last
+trim(temp,n+1,m)
+script2()
+a2=last
+trim(temp,m+1,0)
+script3()
+a3=last
+a1++a2++a3
+
+-------------------------------------------------------------------------------------
+#Script to convert PAL to NTSC
+
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\MVTools\mvtools2.dll")
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\RemoveGrainSSE2.dll")
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\SSE3Tools.dll")
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\mt_masktools-25.dll")
+
+Import("E:\Documents\My Videos\AVISynth Scripts\QTGMC-3.32.avsi") #Use version with hpad,vpad hardwired to 8 (avoids crash)
+
+SetMTMode(5,4)
+SetMemoryMax(1000)
+
+AviSource("e:\frameserver.avi").killaudio().AssumeTFF()
+
+SetMTMode(2)
+ConvertToYUY2(interlaced=true, matrix="PC.601")
+
+Spline36Resize(720,height)
+QTGMC("faster", sharpness=0, SubPel=2)
+FadeIn2(26) # для плавного появления клипа
+
+super = MSuper(levels=1, pel=2)
+MFlowFps(super, QTGMC_bVec1, QTGMC_fVec1, num=60000, den=1001)
+Spline36Resize(width,480)
+
+blur(0.0,1.0)
+sharpen(0.0,0.75) #Adjust 2nd value between 0.5 and 1.0 to taste
+
+FadeOut2(26) # для плавного исчезновения клипа клипа
+
+AssumeTFF().separatefields().SelectEvery(4,0,3).Weave()
+
+---------------------------------------------------------------
+#Script to convert NTSC to PAL
+
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\MVTools\mvtools2.dll")
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\RemoveGrainSSE2.dll")
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\SSE3Tools.dll")
+loadplugin("C:\Program Files\AviSynth 2.5\plugins\mt_masktools-25.dll")
+
+Import("E:\Documents\My Videos\AVISynth Scripts\QTGMC-3.32.avsi") #Use version with hpad,vpad hardwired to 8 (avoids crash)
+
+SetMTMode(5,4)
+SetMemoryMax(1000)
+
+AviSource("e:\frameserver.avi").killaudio().AssumeTFF()
+
+SetMTMode(2)
+ConvertToYUY2(interlaced=true, matrix="PC.601")
+
+Spline36Resize(720,height)
+QTGMC("faster", sharpness=0, SubPel=2)
+FadeIn2(26) # для плавного появления клипа
+
+super = MSuper(levels=1, pel=2)
+MFlowFps(super, QTGMC_bVec1, QTGMC_fVec1, num=50, den=1)
+Spline36Resize(width,576)
+
+blur(0.0,1.0)
+sharpen(0.0,0.75) #Adjust 2nd value between 0.5 and 1.0 to taste
+
+FadeOut2(26) # для плавного исчезновения клипа клипа
+AssumeTFF().separatefields().SelectEvery(4,0,3).Weave()
+
+
+10 БИТНОЕ ВИДЕО 
+http://blendervse.wordpress.com/2011/12/24/canon-magic-lantern-hdr-feature-to-10bit-lossless-h264/
+http://blendervse.wordpress.com/2011/09/16/8bit-video-to-16bit-scene-referred-linear-exrs/
+
+Работа с программой VirtualDub http://forum.emule-rus.net/index.php?showtopic=7146
+Базовый материал по матрицам квантования XviD http://forum.doom9.org/showthread.php?t=54147
+
+
+Деинтерлейс с Destripe
+loadplugin("C:\Program Files\XviD4PSP 5\dlls\AviSynth\plugins\CullResize.dll")
+Import("C:\Program Files\XviD4PSP 5\dlls\AviSynth\plugins\Destripe 03.avs")
+TFM(mode=5, pp=1, slow=2).destripe(360, 8, 4, 5).Tdecimate(1)
+http://www.nmm-hd.org/newbbs/viewtopic.php?f=7&t=768
+
+
+Проблемы работы DGDecNV с многопоточным Avisynth известны, поскольку официально не поддерживается.  В целях повышения «устойчивости», как можно больше, Didee обычно делает так:
+
+SetMemoryMax(1024)
+SetMTmode(5,4)
+
+DGSource("file.dgi")
+RemoveGrain(0) # No-Op filter, just to do frame request
+ChangeFPS(last,last,true) # initiate a small forward buffer
+RemoveGrain(0) # not sure if this 2nd one is needed. But surely it doesn't hurt.
+
+SetMTmode(2)
+
+## now comes the script ##
+
+
+
+
+

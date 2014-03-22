@@ -1,0 +1,5 @@
+audio codec:
+QAAC
+
+audio cli:
+-q 2 --tvbr 90

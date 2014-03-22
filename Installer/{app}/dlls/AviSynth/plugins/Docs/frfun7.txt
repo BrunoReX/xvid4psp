@@ -1,0 +1,21 @@
+FRFun7 - A Denoiser for Avisynth
+
+
+Usage:
+
+FRFun7(Lambda=Float,T=Float,Tuv=Float)
+
+
+Lambda adjusts the power of the local denoising
+The default value is 1.1
+
+T limits the max luma denoising power for edges
+The default value is 6.0
+
+Tuv does the same as T, but for the chroma
+The default value is 2.0
+
+Note: FrFun7 needs YV12 input!
+
+
+~TrimmedBush

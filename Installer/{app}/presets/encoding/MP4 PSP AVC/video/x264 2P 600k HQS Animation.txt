@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --bitrate 600 --level 3.0 --aq-strength 0.6 --deblock 1:0 --direct auto --b-adapt 2 --b-pyramid none --trellis 2 --no-fast-pskip --no-dct-decimate --psy-rd 0.4:0.0 --qcomp 0.8 --partitions p8x8,b8x8,i4x4,p4x4 --no-8x8dct --subme 10 --me umh --rc-lookahead 60
+--pass 2 --bitrate 600 --level 3.0 --aq-strength 0.6 --deblock 1:0 --direct auto --b-adapt 2 --b-pyramid none --trellis 2 --no-fast-pskip --no-dct-decimate --psy-rd 0.4:0.0 --qcomp 0.8 --partitions p8x8,b8x8,i4x4,p4x4 --no-8x8dct --subme 10 --me umh --rc-lookahead 60

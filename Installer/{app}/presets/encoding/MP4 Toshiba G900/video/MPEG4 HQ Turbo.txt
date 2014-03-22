@@ -1,0 +1,5 @@
+video codec:
+MPEG4
+
+video cli:
+-an -vcodec mpeg4 -qscale 3 -vtag DIVX

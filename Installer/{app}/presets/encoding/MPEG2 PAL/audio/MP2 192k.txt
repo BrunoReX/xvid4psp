@@ -1,0 +1,5 @@
+audio codec:
+MP2
+
+audio cli:
+-acodec mp2 -f mp2 -ab 192000

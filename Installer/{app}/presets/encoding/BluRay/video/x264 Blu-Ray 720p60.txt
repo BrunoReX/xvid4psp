@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --bitrate 16000 --preset veryslow --tune film --extra: --vbv-maxrate 40000 --vbv-bufsize 30000 --level 4.1 --keyint 60 --slices 4 --colorprim "bt709" --transfer "bt709" --colormatrix "bt709" --sar 1:1 --bluray-compat --open-gop
+--pass 2 --bitrate 16000 --preset veryslow --tune film --extra: --vbv-maxrate 40000 --vbv-bufsize 30000 --level 4.1 --keyint 60 --slices 4 --colorprim "bt709" --transfer "bt709" --colormatrix "bt709" --sar 1:1 --bluray-compat --open-gop

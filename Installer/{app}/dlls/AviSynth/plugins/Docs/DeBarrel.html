@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>DeBarrel AviSynth Plugin</title>
+</head>
+
+<body>
+	   <font color="#cc0033"><h1>DeBarrel </h1></font>
+	 
+	  <BR><b>Author<a href="../vcmohan.html"> V. C. Mohan</a></b>
+	  <BR> Last modified Date Mar 20, 2008 
+	  
+	  <p>This plugin corrects Barrel type or Pin Cushion type distortions in 
+	  an image that result in due to camera lens projecting image on to
+	  a flat film or sensor array. ( The
+	  distortions due to perspective are not compensated by this plugin. For
+	   that distortion one need to use
+	    <a href="http://www.avisynth.org/vcmohan/Reform?Reform.zip">Reform</a> plugin.)</p>
+	  
+	  <P> A polynomial with 4 coefficients are used to correct. <b>a</b>, <b>b</b>,
+	   and <b>c</b> are the
+	  coefficients to be specified and the fourth <b>d</b> is computed internally.
+	  These parameters mainly depend upon the lens of the camera, focal length of lens 
+	  and setting of zoom.</p> 
+	  
+	  <p>For many high definition still photographic cameras  databases are
+	  available on the web. But for video cams there is no such database. The possible reasons
+	  are 1. Video camera resolution is limited 2. The camera and or subjects move 
+	  and therefore such distortions are not noticeable. However, due to advent of HD
+	  video cams and the consequent increased usage of tripod one may attempt to 
+	  correct for such distortions.</p> 	  
+	  
+	  <P> The parameters can be derived by a nearest fit approach. Using
+	   <a href="http://www.avisynth.org/Grid/Grid.zip">Grid</a> on
+	  a blankclip one can generate Barrel type distortion specifying for
+	   "<b>pin</b>" as <b>true</b> 
+	  or vice versa. By playing with parameters an optimum set can be arrived at.
+	  The examples given are produced similarly. </P>
+	  <BR> Note a + b + c should not exceed 1.0.
+	  <BR>Input clip  RGB format only . 
+	  <BR>After correction one may need to crop image at the edges.
+
+
+<table border="2" bordercolorlight="#c0c0c0" bordercolordark="#000000">
+
+<caption align="top">Details of parameters </caption>
+<tr>
+       <td><b>Description</b></td>
+       <td><b>Name</b></td>
+       <td><b>Type</b></td>
+       <td><b>Limits</b></td>
+       <td><b>Default</b></td>
+</tr>
+<tr>
+       <td>Input clip </td>
+       <td></td>
+       <td>clip</td>
+       <td>RGB format only</td>
+       <td>none</td>
+</tr>
+
+<tr>
+       <td>coefficient a</td>
+       <td>a</td>
+       <td>float</td>
+       <td>between 0 and 0.5</td>
+       <td>0.005</td>
+</tr>
+
+<tr>
+       <td>coefficient b</td>
+       <td>b</td>
+       <td>float</td>
+       <td>between 0 and 0.5</td>
+       <td>0.005</td>
+</tr>
+
+<tr>
+       <td>coefficient c</td>
+       <td>c</td>
+       <td>float</td>
+       <td>between 0 and 0.5</td>
+       <td>0.005</td>
+</tr>
+
+<tr>
+       <td>whether to correct pin cushion or barrel type distortion</td>
+       <td>pin</td>
+       <td>Boolean</td>
+       <td>true for pin, false for barrel</td>
+       <td>false</td>
+</tr>
+
+</table>
+
+
+<BR>#Usage examples:- 
+<pre>
+blankclip(width = 720, height = 480, pixel_type = "RGB32",color = $ffffff,  length = 10)
+grid()
+pin = DeBarrel(a = 0.005, b = 0.005, c = 0.005,pin = false)
+ bar = DeBarrel(a = 0.005, b = 0.005, c = 0.005,pin = true)
+</pre>
+
+<BR><img src="Barrel0.jpeg" border="0"> 
+
+<br>
+<BR><img src="Pin0.jpeg" border="0">
+
+<br>
+
+<br>
+<table>
+
+<tr>
+       <td><a href="../index.html">To my index page</a></td>
+	   <td><a href="DeBarrel.zip">down load plugin</a></td>
+       <td><a href="http://www.avisynth.org">To Avisynth</a> </td>
+</tr>
+</table>	
+</body>
+</html>

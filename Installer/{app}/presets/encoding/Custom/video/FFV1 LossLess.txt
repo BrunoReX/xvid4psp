@@ -1,0 +1,5 @@
+video codec:
+FFV1
+
+video cli:
+-vcodec ffv1 -an -pix_fmt yuv420p

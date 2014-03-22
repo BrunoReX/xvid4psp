@@ -1,0 +1,76 @@
+Info
+    Most of this is translated from the original japanese AviUtl plugin's readme.
+
+    All credit for the algorithm and idea go to flash3kyuu.
+
+    This plugin was basically written (hacked together) in one sitting,
+    so feel free to contact me with bugs (via IRC or d9).
+
+Name
+    Cross-conversion Correction
+
+What it does
+    Re-arranges and re-interpolates pixels,
+    correcting badly done 720p -> 1080i conversions,
+    especially seen in Japanese D-TV and Blu-ray samples.
+    
+    Until now it was customary to resize down to 720 pixels
+    of height with my interlaced resizing plugin, and then resizing back to 1080
+    with another resizing plugin. This plugin lets you do that in one step.
+
+Parameters
+    - phase (int of range 0-5, default = 1)
+        Shifts the beginning point of taking the samples.
+
+    - 720 output (boolean)
+        Called via ccc720.dll and via ccc720() with
+        phase parameter.
+
+        Requires YUY2 input!
+
+        Will resize to 720 pixels of height.
+        With 720p output the original interlacing
+        will be kept.
+        
+        Will not work correctly with other source resolutions
+        than 1080 pixels of height.
+
+Usage
+    Should you wish to output in 1080 pixels of height,
+    please convert your source into progressive 1080p
+    first, and make sure to use it before cropping
+    or resizing.
+    
+    Next you apply this filter, and see which phase matches
+    your source the best.
+
+    Example Usage:
+        dgsource("myinput.dgi")
+        tfm(pp=1) #make sure you don't let it try and postprocess the frames, or it'll mess them up
+        tdecimate()
+        ccc(3)
+        [...]
+
+Other stuff
+    During 1080 height output, the chroma difference will get mashed
+    during subsampling to YV12 so only luma is dealt with.
+    
+    The process in itself was surprisingly difficult, so I couldn't come up
+    with a way to count the coefficients automatically, thus just releasing this
+    as a "720-to-1080-only" filter and calculating the coefficients manually into
+    the program (it's only 6 lines height-wise). Due to all that, this filter
+    does not support sources that were originally 486 or 480 pixels high.
+    
+    Also, as I completely hard-coded the algorithm, it could be that depending on
+    the converter's interpolation method there could be terrible failures,
+    although as far as I've tested there have been no such problems.
+    In case of an initial failure, it can mostly be fixed by playing with the
+    shift parameter.
+    
+    As always, the exception handling at the screen's edges could be weird or broken?
+
+Links:
+    http://japland.org/ccc/
+    http://www.geocities.jp/flash3kyuu/
+    http://geocities.yahoo.co.jp/gl/flash3kyuu/view/200908?.begin=11
+    http://geocities.yahoo.co.jp/gl/flash3kyuu/view/200908?.begin=6

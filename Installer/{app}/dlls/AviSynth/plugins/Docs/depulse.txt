@@ -1,0 +1,25 @@
+It met a very wonderful page of < Do not you make the plug-in either > corner, and made it by watching and imitating. Naming and DePulse.dll. Pitsu, Pitsu, and a white noise that enters sideways are reduced in the image. It sounds like the noise of an old fluorescent lamp or the engine of a motorbike. 
+
+The unfiltered images are on the left. The same frames after filtering are on the right.
+
+It is a long near the waist of the person in upper right black, white noise in the image above.
+
+There is a line secondarily white under the left in the image below.
+
+Usage instructions and important notes as follows:
+
+# I hardly know any C++. Don't laugh too hard when you see the source code.
+
+# Assumes TFF (top field first) field order interlacing.
+
+# YUY2 only.
+
+# Syntax is: DePulse(clip, h=[0-255], l=[0-255], d=[0-255], debug=[true/false])
+
+# Brightness values of h (high) or less are not targeted as white noise.
+
+# Brightness values of l (low) or more are not targeted as black noise.
+
+# When the pixel and the brightness of the field before and after (..drinking.. top and bottom) are different, it is judged to d (difference) or more that it noises. (white and black noise sharing)
+
+# In debug mode, pixels judged to be black or white noise are coloured pink or green.

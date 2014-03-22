@@ -1,0 +1,12 @@
+FRFun3d - A Denoiser for Avisynth
+
+Usage:
+
+FRFun3d(T=Float,Tuv=Float)
+
+T=Luma threshold
+Tuv=Chroma threshold
+
+Note: FrFun3d needs YV12 input!
+
+Have fun!

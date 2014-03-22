@@ -1,0 +1,5 @@
+video codec:
+XviD
+
+video cli:
+-qtype 1 -cq 2.0 -zones 0,w,1.0,O -smoother 0 -max_key_interval 250 -nopacked -bvhq -bquant_ratio 100

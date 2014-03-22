@@ -1,0 +1,5 @@
+video codec:
+MJPEG
+
+video cli:
+-vcodec mjpeg -an -qscale 3.0

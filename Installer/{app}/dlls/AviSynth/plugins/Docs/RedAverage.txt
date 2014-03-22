@@ -1,0 +1,14 @@
+Full description & Discussion:
+
+- http://forum.doom9.org/showthread.php?t=163018
+
+Version:
+
+1.4.3   serious bugfix, thanx to Bloax for pointing out
+1.4.2	bugfix of RMerge SSSE3, switched clips in RMerge to match the mt_merge formula, minor improvements
+1.4.1	SSSE3 optimization of RMerge lsb=0 
+1.4.0	introduction of RMerge
+1.3.10	SSE2 optimization of RAverageW mode=8 lsb=all
+1.3.9	SSSE3 optimization of RAverageW mode=4 lsb_in=false
+
+(released under GPL).

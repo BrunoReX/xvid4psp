@@ -1,0 +1,136 @@
+V0.1
+1. Initial release
+
+V0.2    
+1. Bug fixes with global idx
+2. Change with idx in the main function to increment in case function was called more than once in the same script to ensure no collisions.
+3. Changed the pre filter noise function from remove grain to fft3dfilter to allow the noise vector prefilter to respect the chroma search flag.
+4. Changed the blocksize of smoothed mask noise filter (increased) so it was not as aggressive. Makes increasing of strength more linear (less of a jump between 3 and 4).
+5. Changed frames = 3 or 4 function to first do mvdegrain then mvflow and hold that flowed clip through mask and post functions.
+6. Fixed dct not being used on user input, only default was being used. Improved default selection values.
+
+V0.3 
+1. Added an option to the frames =3-4 called aggressive MC_spuds(frames=3, strength=2, aggressive=true).  With aggressive on it will first get motion vectors and process the clip with mvdegrain2, then get new motion vectors and do a mvflow on the denoised frame.
+
+V0.3b
+1. Removed the global nullclp and now set nullclp in the first function and pass it as need to the other sub functions. 
+
+V0.4
+1. Changed resizer for the up sampled clip, used to help search for motion vectors. Was LanczosResize now BicubicResize, small speed increase
+2. Changed noise filter for pre-filtered clip, used to help search for motion vectors. Was fft3dfilter now removegrain + temporalrepair. Large speed increase. 
+3. Removed last call to ttempsmoothf, seemed redundant and that is a very slow function. Good speed increase.
+4. Improved code readability
+5. Improved debug views
+6. Added additional edge cleaning capability via masking
+7. Changed some of the block and overlap values in the presets to help with speed
+
+V0.4a
+1. Header update to show unfilter as a req, 
+2. Changed inpand to mt_inpand()
+
+V0.5
+1. Starfield = true (false by default). This is my first pass at adding a mask which 'saves' stars in the sky and adds them back after denoising. Really for anime but may be useful for other space shots. 
+2. Anime = true (false by default). This changes the dct to 3, lowers the scene detection threshold, turns on removeblocks which helps with frames <3 and blocksize > 8 and changes the secondary motion cleaning to a value which will be kinder to thin lines. 
+3. Changed dct to 0 for all but anime=true which defaults to 3. It was / can cause some artifacts and it can remove / prevent others, bit of a tough nut. Anime has some rapid luma changes which dct=3 seems to help with but has its issues as well. 
+4. Added ability to set ss_x, ss_y and lsfstr values for Limited Sharpen Faster. Uses smode=4 values and strength = 80 by default. 
+5. Removeblocks = true (false by default). Helps break up some blocks, most useful with frames < 3 and blocksize =16. This is a trade off so decide by what you like. Blocks can be fixed several ways, 1) a smaller blocksize=8 and overlap=2 Also effective is use of frames=3 which does not use mvdegrain so it is not block prone but can have other problems with anime since frames are not naturally flowing (lots of quick scene changes and luma changes can bleed with frames=3) and lastly by turning on removeblocks which improves blocks but not as well as options 1 and 2 in all cases. 
+6. Ability to set thscd1 & thscd2 for mvdegrain1/2.
+
+V0.5a
+1. Tweaked the preset values
+2. Additional anime=true tweaks in the edge noise (ringing) area, basically lowered it as the edge blur was more noticeable in anime.
+3. Added addnoise=true setting which adds some lite grain in the dark areas, useful in some cases to avoid compression blocking
+4. Fixed an oops in the mvdegrain level that was left behind from testing Doh!
+5. Starfield refinements
+
+V0.5b
+1. Fixed the function failing if called with no parameters
+2. Add ability to override limit=xxx, used in mvdegrain12
+3. Added threshold for starfield determination (thStar=float)
+4. Set removeblocks on for anime and blocksize=16, above that its off by default for anime and off for non anime.
+5. Added logic to starfield, now it will only apply stars back to the clip if the created mask is above a defined threshold. Prior to this 'bad' spots were added back into the clip. With the default thStar threshold frames with a low number of spots (stars), say 5, will not get added back, it needs to see a larger number of dots (stars) before it will reintroduce them.
+6. Improved (maybe) the logic on removeblocks for anime and blocksize=16. Now its only called when the filter sees those large luma (prev/next) changes which is mainly where (not always though) the blocks were occurring.
+7. Fixed error in the addnoise (grain) line.
+
+V0.6
+1. Removed mt_binarize on my sharp mask, so the sharpening is applied smoothly.
+2. Added a new parameter sharpp=x which can be 1,2 or 3. 1 will use contra-sharpening,. 2 is limited sharpen faster, and 3 is none so you can apply your own like seesaw. The default is one.  All sharpening is only done to static areas of the frame.
+3. Changed the edge mask, which is used to help dering edges. The old mask contained more edges, really to many, then the new one does. I feel the new one works much better for what its intended. There is also one specific for anime in addition to the standard one.
+4. Changed in behavior for frames=3, it now will call mvdegrain3 since its available in the latest mvtools. You can use the previous revision of  frames=3 function by specifying flow=true 
+5. Changed, yet again, the denoised clip that gets used by mvanalyze for motion vector searches. I've tried removegrain, fft3dfilter, dfttest, hqdn3d and combinations of them. Its been a speed quality trade off and I think I now have a good balance and one that follows the strength parameter more appropriately. 
+6. Removed the dependency on limitchange by replacing it with a mt_lutxy call.
+7. Various changes, optimizations and code structure changes.
+
+V0.7
+1. Added a first pass of a help file so folks can sort though all the parameters. There are a lot of 'buttons' but they are really for those who like to tinker.
+2. Removeblocks now calls deblock_qed. There are default values set for quant1, quant2 and uv but you can supply your own as well. If you use this you will need to import the script yourself. 
+3. Ability to pass the search parameter to mvanalyse, previously it was set to 2, now you can set it to what you want.
+4. Ability to pass the pel parameter to mvanalyse, previously it was set to 2
+5. Colorbleed correction via colorbleed=true. 
+6. Added back the ability to use aggressive with frames=3 and flow=true.
+7. Fixed a few things that caused slowdowns in certain areas under certain conditions. 
+
+V0.7a
+1. Fixed issue that was causing distortion with frames=3.  Mostly due to old version of MVtools which had an error with mvdegrain3.
+
+V0.7b
+1. Fixed a error in the final output of the script, where it was not applying one of the transforms. 
+2. Minor tweaks to the starfield function when its used on non anime sources.
+
+V0.8
+1. Fixed mistake in the debug views with strength=1
+2. Fixed mistake with the limit vale not being utilized via strength
+3. It no longer externally upscales the frame, instead it lets mvtools do the work. I have gone back and forth on this point and tried many different resize functions but in the end I could not see any visual difference that really pointed me in one direction or the other, perhaps even a detriment doing it externally. This was further complicated by allowing pel=4 in the last update.
+4. Significant changes to the flow=true functions. They now work on frames 1 through 4 where in the past it was only on 3 and 4. They also now use mvcompensate in place of mvflow and use ff3dfilter or dfttest for denoising (instead of removegrain and temporalsoften) on the long temporal clip that flow=true creates.
+5. Aggressive=true will work on frames 1-4 instead of just frames 3 and 4. It basically does a two pass through the denoising, a lite first pass and and a second normal (as specified) removal.  The type of denoising will be the same for both passes (ie mvdegrain or mvcompensate)
+6. Various areas cleaned up
+
+V0.9
+1. Added temporal=true which uses the temporal de-graining limit from Didee. Since the script already had 95% of the data needed to do this it seemed like a natural extension to include. 
+2. Prefiltering now follows the strength parameter, this will speed up processing for lower strengths. 
+3. Added premax=true which will turn on full strength pre-filtering of the clip for motion vector searches (overrides strength settings on pre filtering levels). 
+4. Added ability to specify the sharp parameter to mvanalyze via sharp = (0-2)
+5. Added strength=0 (actually redefined) so its very low touch for higher quality input videos
+6. Updated documentation so that sharpp=0 is no sharpening
+7. Fixed mod4 error in resize logic
+8. Deringing strength now follows the strength parameter.  Changed deringing from simple bilinear blur to fft3d for non anime sources.
+9. Added mod16 blank borders to improve edge processing and keep clip mod16 for processing.  Borders are removed at the end to return the original sized clip.
+
+V0.9a/b
+1. Increased chro=false (default) noise removal processing to V0.8 levels
+2. Fixed error where the prefilter was not being utilized
+3. Improved prefilter strength to ensure it follows the global strength parameter.
+
+V0.9c
+1. Overhaul of the starfield function for non anime sources.  
+2. Added lumathres parameter to set cutoff for spot luma to be considered as a potential star.  All spots above this luma value will be considered as a star, below the spots will be discarded.  The overall frame integrity as a starfield is controlled by the thstar value which is the total luma value of the frame based on the number of spots that were allowed to be included via the lumathres.  Increasing thstar says more spots must be in the frame to be valid and reintroduced into the denoised frame.
+
+v0.9d
+1. Fixed error in the debug output, it was cropping the top line
+2. Improved the overall output of the parameters debug view (debug=1).  Many more parameters are now listed.
+3. Moved the location of the colorbleed function to post mv-denoise vs pre mv-denoise
+4. Added parameters to allow setting of additional mvanalyse options, including truemotion (bool), lamda (int), lsad (int), plevel (0,1) and mvglobal (bool)
+5. Added fs1,fs2,fs3,fs4 parameters so tweakers can pass sigma values to the flow function instead of using the scripts values.  For flow and frames>2 only fs1 is required.
+6. Increased search radius of contra-sharp for higher strength settings.
+7. Added new prefast option to speed up processing, prefast=true/false.  This is a alternative faster function to clean the video for motion vector searches.  Not as quite as robust but very adequate for many sources. (BETA)  Increases overall script speed.
+8. Changed edgeclean function from using fft3dfilter to the removedustdirt routine with new clean and repair modes, uses same mask. This increases speed but may not be as effective. (BETA)
+9. Moved the postprocess function ahead of the add grain function to avoid removing what we added.
+10. Fixed scene change transition color bleed caused by use of luma only motion vectors in a plane=4 denoise
+11. Fixed error with anime=true and starfield=true
+
+v1.0
+1. Added mvdegrain4 capability for frames=4
+2. Added gpu=true which will utilize fft3dgpu in place of fft3dfilter
+3. Added prefilter = 0-4, 0-none, 1-fast, 2-strength based, 3-max
+4. Added third sharpening option, contra with MC determined limits
+5. Fixed / added some debug information in the debug=1 screen
+
+v1.1
+1. Added alternative script to make use of spur threaded mvtools ... mc_spuds_mvt
+2. Added motion compensation to the prefilter to help maintain details in moving areas while still keeping static areas calm
+3. Added mode presets to make usage easier mode="low" very low, medium, medium high, high, very high
+4. Fixed frames=4,temporal=true,flow=true error
+5. Tweaks to prefilter=fast
+6. Changed motion compensated sharpening to use limited-sharpen-faster lut in place of contra
+7. Enabled all plane processing in mvdegrain by default, minimal overhead and better overall noise removal (different then chro=true which is still available)
+8. Fixed mask to avoid sharpening dark areas, now it works as it was supposed to

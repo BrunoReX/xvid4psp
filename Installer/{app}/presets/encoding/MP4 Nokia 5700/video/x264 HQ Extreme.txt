@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 21 --level 1.3 --ref 6 --no-cabac --deblock -2:-1 --direct none --no-b-adapt --weightp 0 --trellis 2 --no-fast-pskip --no-dct-decimate --partitions p8x8,b8x8,i4x4,p4x4 --me umh

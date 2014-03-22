@@ -1,0 +1,5 @@
+video codec:
+XviD
+
+video cli:
+-cq 3.0 -vhqmode 4 -smoother 0 -max_bframes 1 -max_key_interval 250 -nopacked -bvhq -bquant_ratio 100 -zones 0,w,1.0,O -fourcc DX50

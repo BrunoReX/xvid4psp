@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>FQFocusDeFocus Plugin</title>
+</head>
+
+<body>
+	   <font color="#cc0033"><h1>FQFocusDeFocus </h1></font>
+	 
+	  <P>This plugin function restores focus ( or sharpens) slightly 
+	  defocussed ( one pixel radius)images. Option to spike centrl point of a PSF (point Spread Function) 
+	  is incorporated. 
+	  Conversely images can be slightly defocussed by this plugin if desired. 
+	  Shape of PSF can be circular, square or  X .
+			This plugin operates in Frequency domain and requires
+			<a href="http://www.avisynth.org/vcmohan/libfftw3f-3.zip">libfftw3f-3.dll</a> or 
+<a href="http://www.avisynth.org/warpenterprises#fftw3">FFTw3.dll</a>
+ or fftw.dll from Fizick's site to be in the path. (system32 folder).
+	Inversion in freq domain may amplify  undesirable low amplitude frequencies 
+	and lead to ringing. White noise wn is added to reduce this. The higher the wn , 
+	the image will be focussed less but ringing will reduce. Compromise is to be 
+	arrived at.
+
+		Spiking of central point of PSF will approach a Gaussian function and proper value
+		also may lessen ringing in a similar fashion.
+	
+			
+ 	  RGB32, RGB24 YV12 and YUY2 colorspaces only are supported. </p>  
+	  
+<BR>
+
+<table border="2" bordercolorlight="#c0c0c0" bordercolordark="#000000">
+
+<caption align="top">Details of parameters </caption>
+<tr>
+       <td><b>Description</b></td>
+       <td><b>Name</b></td>
+       <td><b>Type</b></td>
+       <td><b>Limits</b></td>
+       <td><b>Default</b></td>
+</tr>
+<tr>
+       <td>clip to be processed</td>
+       <td></td>
+       <td>clip</td>
+       <td></td>
+       <td>none</td>
+</tr>
+
+<tr>
+       <td>White noise to be added</td>
+       <td>wn</td>
+       <td>float</td>
+       <td>between 0.00002 and 0.4</td>
+       <td>0.05</td>
+</tr>
+
+
+<tr>
+       <td>value of spike to be added to center of PSF</td>
+       <td>spike</td>
+       <td>float</td>
+       <td> 0.0 to 0.5</td>
+       <td>0.1</td>
+</tr>
+
+<tr>
+       <td>focus or defocus image</td>
+       <td>focus</td>
+       <td>boolean</td>
+       <td> true for focus, false for defocussing</td>
+       <td>focus</td>
+</tr>
+
+<tr>
+       <td>shape of PSF</td>
+       <td>shape</td>
+       <td>string</td>
+       <td> "circular", "square", "x"</td>
+       <td>"circular"</td>
+</tr>
+
+<tr>
+       <td>Scaling output</td>
+       <td>scale</td>
+       <td>float</td>
+       <td> 0.00001 to 100</td>
+       <td>0.85</td>
+</tr>
+
+
+</table>
+
+
+<BR>#Usage examples:- 
+<pre>
+fn=FQFocusDefocus( focus = false,   shape = "x")
+fn1 = FQFocusDefocus( focus = true, wn = 0.15, spike = 0.3,  shape = "square")
+fn2= FQFocusDefocus( focus = true, wn = 0.15, spike = 0.05)
+
+</pre>
+<BR>mildly defocussed images in top row. Corresponding focussed images bottom row.
+Left "circular", middle "square" and right "x" shape of PSF.
+<BR>
+<img src="FQFocusDefocus0.png" width="720" height="480" border="0"></td>
+<BR>
+<img src="FQFocusDefocus1.png" width="720" height="480" border="0"></td>
+
+
+<table>
+
+
+<tr>
+       <td></td>
+       <td><a href="../../index.html">Back to my index page</a></td>
+       <td></td>
+</tr>
+<tr>
+       <td></td>
+       <td></td>
+       <td><a href="http://www.avisynth.org/">back to Avisynth</a></td>
+</tr>
+</table>
+</body>
+</html>
+
+

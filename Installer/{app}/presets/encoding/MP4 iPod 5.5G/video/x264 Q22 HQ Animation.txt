@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 22 --level 3.0 --ref 6 --aq-strength 0.6 --deblock 1:1 --bframes 0 --b-pyramid none --weightp 0 --no-mixed-refs --no-cabac --psy-rd 0.4:0.0 --qcomp 0.8 --no-fast-pskip --partitions p8x8,b8x8,i4x4 --no-8x8dct --me umh --rc-lookahead 60 --qpmin 10

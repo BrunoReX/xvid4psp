@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 18.0 --no-mixed-refs --bframes 16 --no-weightb --partitions all --subme 5

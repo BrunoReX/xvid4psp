@@ -1,0 +1,607 @@
+21.03.2013 RC33.1 AviSynth 2.6
+==========
+XviD4PSP5 updated to r330
+L-SMASH updated to r501
+Added license docs\LICENSE LSMASHSource.txt
+qAAC updated to 2.17
+FFMS2 replaced by r722 Stable (http://code.google.com/p/ffmpegsource/)
+Short help for MT-modes was added to \docs
+Ukrainian translation was updated. Thanks to neoroman1982
+Filters and plugins updated with the last filter's pack from Tempter57 for AviSynth 2.6 (i3vzplugins_filtering.rar)
+
+12.03.2013 RC33 AviSynth 2.6
+==========
+XviD4PSP5 updated to r326, custom user programs settings added to apps/Custom/tools.ini
+AviSynth 2.6 updated to 09.03.2013 (http://forum.doom9.org/showthread.php?t=148782)
+Deleted unused file avisynth_c.dll
+avs4x264 (avs4x264mod) updated to avs4x264mod 0.9.0 (http://forum.doom9.org/showthread.php?t=162656)
+FFMS2 updated to r725-icl-4 (http://code.google.com/p/ffmpegsource/)
+Installers compiler Inno Setup updated to 5.5.3
+x264 updated to rev2273 vanilla
+VSFilter.dll (xy-VSFilter) updated to 3.0.0.211 (http://code.google.com/p/xy-vsfilter/)
+LAVFilters updated to 0.55.3
+MediaInfo updated to 0.7.62+ от 26.02.2013
+MKVToolnix updated to 6.1.0.505
+AvsPmod updated to 2.4.2, updated French, German, Portuguese, Spanish, Japanese, Russian translations
+qAAC updated to 2.16
+Updated sound presets for AC3 и MP3, made by user busoni4444
+BluRay presets corrected
+XviD 1.3.2 build 65 replaced by multi-threaded XviD 1.4.0 build 73 by fcp
+Filters and plugins updated with the last filter's pack from Tempter57 for AviSynth 2.6 (i1d8plugins_filtering.rar)
+DirectShowSource.dll updated (http://sourceforge.net/projects/avisynth2/files/AviSynth_Alpha_Releases/AVS%202.6.0%20Alpha%204%20%5B130114%5D/DirectShowSource_2601.zip/download)
+Updated or added licenses (License.txt, License Rus.txt, License (DirectShowLib).txt, License (SharpDX).txt)
+
+13.09.2012 RC32.1 AviSynth 2.6
+==========
+Updated DirectShowSource.dll
+
+13.09.2012 RC32 AviSynth 2.6
+==========
+XviD4PSP5 updated to r305
+AviSynth 2.6 updated to 28.08.2012 (http://forum.doom9.org/showthread.php?t=148782)
+Added presets for x262 for formats TS, M2TS, MPEG2 NTSC, MPEG2 PAL and MPEG2 PS. Added codec x262 rev.2433
+Deleted folder \apps\mplex
+Deleted folder \apps\x264\cmatrix
+Added LAV filters version 0.51.3
+Installers compiler Inno Setup updated to 5.5.1
+FFMS2 updated to r712-2 (http://code.google.com/p/ffmpegsource/)
+qAAC updated to до 1.41
+VSFilter.dll (xy-VSFilter) updated to 3.0.0.65 (http://code.google.com/p/xy-vsfilter/)
+MediaInfo updated to 0.7.60
+MKVToolnix updated to 5.8.0
+Updated ukrainian language. Translation by user Neopagan from ru-board forum
+x264 updated to rev2208 vanilla
+NicAudio.dll library updated to 2.0.6
+Filters and plugins updated with the last filter's pack from Tempter57 for AviSynth 2.6 (ga6xplugins_filtering)
+
+05.07.2012 RC31 AviSynth 2.6
+==========
+XviD4PSP5 updated to r289
+Some unused files were deleted
+AviSynth 2.6 updated to 16.05.2012 (http://forum.doom9.org/showthread.php?t=148782)
+avs4x264 (avs4x264mod) updated to avs4x264mod 0.8.0 (http://forum.doom9.org/showthread.php?t=162656)
+FFMS2 updated to r700 (http://forum.doom9.org/showthread.php?p=1580046#post1580046)
+ffmpeg returned to r31763 from 16.01.2012 due to incompatibility
+bass.dll library returned to 2.4.8 due to incompatibility with bassAudioSource
+Installers compiler Inno Setup updated to 5.5.0
+MediaInfo updated to 0.7.58+ from 2012-06-11
+MKVToolnix updated to 5.6.0.449
+VSFilter.dll replaced by xy-VSFilter 3.0.0.42 (http://code.google.com/p/xy-vsfilter/)
+AvsPmod updated to 2.3.0, updated or added French, German, Portuguese, Spanish, Japanese, Russian translations
+Japanese language added to installer, updated Ukrainian language
+Updated changelog from MKVExtractGUI-2
+x264 updated to rev2200 vanilla
+XviD 1.3.2 updated to build 65
+Added qAAC 1.38 audio codec. For proper use you need to install Apple QuickTime into your system. Or find and download qAAC Portable and move it into folder c:\Program Files\XviD4PSP 5\apps\
+Four qAAC presets added
+Filters and plugins updated with the last filter's pack from Tempter57 for AviSynth 2.6 (flzhplugins_filtering.rar)
+MCTDMod.avsi plugin updated to 1.4.20 mod3.7
+
+14.05.2012 RC30.1 AviSynth 2.6
+==========
+ffmpeg updated to 13.05.2012 (http://ffmpeg.zeranoe.com/builds/)
+Filters and plugins updated with the last filter's pack from Tempter57 for AviSynth 2.6 (f13mplugins_filtering.rar)
+AviSynth 2.6 MT by SEt (http://forum.doom9.org/showthread.php?t=148782) changed to a previous version 31.03.2012 with a recommendation from Tempter57
+
+11.05.2012 RC30
+==========
+XviD4PSP5 updated to r276.1 (thanks to wayger)
+Moved to AviSynth 2.6
+Filters and plugins updated with the last filter's pack from Tempter57 for AviSynth 2.6 (euamplugins_filtering.rar)
+MKVToolnix updated to 5.5.0.439
+MKVExtractGUI-2 updated to 2.2.2.9
+ffmpeg updated to 09.05.2012 (http://ffmpeg.zeranoe.com/builds/)
+MediaInfo updated to 0.7.57
+x264 updated to rev2197 vanilla
+bass.dll library updated to 2.4.9
+
+25.04.2012
+========== rc29 Test
+XviD4PSP5 updated to r276 (thanks to wayger)
+avs4x264 updated to avs4x264mod 0.6.4 (http://forum.doom9.org/showthread.php?t=162656)
+lame updated to 3.99.5 (Intel Compiler 12.1) (http://www.rarewares.org/mp3-lame-bundle.php)
+ffmpeg updated to 24.04.2012 (http://ffmpeg.zeranoe.com/builds/)
+x264 updated to rev2184 vanilla
+MediaInfo updated to 0.7.56
+VSFilter.dll updated to 1.6.1.4137
+Filters and plugins updated with the last filter's pack from Tempter57 (eluhplugins_filtering.rar)
+bass_wv.dll updated to 2.4.3
+Additional matrix were added to presets\matrix\ in an compressed file matrices.zip
+
+13.02.2012
+========== rc28
+XviD4PSP5 returned to r271 due to some interface bugs
+avs4x264 replaced by avs4x264mod 0.6.2 (http://forum.doom9.org/showthread.php?t=162656)
+FFMS2 updated to r644 (http://code.google.com/p/ffmpegsource/updates/list)
+MKVToolnix returned to 5.2.0 due to bugs with mkv.
+MKVExtractGUI2 returned to 2.2.2.5
+VSFilter.dll updated to 1.6.1.4041
+AvsPmod - updated some language files to exclude first run error
+XviD 1.2.2 replaced by version from MeGUI, koepi build
+Filters and plugins updated with the last filter's pack from Tempter57 (dwmbplugins_filtering.rar)
+
+06.02.2012 rc27.2 Test3
+==========
+FFMS2 updated to r637 (http://code.google.com/p/ffmpegsource/updates/list)
+x264 updated to rev2164 vanilla
+Forced key --keyint-min 1 was added to Bluray presets
+MediaInfo updated to 0.7.53
+MKVToolnix updated to 5.2.1.402
+VSFilter.dll updated to 1.5.3.4006
+lame - updated to 3.99.4 (Intel Compiler 12.1) (http://www.rarewares.org/mp3-lame-bundle.php)
+Filters and plugins updated with the last filter's pack from Tempter57 (drz6plugins_filtering.rar)
+
+20.01.2012 rc27.1 Test2
+==========
+ffmpeg updated to r31763 (http://ge.tt/#2gBFf0x)
+MKVToolnix updated to 5.2.1.400
+x264 updated to rev2146 vanilla
+Filters and plugins updated with the last filter's pack from Tempter57 (dje4plugins_filtering.rar)
+
+13.01.2012 rc27 Test
+==========
+XviD4PSP5 updated to r271.8
+FFMS2 updated to official r624 (http://code.google.com/p/ffmpegsource/updates/list), manually updated to r628
+ffmpeg updated to r31631 (http://ge.tt/#2gBFf0x)
+Inno Setup updated to 5.4.3
+MediaInfo updated to 0.7.52
+VSFilter.dll updated to 1.5.3.3958
+MKVToolnix updated to 5.2.1.398
+x264 updated to rev2120 vanilla
+AvsPmod updated to 2.2.1
+lame updated to 3.99.3 (Intel Compiler 11.1) (http://www.rarewares.org/mp3-lame-bundle.php)
+MKVExtractGUI2 updated to 2.2.2.9
+Filters and plugins updated with the last filter's pack from Tempter57 (dfjyplugins_filtering.rar)
+VC+ installer's bug corrected
+
+08.11.2011 rc26
+==========
+XviD4PSP5 updated to r271
+Installer's script updated once again
+MKVToolnix updated to 5.0.1.382
+AvsPmod updated with latest version with some bugfixes for translation files
+
+07.11.2011 rc25.1 (test build, never released)
+==========
+Installer's script updated
+FFMS2 updated to r580 (http://code.google.com/p/ffmpegsource/updates/list)
+ffmpeg updated to r30823 (http://ge.tt/#2gBFf0x)
+VSFilter.dll updated to 1.5.3.3810
+MKVToolnix updated to 5.0.1.378
+lame updated to 3.99.1 (Intel Compiler 11.1) (http://www.rarewares.org/mp3-lame-bundle.php)
+DGDecode.dll updated to optimized SSE version (http://forum.doom9.org/showthread.php?t=162920)
+Filters and plugins updated with the last filter's pack from Tempter57 (co33plugins_filtering.rar)
+
+26.10.2011 rc25
+==========
+XviD4PSP5 updated to r268
+VSFilter.dll updated to 1.5.3.3785
+MKVToolnix updated to 5.0.1.376, old unused files deleted
+ffmpeg updated to r30550 (http://ge.tt/#2gBFf0x)
+x264 updated to rev2106 vanilla
+XviD 1.2.2 updated with a build dated 13.07.2011 (http://jawormat.republika.pl/xvid.html)
+NicAudio.dll library updated to 2.0.5
+Filters and plugins updated with the last filter's pack from Tempter57 (chzqplugins_filtering.rar)
+
+19.10.2011 rc24.1
+==========
+FFMS2 - Updated to r579 (http://code.google.com/p/ffmpegsource/updates/list)
+ffmpeg Updated to r30206 (http://ge.tt/#2gBFf0x)
+MKVToolnix - updated to 5.0.1.369
+lame - updated to 3.99 (compiled with Intel Compiler 11.1) (http://www.rarewares.org/mp3-lame-bundle.php)
+Filters and plugins updated with the last filter's pack from Tempter57 (cecoplugins_filtering.rar)
+
+24.09.2011 rc24
+==========
+XviD4PSP5 - updated to r265
+FFMS2 - updated to r559 (http://code.google.com/p/ffmpegsource/updates/list)
+ffmpeg updated to r30053 (http://ge.tt/#2gBFf0x)
+x264 updated to rev2085 vanilla
+MediaInfo updated to 0.7.50
+MKVToolnix updated to 4.9.1.367
+Library devil.dll replaced by non-unicode version
+Library bass.dll updated to 2.4.8
+Filters and plugins updated with the last filter's pack from Tempter57
+
+31.08.2011 rc23
+==========
+XviD4PSP5 updated to r260
+ffmpeg updated to r29765 (http://ge.tt/#2gBFf0x)
+FFMS2 updated to r543 (2.16) (http://code.google.com/p/ffmpegsource/updates/list)
+x264 updated to rev2074 vanilla
+Files avs4x264.exe and vfw4x264.exe added to folder \apps\x264_10b
+MediaInfo updated to 0.7.48
+MKVToolnix updated to 4.9.1.358
+Updated library devil.dll to 1.7.8
+AvsPmod 2.2.0 launch bug fixed again
+Filters and plugins updated with the last filter's pack from Tempter57
+Plugin dither updated to 1.10.0
+Deinstallation algorithm updated
+
+05.08.2011 rc22
+==========
+XviD4PSP5 - updated to r250
+AvsPmod launch bug fixed
+FFMS2 - updated to r517 (http://code.google.com/p/ffmpegsource/updates/list)
+
+01.08.2011 rc21
+==========
+XviD4PSP5 - updated to r248
+FFMS2 - updated to r507 (http://code.google.com/p/ffmpegsource/updates/list)
+ffmpeg updated to r29615 (http://ge.tt/#2gBFf0x)
+x264 updated to rev2044 vanilla
+10-bit x264 version rev2044 added, located at \apps\x264_10b
+MediaInfo updated to 0.7.47
+MKVToolnix - updated to 4.9.1
+AvsPmod updated to 2.2.0
+XviD 1.3.2 updated to version dated 24.06.2011 by Jawor (http://jawormat.republika.pl/xvid.html)
+Filters and plugins updated with the last filter's pack from Tempter57
+XviD presets updated by Tempter57
+
+21.06.2011
+========== rc20.2
+MKVToolnix - updated to 4.8.0.352
+ffmpeg updated to r29054 (http://ge.tt/#2gBFf0x)
+AvsPmod updated to 2.1.8
+FFMS2 - updated to r473 (http://code.google.com/p/ffmpegsource/updates/list)
+MediaInfo updated to 0.7.45
+XviD updated to 1.3.2 dated 17.06.2011 from Jawor (http://jawormat.republika.pl/xvid.html)
+x264 updated to rev2008 vanilla
+Filters and plugins updated with the last filter's pack from Tempter57
+XviD presets updated by Tempter57
+Added filter S_ExLogo for logo removing and two x264 presets by Olte
+
+25.05.2011
+========== rc20.1
+MediaInfo updated to 0.7.44
+MKVToolnix - updated to 4.8.0
+AvsPmod updated to до 2.1.6
+x264 - updated to rev1995 vanilla
+Blu-Ray presets rewritten
+ffmpeg updated to r28532 (http://ge.tt/#2gBFf0x)
+QTGMC - updated to 3.32
+VSFilter.dll updated to 1.5.2.3093
+FFMS2 - updated to r460 (http://megui.org/auto/)
+Filters and plugins updated with the last filter's pack from Tempter57
+Updated plugins, modded for QTGMC: fftw3, libfftw3f-3, AddGrainC, dfttest, EEDI2, EEDI3, FFT3DFilter, mt_masktools-25, mt_masktools-26, mvtools2, nnedi, nnedi2, nnedi3, RemoveGrainSSE2, RepairSSE2, SSE2Tools, TDeint, VerticalCleanerSSE2, yadif
+
+16.04.2011
+========== rc20
+XviD4PSP5 - updated to r234
+XviD 1.3.1 updated to Jawor's patched build (built on 02.04.2011) (http://jawormat.republika.pl/xvid.html)
+x264 x86 - updated to rev1937 vanilla
+x264 x64 - updated to rev1936 vanilla
+MKVToolnix - updated to до 4.6.0.335
+ffmpeg updated to r28186 (http://ge.tt/#2gBFf0x)
+AvsPmod updated to 2.0.9
+Deleted MSU_FRC.dll plugin
+Updated help to TDeint plugin (req. by agz)
+Added help to TMM plugin (req. by agz)
+Rewritten Blu-Ray presets due to changes in latest x264
+Added docs directory to main program filder with some encoding help files
+*.tsks files windows association added (req. by Czavidvilal)
+Filters and plugins updated with the last filter's pack from Tempter57
+
+31.03.2011
+========== rc19
+XviD4PSP5 - updated to r228
+I included Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package ATL Security Updateinto installer, because it is needed for EEDI3 to work.
+XviD updated to 1.3.1 (built on 24.03.2011) by Jawor (http://jawormat.republika.pl/xvid.html)
+x264 - updated to rev1924 vanilla
+MKVToolnix - updated to 4.6.0.333
+ffmpeg updated to r27980 (http://ge.tt/#2gBFf0x)
+Filters and plugins updated with the last filter's pack from Tempter57
+
+21.03.2011 rc18.1
+==========
+Filters and plugins updated with the last filter's pack from Tempter57
+Some bugfixes in filters and plugins
+Bugfix in preset XviD 1P 1500k Turbo
+QTGMC - updated to 3.31
+MediaInfo updated to 0.7.43
+AvsPmod updated to 2.0.8
+
+19.03.2011 rc18
+==========
+XviD4PSP5 - updated to r226
+Inno Setup compiler updated to 5.4.2
+ffmpeg updated to r27881 (http://ge.tt/#2gBFf0x)
+MKVToolnix - updated to 4.6.0.331
+MKVExtractGUI2 updated to 2.2.2.5
+QTGMC - updated to 3.25
+Filters and plugins updated with the last filter's pack from Tempter57
+
+06.03.2011
+========== rc17 Test
+XviD4PSP5 - updated to r221.7
+ffmpeg updated to r27777 (http://ge.tt/#2gBFf0x)
+XviD 1.3.0 & xvid_encraw.exe updated to latest version (25.02.2011) from Jawor (http://jawormat.republika.pl/xvid.html)
+Updated script DVD_SAT QTGMC MT
+AvsPmod updated to 2.0.7
+AvsPmod russian translation updated
+MediaInfo updated to 0.7.42
+
+23.02.2011
+========== rc16
+XviD4PSP5 - updated to r221
+MediaInfo updated to 0.7.41+
+ffmpeg updated to r27720 (http://ge.tt/#2gBFf0x)
+FFMS2 - updated to r451 (http://ge.tt/#2gBFf0x)
+
+22.02.2011
+========== rc15
+XviD4PSP5 - updated to r220
+Updated iPod presets
+ffmpeg updated to r27695 (http://ge.tt/#2gBFf0x)
+FFMS2 - updated to 2.15 (http://code.google.com/p/ffmpegsource/updates/list)
+AvsPmod updated to 2.0.6
+x264 - updated to rev1913 vanilla
+QTGMC - updated to 3.11
+MKVToolnix - updated to 4.5.0.325
+
+10.02.2011
+========== rc14
+XviD4PSP5 - updated to r218
+Deleted file \apps\MP4Box\libgpac.dll
+MP4Box returned to revision 2053 (http://komisar.gin.by/tools/)
+ffmpeg updated to r27577 (compiled by Procrustean, http://ge.tt/#2gBFf0x)
+FFMS2 - updated to r432 (http://ge.tt/#2gBFf0x)
+VSFilter.dll updated to 1.5.0.2827 (31.01.2011) (http://sourceforge.net/projects/mpc-hc/files/Standalone%20Filters%20-%20Win32/Filters%20v1.5.0.2827%20_%2032%20bits/)
+x264 - updated to rev1990 vanilla
+MKVToolnix - updated to 4.5.0.324
+QTGMC script updated to 3.01
+Installer script updated to 1.24 Beta
+Inno Setup compiler updated to 5.4.1
+Filters and plugins updated with the last filter's pack from Tempter57
+
+03.02.2011
+========== rc13
+XviD4PSP5 - updated to r217
+Aften - updated to a verion, compiled by Procrustean (http://ge.tt/#2gBFf0x)
+x264 - updated to rev1884 vanilla
+MKVExtractGUI2 updated to 2.2.2.2
+MediaInfo updated to 0.7.41
+FFMS2 - updated to r430 (http://ge.tt/#2gBFf0x)
+avs4x264.exe and vfw4x264.exe replaced newer version 29.01.2011, taken from MeGUI x264 1884 autoupdater
+ffmpeg comilied by Procrustean, revision r27462 (http://ge.tt/#2gBFf0x)
+Updated MP4Box to r2634 from http://ge.tt/#2gBFf0x
+Filters and plugins updated with the last filter's pack from Tempter57
+Updated XviD presets from Tempter57 for XviD 1.2.2. XviD 1.3.0 is highly experimental and does not intended to use.
+MKVToolnix - updated to 4.5.0
+QTSource documentation updated
+
+20.01.2011
+========== rc12.3
+MaskTools - updated to 2.0a48
+XviD 1.3.0 and xvid_encraw.exe updated with version dated 11.01.2011 from Jawor (http://jawormat.republika.pl/xvid.html)
+Checked script AnimeIVTC 2.00.avs
+x264 - updated to rev1867 vanilla
+MKVExtractGUI2 updated to 2.2.2.1
+MKVToolnix - updated to 4.4.0.321
+FFMS2 - updated to r411 MT (http://code.google.com/p/ffmpegsource/updates/list)
+ffmpeg - 17.01.2011 (FFmpeg revision: 26400, SwScale revision: 32676)
+
+06.01.2011
+========== rc12.2
+xvid_encraw.exe updated with version from 06.01.2011 (http://jawormat.republika.pl/xvid.html)
+ffmpeg - 06.01.2011
+
+04.01.2011
+========== rc12.1
+XviD 1.3.0 and xvid_encraw.exe replaced with new version from Jawor dated 02.01.2011 (http://jawormat.republika.pl/xvid.html)
+Script AnimeIVTC 2.00.avs rewritten using QTGMC instead of TGMCmod, filter also rewritten
+MediaInfo updated to 0.7.39
+ffmpeg - 04.01.2011
+
+29.12.2010
+========== rc12
+XviD4PSP5 updated to r206
+Updated FFMS2 with version r381 MT (http://komisar.gin.by/mingw/index.html)
+Corrected an error in filter AnimeIVTC_1.06.1mod Multi.avs
+MKVToolnix updated to 4.4.0.320
+Installer script updated to 1.22 Beta
+Due to founded error in Jawor's XviD 1.3.0, returned XviD from previous build.
+Due to possible founded error in MP4Box, it returned to revision 2053 (http://komisar.gin.by/tools/)
+ffmpeg - 29.12.2010
+
+25.12.2010
+========== rc11.2
+Filters and plugins updated with the last filter's pack from Tempter57
+XviD 1.3.0 updated to 25.12.2010 (http://jawormat.republika.pl/xvid.html)
+Installer script updated to 1.09 Beta
+eedi3.dll updated to 0.9.1.0, old version 0.9.0.0 renamed to eedi3_90.dll and used only in filters, which using QTGMC.avs script
+Presets x264 Blu-Ray xxx rewritten, --tune option moved after the "--extra:" key
+ffmpeg - 25.12.2010
+
+22.12.2010
+========== rc11.1
+eedi3.dll downgraded to 0.9.0.0, because QTGMC do not work with 0.9.1.0
+Fixed bug with XviD 1.3.0 not working. XviD 1.3.0 now using from http://www.xvidvideo.ru/xvid-video-codec/
+Deleted folder 1.2.2_new
+Updated MCBob_mod.avs script, now it using NNEDI3 instead of NNEDI2
+Presets x264 Blu-Ray xxx rewritten using key "--extra:"
+Filters and plugins reupdated with the last filter's pack from Tempter57
+MKVToolnix - updated to 4.4.0.317
+Installer script updated to 1.06 Beta
+ffmpeg - 22.12.2010
+
+21.12.2010
+========== rc11
+XviD4PSP5 - new version r205
+Filters and plugins updated with the last filter's pack from Tempter57
+ffmpeg - 21.12.2010
+Deleted program MKVExtractGUI. It was unused anyway. Instead using MKVExtractGUI2
+MKVExtractGUI2 updated to 2.2.1.1
+Added folder 1.2.2_new to c:\Program Files\XviD4PSP 5\apps\xvid_encraw\ with last 1.2.2 XviD version. By default when using 1.2.2 XviD insted of 1.3.0 - 1.2.2 is rather old and not updated with last Jawor builds. If you want to use last 1.2.2 Jawor builds - you need to rename 1.2.2_new to 1.2.2
+Re-added specific BluRay presets (x264 Blu-Ray xxxx). Do not change anything in them, or there is a huge chance that your video will not play in your BluRay player.
+
+17.12.2010
+========== rc10.1
+Some minor installer script changes
+x264 - updated to rev1834 vanilla (x64)
+MediaInfo updated to 0.7.38
+ffmpeg -- 17.12.2010
+Decomb plugin updated to 5.2.3
+TomsMoComp updated to 0.0.1.8
+
+16.12.2010
+========== rc10
+Installer script rewritten to Inno Setup, script created by ru.procrustean
+Updated Helix I420 YUV Codec (i420vfw.dll and yv12vfw.dll) to version R1.03
+MP4Box - updated to 0.4.6 rev2485
+ffmpeg - 15.12.2010
+x264 - updated to rev1834 vanilla (x32)
+Filters and plugins updated with the last filter's pack from Tempter57
+Program PgcDemux added to apps folder
+
+12.12.2010
+========== rc9.5
+Filters and plugins updated with the last filter's pack from Tempter57
+Updated VSFilter.dll from 07.09.2010. Taken from http://sourceforge.net/projects/mpc-hc/files/Standalone%20Filters%20-%20Win32/Filters%20v1.4.2499.0%20_%2032%20bits/
+Updated FFMS2 to r375 (http://code.google.com/p/ffmpegsource/updates/list)
+Added specific BluRay presets (x264 Blu-Ray xxxx). Restrictions taken from http://sites.google.com/site/x264bluray/home. After some arguing with fcp and ru.procrustean, they were temporaly deleted from program
+
+09.12.2010
+========== rc9.4
+Updated EdgeCleaner.avs script due to changes in awarpsharp() and awarpsharp2() functions
+x264 - updated to rev1820 vanilla (x32, x64)
+ffmpeg - 09.12.2010
+
+06.12.2010
+========== rc9.3
+Filters and plugins updated with the last filter's pack from Tempter57
+ffmpeg - 06.12.2010
+
+02.12.2010
+========== rc9.2
+Updated dxwebsetup.exe (DirectX web-installer) with November version
+ffmpeg - 02.12.2010
+bass.dll - new version 2.4.7.1
+
+30.11.2010
+========== rc9.1
+Two filters fixed - DVD MCDS MT and AnimeIVTC 2.00 DH, thanks to Tempter57
+ffmpeg - 30.11.2010
+
+29.11.2010
+========== rc9
+Deleted readme.txt from avc2avi folder, it was from different version of the program
+x264 - updated to rev 1804 vanilla (x32, x64)
+XviD - updated to 1.2.2 (26.11.2010) (http://jawormat.republika.pl/xvid.html)
+Filters and plugins updated with the last filter's pack from Tempter57
+ffmpeg - 29.11.2010
+
+23.11.2010
+========== rc8
+XviD4PSP5 - brand new version r194
+MediaInfo - updated to 0.7.37
+x264 - updated to rev 1790 vanilla (x32, x64)
+ffmpeg - 23.11.2010
+I put an old xvid_encraw.exe by the name xvid_encraw_old.exe in Program folder XviD4PSP5\apps\xvid_encraw\. If you encouner any errors while coding with XviD, try the old version, just rename it back and replace the new file.
+
+17.11.2010
+========== rc7
+MKVtoolnix v4.40.315 (15.11.2010)
+x264 updated to rev 1772 vanilla (both x32 and x64)
+some minor fixes
+ffmpeg - 17.11.2010
+
+
+11.11.2010
+========== rc6
+x264 x32 - updated to rev 1766 vanilla (x64 not yet available to download at x264.nl)
+ffmpeg - 11.11.2010
+
+09.11.2010
+========== rc5
+XviD4PSP5 - new version r191
+MKVToolnix v4.40.312
+FFMS2 - updated to unicode test build r354 from http://doom10.org/index.php?topic=25.msg4941#msg4941
+ffmpeg - 09.11.2010
+Additional XviD presets added to AVI Hardware profile
+
+02.11.2010
+========== rc4
+Added enlight translation for Installer changelog, added Installer changelog into XviD4PSP5 main directory
+ffmpeg - 01.11.2010
+QTGMC - updated to 2.51
+mvtools2 2.5.11
+MaskTools 2.0a45
+NNEDI3 0.9.2
+EEDI3 0.9.1
+NNEDI2 1.6
+TBilateral 0.9.11
+
+31.10.2010
+========== rc3
+Replaced avc2avi with old version (not avc2avimod) 01.11.2006. It's a workaround for mod16 (only mod 16 was allowed) error when using x264 in avi container
+ffmpeg - 31.10.2010
+
+30.10.2010
+========== rc2-fix1
+xvid_encraw.exe - used modified version from fcp 30.10.2010
+
+30.10.2010
+========== rc2
+XviD4PSP5 r187
+XviD - used patched 1.2.2 27.10.2010 from Jawor (http://jawormat.republika.pl/xvid.html). Thanks Tempter57 for link
+ffmpeg 30.10.2010
+
+28.10.2010
+========== rc1
+ffmpeg - 28.10.2010
+Deleted filter SAT LEM, not enough components for now
+x264 replaced with vanilla 1745. You could find patched builds here http://x264.fushizen.eu/
+
+26.10.2010
+========== test3
+I replaced cfourcc with old version
+Replaced FFMS2 with 2.14Vanilla
+Added filter SAT LEM from Tempter57
+dxwebsetup - 08.06.2010
+
+26.10.2010
+========== test2
+Used NSIS 2.46 instead of 2.47beta. No more cyrillic license problem
+Deleted FormatSettings.ini
+Deleted Themes.xaml
+Deleted XviD4PSP 64.exe
+Updated History.txt for MediaInfo
+Updated About filtering (by Tempter57).txt
+Deleted Manual.avs from SBC directory
+MP4Box rev 2125 (http://kurtnoise.free.fr/mp4tools/?M=A)
+I made a copy of QTGMC2.4r.avs with name QTGMC.avs for correct working of XviD4PSP5
+ffmpeg - 25.10.2010
+Used SEt's AviSynth 2.5.8 MT 12.07.2009
+VSFilter.dll 24.06.2009
+
+
+25.10.2010 Main changes after XviD4PSP ver 5.0.37.8 r132
+========== test1
+XviD4PSP5 r183
+Aften - 26.12.2009 (http://code.google.com/p/wavtoac3encoder/downloads/list)
+avc2avi - used avc2avimod 12.11.2006
+AVIMux GUI 1.17.8.3
+AvsP - replaced by AvsPmod 2.0.5
+bautodeint.exe - not used anymore, deleted
+cfourcc - 04.12.2007, working via cygwin1.dll
+DirectX_Update - 06.11.2009
+ffmpeg - 24.10.2010 (http://ffmpeg.arrozcru.org/autobuilds/)
+FFMS2 2.14MT
+lame 3.98.4 (Intel Compiler 11.1.054) (http://www.rarewares.org/mp3-lame-bundle.php)
+MKVtoolnix - 4.3.0.311, MKVExtractGUI2 2.2.1 added
+MP4Box - 30.09.2010
+neroAacEnc 1.5.4.0
+VirtualDubMod - 25.12.2007beta (http://www.videohelp.com/download/VirtualDubMod_1.5.10.3_b2550.zip)
+x264 - patched 1745 http://x264.fushizen.eu/
+avs4x264.exe 15.07.2010, vfw4x264.exe added
+MediaInfo 0.7.36
+Added last filters/plugins from Tempter57
+Additional XviD present from Tempter57
+Optimized GradFun2DBmod.avs
+Most bass plugins updated, added OptimFROG.dll
+AviSynth 2.5.8 MT from doom9 (08.01.2010)
+Added RawSource.dll
+Updated QTInput (http://forum.doom9.org/showthread.php?t=156777)
+libfftw3f-3.dll - 21.06.2010
+VSFilter.dll - 28.07.2008

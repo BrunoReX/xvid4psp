@@ -1,0 +1,5 @@
+video codec:
+x262
+
+video cli:
+--mpeg2 --bitrate 50000 --vbv-maxrate 80000 --profile main --level high --vbv-bufsize 9781 --dc 10 --altscan --preset veryslow --open-gop --bframes 2 --aq-mode 2 --colorprim smpte170m --colormatrix smpte170m --transfer smpte170m

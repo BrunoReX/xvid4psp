@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--qp 0 --no-mixed-refs --partitions none --subme 1 --me dia

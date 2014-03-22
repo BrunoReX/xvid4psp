@@ -1,0 +1,6 @@
+video codec:
+x264
+
+video cli:
+--pass 1 --bitrate 16000 --preset veryslow --sar 40:33 --tune film --extra: --vbv-maxrate 40000 --vbv-bufsize 30000 --level 4.1 --keyint 24 --slices 4 --pulldown 32 --fake-interlaced --colorprim "smpte170m" --transfer "smpte170m" --colormatrix "smpte170m" --bluray-compat --open-gop
+--pass 2 --bitrate 16000 --preset veryslow --sar 40:33 --tune film --extra: --vbv-maxrate 40000 --vbv-bufsize 30000 --level 4.1 --keyint 24 --slices 4 --pulldown 32 --fake-interlaced --colorprim "smpte170m" --transfer "smpte170m" --colormatrix "smpte170m" --bluray-compat --open-gop

@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AAD (Auto Anime Decomb) 使用手册</title>
+<style type="text/css">
+<!--
+body {
+	font-family: "华文中宋", "宋体-PUA", "新宋体", "宋体", Verdana, Arial, Helvetica, sans-serif;
+	background-color: #C8D4D8;
+	font-size: 12pt;
+	line-height: 18pt;
+	color: #000000;
+	text-align: justify;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+pre {
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #B9D7EC;
+	padding-left: 12px;
+	padding-top: 12px;
+	padding-right: 12px;
+	padding-bottom: 12px;
+	border: #006699;
+	border-style: solid;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+}
+a:link {
+	color: #006699;
+	text-decoration: none;
+}
+a:visited {
+	color: #006699;
+	text-decoration: none;
+}
+a:hover {
+	color: #FF6600;
+	text-decoration: none;
+}
+a:active {
+	color: #006699;
+	text-decoration: none;
+}
+.hlight {
+	color: #003399;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<font size="5"><b>AAD (Auto Anime Decomb) 使用手册</b></font><br>
+<p>作者: diseac ／ 版本: 0.1.5a (090707) ／ 使用环境: Avisynth 2.5.x, YV12/YUY2<br>
+  发布地址: <a href="http://www.nmm-hd.org/bbs/thread-667-1-1.html" target="_blank">http://www.nmm-hd.org/bbs/thread-667-1-1.html</a> (nmm论坛)</p>
+<hr>
+<strong>AAD简介</strong>
+<ul>
+  <li>AAD是专门为动画片设计的，IVTC及解除交错用Avisynth脚本。</li>
+  <li>在IVTC方面，AAD使用可选式4pass的处理模式，与原创的AADivtc脚本互补，支持全自动处理，同时支持手动编写TIVTC的ovr文件。干净漂亮的3rdpass+4thpass可使渐变场景的拉丝一扫而光，你无须再手动调整渐变部分的交错残留。AAD的3pass极限模式速度虽慢，但画面完全没有拉丝，对付极端的 Bad Edit 时尤为有效。</li>
+  <li>如果你在使用过程中发现BUG，或者对我有建议，请在<a href="http://www.nmm-hd.org/bbs/thread-667-1-1.html" target="_blank">这里</a>跟帖或联系我：<A href="mailto:17genius@163.com">17genius@163.com</A>
+  <li>感谢Avisynth的开发人员和dll插件的制作者们，感谢<a href="http://www.nmm-hd.org/bbs/" target="_blank">nmm论坛</a>的朋友们为我制作这个脚本带来的帮助和灵感！
+</ul>
+<hr>
+<strong>使用插件</strong>
+<ul>
+  <li><u>TIVTC</u>　<em><font size="-1">v1.0.5</font></em>　作者: tritical</li>
+  <li><u>a60224</u>　<em><font size="-1">040315</font></em>　作者: ちよクロ</li>
+  <li><u>TDeint</u>　<em><font size="-1">v1.1</font></em>　作者: tritical</li>
+  <li><u>nnedi2</u>　<em><font size="-1">v1.3</font></em>　作者: tritical</li>
+  <li><u>TMM</u>　<em><font size="-1">v1.0</font></em>　作者: tritical</li>
+  <li><u>Vinverse</u>　<em><font size="-1">dll version</font></em>　作者: tritical &amp; Didée</li>
+</ul>
+<hr>
+<strong>语法</strong>
+<ul>
+  <li>主函数：<br>
+    <pre><strong>AAD</strong> (int "<strong>mode</strong>", bool "<strong>tff</strong>", string "<strong>ovr</strong>", bool "<strong>debug</strong>", bool "<strong>ivtc2pass</strong>", bool "<strong>ivtc3pass</strong>", bool "<strong>finalpass</strong>", bool "<strong>ultimate</strong>")</pre>
+  </li>
+  <li>附加独立函数：<br>
+    <pre><strong>AADTrim</strong> (int "<strong>stf</strong>", int "<strong>edf</strong>", string "<strong>func</strong>", string "<strong>func2</strong>", clip "<strong>clip1</strong>", clip "<strong>clip2</strong>")</pre>
+	    <pre><strong>AUS720 </strong>(int "<strong>a</strong>", int "<strong>w</strong>", int "<strong>d</strong>", int "<strong>s</strong>")</pre>
+  </li>
+</ul>
+<hr>
+<strong>参数说明</strong><br>
+<br>
+<u>第一部分、主函数：AAD() 参数表</u>
+<ul>
+  <li><span class="hlight">mode</span> = 0／1／2 (整数，默认值: 1)<br>
+    AAD 的处理模式。<br />
+    <br>
+    0 - 输出tfm的日志文件，将在片源同目录下生成一个名为tfm_log.txt的文件。这个选项只做日志输出使用，请不要对全片独立使用mode=0选项。<br>
+    1 - 可选式4pass处理模式IVTC，在IVTC方面我推荐这个选项。 <br>
+    2 - 可选式3pass处理模式IVTC，使用原创脚本：AADivtc。<br>
+  </li>
+</ul>
+<p><span class="hlight">关</span>于AADivtc，理论上说它是我的原创算法。因为首先它是我自己想出来的，其次我没有见过别人这样操作过。但实际上也是借助了 IsCombedTIVTC() 和 tdecimate() 这两个外部插件所提供的函数才实现的，所以不能算是完全意义上的原创吧。<br />
+  <span class="hlight">A</span>ADivtc服务于AAD(mode=2)，虽然我创建了独立函数，但是请不要独立使用它。它的算法很简单，但如果运气好的话，它可以达到100%的正确匹配，而且不会出现jerk现象。但这只是最理想的情况，在实际操作中，它基本只能保持60%以上的正确率。<br />
+  <span class="hlight">在</span>avisynth里我没有办法使用更高级的算法，所以 AADivtc现在还很简单，但有时候它可能会更完美地解决一些顽固拉丝。<br />
+  <span class="hlight">当</span>设置mode=2时，将由AADivtc()执行1st pass，2nd pass将被强制关闭，ovr也不再生效，但 3rd pass 与 4th pass 仍然可以进行。<br />
+  <span class="hlight">请</span>注意，如果你这样设置：<u>AAD(mode=2,ivtc3pass=false,finalpass=false)</u>，这完全等同于AADivtc()裸奔，我极力不推荐你这样做。也许你观察mode=2处理出的影片时不会发现它有什么错误，但我建议你不要对整片使用mode=2选项。mode=2的设计旨在与mode=1互补，如果你使用mode=1时发现有某一小段令你不满意，你可以试试mode=2，如果你觉得它更好，你可以用该部分的帧替换你不满意的帧。<br />
+  <span class="hlight">内</span>置函数AADTrim可以轻松做到这点，下面一段脚本说明了如何简单地将mode=1处理出的第10-20帧、及30-40帧替换为mode=2所处理的。<br />
+</p>
+<pre>mode2 = last.AAD(mode=2)<br />AAD(mode=1).AADTrim(10,20,clip1=mode2).AADTrim(30,40,clip1=mode2)</pre>
+<br>
+<ul>
+  <li><span class="hlight">tff</span> = true／false (布尔型，默认值: true)<br>
+    true为奇数场先(tff)，false为偶数场先(bff)。<br>
+    ※注: 布尔型参数当设置为true(真)时表示打开，false(假)表示关闭，下同。<br>
+    <br>
+  </li>
+  <li><span class="hlight">debug</span> = true／false (布尔型，默认值: false)<br>
+    调试模式。开启后将在屏幕上显示tfm和AAD的处理信息，并且输出tfm的debug信息(可用DebugView软件查看)。<br>
+    请注意，如果你只是想要压片，不要打开这个选项，否则你压好的片子上会被打上字幕。<br>
+    <br>
+  </li>
+  <li><span class="hlight">finalpass</span> = true／false (布尔型，默认值: true)<br>
+    最终pass操作，杀光残留的交错，对渐变场景的交错残留尤为有效，同时不会破坏progressive帧。这项操作是全自动的，你无需再手动Trim(start,end)来清理渐变场景的交错。当ultimate=false时有效。但是，如果前面的步骤残留了实体交错，finalpass可能无法为你解决问题。此参数推荐开启。  </li>
+</ul>
+<ul>
+  <li><span class="hlight">ovr</span> = "x:\xx\xx.txt" (字符串，默认值: "noovr")<br>
+    指定tfm的ovr文件，当mode=1时有效。当ovr被指定后，tfm无论如何都会被放在 1st pass 的位置，即使ovr里面什么也不写。如果不指定ovr，则a60224会默认被放在 1st pass 的位置。你可以设置 ovr="noovr" 来暂时关闭ovr，以方便调试。当mode=2时，无论你是否指定了ovr，它都不会生效。 ovr的写法参见TIVTC的手册，nmm论坛的<a href="http://www.nmm-hd.org/bbs/thread-663-1-1.html" target="_blank">这篇帖子</a>(作者: dgwxx)同时会对你有所帮助。<br />
+    <br />
+  </li>
+  <li><span class="hlight">ivtc2pass</span> = true／false (布尔型，默认值: true)<br>
+    IVTC操作的 2nd pass。当 mode=1 时有效。推荐开启。<br />
+    <br />
+  </li>
+  <li><span class="hlight">ivtc3pass</span> = true／false (布尔型，默认值: true)<br>
+    IVTC操作的 3rd pass。当 mode=1/2 时有效。推荐开启。<br />
+    <br />
+  </li>
+  <li><span class="hlight">ultimate</span> = true／false (布尔型，默认值: false)<br>
+    IVTC的极限模式，场匹配后进行全帧无运动检测透明混合处理，当 ivtc3thpass=true 时有效，同时会取消finalpass。请注意，只有运动图象的交错部分在进行了透明混合处理后会出现重影现象，场匹配正确后是不会重影的。极限模式的优点是Deinterlace率可以达到100%，缺点是画面会产生一些模糊，而且速度非常慢，编码时会需要更长的时间。<br />
+  </li>
+</ul>
+<u>第二部分、附加独立函数: AADTrim()参数表</u><br />
+<ul>
+  <li><span class="hlight">stf / edf</span> (整数，默认值: 无)<br />
+    起始帧/结束帧。<br />
+    几乎完全等于Trim()的语法。但AADTrim(0,0)所表示的是第0帧，而不是从第0帧到最后一帧，这是AADTrim与Trim在数字上的唯一不同。因为你没有必要使用这个函数来为影片的全部帧应用操作函数。注意，AADTrim并不是真正的截断影片，而是将影片分段处理再连接到一起。stf / edf 是必选参数，必须填写。<br />
+    <br />
+  </li>
+  <li><span class="hlight">func / func2</span> (字符串，默认值: 无)<br />
+    自定义操作函数。<br />
+    func参数定义的操作函数将被应用到从stf到edf的部分；func2参数定义的操作函数将被应用到从stf到edf<span class="hlight">以外</span>的部分。你必须保证经过你自定义函数操作以后的帧率(fps)、帧分辨率(x&amp;y)、以及颜色空间与其他需要连接的部分相同，否则影片是无法串接的。自定义操作函数里面只能包括函数，而不能有其他东西，如func2=&quot;last.warpsharp()&quot;是不正确的写法。func与func2参数都是可选参数，可以不填写。<br />
+    <br />
+  </li>
+  <li><span class="hlight">clip1 / clip2</span> (影片剪辑，默认值: 无)<br />
+    影片剪辑，用于替换。<br />
+    由clip1参数引入的影片剪辑将替换从stf到edf的部分；<br />
+    由clip2参数引入的影片剪辑将替换从stf到edf<span class="hlight">以外</span>的部分。<br />
+    如果你指定了func参数，则clip1将替换从stf到edf的部分后，再由替换完的这部分来应用func参数所指定的函数；<br />
+    如果你指定了func2参数，则clip2将替换从stf到edf<span class="hlight">以外</span>的部分后，再由替换完的这部分来应用func2参数所指定的函数。<br />
+    clip1与clip2都是可选参数，可以不填写。</li>
+</ul>
+<u>第三部分、附加独立函数: AUS720()参数表</u><br />
+<ul>
+  <li><span class="hlight"> a / w / d / s </span> (整数，默认值: 0)<br>
+    Upsize前的切边行数。<br />
+  对应键盘的 a、w、d、s 方向，分别代表左、上、右、下的切边行数，和Resize滤镜的内部切边一样，这些数字是相当于在Upsize之前切掉的。<br />
+  例如 AUS720(8,0,8,0) 就可以相当于 LanczosResize(1280,720,8,0,-8,0) 。 
+  <br />
+    <br />
+  </li>
+</ul>
+<hr>
+<strong>AAD使用实例</strong>
+<ul>
+  <li>IVTC：<br>
+    <pre>AAD() </pre>
+  </li>
+  <li>输出tfm的日志文件：<br>
+    <pre>AAD(mode=0)</pre>
+  </li>
+  <li>使用tfm的ovr：<br>
+    <pre>AAD(ovr="x:\xx\xx.txt")</pre>
+  </li>
+  </li>
+  <li>调试模式：<br>
+    <pre>AAD(debug=true)</pre>
+  </li>
+  </li>
+  <li>使用AADTrim对影片的不同片段使用不同滤镜锐化：<br>
+    <pre>AADTrim(100,200,"warpsharp()","UnsharpMask()")</pre>
+  </li>
+  </li>
+  <li>AUS720的简单使用举例：<br>
+    <pre>AUS720(8,0,8,0)</pre>
+  </li>
+</ul>
+<hr>
+<p><strong>更新记录</strong><br /><br />
+  <u>2009-07-07 v0.1.5a</u></p>
+<ul>
+  <li>不再使用nnedi插件，改用nnedi2。</li>
+</ul>
+  <u>2009-01-27 v0.1.5</u></p>
+<ul>
+  <li>取消AAD主函数参数：top2px。现在的AAD不再支持屏蔽DVD画面上方的2象素黑边了。</li>
+  <li>优化了3rdpass的算法，ultimate参数不再是鸡肋，但仍然会拖慢编码速度。</li>
+  <li>随着科学发展的日益进步，现在的显示器分辨率越来越大，DVD的画面尺寸已经越来越无法满足观众的需求。因此我增加了新的独立使用函数：AUS720()，这个函数可以简单地实现DVD画面分辨率向上采样到1280x720。</li>
+</ul>
+  <u>2008-08-21 v0.1.4</u></p>
+<ul>
+  <li>增加新的非独立使用函数：AADivtc()。</li>
+  <li>增加第二种IVTC方式：mode=2。</li>
+  <li>修正了AAD错误提示信息的颜色空间问题。</li>
+  <li>为AADTrim增加了clip1参数。</li>
+</ul>
+<u>2008-08-21 v0.1.3</u>
+<ul>
+  <li>增加独立函数：AADTrim()</li>
+</ul>
+<u>2008-08-20 v0.1.2</u>
+<ul>
+  <li>经过再三权衡，我最终决定把a60024放在1st pass的位置。</li>
+  <li>现在你依然可以指定手动编写的ovr文件，当ovr存在时，tfm将自动与a60024调换处理顺序。只要你指定了ovr，即使ovr里什么都不写，tfm都将占据1st pass的位置。</li>
+  <li>增加新参数：ivtc2pass。现在你可以设置ivtc2pass=false来关闭2nd pass。</li>
+  <li>为了今后的更新方便，我决定不再使用mode=2选项来打开debug模式。</li>
+  <li>恢复了debug参数，当你指定debug=true时，你将在屏幕上看到AAD的信息，以及tfm的信息（在tfm被使用并且没有被Drop的情况下）</li>
+  <li>部分参数名称有所调整。</li>
+</ul>
+<u>2008-08-20 v0.1.1</u>
+<ul>
+  <li>移除参数：debug，增加mode=2选项。</li>
+</ul>
+<u>2008-08-19 v0.1.0</u>
+<ul>
+  <li>AAD诞生！</li>
+</ul>
+<font face="Verdana, Arial, Helvetica, sans-serif" size="-1"></font>
+</body>
+</html>

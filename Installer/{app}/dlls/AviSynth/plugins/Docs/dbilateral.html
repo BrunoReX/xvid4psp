@@ -1,0 +1,1035 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Music, programming, articles, source code and much more." />
+<title>Dbilateral&nbsp;&mdash;&nbsp;A high bitdepth bilateral smoother</title>
+<link rel="stylesheet" type="text/css" href="avisynth.css" />
+</head>
+
+<body>
+
+<h1>Dbilateral&nbsp;&mdash;&nbsp;A high bitdepth bilateral smoother</h1>
+
+<p>&nbsp;</p>
+<h2>Abstract</h2>
+
+<p>
+<b>Author: </b>The_Profileth<br />
+<b>Version: </b>4.32<br />
+<b>Download: </b><a href="http://www.mediafire.com/file/df323eaacoy7qhq" target="_blank">Dbilateral_4.32.7z</a><br />
+<b>Category: </b>Deep color tools<br />
+<b>Requirements: </b>
+</p>
+<ul>
+	<li>Planar colorspace,</li>
+	<li>Masktools 2 <b><span style="background:#FFFF00">alpha 48</span></b> or later,</li>
+	<li>RemoveGrain 1.0b &quot;beta&quot; or later,</li>
+	<li>MVTools2</li>
+	<li>Dithertools</li>               
+	<li>SMDegrain 1.95d or later</li>
+	<li>Removegrain</li>
+	<li>ReduceFlicker and ReduceFluctuations</li>
+	<li>RedAverage 1.4.3 or later</li>
+	<li>TTempsmooth</li>
+	<li>Medianblur</li>
+	<li>Variableblur</li>
+	<li>Flash3Kyuu 1.4.2</li>
+	<li>HQ3DN</li>
+	<li>MosquitoNR</li>
+	<li>AddGrainC 1.5.1 or later</li>
+</ul>
+
+
+
+<p>&nbsp;</p>
+<hr />
+<h2>Table of contents</h2>
+<ul>
+<li><a href="#Purpose">Purpose</a></li>
+<li><a href="#Bilateral Parameters">Bilateral Parameters</a></li>
+<li><a href="#Misc/Advanced Bilateral Parameters">Misc/Advanced Bilateral Parameters</a></li>
+<li><a href="#Dither Method Settings">Dither Method Settings</a></li>
+<li><a href="#SMDegrain Settings">SMDegrain Settings</a></li>
+<li><a href="#Dither Parameters">Dither Parameters</a></li>
+<li><a href="#Flash3Kyuu Parameters">Flash3Kyuu Parameters</a></li>
+<li><a href="#Limiter/Protection Settings">Limiter/Protection Settings</a></li>
+<li><a href="#Pre/Post filtering Parameters">Pre/Post filtering Parameters</a></li>
+<li><a href="#Normal Sharpening Settings">Normal Sharpening Settings</a></li>
+<li><a href="#MoComp Sharpening Settings">MoComp Sharpening Settings</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#changelog">Changelog</a></li>
+</ul>
+
+<p>&nbsp;</p>
+<h2><a id="Purpose"></a>I) Purpose</h2>
+
+	<p>To fully take advantage of the bilateral filter that is included in dither tools, as it is exceptionally fast
+and effective for a bilateral filter, but in order to be utilized successfully it needs some prepackaging.
+Another benefit of being part of the dither package is that it lends itself well to be used for dithering.
+Basically I want to pack as much usefulness into one filter as possible without being cumbersome and slow</p>
+
+<p>&nbsp;</p>
+<h2><a id="Bilateral Parameters"></a>II) Bilateral Parameters</h2>
+
+<h4></p>OFFICIAL DESCRIPTION OF FILTER</p></h4>
+</p>Performs a bilateral filtering on the input clip.</p>
+ <p>A bilateral filter is like a gaussian filter, but values of the filtering window are weighted with a gaussian curve,
+ depending of their proximity with the center pixel. The closer the values, the more weight has the value in the final sum.
+ Bilateral filters are very efficient to remove noise on flat areas and smooth gradients without being disturbed by
+ surrounding areas of different colors or high contrast lines. The result of a bilateral filtering is indeed cartoonish and
+ waxy, therefore it does a very good job at gradient smoothing, without producing halos like the box filter.
+ Actually, this implementation is an approximation of a bilateral filter, like many other image processing tools do.
+ The spatial weighting is not a gaussian curve but a box, and the value weighting is a trapezoid.
+ Cascading several function calls leads to a better approximation of the gaussian shape.</p>
+
+ <p><code>ref</code>: <var>clip</var><br /></p>
+<p>When computing the value weighting, pixels of this clip are taken for reference.</p>
+<p>When cascading several calls to the function, set the original clip as reference
+to avoid the result to drift to something superflat.
+Essentially the reference clip is used to calculate the pixel values to see if they are over the threshold or not 
+essentially changing how you filter it, kinda like feeding in a modified search clip for mdegrain and such.</p>
+<p><code>radius</code>: <var>[int: 2, 3, 4, 5, 6, 7, 8, 9,....16,....64, "round(width/80)"]</var><br /></p>
+Radius sets the size of the averaged square. Its width is radius*2-1. Range: 2–64.<br />
+Essentially this the sample size for the filter, bigger is better for HD, smaller for normal<br />
+The radius is automatically calculated by dividing the frames width by 80 and rounding to the
+nearest integer, this method allows for it to auto adapt the window size for HD or SD content and filter properly them<br />
+<p>The reason you need a larger radius for HD stuff is because of this
+As this is a spacial filter that weighs and compares pixels that are nearby in order to make decisions
+when using HD content you often have more pixels that are similar next to each other, this tends to lead to be less
+selective/accurate filtration with default settings as areas become too similar or noise is too big or in transition
+areas only part of the transition between edge and flat area is looked at, all of these things affect the denoising.
+Hence you need a larger window to reduce the pixel redundancy of HD content.</p>
+<p><code>thr </code>: <var>[float: 0.1,...,"3",...,255]</var><br /></p>
+Pixels whose difference of value with the center pixel is over thr will be discarded.<br />
+Essentially this controls how much denoising is going to be done<br />
+The parameter ranges on an 8 bit scale. Must be strictly positive.<br />
+<p><code>flat </code>: <var> [float: 0, 0.1,...,"1"]</var><br /></p>
+Flat determines the shape of the trapezoid weighting of the value differences. <br />
+Close to 0, the shape is triangular.<br />
+Close to 1, the shape is a rectangle, like a box filter with a hard threshold.<br />
+Range: 0.0–1.0<br />
+Essentially this how adaptive the thresholding is.<br />
+
+<p><code>wmin</code>: <var>[float: 0.1,...,"1",...,255?]</var><br /></p>
+The partial or missing pixels are completed with the center pixel to match the wmin fraction 
+of the filter window at full weight. <br />
+At 0.0, it acts like a classic bilateral filter. <br />
+Raising the total weight helps preventing the filter to completely flatten the small areas of close colors.<br />
+Range: 0.0–1.0. <br />
+Values over 1 are tolerated, they are equivalent to keep wmin to 1 while reducing the overall strength of the filter.<br />
+<p>&nbsp;</p>
+<h2><a id="Misc/Advanced Bilateral Parameters"></a>III) Misc/Advanced Bilateral Parameters</h2>
+<p><code> Y U V</code>: <var> [int: 1, 2 , "3"]</var><br /></p>
+ This controls whether or not each plane is filtered by the bilateral denoiser<br />
+ 1 does not process<br />
+ 2 simply copies input plane<br />
+ 3 processes plane<br />
+
+ <p><code>subspl </code>: <var> [float: "0"]</var><br /></p>
+ Subsampling rate.<br />
+ When this parameter is activated, only a few pixels randomly chosen from the search window are taken into account. <br />
+ This leads to a significant speed improvment, with only a minor quality loss.<br />
+ A value equal to twice the radius looks like a good compromise. Normal subsampling values should be greater
+ or equal to 4. Below, subsampling is disabled.<br />
+ Set subspl to 0 to let the filter adjust the subsampling rate automatically, depending on the radius.<br />
+
+ <p><code>multi </code>: <var> [bool: true, "false"]</var><br /></p>
+ A multi-pass approach to bilateral filtering, so far I am very happy with how this has turned out<br />
+ A Tappering pattern is used, high strength low radius all the way up to high radius low strength<br />
+ 	<code>dither_bilateral16(radius=2,thr=8,wmin=1,flat=0,y=y,u=u,v=v)<br />
+ 	dither_bilateral16(radius=4,thr=6,wmin=1,flat=0,y=y,u=u,v=v,ref=ditherup)<br />
+ 	dither_bilateral16(radius=8,thr=4,wmin=1,flat=0,y=y,u=u,v=v,ref=ditherup)<br />
+ 	dither_bilateral16(radius=16,thr=2,wmin=1,flat=0,y=y,u=u,v=v,ref=ditherup)<br />
+ 	dither_bilateral16(radius=32,thr=1,wmin=1,flat=0,y=y,u=u,v=v)<br /></code>
+ Very good at debanding and removing noise while keeping picture structure intact.<br />
+ Only problem is with smaller details and lines. Which is why I invented vortex (see below)<br />
+
+ <p><code>vortex </code>: <var> [int: "0", 1 , 2 , 3]</var><br /></p>
+ Visually Objective Recovery Techniques Enhance eXperience <br />
+ Cool name right?, these methods (can) help to maintain the effectiveness of
+ using multi while maintaining more detail.<br /> They can be very good at bringing
+ back slight details while avoiding noise, the only real downside is that it
+ increases processing time<br />
+ Either way they essentially works like this<br />
+
+ Vortex=1 does this<br />
+	<pre>Pass 1 filters source
+	Reduce all pixel changes by VS amount
+	Pass 2 filters reduced Pass 1
+	Reduce all pixel changes by VS amount
+	Pass 3 filters reduced Pass 2
+	Reduce all pixel changes by VS amount
+	Pass 4 filters reduced Pass 3
+	Reduce all pixel changes by VS amount
+	Pass 5 filters reduced Pass 4
+	Reduce all pixel changes by VS amount
+	Pass 6 filters reduced Pass 5
+	Reduce all pixel changes by VS amount</pre>
+
+ Vortex=2 uses dither_limit_dif16<br />
+ compare a filtered clip with its original version, and keeps the filtered pixels only if the difference
+ between the filtered pixel and the reference pixel is below the given threshold<br />
+	<pre>Pass 1 filters source
+	changes below threshold VT pass through, all else are gradually attenuated, up to VT * VS
+	Pass 2 filters reduced Pass 1
+	changes below threshold VT pass through, all else are gradually attenuated, up to VT * VS
+	Pass 3 filters reduced Pass 2
+	changes below threshold VT pass through, all else are gradually attenuated, up to VT * VS
+	Pass 4 filters reduced Pass 3
+	changes below threshold VT pass through, all else are gradually attenuated, up to VT * VS
+	Pass 5 filters reduced Pass 4
+	changes below threshold VT pass through, all else are gradually attenuated, up to VT * VS
+	Pass 6 filters reduced Pass 5
+	changes below threshold VT pass through, all else are gradually attenuated, up to VT * VS</pre>
+
+ Vortex=3 uses SootheS2 which is a *slight* mod of SootheSS from SeeSaw<br />
+ To find an explanation of SootheS2 look under the Limiter/Protection Settings section<br />
+ This one is a "bit" more complicated<br />
+	<pre>Pass 1 filters source
+	Temporally soothe the input and pass 1, keep min amount VT  of pass 1
+	Pass 2 filters soothed Pass 1
+	Temporally soothe pass 1 and pass 2, keep min amount VT of pass 2
+	Pass 3 filters soothed Pass 2
+	Temporally soothe pass 2 and pass 3, keep min amount VT of pass 3
+	Pass 4 filters soothed Pass 3
+	Temporally soothe pass 3 and pass 4, keep min amount VT of pass 4
+	Pass 5 filters soothed Pass 4
+	Temporally soothe pass 4 and pass 5, keep min amount VT of pass 5
+	Pass 6 filters soothed Pass 5
+	Temporally soothe pass 5 and pass 6, keep min amount VT of pass 6</pre>
+
+<b>For each vortex method the parameters VS and VT do different things</b><br />
+
+  <p><code>VS </code>: <var> [int: 0 , 1, 2, 3, 4,...255]</var><br /></p>
+ <p>For Vortex=1 [int: 1, 2, 3, "4",...255]<p />
+ This controls how much of the original input is maintained after each pass during multi<br />
+ A value of 1 reduces all changes to 1 pixel difference<br />
+ A value of 2 reduces all changes to 2 pixel difference<br />
+ A value of 4 reduces all changes to 4 pixel difference<br />
+
+<p> For Vortex=2 [float: <=1, 2, 3, "4",...10]<p />
+ This controls the elasticity of the filter<br />
+ IE this is the soft threshold<br />
+ Higher values allow more general change<br />
+
+<p> For Vortex=3 [int: "0", 1, 2, 3, 4,...255]<p />
+ VS enables spatial soothing which is not recommended as it is pretty much unneeded<br />
+ This controls the amount of the minimum percent of the original that is kept when spatially soothing<br />
+ So lower values allow for more 'pure' soothing and higher values keep more of original by default<br />
+
+ <p><code>VT </code>: <var> [int: 1, 2, 3, "4",...255]</var><br /></p>
+ <p>For Vortex=1 [null]<p />
+ This is not used<br />
+
+ <p>For Vortex=2 [float: <0,0.25,0.5,0.75,"1",1.25,1.5,1.75, 2,...>255]<p />
+ This controls the hard threshold, higher values pass through more<br />
+ without graduating them, but also affects the soft threshold by making it more lenient<br />
+
+ <p>For Vortex=3 [int: -100 ,-75 ,-50 ,-25 ,0, "25", 50, 75, 100]<p />
+ This controls the amount of the minimum percent of the original that is kept when temporally soothing<br />
+ So lower values allow for more 'pure' soothing and higher values keep more of original by default<br />
+ Negative values call the temporal soothing twice<br />
+ 
+<p>&nbsp;</p>
+<h2><a id="Dither Method Settings"></a>IV) Dither Method Settings</h2>
+<p><h4>Note</p></h4>
+<p>While only using the bilateral smoother aspect is extremely fast and still relatively effective at denoising<br />
+the additional mocomp denoising is very useful and has been tuned to be relatively fast plus<br />
+If SMD is set to false and CDUP is not defined, dithering may not be as effective<p />
+Ok so two very important parameters are<br />
+	DitherMethod (the method of dithering to 16bit)<br />
+ 	and<br />
+	DitherDMethod (the method of dithering back to 8bit)<br />
+So here are the following settings for both of these parameters<br />
+<p><h5>Note All Flash3Kyuu parameters are in the Flash3Kyuu parameter section above the dither section </p></h5>
+ <p><code>DitherMethod</code>: <var> [int: -5, -4, -3, -2, -1, "0", 1, 2, 3, 4]</var><br /></p>
+	-5=CDUP (Custom Ditherup), with Flask3KyuuDeband (AKA F3KDB) processing in 16bit and SMD filtering it (SLOW and really why????)<br />
+	-4=CDUP (Custom Ditherup), with SMD filtering and Flash3KyuuDeband processing (SLOW and really why?)<br />
+	-3=CDUP (Custom Ditherup), with Flash3Kyuu processing<br />
+	-2=CDUP (Custom Ditherup), with SMD filtering<br />
+	-1=CDUP (Custom Ditherup), CDUP no extra ditherup PP<br />
+	0=convert16 (lazy but very fast)<br />
+	1=SMD<br />
+	2=Flash3KyuuDeband<br />
+	3=SMD outputs 16bit Flask3KyuuDeband processes it, leaves in 16<br />
+	4=Flash3Kyuu outputs 16bit and SMD filters it, leaves in 16<br />
+
+
+ <p><code>DitherDMethod </code>: <var>[int: -1, "0", 1, 2]</var><br /></p>
+	-1=no dithering outputs 16bit<br />
+	0=ditherpost outputs 8bit<br />
+	1=Flash3KyuuDeband processes and outputs 8bit requires dither= 0 or 6<br />
+	2=ditherpost ouputs 8bit and Flash3KyuuDeband debands further<br />
+
+	<p>CDUP=DitherMethod [int: -5, -4, -3, -2, -1]<br /></p>
+
+ Custom Dither Up, if you picked a mode from -5~-1 then you turn on CDUP<br />
+ If CDUP is set to true then dbilateral4 will expect to receive a 16bit clip<br />
+ The 16bit clip is then used for the bilateral smoothing and other parts<br />
+ Any filter that can output a 16-bit clip can be used, for example dfttest(lsb=true) would work<br />
+
+ <p>SMD=DitherMethod [int: -5, -4, -2, 1, 3, 4]<br /></p>
+ If you picked a DitherMethod -5,-4,-2,1,3,4<br />
+ they utilizes SMDegrain to output/process a 16bit clip with motion compensated spatiotemporally denoising<br />
+ The parameters for SMD are in the section below<br />
+<p>&nbsp;</p>
+<h2><a id="SMDegrain Settings"></a>V) SMDegrain Settings</h2>
+ <p><code>tr</code>: <var> [int: 1, "2", 3, 4, 5, 6, ...]</var><br /></p>
+ Select between MDegrain 1, 2, 3, 4, 5 or 6. Higher is (can be) better, but also much slower.<br />
+ This can be considered the strength of the denoising. tr 4, 5 and 6 (limit is tr=128 for non-interlaced) require Dither's MVTools2 mod.
+
+  <p><code>thSAD </code>: <var>[int: "400"]</var><br /></p>
+ "Sum of Absolute Differences" threshold.<br />
+ This is the spatial difference threshold where the motion search will consider whether to denoise.<br />
+ This spatial difference will be compared in blocks (blksize). If your noise is not getting into consideration for the denoising try raising<br />
+ this value, or reduce its SAD with previous prefiltering.<br />You can alternatively raise the block size, which will likely even blocks SAD.
+ Low values can result in staggered/blotchy denoising, large values can result in ghosting and artifacts.<br />
+
+  <p><code>RefineMotion </code>: <var>[bool: "true", false]</var><br /></p>
+ Motion Vector refinement using MRecalculate, default=true<br />
+ Refines and recalculates motion data of previously estimated (by MAnalyse) motion vectors. <br />
+ Turn it on for better motion vectors, specially when dealing with ghosting issues, lineart fading and whatnot.<br />
+ It won't enhance much if you use a prefilter (in case you use it) so strong that blurs too much or kills all the details you are aiming to protect.<br />
+
+  <p><code>plane </code>: <var>[int: 0, 1, 2, 3, "4"]</var><br /></p>
+ Select the planes you wish to process:<br />
+ 0 - luma only, 1 - chroma U, 2 - chroma V, 3 - both chromas, 4 - all.<br />
+ Keep in mind that plane=4 (2 and 3 as well) can sometimes create chroma smearing. In this case I recommend denoising chroma in the spatial domain.<br />
+
+  <p><code>pel </code>: <var>[int: 1, "2", 4]</var><br /></p>
+ Accuracy of the motion estimation. 1 means a precision to the pixel. (Default 1 for HD material)<br />
+ 2 means a precision to half a pixel. 4 means a precision to quarter a pixel, produced by <br />
+ spatial interpolation (more accurate but slower and not always better due to big level scale step)<br />
+
+  <p><code>blksize </code>: <var>[int: 4, "8", 16]</var><br /></p>
+ Size of a block (horizontal). (Default 16 for HD material)<br />
+ Larger blocks are less sensitive to noise, are faster, but also less accurate.<br />
+
+  <p><code>overlap </code>: <var>[int: "blksize/2"]</var><br /></p>
+ Must be *even* and *less* than block size. Common overlap values: blksize/4 or blksize/2.<br />
+ The greater overlap, the more blocks number, and the lesser the processing speed.<br />
+
+  <p><code>Search </code>: <var>[int: 0, 1, 2, 3, "4", 5]</var><br /></p>
+ 0= 'OneTimeSearch', 1 = 'NStepSearch', 2= Logarithmic, 3= Exhaustive, 4= Hexagon, 5= Uneven Multi Hexagon<br />
+ See details at MVTools2 documentation.<br />
+ http://avisynth.org.ru/MVTools/MVTools2.html<br />
+
+  <p><code>Truemotion </code>: <var>[bool: true, "false"]</var><br /></p>
+ Truemotion is a preset of some parameters values.<br />
+ It allows easy to switch default values of all "true motion" parameters at once.<br />
+ Set it 'true' for true motion search (high vector coherence), set it 'false' to search motion vectors with best SAD.<br />
+ When set to false, it often helps to better protect low frequency details (shading) when in motion (i.e. walls, grounds, clouds texture, motion blur, etc).<br /> Set it to 'true' for smoother (more temporal coherence) high frequency details or lineart.<br />
+
+  <p><code>Chroma </code>: <var>[bool: "true", false]</var><br /></p>
+ Takes chroma planes into consideration for calculating the motion vectors.<br />
+ Turn it off for more speed with little cost in quality, or when your chroma is not reliable enough for motion estimation.<br />
+ * Watch out if you turn this off when processing chroma planes (aka luma vectors for chroma denoising), it has shown problems in some recent tests.<br />
+ (http://forum.doom9.org/showthread.php?p=1551305post1551305)<br />
+<p>&nbsp;</p>
+<h2><a id="Dither Parameters"></a>VI) Dither Parameters</h2>
+<p><h4>Note<br />
+This section is regarding how to dither down IE 16 to 8
+Also the only parameter that affects F3KDB is dither as detailed below</p></h4>
+ <p><code>dither </code>: <var>[int: 1, 2, 3, 4, 5, "6", 7, 8]</var><br /></p>
+ If using DitherDMethod=1 dither is the dithering method used by Flask3Kyuu<br />
+ You only get 2 options of dithering with Flask3Kyuu<br />
+ 0: 8-bit ordered dither<br />
+ 6: Serpentine Floyd-Steinberg<br />
+
+ If using DitherDmethod=0 or 2 then <br />
+ Dither is the method used for dithering:<br />
+ -1: no dither, round to the closest value<br />
+ 0: 8-bit ordered dither + noise.<br />
+ 1: 1-bit dither<br />
+ 2: 2-bit dither, light<br />
+ 3: 2-bit dither, medium<br />
+ 4: 2-bit dither, strong<br />
+ 5: 2-bit dither, stronger<br />
+ 6: Serpentine Floyd-Steinberg error diffusion + noise. Well-balanced algorithm.<br />
+ 7: Stucki error diffusion + noise. Looks sharp and preserve light edges and details well.<br />
+ 8: Atkinson error diffusion + noise. Generates distinct patterns but keeps clean the flat areas.<br />
+ 
+
+ <p><code>ampo </code>: <var>[float: "1", 2, 3, 4, ... 255]</var><br /></p>
+ ampo is the ordered dither peak-to-peak amplitude, on an 8 bit scale. = 0. <br />
+ On error diffusion algorithms, it increases the collected error amount, 
+ helping to extend the range of the dithering while preserving its natural pattern
+ (especially Atkinson's).<br /> This gives a better looking result than just adding noise.
+
+ <p><code>ampn </code>: <var>[float: "0", 1, 2, 3, 4]</var><br /></p>
+ ampn is the noise peak-to-peak amplitude, on an 8 bit scale. = 0. Currently, the maximum value is 4.<br />
+
+ <p><code>pat </code>: <var>[int: "0", 1, 2]</var><br /></p>
+ pat is the dither pattern type for 2-bit dither:<br />
+ 0: regular<br />
+ 1: alternate V<br />
+ 2: alternate H<br />
+ 
+ <p><code>dyn </code>: <var>[bool: true, "false"]</var><br /></p>
+ dyn indicates if the ordered dither pattern is dynamic.<br /> If so, the pattern is rotated each frame.<br />
+
+ <p><code>prot </code>: <var>[bool: true, "false"]</var><br /></p>
+ prot enables the protection against MSB-LSB inconsistencies, which can occur when the main picture(MSB only) is processed.<br />
+
+ <p><code>dithermask </code>: <var>[clip: "null"]</var><br /></p>
+ mask if defined, dithering is applied where the pixel values are lower than 128.<br />
+ Must be defined for all the planes.<br /> You can build the mask with DitherBuildMask.<br />
+
+ <p><code>staticnoise </code>: <var>[bool: true, "false"]</var><br /></p>
+ staticnoise if set to true, the noise generated with ampn is static.<br />
+<p>&nbsp;</p>
+<h2><a id="Dither Parameters"></a>VII) Dither Parameters</h2>
+<p><h4>Note<br />
+The purpose of incorporating F3KDB into this filter is to allow for better dithering
+and more effective debanding.<br /> F3KDB is a very fast and very effective high bit depth debander
+and often can be used to achieve a more visually appealing dither effect as well as do other things</h4></p>
+If you picked DitherMethod -5,-4,-1,2,3,4<br />
+Then Flash3KyuuDeband will be used to output 16bit and/or deband <br />
+If you picked DitherDMethod 1 Flash3KyuuDeband will be used to dither from 16 to 8<br />
+If you picked DitherDMethod 3 then ditherpost will be used to go from 16bit to 8bit<br />
+and then Flash3KyuuDeband will be called to deband the clip<br />
+Here are the appropriate settings for it<br />
+ <p><code>Range </code>: <var>[int: "15" 0, 1, 2, 3, 4, ... 255?]</var><br /></p>
+ Banding detection range<br />
+ 
+ <p><code>YThresh CbThresh CrThresh </code>: <var>[int: "64" 0, 1, 2, 3, 4, ... 255?]</var><br /></p>
+ Banding detection threshold. If difference between current pixel and 
+ reference pixel is less than threshold, it will be considered as banded.<br />
+ If set to 0, the corresponding plane will be untouched regardless of dither settings.<br />
+	
+ <p><code>DitherY DitherC </code>: <var>[int: "64" 0, 1, 2, 3, 4, ... 255?]</var><br /></p>
+ Valid only when sample_mode is 1 or 2. Specifies dither strength.<br />
+	
+ <p><code>Sample_mode </code>: <var>[int: 1, "2"]</var><br /></p>
+ Valid modes are:<br />
+ 1: Take 2 pixels as reference pixel. Reference pixels are in the same 
+   column of current pixel. Dither after processing.<br />
+ 2: Take 4 pixels as reference pixel. Reference pixels are in the square 
+   around current pixel. Dither after processing.<br />
+	
+ <p><code>Blur_first </code>: <var>[bool: "true", false]</var><br /></p>
+ true: Current pixel is compared with average value of all pixels. <br />
+ false: Current pixel is compared with all pixels. The pixel is considered as
+       banded pixel only if all differences are less than threshold.<br />
+	   
+<p>&nbsp;</p>
+<h2><a id="Limiter/Protection Settings"></a>VIII) Limiter/Protection Settings</h2>  
+<p><code>fix </code>: <var>[bool: true, "false"]</var><br /></p>
+ Fix merges the 16-bit bilaterally filtered clip with the original 16-bit clip<br />
+ This process helps to preserve edges and details better but is also a very effective way of solving
+ a lot of the issues (aliasing, edge disassociation and splintering) that high powered bilateral filtering causes.<br />
+ A reason that you may want to turn this off is because it can interfere with the dithering process.<br />
+ You may want to turn this off if you want to try and harness the full force of the filtering
+ via darkprotection and masking or maybe some external method, regardless it is here for those that want it.<br />
+
+ <p><code>Recover </code>: <var>[float: 0.01,...,"0.6",...,0.99]</var><br /></p>
+ This determines how much of the filtered clip is kept when using fix <br />
+ Range is between 0<>1<br />
+ A value of 0.1 will give you pretty much only chroma filtered<br />
+ A value of 0.5 will give in similar results to averaging the original with the filtered<br />
+ A value of 0.9 is nearly full filtering <br />
+
+ <p><code>lmode </code>: <var>[int: "0", 1, 2, 3, 4]</var><br /></p>
+ <p>limiter mode enables one of several limiting methods at any value other than 0, default=0</p>
+
+ At 1 a system of pixel weighting is applied<br />
+ I "borrowed" the system from Didée's SPresso function because it works quiet well<br />
+ There are 2 additional settings for this mode, limit and bias<br />
+ 
+ <p><code>Limit </code>: <var>[float: 1, 2, 3, "4", 5, 6, 7, 8]</var><br /></p>
+ Limit tells the maximum change to do to any pixel<br />
+ Limit is like a hard threshold, nothing can go over it<br />
+
+ <p><code>Bias </code>: <var>[float: 1,....,"50",...,99]</var><br /></p>
+ Bias is aggressiveness, low settings provide better protection, higher settings allow more denoising<br />
+ bias essentially adds a bit of elasticity to the threshold for change<br />
+ values from 25-80 work well<br />
+ 
+ At 2 a modified version of SootheS2 is applied<br />
+ Here is Didée's explanation of the process<br />
+ <pre>"The introduction of jitter on the temporal axis is a general problem of sharpening operations
+ since sharpening (usually) considers spatial aspects only.
+ Therefore, Soothe() does a very simple job: get the difference between [source] and [sharpened source],
+ apply a TemporalSoften on this difference BUT allow only changes towards 128 ("neutral"), and then apply
+ this temporally calmed difference back to the original clip. Effectively, this will reduce the overall effect
+ of sharpening - less in static areas, and more in moving areas."</pre>
+ But instead of sharpening, we are denoising so it will smooth less in static areas IE backgrounds and<br />
+ denoise more in moving areas which typically have less detail and more noise. <br />
+ there are 2 parameters for it<br />
+
+ <p><code>SLimit </code>: <var>[int: -100, -50, -25, "0", 25, 50, 100]</var><br /></p>
+ Limit tells the maximum change to do to any pixel<br />
+ Limit is like a hard threshold, nothing can go over it<br />
+
+ <p><code>TLimit </code>: <var>[int: -100, -50, -25, 0, "25", 50, 100]</var><br /></p>
+ Limit tells the maximum change to do to any pixel<br />
+ Limit is like a hard threshold, nothing can go over it<br />
+
+ <p><h4>Note</p></h4> lmodes 3-4 are experimental and more of a situational fix than a recommended one<br />
+ Lmode=3 a mask is generate via mt_logic<br />
+ Lmode=4 a mask is generate via several fancy mt_logic expressions<br />
+
+
+ <p><code>darkprotect </code>: <var>[bool: true, "false"]</var><br /></p>
+ A nonlinear curve based limitation system<br />
+ Essentially this helps to reduce dark areas getting smudged, but actually works splendidly in general.
+ This not only helps to protect dark areas, but essentially any detailed areas.<br />
+ The only drawback is that if not tweaked correctly, it can let too much noise in.<br />
+
+ <p><code>nlthresh </code>: <var>[float: 1....,"5000",....1000000]</var><br /></p>
+ nonlinear curve threshold<br />
+ This determines the threshold of the scale.<br />
+ Higher values increase protection but can let more noise get through.<br />
+ For general use 1000 will provide good protection on dark areas and will not let more noise in.<br />
+ For better protection values around 4000-8000 help to protect dark areas and details in general.<br />
+ For max protection values around or above 10000 typically work great at protecting dark areas and most details.<br />
+
+ <p><code>nlscale </code>: <var>[float: "3.1"]</var><br /></p>
+ nonlinear curve scale<br />
+ This determines the curvature of the scale.<br />
+ Raising the value causes it to be more lenient but can be useful for adapting it to the source.<br />
+ Sometimes the only way to get the most protection while maintaining the most details is to modify this.<br />
+<p><h4>NOTE
+ In order to better understand the interplay between the nlscale and the nlthresh let me explain the parameters<br />
+ Changes made to nlscale should be done in 0.1's or 0.05's or 0.01's as this part is highly sensitive to change<br />
+ depending on your nlscale the threshold's level of protection changes exponentially</h4>
+ To put it into simple mathematical terms<br />
+ A nlscale of 3.1 with a nlthresh of 10000 could be called a protection level of 10000^(1/3.1) ~ 19.5<br />
+ but if the nlscale was 3.2 with a nlthresh of 10000 you would get 10000^(1/3.2) ~17.78<br />
+ In order to compensate you would need to change the nlthresh to about 14000 to get 14000^(1/3.2) ~ 19.75<br />
+ The difference between the nlscale 3.1, nlthresh 10000 and the nlscale 3.2 ,nlthresh 14000 is that the results<br />
+ are more polarized. This causes areas that had less protection originally to now receive even less this time <br />
+ and areas that had more protection before, will receive even more this time.<br />
+ This may sound counter intuitive,but the areas that received less before were probably bright and less detailed.<br />
+ Where as the areas that got more protection before were probably dark areas with more detail.<br />
+ Thus we protect detailed areas more and allow for more denoising on noisy areas.</p>
+
+ <p>&nbsp;</p>
+<h2><a id="Pre/Post filtering Parameters"></a>IX) Pre/Post filtering Parameters</h2>  
+	  <p><code>Dampen </code>: <var>[int: "-1", 0, 1, 2]</var><br /></p>
+ dampen noise before and/or after filtering
+ This adds a pass of a noise dampener helping to maximize compression and reduce noise caused by the pre/post sharpen<br />
+ Helps a lot with compression and has no big downside so on by default<br />
+ A value of 0 turns it off<br />
+ A value of -1 turns on only prefiltering<br />
+ A value of 1 turns on only postfiltering<br />
+ A value of 2 turns on both pre and post filtering<br />
+
+ <p><code>DPower </code>: <var>[int: 0, 1, 2, 3, 4, "5", 6]</var><br /></p>
+ Dampening strength using a number of different methods (luma only)<br />
+ For reference a analysis of each mode will be given a score on<br />
+			<p>Strength: 1-10</p>
+			<p>Speed: In frames per second for ONLY that filter being used</p>
+			<p>Usage: The recommended usage or situation to use on ect...</p>
+
+<pre>A value of -1 uses a temporally soothed regulated median IE the pixels are only changed if they are under a certain threshold 
+ 	Strength: 6
+	Speed: ~60fps
+	Usage: 
+		 Pretty decent denoising and degraining and is good with detail won't remove really high contrast noise or grain</pre>
+
+ <pre>A value of 0 uses MosquitoNR a fancy new denoiser I found that is both fast and effective
+ 	Strength: 2-10
+	Speed: ~95fps
+	Usage:
+		 Very adapatable, in general is good at knocking out high frequency noise
+		 Actually worth giving parameters for this so here they are
+
+ <code>MStr </code>: <var>[int: 0, 4, 8, 12, "16", 20, 24, 28, 32]</var>
+Sets the strength of smoothing.
+The larger the number, the stronger the effect of noise reduction but also the stronger the side effects are at the same time
+So, please set the parameters with care.
+
+<code>MRest </code>: <var>[int: 0, 16, 32, 64,...."128"]</var>
+Sets how much you want to restore the low-frequency components of smoothing before.
+When set to 128, when synthesizing the low frequency component and high frequency component, low-frequency smoothing before
+Use only the component. When set to 0, the low frequency component of the smoothing is not used before,
+Will have the same effect as a stand-alone for use in the smoothing filter.
+
+ <code>MRad </code>: <var>[int: "1", 2]</var>
+ Controls the size of the window for filtering
+ Best to keep it at 1 as 2 can cause artifacts sometimes</pre>
+
+ <pre>A value of 1 use reducefluctuations with repair
+ 	Strength:6
+	Speed:~112fps
+	Usage:
+		 Good in general, at both degraining and denoising, recommended</pre>
+
+ <pre>A value of 2 uses a temporally soothed median courtesy of removegrain(4,0,0)
+ 	Strength: 7
+	Speed:~70fps
+	Usage: 
+		 Best used for degraining</pre>
+
+<pre>A value of 3 uses hqdn3d with low settings and repair
+	Strength:8
+	Speed:~58fps
+	Usage: 
+		 Good at denoising and degraining, slightly stronger than Dpower 1 and 2 
+		 and often gives a different look, typically more smooth looking mainly neutralizes grain
+		 rather than removing it completely</pre>
+
+ <pre>A value of 4 uses ttempsmooth and limits the result with a mask made with mt_logic
+	Strength:9
+	Speed:~15fps
+	Usage: 
+		 Really good at denoising and degraining, typically gives the highest quality result
+		 Often helps to give a nice and stable result too, almost always worth the extra time
+		 for the increase in quality. This also typically produces a more smooth looking clip 
+		 and mainly neutralizes grain rather than removing it completely</pre>
+
+<pre>A value of 5 uses a smoothgrad call twice while still in 16bit
+	Strength:9
+	Speed:~70fps
+	Usage: 
+		 Helps mitigate noise and grain while also helping with dithering 
+		 The only real problem this mode has is that it can sometimes hurt small details
+		 Or mess up backgrounds</pre>
+
+ <pre>A value of 6 uses weighted pyramid smoothgrad method while still in 16bit
+	Strength:10
+	Speed:~40fps
+	Usage: 
+		 A stronger and more accurate version of dpower 5, very strong
+		 This actually does have a problem with details that are not clearly defined
+		 It can also mess up backgrounds but in certain situations gives a very good look</pre>
+ <p>&nbsp;</p>
+<h2><a id="Normal Sharpening Settings"></a>X) Normal Sharpening Settings</h2>  
+<p><code>Sharpen </code>: <var>[int: -1, "0", 1]</var><br /></p>
+ Enables sharpening<br />
+ This enables pre and/or post sharpening<br />
+ A value of 0 turns it off<br />
+ A value of -1 turns on presharpening<br />
+ A value of 1 turns on postsharpening<br />
+ 
+   <p>Smode=0</p>
+ A value of 0 uses a sharpener that works by<br />
+ Using a basic nonlinear sharpening method is performed, then the *blurred* sharp-difference gets subtracted again.<br />
+ For the sake of simplness you only control the strength<br />
+
+ <p><code>Sharp </code>: <var>[float: 0.01,...,"0.45",...,10]</var><br /></p>
+ Controls sharpening strength<br />
+ A value of 0 does nothing<br />
+ A value of 0.45 does light (default)<br />
+ A value of 1 is moderate NOTE This is the recommended for Smode=0<br />
+ A value of 5 is too much<br />
+
+ <p><code>Soothe </code>: <var>[bool: true, "false"]</var><br /></p>
+This can be used for all of the Smodes<br />
+
+ When Soothe is set to true a modified version of SootheS2 is applied<br />
+ Here is Didée's explanation of the process<br />
+  <pre>"The introduction of jitter on the temporal axis is a general problem of sharpening operations
+ since sharpening (usually) considers spatial aspects only.
+ Therefore, Soothe() does a very simple job: get the difference between [source] and [sharpened source],
+ apply a TemporalSoften on this difference BUT allow only changes towards 128 ("neutral"), and then apply
+ this temporally calmed difference back to the original clip. Effectively, this will reduce the overall effect
+ of sharpening - less in static areas, and more in moving areas."</pre>
+
+ Also in this version there is some spatial soothing that can be used too but it is off by default<br />
+ There are 2 parameters for it<br />
+
+ <p><code>SthSS </code>: <var>[int: "0", 25, 50, 100]</var><br /></p>
+ Soothe Sharpening Spatially<br />
+ SthSS sets how much of the minimum percent of the original that is kept when spatially soothing<br />
+ So lower values allow for more 'pure' spatial soothing and higher values keep more of original by default<br />
+ 0 disables it<br />
+
+<p><code>SthST </code>: <var>[int: -100, -50, -25, 0, "25", 50, 100]</var><br /></p>
+ Soothe Sharpening Temporally<br />
+ SthST sets how much of minimum percent of the original that is kept when temporally soothing<br />
+ So lower values allow for more 'pure' temporal soothing and higher values keep more of original by default<br />
+ 0 disables it<br />
+ -100 to -1 call a second temporal soothe as well<br />
+ 
+ <p>&nbsp;</p>
+<h2><a id="MoComp Sharpening Settings"></a>XI) MoComp Sharpening Settings</h2>  
+<h4>Note
+ <p>Smodes 1,2,3,4 are slower than method -1 and 0 because they required some motion compensation<br />
+ Either way the quality should be the thing that matters but still something to take into account</p></h4>
+
+ <p><code>Smode </code>: <var>[Normal int: "-1", 0] [MOCOMP int: 1, 2, 3, 4]</var><br /></p>
+ Sharpening Mode/Method out of the 6 available, default=-1<br />
+ Smodes of 1-5 are motion compensated sharpeners and are handled in the section below<br />
+ this section pertains only to Smode -1 and 0 (mainly -1)<br />
+ A value of -1 uses a nonlinear sharpener that I stole from pieces of LSFmod and modded<br />
+
+ <p>Smode=1</p>
+ <p>A value of 1 uses the method Didée described in the motion compensated sharpen thread at doom9
+ spatial sharpen, temporally limited, using median-sharpen for more headroom on temporal limiting
+ This method all be it slower, is very appealing and usually does not halo</p>
+
+ <p>Smode=2</p>
+<p> A value of 2 uses a modified version of Smode=1 by giving more "headroom" and using unsharp to sharpen
+ Currently this is my favorite method of sharpening as it produces the nicest results (in my opinion)</p>
+
+ <p>Smode=3</p>
+ <p>A value of 3 uses a weighted median to provide the median-sharpen which lowers haloing and generally looks
+ more natural. While slightly slower than mode 2 it is a very good mode, Unsharp is still used to sharpen</p>
+
+ <p>Smode=4</p>
+ <p>A value of 4 uses the method described in Smode=3 but instead of using Unsharp, the original weighted median
+ clip is taken and then clamped, the only parameters that are changeable are the radius of the median</p>
+
+   <p><code>Sharp </code>: <var>[float: 0.01,...,"0.45",...,10]</var><br /></p>
+ Controls sharpening strength<br />
+ A value of 0 does nothing<br />
+ A value of 0.45 does light (default)<br />
+ A value of 1 is moderate NOTE This is the max value for Smode=1<br />
+ A value of 5 is too much<br />
+
+ 
+  <p><code>FSMA </code>: <var>[float: 0,"1",2]</var><br /></p>
+ Fast Sharpen Motion Analysis<br />
+ This enables faster motion analysis for the motion compensated sharpeners<br />
+ A value of 0 sets block size to 8 and overlap to 4<br />
+ A value of 1 sets block size to 16 and overlap to 8<br />
+ A value of 2 sets block size to 32 and overlap to 16<br />
+ The point of this is to speed up the mocomped sharpeners as to not drag down the overall speed<br />
+ By Default a value of 0 is used for non HD sources IE width<1280 and height<720<br />
+ But if the resolution has a width>1280 or height>720 then a value of 1 is used by default<br />
+ 
+<p>&nbsp;</p>
+<h2><a id="Examples"></a>XII) Changelog</h2>
+Here are a few quick examples of how to use said filter<br />
+<p>Example 1: MDegrain usage</p>
+<pre>Dbilateral4(Dithermethod=1)</pre>
+<p>Example 2: MDegrain usage and Flash3Kyuu usage</p>
+ <pre>Dbilateral4(Dithermethod=1,Ditherdmethod=1)</pre>
+<p>Example 3: MDegrain usage and protection for dark areas</p>
+<pre>Dbilateral4(dithermethod=1, darkprotect=true)</pre>
+<p>Example 4: MDegrain usage and protection for dark areas and mocomp sharpening</p>
+<pre>Dbilateral4(dithermethod=1, darkprotect=true,sharpen=1,smode=2)</pre>
+<p>Example 5: Really heavy denoising but decent detail retention and sharpening</p>
+<pre>Dbilateral4(dithermethod=1, multi=true,darkprotect=true,sharpen=-1,dpower=5,smode=2)</pre>
+ 
+<p>&nbsp;</p>
+<h2><a id="Changelog"></a>XIII) Changelog</h2>
+ v4.32<ul>
+	 <li>Replaced Dpower=-1 with an actually useful filter, RegMed</li>
+	 <li>Replaced Smode 0 and -1 with a modded version of Didée's FineSharp filter</li>
+	 <li>Some tweaks</li>
+	 <li>Changed truemotion default to false</li>
+	 <li>Added in an example section</li></ul>
+ v4.312<ul>
+	 <li>Changed Smodes 3-5 should give better results</li>
+	 <li>Made slight changes and fixes</li>
+	 <li>Updated for SMDegrain 1.95d</li></ul>
+ v4.311<ul>
+	 <li>Transfered documentation over to html</li></ul>
+
+ v4.31<ul>
+	 <li>Changed dpower 0 to -1 and added a new dpower 0</li>
+		The new dpower 0 uses a fancy new filter I found, called MosquitoNR
+		You even get parameters for it if you choose to use it, MStr, MRest and MRad
+	 <li>Fixed a bug I forgot to update the post filter dampening</li>
+	 <li>Fixed a bug with the sharpeners, I forgot to add bias=128 back in</li>
+	 <li>Added in the soothe parameters that I accidently left out</li></ul>
+
+ v4.3<ul>
+	 <li>Added new 'vortex' multi pass limitation methods
+	 <li>Added new parameters to utilize vortex
+	 <li>New lmode=2 , lmode=2 and lmode=3 from previous versions are now lmode=3 and lmode=4
+	 <li>Added new parameters to control lmode=2
+	 <li>A TON of updates to the readme sections to improve clarity and ease of use
+	 <li>Removed some deprecated parameters and other code clean up
+	 <li>Incorporated new truemotion setting from SMDegrain 1.9
+	 <li>Added todo list
+	 <li>Changed F3KDB multithreading back on by default
+	 <li>Changed the dampening methods to be less nonsensical and more useful
+		<li>I replaced the first 3 dampener modes with ones that actually are USEFUL rather
+		than a silly mash up of weird methods to slow down your filtering<br />
+		<ul>How it goes not is (essentially) increasing order of denoising<br />
+		While at the same time it is in (essentially) decreasing order of speed<br />
+		Still want to do a bit of changing or atleast some tweaking with the usage of
+		smoothgrad which are currently used in modes 5 and 6</ul></ul>
+
+ v4.2851<ul>
+	 <li>Minor aesthetic changes</ul>
+
+ v4.285<ul>
+	 <li>Several bug fixes regarding sharpening
+	 <li>Removed sharpen=2 as it is both bugged currently and is no longer needed really
+	 <li>Added () to parameterless filters that are called
+	 <li>Reorganization and Classification of the explanation section
+  <ul>Notes:
+		<ul>Thanks Dogway for the feedback :)
+		Also I stole/copied from your readme layout :3</ul></ul></ul>
+
+ v4.284<ul>
+	 <li>Changed FSMA default to 0 for SD and 1 for HD
+		<ul>looks WAY better with this</ul></ul></ul>
+
+ v4.283<ul>
+	 <li>Fixed bug with ditherdmethod
+	 <li>Fixed bug with a few of the Smodes</ul>
+
+ v4.282<ul>
+	 <li>Bug fixes mainly
+	 <li>Changed F3KDB to not internally multithread (will add parameter later to re-enable)
+		<ul>thanks OZC ;)</ul></ul>
+
+ v4.281<ul>
+	 -Added lmode 4, an interesting masking idea, mainly for testing
+  <ul>Notes:<br />
+		<ul>Hmm ok, so next idea, kinda useless but having a "custom" multi<br />
+		Where you can specify each step's radius and thr (everything else will be locked)<br />
+		This is more of a just in case kind of addition but still might be worth it<br />
+		Also need to look at current methods of prefiltering and post filtering<br />
+		All of the dampeners except 4, 5 and 6 seem sort of useless or atleast I never use them<br />
+		Will definitely look into replacing/removing/doing something about the dampener functions</ul></ul></ul></ul>
+
+ v4.28<ul>
+	 -Implemented F3KDB
+ 	<ul><pre>F3KDB implementation guide
+			1:Method for dithering up
+			2:Method for dithering down
+			3:Prefilter to remove banding
+			4:Postfilter to remove banding
+ 		
+		Filter param DitherMethod
+			-5=CDUP (Custom Ditherup), with Flask3Kyuu processing in 16bit and SMD filtering it (SLOW and really why????)
+			-4=CDUP (Custom Ditherup), with SMD filtering and Flash3Kyuu processing (SLOW and really why?)
+			-3=CDUP (Custom Ditherup), with Flash3Kyuu processing
+			-2=CDUP (Custom Ditherup), with SMD filtering
+			-1=CDUP (Custom Ditherup), CDUP param still left in place incase you want 16bit PP
+			0=convert16 (lazy but very fast)
+			1=SMD
+			2=Flash3KyuuDeband
+			3=SMD outputs 16bit Flask3Kyuu processes it, leaves in 16
+			4=Flask3Kyuu outputs 16bit and SMD filters it, leaves in 16
+ 		
+		Filter param DitherDMethod
+			-1=No dithering is done, left in 16bit replacement of dither=9
+			0=ditherpost outputs 8bit
+			1=Flash3KyuuDeband processes and outputs 8bit requires dither= 0 or 6
+			2=ditherpost ouputs 8bit and Flash3KyuuDeband debands further</pre></ul>
+	 <li>Moderate speed up for Smode -1 by replacing mt_makediff and mt_adddiff with the raveragew equivalents
+	 <li>Slight changes to a few of the sharpening modes to give slightly better results
+  </ul><ul>Notes:<br />
+		<ul>Awesome I am getting better at this, I only made a few mistakes while setting this up
+		and they were syntax related lol, extra comma or forgot a )<br />
+		Next step is to try to emulate tbilateral, if at all possible<br />
+		Also need to try to test out that dynamic pixel weighting system</ul></ul>
+
+ v4.27<ul>
+	 <li>Started prepping for implementation of F3KDB
+	 <li>Fixed more CDUP issues should work better now even with dither=9
+	 <li>Fixed weird bug when Smode=2 that caused the edges of the frame to get messed up
+  <ul>Notes:<br />
+		<ul>God damn this stuff was annoying to get right, so many if then statements to link together
+		Probably did not help that I kept mixing up my msb's for my lsb's :3
+		The next version will have F3KDB fully implemented as a</ul>
+			<ul><p>1:Method for dithering up<br />
+			2:Method for dithering down<br />
+			3:Prefilter to remove banding<br />
+			4:Postfilter to remove banding</p></ul>
+		<ul>After I get that done I also want to try and develope the bilateral filtering method a bit more, and if possible<br />
+		try and implement some of the techniques that are in tbilateral, may have to do some research for that<br />
+		but if I can emulate the results of Tbilateral except way faster and better at banding removal<br />
+		I will be ready for a public release. Another thought I have been having is to rethink the current method<br />
+		that I have been using for pre and post filtering. Also I have an idea for a dynamic pixel weighting system<br />
+		that adapts based on temporal factors.<br /></ul></ul></ul>
+		
+
+ v4.26<ul>
+	 <li>Added (lots of) parameters to control SMD
+	 <li>Revamped CDUP to make it less stupid and more practical
+	 <li>Added new Smode -1 which is an implementation of a nonlinear sharpener
+		<ul>I pillaged the pieces from LSFmod's Smode 5, has lots of parameters</ul>
+	 <li>Added Smode 5 using mocomp and NLsharp
+	 <li>Changed Smode default to -1
+	<li>Changed Sharp default to 0.5
+	 <li>Added Dpower mode 7
+	 <li>Added needed info to the readme
+	 <li>Minor script clean up and optimization</ul>
+
+ v4.25<ul>
+	 <li>Changed sharpening mode 0 as it is both obsolete and has some bugs so UnsharpHQ is no longer required
+	 <li>Small optimizations for the sharpening modes by using raveragew for makediff and adddiff
+	 <li>Changed Sharpen default to 0
+	 <li>Changed Smode default to 1
+	 <li>Fixed a bug when sharpen was 1 or 2
+	 <li>Fixed a bug with smode 2
+	 <li>Added new sharpening mode 4
+	 <li>Added new parameter FSMA
+		<ul>Fast Sharpen Motion Analysis essentially being cheap on the motion analysis for the mocomp for the sharpeners<br />
+		Can help with speed a bit when using Smodes>0<br />
+		It has 3 values<br />
+		0 blksize = 8 <br />
+ 		1 blksize = 16<br />
+		2 blksize = 32<br /></ul>
+	 <li>Added new sharpener that I whipped together from the parts of the non linear sharpener LSFmod<ul>
+	Not exactly the best but definitely not the worst this will probably replace the current smode 0</ul></ul>
+ v4.24<ul>
+	 <li>Added new Sharpening methods using the method Didée described
+		Spatial sharpen, temporally limited, using median-sharpen for more headroom on temporal limiting
+		Can look very nice and do not halo usually, only down side is that they are a lot slower than USMHQ
+	 <li>Altered sharpening params to accommodate the new methods
+	 <li>Added new dpower mode 0 which uses a extremely fast median filter mainly for testing purposes not actual usage
+	 <li>Fixed several mistakes in the documentation and updated older parts
+	 <li>Removed Sharper parameter as it is no longer needed and was realy pretty pointless to begin with<br />
+  <ul>Notes:<ul>
+		I think in my next version I am gonna start compiling a list of credits and acknowledgments as I am nearing
+		a publicly releasable copy of this filter.<br /> Still I want to hit a breakthrough before shipping this out
+		maybe something like a locally adapting pixel weighting system.<br /> One thing I do plan on doing is adding an option
+		to allow multi to change radius (and maybe thr) based on the frame size<br /> like how radius normally does
+		the only issue is that the radius and the thr settings are heavily tied to giving good results so something<br />
+		would need to be done in order to assure multi does not over or under filter because of the change in radius.
+		<br />I wonder if I should add some settings to control SMD, while I am happy with the defaults others may want an
+		alternative set up so maybe that could be beneficial.</ul></ul></ul>
+
+ v4.23<ul>
+	 <li>Restructuring the mask system and renaming it lmode<br />
+		<ul>I have found that because of the way that masks are handled as is they serve almost no purpose but to<br />
+		interfere with dithering so a rethinking was necessary<br /></ul>
+	 <li>Added new mask mode that works pretty well<br />
+	 <li>Optimized several of the dampeners<br /></ul>
+
+ v4.22<ul>
+	 <li>Changed HPSX to UnsharpHQ as it is faster and preforms better in general
+	 <li>Added USM (UnSharp mask) parameter replacing HPSharp
+	 <li>Added new params for UnsharpHQ so you can individually set the strength for pre and post sharpening
+		<ul>New params are called Sharp, PreS, and PostS check readme section for more info</ul>
+	 <li>Reorganized the param layout (mainly for my convenience) 
+	 <li>Changed dampen default to -1
+	 <li>Changed USM default to -1
+	 <li>Changed Sharp default to 0.45
+	 <li>Added new dpower mode meaning there are modes 1-6 available
+	 <li>Fixed darkprotect which for the last 3 versions has been not working as it was supposed to
+	 <li>Fixed odd bug with UnSharpHQ causing two edge pixels to get mess up
+	 <li>Changed dpower settings, removed a few useless ones, add a new one and changed the order
+  <li>A few fixes and tweaks
+  <ul>Notes:<ul>
+		This current version basically benefits mainly from the usage of UnSharpHQ, not only making sharpening faster
+		but also generally helping to balance out the usage of dampen's negative effects like slight blurring of details
+		hence why both dampen and USM have been turned on as default. Another thing to note is that USM works quite well
+		when combined with multi and mask=3, they give a very clean and very tight picture without a lot of detail loss.</ul></ul></ul>
+
+ v4.21<ul>
+	 <li>Changed Multi and made it much more useful, almost recommended if you are going the spatial only route
+	 <li>Finally got around to changing default values
+		<ul>I felt that there was no reason to keep the old defaults as they really served no purpose<br />
+		please note that the defaults are tuned for animation and I have no idea how well they will work<br />
+		on live action material, though probably pretty well from my previous tests</ul>
+	 <li>Changed wmin default to 1
+	 <li>Changed flat default to 0
+	 <li>Changed dampen default to 0
+	 <li>Changed flat default to 0
+  <li>Added new Dpower mode 5 and 6
+	 <li>Changed the Dpower default to 5 because it seems to be the best at the moment
+	 <li>Changed HPS4 to HPSX to better fit a variety of sources and increase speed
+  <li>Added practical usages sections for those who are too lazy to experiment
+		<ul>I should note that this sort of filtering is VERY dependent on the source and experimenting<br />
+		is required to achieve the best quality, hence the reason why I have such conservative defaults</ul>
+  <li>Minor tweaks and fixes
+  </ul>
+		
+ v4.2<ul>
+	 <li>Changed dampen again and added 4 modes
+		<ul>I felt that sometimes the dampen was softened too much so I decided to add a variety of modes
+		this helps to preserve details and better fit to certain sources</ul>
+	 <li>Optimized dampener methods with Raverage and Rmerge to increase speed
+  <li>Added new parameter Dpower because of dampen change
+	 <li>Changed HPS3 to HPS4 by adding in the usage of Raverage and Rmerge to increase speed
+	 <li>Optimized general function 
+	  	<ul>I used the Raverage equivalent to replace mt_average, mt_makediff, and mt_merge
+		should increase speed moderately</ul>
+  <ul>Notes:<ul>
+		Currently been working on trying to make the spatial only mode just as viable as with SMD<br />
+		Been focusing a lot on speed and optimization but also adding new features<br />
+		I am very happy with how this has been turning out I end up with a public release as soon<br />
+		as I hit another big breakthrough.One of the things I would like to see is an
+		auto adjusting multi, but atleast multi as it stands works well<br />
+		there is also the opportunity to utilize raverage to replace/redo the fix part of the script</ul></ul></ul>
+
+ v4.1<ul>
+	 <li>Changed minmapblur to a modified version of it that is much faster
+		<ul>calling minmapblur twice did impact speed a fair bit but really helped a lot for compression<br />
+		so I crafted a function to do a similar thing using vmean hence a massive speed increase<br />
+		I named the function dampener for obvious reasons</ul>
+  <li>Changed order in which masking occurs to avoid issues with dithering
+	 <li>Changed the where dampen is called to fit the new masking order
+  <li>Added new mask mode 3 (old mask mode 3 moved to 4 and disabled due to lack of results)
+		<ul>"mask" mode 3 is a pixel weighting system from Didée's SPresso function, I found that it<br />
+		works quiet nicely at protecting hard to mask areas and is nice and quick<br />
+		new parameters limit and bias have been added to adjust it,they can be found under the mask section</ul>
+	 <li>Optimized dampen when settings are 1 or 2
+		<ul>I decided to do a bit of optimizing by making dampener only have to process the lsb part of the frame<br />
+		hopefully this will help to speed it up a bit</ul><br />
+	 <li>Changed order of when the first dampen is applied to preserve more detail when using HPsharp
+	 <li>Changed the default for dampen to be -1 as the post dampen is not as necessary
+	 <li>Dropped SFM2f support in favor of SFM5f, faster and gets the job done plus less dependencies
+	 <li>Changed Multi settings to be more effective yet keep more details
+	 <li>Optimized masking sections to be more efficient 
+  <ul>Notes:<ul>
+		While the speed increase from the new dampen function is very nice, I will keep working until I get a<br />
+		perfect version as right now it is only temporary but still very good<br />
+		the implementation of minmapblur also has been very successful<br />
+		strongly considering altering the defaults<br />
+		still testing how to get multi to work well</ul></ul></ul>
+
+ v4<ul>
+  <li>Added Dampen option to turn off the usage of minmapblur before and after or just select one
+  <li>Changed Multi to actually be useful hence the need for the fix to be changed
+	 <li>Removed Twopass as there is no real reason for it to since multi is phasing it out
+	 <li>Changed Fix to work on a weight based system IE more useful and more flexible 
+	 <li>Added Recover parameter to accompany the new fix method
+  <li>Changed SMD settings, lowered blocksize because it would rarely generate a motion artifact
+  <li>Changed dither method default settings to be 6 (dither=6)
+		<ul>Serpentine Floyd-Steinberg is generally regarded as the standard method for dithering
+		so it made sense to just leave that as standard</ul></ul>
+ v3.2<ul>
+  <li>Added multi pass option
+		<ul>currently experimental and can be useful for reducing lots of noise if you don't want to use smd=true<br />
+		but still want to maintain speed, hence why mask mode 3 was made</ul>
+  <li>Added mask mode 3
+		<ul>mode 3 is a proof of theory of using a bilateral smoother to differentiate between edges<br />
+		is slower than mask mode 1 but about twice as fast as mask mode 2 basically a medium level</ul>
+  <li>Fixed a few spelling mistakes
+  <ul>Notes:<ul>
+		I am happy with how well the auto radius adjustment is working out, now if only there was a way to do it<br />
+		with thr that would be something ;)<br />
+		the implementation of minmapblur also has been very successful<br />
+		strongly considering altering the defaults<br />
+		still testing how to get multi to work well</ul></ul></ul>
+
+ v3.1<ul>
+  <li>Added version history
+  <li>Added changed defaults (made fix false by default)
+  <li>Added automatic radius adaptation based on frame width
+  <li>Fixed small bugs
+  <li>Fixed a bug regarding dither=9
+  <li>Small optimizations
+  <li>Implemented minmapblur (thanks Didée) as a prefilter
+		<ul>I implemented minmapblur because it helps make the spatial mode more viable as a denoiser <br />
+		because it gets the really small noise that dbilateral misses with most moderate settings<br />
+		it also helps to decrease noise from being enhanced when the high pass sharpener(s) are used<br />
+		and since it has nearly no speed cost it is well worth having it on by default<br />
+		I may add an option to turn it off later but there is no reason to at the moment</ul>
+  <ul>Notes:<ul>
+		I am considering having custom defaults rather than keeping ones that are like the original filter's</ul></ul></ul>
+
+ v3<ul>
+  <li>Added highpass sharpener
+  <li>Added option to output or take in 16-bit
+  <li>Added option to use SMDegrain
+  <li>Added added fix parameter to help general bilateral issues
+  <li>Added added full readme</ul>
+ v2<ul>
+  <li>Added full parameters and fixes</ul>
+ v1<ul>
+   <li>Proof of concept build</ul>
+
+
+
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+</body>
+</html>
+
+

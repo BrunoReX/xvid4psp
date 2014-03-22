@@ -1,0 +1,57 @@
+rePal plugin, released by Bach, based on Donald Graft's decimate source.
+Brasil, May 2003
+
+This plugin is usefull for a 30->25 IVTC conversion. It must be used in conjunction
+with a (smart)bob. It works deleting 7 frames from every group of  12 frames, in 
+such way that only blended and/or repeated frames are decimated. It is very
+reliable when the source clip is known to be PAL telecined material (most of  
+time this is known as 25fps->30fps conversion). Using this plugin you may
+achieve better results than telecide(guide=3).decimate(6), since the ghosting effect 
+can be avoided. 
+
+The usage is 
+
+#################################
+LoadPlugin("rePal.dll")
+AVISource("mixed.avi")
+bob() ## it is much better to use a smartbob ;). If the result is not good, use complementparity() before. ##
+repal() 
+#################################
+
+Theory of opperation:
+Most of times, 25fps->30fps conversion is done in a silly way, such that a 
+progressive sequence of frames A B C D E F from the source is converted to a 
+sequence of fields A, AB, B, BC, C, C, CD, D, DE, E, EF, EF, F … where XY means 
+that we have a blended field, and after this this sequence is weaved. Bobbing 
+the converted file, we can recover all the progressive frames from the source, 
+mixed with blended and repeated frames. The next work is to discard these 
+frames only.   
+
+When this filter receives a request for a frame it gets access to a group of 13 
+frames, search for the pair of  frames with the smaller difference between then, 
+and gets the second frame of this pair as an anchor (in the above example, the 
+anchor should be the second C frame). Based on the value of this anchor, it will 
+choose the 5 frames from the group of  12 which should be kept. The others will 
+be discarded.
+
+Using rePal(show=true), you will have access to the frame which is anchor and the 
+frames selected to be kept. In order to understand the log, let 0 be the 2nd frame, 
+1 be the 3rd frame, 2 be the 4th frame … from the group of 13 frames. We will keep 
+the following frames:
+
+Anchor            keep frames
+
+0           0, 2, 4, 7, 9
+1           1, 3, 5, 8, 10
+2           2, 4, 6, 9, 11
+3           0, 3, 5, 7, 10
+4           1, 4, 6, 8, 11
+5           0, 2, 5, 7, 9
+6           1, 3, 6, 8, 10
+7           2, 4, 7, 9, 11
+8           0, 3, 5, 8, 10
+9           1, 4, 6, 9, 11
+10          0, 2, 5, 7, 10
+11          1, 3, 6, 8, 11                   
+
+If you want to increase the C match, play with the quality value, using repal(quality=3).

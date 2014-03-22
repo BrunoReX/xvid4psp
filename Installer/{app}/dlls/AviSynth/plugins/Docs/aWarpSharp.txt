@@ -1,0 +1,56 @@
+aWarpSharp package 2009.06.19 - a WarpSharpening filter for Avisynth 2.5
+
+  This filter implements the same WarpSharpening algorithm as aWarpSharp by MarcFD,
+  but with several bugfixes and optimizations. In addition to complete algorithm
+  filter aWarpSharp2 parts of algorithm are also available as aSobel, aBlur, aWarp.
+
+  Requires YV12 and at least MMXExt capable CPU, optimized for Nehalem, blur will
+  be more precise around frame borders if SSSE3 is available.
+
+Syntax:
+  aWarpSharp2(int "thresh", int "blur", int "type", int "depth", int "chroma")
+  aSobel(int "thresh", int "chroma")
+  aBlur(int "blur", int "type", int "chroma")
+  aWarp(edge_mask_clip, int "depth", int "chroma")
+
+  aWarpSharp2() is the same as aWarp(aSobel().aBlur()) but a bit faster.
+
+  It's good idea to do anti-aliasing and temporal filtering over edge mask before
+  passing it to warp stage if you want more stable results.
+
+  thresh: 0..255, default 128
+    Saturation limit for edge detection. Reduce for less aggressive sharpening.
+
+  blur: 0..100, default 2 for type 0, 16 for type 1
+    Number of blur passes over edge mask. Less passes increase sharpening effect,
+    but can produce major artifacts with high depth and thresh. You can use values
+    higher than 100, but probably won't see any difference.
+    Chroma is processed with (blur+1)/2 passes.
+
+  type: 0..1, default 0
+    Type of blur:
+      0 - radius 6 blur
+      1 - radius 2 blur, requires around 8x more passes than type 0 for the same
+          effect (will be 2.5x slower), but produce better quality
+
+  depth: -128..127, default 16
+    Strength of the final warping. Negative values result in warping in opposite
+    direction.
+
+  chroma: 0..4
+    Processing mode for chroma planes (U and V):
+      0 - fill with zeroes
+      1 - don't care, default for aSobel and aBlur
+      2 - copy
+      3 - process
+      4 - guide by luma - aWarpSharp and aWarp only, default for them
+
+Original aWarpSharp compatibility:
+  Mapping from original aWarpSharp parameters:
+    thresh = thresh*256
+    blur   = blurlevel
+    depth  = depth*blurlevel/2
+    chroma = 0->2, 1->4, 2->3
+
+
+Copyright (C) 2003 MarcFD, 2009 Skakov Pavel

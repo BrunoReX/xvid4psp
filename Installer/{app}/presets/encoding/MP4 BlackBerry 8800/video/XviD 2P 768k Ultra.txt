@@ -1,0 +1,6 @@
+video codec:
+XviD
+
+video cli:
+-max_bframes 0 -nopacked
+-bitrate 768 -max_bframes 0 -nopacked -imin 1 -bmin 1 -pmin 1

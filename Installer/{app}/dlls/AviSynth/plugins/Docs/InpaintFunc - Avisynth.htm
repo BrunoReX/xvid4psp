@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0041)http://avisynth.org/mediawiki/InpaintFunc -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="generator" content="MediaWiki 1.13.3">
+		<meta name="keywords" content="InpaintFunc,AVSInpaint">
+		<link rel="shortcut icon" href="http://avisynth.org/images/avisynth-logo-gears-favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://avisynth.org/mediawiki/opensearch_desc.php" title="Avisynth (en)">
+		<link title="Creative Commons" type="application/rdf+xml" href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=creativecommons" rel="meta">
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/">
+		<link rel="alternate" type="application/rss+xml" title="Avisynth RSS Feed" href="http://avisynth.org/mediawiki/index.php?title=Special:RecentChanges&feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="Avisynth Atom Feed" href="http://avisynth.org/mediawiki/index.php?title=Special:RecentChanges&feed=atom">
+		<title>InpaintFunc - Avisynth</title>
+		<style type="text/css" media="screen, projection">/*<![CDATA[*/
+			@import "/mediawiki/skins/common/shared.css?164";
+			@import "/mediawiki/skins/monobook/main.css?164";
+		/*]]>*/</style>
+		<link rel="stylesheet" type="text/css" media="print" href="./InpaintFunc - Avisynth_files/commonPrint.css">
+		<!--[if lt IE 5.5000]><style type="text/css">@import "/mediawiki/skins/monobook/IE50Fixes.css?164";</style><![endif]-->
+		<!--[if IE 5.5000]><style type="text/css">@import "/mediawiki/skins/monobook/IE55Fixes.css?164";</style><![endif]-->
+		<!--[if IE 6]><style type="text/css">@import "/mediawiki/skins/monobook/IE60Fixes.css?164";</style><![endif]-->
+		<!--[if IE 7]><style type="text/css">@import "/mediawiki/skins/monobook/IE70Fixes.css?164";</style><![endif]-->
+		<!--[if lt IE 7]><script type="text/javascript" src="/mediawiki/skins/common/IEFixes.js?164"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<script type="text/javascript">/*<![CDATA[*/
+var skin = "monobook";
+var stylepath = "/mediawiki/skins";
+var wgArticlePath = "/mediawiki/$1";
+var wgScriptPath = "/mediawiki";
+var wgScript = "/mediawiki/index.php";
+var wgVariantArticlePath = false;
+var wgActionPaths = [];
+var wgServer = "http://avisynth.org";
+var wgCanonicalNamespace = "";
+var wgCanonicalSpecialPageName = false;
+var wgNamespaceNumber = 0;
+var wgPageName = "InpaintFunc";
+var wgTitle = "InpaintFunc";
+var wgAction = "view";
+var wgArticleId = "1990";
+var wgIsArticle = true;
+var wgUserName = null;
+var wgUserGroups = null;
+var wgUserLanguage = "en";
+var wgContentLanguage = "en";
+var wgBreakFrames = false;
+var wgCurRevisionId = "6665";
+var wgVersion = "1.13.3";
+var wgEnableAPI = true;
+var wgEnableWriteAPI = false;
+var wgRestrictionEdit = [];
+var wgRestrictionMove = [];
+/*]]>*/</script>
+                
+		<script type="text/javascript" src="./InpaintFunc - Avisynth_files/wikibits.js"><!-- wikibits js --></script><style type="text/css">@import "/mediawiki/skins/monobook/KHTMLFixes.css";</style>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="./InpaintFunc - Avisynth_files/ajax.js"></script>
+		<script type="text/javascript" src="./InpaintFunc - Avisynth_files/index.php"><!-- site js --></script>
+		<style type="text/css">/*<![CDATA[*/
+@import "/mediawiki/index.php?title=MediaWiki:Common.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/mediawiki/index.php?title=MediaWiki:Monobook.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/mediawiki/index.php?title=-&action=raw&gen=css&maxage=18000&useskin=monobook";
+/*]]>*/</style>
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="./InpaintFunc - Avisynth_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./InpaintFunc - Avisynth_files/main_ru.js"></script><script type="text/javascript" charset="UTF-8" src="./InpaintFunc - Avisynth_files/element_main.js"></script></head><body class="mediawiki ns-0 ltr page-InpaintFunc">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 class="firstHeading">InpaintFunc</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From Avisynth</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="http://avisynth.org/mediawiki/InpaintFunc#column-one">navigation</a>, <a href="http://avisynth.org/mediawiki/InpaintFunc#searchInput">search</a></div>			<!-- start content -->
+			<table rules="all" style="border: 1px solid #000;margin: 0.5em 0 1em 1em;" cellpadding="3" align="right" width="300px">
+<tbody><tr>
+<th colspan="2" style="background: lavender"> Abstract
+</th></tr>
+<tr>
+<td width="30%"> <b>Author</b>
+</td><td> Reuf Toc
+</td></tr>
+<tr>
+<td width="30%"> <b>Version</b>
+</td><td> 1.13
+</td></tr>
+<tr>
+<td width="30%"> <b>Download</b>
+</td><td> <a href="http://avisynth.org/mediawiki/upload/6/61/InpaintFunc.avs" class="internal" title="InpaintFunc.avs">InpaintFunc.avs</a>
+</td></tr>
+<tr>
+<td width="30%"> <b>Category</b>
+</td><td> Logo removal
+</td></tr>
+<tr>
+<td width="30%"> <b>Requirements</b>
+</td><td>
+<p>YV12, YUY2, RGB24, RGB32
+</p>
+</td></tr>
+<tr>
+<td width="30%"> <b>License</b>
+</td><td>
+</td></tr></tbody></table>
+<p><span style="color: purple; font-weight: bold">InpaintFunc(clip clp, string "mask", string "loc", float "AR", string "mode",int "speed", int "pp", int "ppmode", bool "reset", float "radius", float "sharpness", float "preblur", float"postblur")</span>
+</p><p><br>
+<span style="color: purple; font-weight: bold">InpaintAssist(clip clp, string "loc", string "alignment")</span>
+</p>
+<table id="toc" class="toc" summary="Contents"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a id="togglelink" class="internal" href="javascript:toggleToc()">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="http://avisynth.org/mediawiki/InpaintFunc#Abstract"><span class="tocnumber">1</span> <span class="toctext">Abstract</span></a></li>
+<li class="toclevel-1"><a href="http://avisynth.org/mediawiki/InpaintFunc#Requires_Filters"><span class="tocnumber">2</span> <span class="toctext">Requires Filters</span></a></li>
+<li class="toclevel-1"><a href="http://avisynth.org/mediawiki/InpaintFunc#Background_Information"><span class="tocnumber">3</span> <span class="toctext">Background Information</span></a></li>
+<li class="toclevel-1"><a href="http://avisynth.org/mediawiki/InpaintFunc#Description"><span class="tocnumber">4</span> <span class="toctext">Description</span></a></li>
+<li class="toclevel-1"><a href="http://avisynth.org/mediawiki/InpaintFunc#Example"><span class="tocnumber">5</span> <span class="toctext">Example</span></a></li>
+<li class="toclevel-1"><a href="http://avisynth.org/mediawiki/InpaintFunc#Links"><span class="tocnumber">6</span> <span class="toctext">Links</span></a></li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="Abstract"></a><h2><span class="editsection">[<a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit&section=1" title="Edit section: Abstract">edit</a>]</span> <span class="mw-headline"> Abstract </span></h2>
+<p>InpaintFunc is a new delogo function using AVSInpaint.dll an AviSynth C plugin developed by AMSS. See thread&nbsp;: <a href="http://forum.doom9.org/showthread.php?t=133682" class="external free" title="http://forum.doom9.org/showthread.php?t=133682" rel="nofollow">http://forum.doom9.org/showthread.php?t=133682</a> to download this plugin and get more information about it. Just some advice&nbsp;: AVSInpaint plugin is rather slow so be patient&nbsp;;-)
+</p>
+<a name="Requires_Filters"></a><h2><span class="editsection">[<a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit&section=2" title="Edit section: Requires Filters">edit</a>]</span> <span class="mw-headline"> Requires Filters </span></h2>
+<ul><li><a href="http://avisynth.org/mediawiki/index.php?title=AVSInpaint&action=edit&redlink=1" class="new" title="AVSInpaint (not yet written)">AVSInpaint</a>
+</li></ul>
+<p>AVSInpaint is an avisynth C plugin, don't forget to add <b>loadCplugin("xxx\AVSInpaint.dll")</b> in your script before calling this function&nbsp;!!!
+</p>
+<a name="Background_Information"></a><h2><span class="editsection">[<a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit&section=3" title="Edit section: Background Information">edit</a>]</span> <span class="mw-headline"> Background Information </span></h2>
+<p>Image Inpainting is the art of restoring destroyed parts of an image by using information of valid parts of the image in a way, so that the human eye does not recognize the damaged areas (at least not at a first sight). In video processing image inpainting is often applied to videos in order to remove TV station logos.
+</p>
+<a name="Description"></a><h2><span class="editsection">[<a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit&section=4" title="Edit section: Description">edit</a>]</span> <span class="mw-headline"> Description </span></h2>
+<p>Uses AVSInpaint to remove a logo, such as that of a TV station, from a specified clip.
+</p><p><b>clp</b> <i>clip</i> = last<br>
+The clip to be "delogo-ed".
+</p><p><b>mask</b> <i>string</i> = null<br>
+Path to the mask of the logo. The mask is a black and white picture. Areas where the logo is are white, the rest is black. Example&nbsp;: mask="C:\my_mask.bmp"
+</p><p><b>loc</b> <i>string</i> = null<br>
+Select the region of the picture where the logo to remove is.
+See the table&nbsp;:
+</p><p><br>
+</p>
+<pre>             ______________           ______________
+             | TL | TC |TR |          | X1 | X2 |X3 |
+             |____|____|___|          |____|____|___|
+             | ML | MC |MR |    or    | Y1 | Y2 |Y3 |
+             |____|____|___|          |____|____|___|
+             | BL | BC |BR |          | Z1 | Z2 |Z3 |
+             |____|____|___|          |____|____|___|
+</pre>
+<p><br>
+If the logo you want to remove is in the top right corner, then you can choose either loc="TR" or loc="x3".
+But if you're not satisfied with those presets, you can enter your own parameters by pixels to isolate the logo.
+</p><p>example&nbsp;: loc = "0,300,-440,-20". Spaces are not allowed in "loc" parameter.
+</p><p><b>AR</b> <i>float</i> =  1.0<br>
+The Sample Aspect Ratio of your video. E.g.&nbsp;: 16/9, 4/3...  (Default 1.0). This value is used to calculate the PAR of your video. If you don't set this parameter, then PAR will be set to 1:1. When you set the AR, take care to add ".0" to your values if you use exact value (16/9 or 4/3). Example&nbsp;: AR=16.0/9.0 or AR=4.0/3.0 .
+</p><p><b>mode</b> <i>string</i> = "both"<br>
+3 Choices (default both)&nbsp;: <br>
+</p>
+<ul><li>Deblend&nbsp;: If the logo is transparent, use this mode. <br>
+</li><li>Inpaint&nbsp;: If the logo is opaque, use this mode. <br>
+</li><li>Both   &nbsp;: If the logo is both opaque and transparent, use this mode. <br>
+</li></ul>
+<p><b>speed</b> <i>int</i> = 5<br>
+With this parameter you can speed up this function by trimming the clip analyzed by AnalyseLogo. A value of 20 means that 100% of clip will be analyzed. With a value of 1, only 5% will be analyzed. (min value 1, max value 20, default 5).
+</p><p><b>PPmode</b> <i>int</i> = 0<br>
+If you want to apply post-processing, 3 modes are available. Default is 0 (disabled)
+</p>
+<ul><li>Mode 1&nbsp;: Blur all the area where logo was present.
+</li><li>Mode 2&nbsp;: Blur all the area where logo was present using TemporalSoften and SpatialSoften.
+</li><li>Mode 3&nbsp;: Blur only the edge of logo area using TemporalSoften and SpatialSoften..
+</li></ul>
+<p><b>PP</b> <i>int</i> = 50<br>
+Strength of the post-processing. Default is 50 (min value 0, max value 100)
+A 0 value will disable post processing, 100 will process at full strength.
+</p><p><b>Reset</b> <i>bool</i> = False<br>
+InpaintFunc contain a feature that allow to not compute logo analysis when it was already done.
+By setting Reset to true, logo analysis is always computed. Default is false.
+</p><p><b>Radius</b> <i>Float</i> = 8.0<br>
+Radius around a damaged pixel from where values are taken when the pixel is inpainted. Bigger values prevent inpainting in the wrong direction, but also create more blur.
+</p><p><b>Sharpness</b> <i>Float</i> = 75.0<br>
+Higher values can prevent blurring caused by high Radius values.
+</p><p><b>PreBlur</b> <i>Float</i> = 8.0<br>
+Standard deviation of the blur which is applied to the image before the structure tensor is computed. Higher values help connecting isophotes which have been cut by the inpainting region, but also increase CPU usage. PreBlur=0.0 disables pre-blurring.
+</p><p><b>PostBlur</b> <i>Float</i> = 4.0<br>
+Standard deviation of the blur which is applied to the structure tensors before they are used to determine the inpainting direction. Higher values help gather more directional information when there are only few valid pixels available, but increases CPU usage.
+</p><p><b>Show</b> <i>Bool</i> = False<br>
+Allow the user to see the differents steps of the delogoing. Are displayed the source, the repaired, the repaired post-processed, the mask, the repair masks (edge and global), the color mask, the alpha mask and the inpaint mask.
+</p><p><br>
+</p>
+<hr>
+<p><br>
+Rev 1.11 introduce a subfunction, <b>InpaintAssist</b>, that can be used to help you in order to set your own crop values to isolate the logo to remove.
+With HD footage, the delogo process is slow due to the resolution (especialy for analysis) and to maximize speed, it is adviced to reduce the size of the cropped clip by setting your own crop values.
+</p>
+<ul><li>If you don't specify a loc value, this function will display your clip divised in 9 parts (the nine loc preset of InpaintFunc) with the crop values for each one in order to give you an idea about the values to use.
+</li></ul>
+<ul><li>After that step, you can enter your own loc values and check they are correct. The selected area will be hightlighted. Keep in mind you have to keep a little border around the logo since inpainting use nearby pixels to compute the hidden ones.
+</li></ul>
+<p><br>
+<b>loc</b> <i>string</i> = null<br>
+Select the part of the picture where is the logo to remove. Same as InpaintFunc loc parameter
+</p><p><b>alignment</b> <i>string</i> = "top"<br>
+Alignment of the text. "Top", "Center" and "Bottom" are allowed
+</p>
+<a name="Example"></a><h2><span class="editsection">[<a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit&section=5" title="Edit section: Example">edit</a>]</span> <span class="mw-headline"> Example </span></h2>
+<pre>LOADCPLUGIN("AVSINPAINT.DLL")
+Import("InpaintFunc.avs")
+avisource("videowithlogo.avi")
+InpaintFunc(last, mask="logo.bmp", loc="br", AR=4.0/3.0, mode="both", speed=10, ppmode=3, pp=75)
+</pre>
+<a name="Links"></a><h2><span class="editsection">[<a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit&section=6" title="Edit section: Links">edit</a>]</span> <span class="mw-headline"> Links </span></h2>
+<p>Download <a href="http://avisynth.org/mediawiki/upload/6/61/InpaintFunc.avs" class="internal" title="InpaintFunc.avs">InpaintFunc.avs</a> Current version (recommended).
+</p><p>Download <a href="http://forum.doom9.org/showpost.php?p=1086451&postcount=1" class="external text" title="http://forum.doom9.org/showpost.php?p=1086451&amp;postcount=1" rel="nofollow">AVSInpaint</a> from this post.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 182/1000000
+Post-expand include size: 1436/2097152 bytes
+Template argument size: 558/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key avisynth-mw_:pcache:idhash:1990-0!1!0!!en!2 and timestamp 20120412061045 -->
+<div class="printfooter">
+Retrieved from "<a href="./InpaintFunc - Avisynth_files/InpaintFunc - Avisynth.htm">http://avisynth.org/mediawiki/InpaintFunc</a>"</div>
+						<!-- end content -->
+			<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="./InpaintFunc - Avisynth_files/InpaintFunc - Avisynth.htm" title="View the content page [alt-c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="http://avisynth.org/mediawiki/index.php?title=Talk:InpaintFunc&action=edit" title="Discussion about the content page [alt-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-edit"><a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=edit" title="You can edit this page. Please use the preview button before saving. [alt-e]" accesskey="e">Edit</a></li>
+				 <li id="ca-history"><a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&action=history" title="Past versions of this page. [alt-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://avisynth.org/mediawiki/index.php?title=Special:UserLogin&returnto=InpaintFunc" title="You are encouraged to log in, it is not mandatory however. [alt-o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo" title="Main Page">
+		<a style="background-image: url(/images/avisynth-logo-gears-mod.png);" href="http://avisynth.org/mediawiki/Main_Page" title="Visit the Main Page [alt-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage"><a href="http://avisynth.org/mediawiki/Main_Page" title="Visit the Main Page [alt-z]" accesskey="z">Main Page</a></li>
+				<li id="n-portal" title="About the project, what you can do, where to find things"><a href="http://avisynth.org/mediawiki/Avisynth:Community_Portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-recentchanges"><a href="http://avisynth.org/mediawiki/Special:RecentChanges" title="The list of recent changes in the wiki. [alt-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="http://avisynth.org/mediawiki/Special:Random" title="Load a random page [alt-x]" accesskey="x">Random page</a></li>
+				<li id="n-help" title="The place to find out."><a href="http://avisynth.org/mediawiki/Help:Contents" title="The place to find out.">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-community">
+		<h5>community</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-currentevents" title="Find background information on current events"><a href="http://avisynth.org/mediawiki/Avisynth:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-Old-Wiki"><a href="http://avisynth.org/oldwiki/">Old Wiki</a></li>
+				<li id="n-Doom9-Forum"><a href="http://forum.doom9.org/">Doom9 Forum</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-in_other_languages">
+		<h5>in other languages</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-Deutsch-.28Ge.29"><a href="http://avisynth.org/mediawiki/Main_Page/de">Deutsch (Ge)</a></li>
+				<li id="n-Espa.C3.B1ol-.28Es.29"><a href="http://avisynth.org/mediawiki/Main_Page/es">Español (Es)</a></li>
+				<li id="n-Fran.C3.A7ais-.28Fr.29"><a href="http://avisynth.org/mediawiki/Main_Page/fr">Français (Fr)</a></li>
+				<li id="n-.E6.97.A5.E6.9C.AC.E8.AA.9E-.28Ja.29"><a href="http://www.avisynth.info/">日本語 (Ja)</a></li>
+				<li id="n-Polski-.28Pl.29"><a href="http://avisynth.org/mediawiki/Strona_g%C5%82%C3%B3wna">Polski (Pl)</a></li>
+				<li id="n-.D0.A0.D1.83.D1.81.D1.81.D0.BA.D0.B8.D0.B9-.28Ru.29"><a href="http://avisynth.org/mediawiki/Main_Page/ru">Русский (Ru)</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="http://avisynth.org/mediawiki/Special:Search" id="searchform"><div>
+				<input id="searchInput" name="search" type="text" title="Search Avisynth [alt-f]" accesskey="f" value="">
+				<input type="submit" name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists">&nbsp;
+				<input type="submit" name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://avisynth.org/mediawiki/Special:WhatLinksHere/InpaintFunc" title="List of all wiki pages that link here [alt-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://avisynth.org/mediawiki/Special:RecentChangesLinked/InpaintFunc" title="Recent changes in pages linked from this page [alt-k]" accesskey="k">Related changes</a></li>
+<li id="t-upload"><a href="http://avisynth.org/mediawiki/Special:Upload" title="Upload images or media files [alt-u]" accesskey="u">Upload file</a></li>
+<li id="t-specialpages"><a href="http://avisynth.org/mediawiki/Special:SpecialPages" title="List of all special pages [alt-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&printable=yes" title="Printable version of this page [alt-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://avisynth.org/mediawiki/index.php?title=InpaintFunc&oldid=6665" title="Permanent link to this version of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="./InpaintFunc - Avisynth_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="./InpaintFunc - Avisynth_files/somerights20.png" alt="Attribution-ShareAlike 3.0"></a></div>
+			<ul id="f-list">
+				<li id="lastmod"> This page was last modified on 17 September 2010, at 13:38.</li>
+				<li id="viewcount">This page has been accessed 11,599 times.</li>
+				<li id="copyright">Content is available under <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="external " title="http://creativecommons.org/licenses/by-sa/3.0/" rel="nofollow">Attribution-ShareAlike 3.0</a>.</li>
+				<li id="privacy"><a href="http://avisynth.org/mediawiki/Avisynth:Privacy_policy" title="Avisynth:Privacy policy">Privacy policy</a></li>
+				<li id="about"><a href="http://avisynth.org/mediawiki/Avisynth:About" title="Avisynth:About">About Avisynth</a></li>
+				<li id="disclaimer"><a href="http://avisynth.org/mediawiki/Avisynth:General_disclaimer" title="Avisynth:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.168 secs. -->
+<!-- m5o0f7a --><div id="goog-gt-tt" class="skiptranslate"><div style="overflow:hidden"><div class="logo"><img src="./InpaintFunc - Avisynth_files/mini_google.png"></div><a class="close-button" href="javascript:void(0)" title="Close"><img src="./InpaintFunc - Avisynth_files/cleardot.gif" width="15" height="15" style="background-image:url(http://translate.googleapis.com/translate_static/img/te_ctrl3.gif); background-position:-28px 0px"></a></div><div class="top"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="title left">Original Text:</div></div><div class="middle"><div class="original-text"></div></div><div class="bottom"><div class="activity-links"><span class="activity-link">Показать альтернативный перевод</span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; "></div></div><!-- m9o5f8a --></body></html>

@@ -1,0 +1,5 @@
+audio codec:
+AC3
+
+audio cli:
+-b 192

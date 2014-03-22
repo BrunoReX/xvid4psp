@@ -1,0 +1,57 @@
+<html>
+<body>
+<h1>Bifrost 1.1</h1>
+<p>Bifrost is a temporal derainbower for avisynth that works in the yv12 colorspace and is intended for region 1 anime dvds (hasn't been tested with anything else). The advantage of a temporal derainbower is that it can actually recover detail and doesn't just smooth the image and cause color bleeding. The bad part is that it's only possible to process static parts of the image which is why an alternative derainbowing method can be used with the altclip parameter. The most similar filter is probably the temporal processing part of the dotcrawl virtualdub filter but with considerably less checks for artifacts.</p>
+
+<h2>Changes</h2>
+<h5>Version 1.1</h5>
+<ul>
+<li>Corrected several bad assumptions about pitch and no longer requests frames out of range which makes it compatible with avisynth 2.5.7.</li>
+<li>Uses the whole image and not just the upper half to determine if there is too much motion, this reduces artifacts greatly in certain clips but the scenelumathresh argument now has to be twice as big as in previous versions for the same effect.</li>
+<li>Processes the image borders properly instead of just ignoring them.</li>
+<li>Can look two frames in either direction instead of just one frame in both. This makes it possible to remove rainbows in frames right before and after scenechanges.</li>
+</ul>
+
+<h2>Rainbow Types</h2>
+<p>When dealing with telecined material you first have to determine if the rainbows were added before or after it was telecined. To do this use separatefields().selectodd() on the source. Find a frame with lots of rainbowing and see if they change every frame or if there's a duplicate every 5 frames. If you find duplicates it's type 2 rainbows and you have to perform perfect ivtc in yatta and force the right pattern over the entire source clip and then finally use "Decimation by pattern" in the project to finish it. If you find no duplicates (type 1) the process is much simpler and you just put Bifrost() right after the source.
+
+<h2>Usage</h2>
+<p>Using Bifrost multiple times on type 2 rainbows can improve the results.</p>
+<p><b>Type 1:</b></p>
+<p>Mpeg2source("fruits_basket_r1.d2v")<br/>
+Bifrost()<br/>
+Telecide(order=1)<br/>
+Decimate()<br/>
+</p>
+<p><b>Type 1 using altclip and SSIQ:</b></p>
+<p>Mpeg2source("gsc_r1.d2v")<br/>
+Bifrost(scenelumathresh=1.5,altclip=SSIQ(11,100,true),interlaced=true)<br/>
+Telecide(order=1)<br/>
+Decimate()</p>
+
+
+<p><b>Type 2:</b></p>
+<p>Mpeg2source("trigun_r1.d2v")<br/>
+Telecide(order=1,ovr="trigun.tel.txt")<br/>
+Decimate(ovr="trigun.dec.txt")<br/>
+Bifrost(interlaced=false)
+</p>
+<p><b>Type 2 using altclip and SSIQ:</b></p>
+<p>Mpeg2source("bgc_r1.d2v")<br/>
+Telecide(order=1,ovr="bgc.tel.txt")<br/>
+Decimate(ovr="bgc.dec.txt")<br/>
+Bifrost(scenelumathresh=2,altclip=SSIQ(11,300,false),interlaced=false)<br/>
+</p>
+
+<h2>Arguments</h2>
+<p>Bifrost(clip, clip altclip (Returns the first clip if none is specified, has to be yv12), float scenelumathresh (Default 3.0), int variation (Default 5), bool conservativemask (Default false), bool interlaced (Default true))<br />
+Altclip is the clip to return frames from when scenelumathresh is passed. This allows rainbows to be removed even in high motion scenes with other processing.<br/>
+Scenelumathresh is how much every pixel in the frame/field may change on average and still be processed.<br />
+Variation determines how much the chroma must change for it to be considered a rainbow. Increasing it decreases false detection in some cases.<br />
+Conservativemask determines if the area around pixels that are considered rainbows also are processed. Can reduce miscoloring a little when there's both movement and rainbows.<br />
+Interlaced changes between field based and frame based decisions for scenelumathresh and is equivalent to using separatefields and weave.<br /></p>
+
+<h2>The Rest</h2>
+<p>Bifrost was created by Fredrik Mellbin. You can find my avisynth related things at <a href="http://ivtc.org/">ivtc.org</a> and if you want to contact me I can be found in the doom9 forums and in #darkhold on irc.chatsociety.net. The source will probably never be released since it contains nothing of real interest. Only simple chroma averaging and a few thresholds.</p>
+</body>
+</html>

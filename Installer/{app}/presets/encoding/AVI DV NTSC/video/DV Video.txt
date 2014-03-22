@@ -1,0 +1,5 @@
+video codec:
+DV
+
+video cli:
+-vcodec dvvideo -an -pix_fmt yuv411p -vtag dvsd
