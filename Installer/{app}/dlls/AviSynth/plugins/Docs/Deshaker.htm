@@ -1,0 +1,3837 @@
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <style type="text/css">
+  body
+  {
+    background-color:#FFFFFF;
+  }
+  h1
+  {
+    font-family:"Verdana";
+    
+font-size:2.2em;
+  }
+  h2
+  {
+    font-family:"Verdana";
+    
+font-size:1.6em;
+  }
+  h3
+  {
+    font-family:"Verdana";
+    
+font-size:1.1em;
+  }
+  h4
+  {
+    font-weight:bold;
+    font-family:"Verdana";
+    
+font-size:0.9em;
+    margin-bottom:0;
+  }
+  p,li
+  {
+    font-family:"Verdana";
+    
+font-size:0.8em;
+  }
+  p.small
+  {
+    
+font-size:0.6em;
+  }
+  p.faq_q
+  {
+    font-weight:bold;
+    margin-top:1em;
+    margin-bottom:0.28em;
+  }
+  p.faq_a
+  {
+    margin-top:0;
+    margin-bottom:0.28em;
+  }
+  li
+  {
+    margin-top:0;
+    margin-bottom:0.28em;
+  }
+  .gray
+  {
+    color:#808080;
+  }
+  .smaller
+  {
+    
+font-size:0.8em;
+  }
+  table.norm
+  {
+    border-collapse: collapse;
+  }
+  table.norm td 
+  {
+    background-color: #D8D8D8;
+    padding: 4px;
+    border: 1px #F0F0F0 solid;
+  }
+
+  </style>
+
+  <title>Deshaker - video stabilizer</title>
+<style id="tabletools2_css">.tt_icon_asc, .tt_icon_desc, .tt_icon_asc1, .tt_icon_desc1, .tt_icon_asc2, .tt_icon_desc2, .tt_icon_asc3, .tt_icon_desc3, .tt_icon_asc4, .tt_icon_desc4 { padding-right: 8px; background-repeat: no-repeat; background-position: center right; }
+.tt_icon_asc { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAKElEQVQYlWNggAGe8/8ZeM7/Z0ABMEEUSXRBuCRMBbJqFCOx2jH0JQCDSj71Y9NI5gAAAABJRU5ErkJggg==); }
+.tt_icon_desc { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAKUlEQVQYlWNggAGe8/8ZeM7/Z8AAQ10CxkGW4Dn/HyGAjlFUY7UHTRAA8BY+9dt90dMAAAAASUVORK5CYII=); }
+.tt_icon_asc1 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAALUlEQVQYlWNggAGe8/8ZeM7/Z0ABMEEUSXRBuCRMBbJqFCMx7MBpFF5XDTYJAOjBRl2TiMRpAAAAAElFTkSuQmCC); }
+.tt_icon_desc1 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAKklEQVQYlWNggAGe8/8ZeM7/Z8AAg0sCJoCO8etAl+A5/5+AUTjNx2IHAOMuRl3oMgi9AAAAAElFTkSuQmCC); }
+.tt_icon_asc2 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAALUlEQVQYlWNggAGe8/8ZeM7/Z0ABMEEUSXRBuCRMBbJqFCMx7MBpFBV10F4CANvZTcX72GStAAAAAElFTkSuQmCC); }
+.tt_icon_desc2 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAKklEQVQYlWNggAGe8/8ZeM7/Z8AAtJSACaBjautAl+A5/5+AUTjNx2IHAEi0TcXmBWzoAAAAAElFTkSuQmCC); }
+.tt_icon_asc3 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAALUlEQVQYlWNggAGe8/8ZeM7/Z0ABMEEUSXRBuCRMBbJqFCMx7MBp1IDqIFUCAFySVS21ONifAAAAAElFTkSuQmCC); }
+.tt_icon_desc3 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAKklEQVQYlWNggAGe8/8ZeM7/Z8AAxEvABNDxwOtAl+A5/5+AUTjNx2IHACCZVS2kOc3PAAAAAElFTkSuQmCC); }
+.tt_icon_asc4 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAK0lEQVQYlWNggAGe8/8ZeM7/Z0ABMEEUSXRBuCRMBbJqFCMx7MBp1JDSAQBq3VyV9AphZwAAAABJRU5ErkJggg==); }
+.tt_icon_desc4 { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAANCAYAAACKCx+LAAAAJklEQVQYlWNggAGe8/8ZeM7/Z8AQQMdDUQe6BM/5/wSMwmk+FjsAat1clW2GeUoAAAAASUVORK5CYII=); }
+.tt_it { color: #543; background: #ffc; border: 1px solid #715; width:95%; }
+.tt_sel { color: #543; background: #cff; border: 1px solid #517; width:95%; }
+.tt_inv { background: #ff0; }
+td.tt_found { background: #ff9; }
+tr.tt_summary { background: #fcf; }
+td.tt_summary { text-align: center; font-size: 10px; }
+
+</style></head>
+
+<body topmargin="0" leftmargin="0" rightmargin="0" alink="#FF6600" bgcolor="#FFFFFF" link="navy" vlink="navy">
+
+  <table border="0" cellpadding="12" cellspacing="0" width="100%">
+    <tbody><tr>
+      <td width="100%">
+        <table style="border: 1px solid #808080;" cellpadding="8" cellspacing="0" width="100%">
+          <tbody><tr>
+            <td bgcolor="#F8F8F8" width="100%">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody><tr>
+                  <td>
+                    <h1>Deshaker <span style="font-size: .4em;">(Latest version: <a href="#version%20history">3.0</a>)</span></h1>
+
+                    <p>Deshaker is a video stabilizer for VirtualDub. It eliminates camera shakiness and makes panning, rotation and zooming smoother.</p>
+
+                    <p><u>Features</u>:</p>
+
+                    <ul>
+                      <li>
+                        Stabilizes horizontal/vertical panning, rotation and zooming.
+                      </li>
+
+                      <li>
+                        Works in 2 passes for optimal simulated camera motion.
+                      </li>
+
+                      <li>
+                        Can use previous and future frames to fill in "black areas" caused by the stabilization.
+                      </li>
+
+                      <li>
+                        Optional motion vector video output during first pass.
+                      </li>
+
+                      <li>
+                        Lots of settings for the advanced user.
+                      </li>
+
+                      <li>
+                        Human guidance is possible on a frame per frame basis.
+                      </li>
+                    </ul>
+                  </td>
+
+                  <td valign="top" width="40%">
+                    <table style="border-right: #a0a0a0 1px dotted; border-top: #a0a0a0 1px dotted; border-left: #a0a0a0 1px dotted; border-bottom: #a0a0a0 1px dotted" bgcolor="#E8E8E8" border="0" cellpadding="4" cellspacing="0" width="100%">
+                      <tbody><tr>
+                        <td>
+                          <p class="small"><b>External Deshaker links:</b></p>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <p class="small"><span style="color: maroon">[english]</span> A good but pretty old Deshaker guide by John Meyer:<br>
+                          <a href="http://www.sundancemediagroup.com/articles/deshaker_guide.htm">http://www.sundancemediagroup.com/articles/deshaker_guide.htm</a></p>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <p class="small"><span style="color: maroon">[deutsch]</span> The Deshaker manual (this page) and the John Meyer guide translated to German by Armin Schreiter:<br>
+                          <a href="http://www.ffc-hildesheim.de/tipps_tricks.htm">http://www.ffc-hildesheim.de/tipps_tricks.htm</a></p>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <p class="small"><span style="color: maroon">[español]</span> The Deshaker manual (this page) translated to Spanish by Ramón Cutanda:<br>
+                          <a href="http://www.videoedicion.org/documentacion/article/deshaker-filtro-estabilizador-para-virtualdub">http://www.videoedicion.org/documentacion/article/deshaker-filtro-estabilizador-para-virtualdub</a></p>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <p class="small"><span style="color: maroon">[français]</span> The Deshaker manual (this page) and the John Meyer guide translated to French by Andre Milliner:<br>
+                          <a href="http://letransfert.xooit.fr/t215-Deshaker-traduction-en-Francais-de-la-DOC.htm">http://letransfert.xooit.fr/t215-Deshaker-traduction-en-Francais-de-la-DOC.htm</a></p>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <p class="small"><span style="color: maroon">[english]</span> A guide with some good advice for stabilizing bicycle video, by John Allen:<br>
+                          <a href="http://www.sheldonbrown.com/deshaker.html">http://www.sheldonbrown.com/deshaker.html</a></p>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <p class="small"><span style="color: maroon">[p&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;]</span> Detailed Russian article comparing Deshaker to other video stabilizers, by Eugene Vasiliev:<br>
+                          <a href="http://www.ixbt.com/divideo/digital-video-guide/5-2-1-stabilization.shtml">http://www.ixbt.com/divideo/digital-video-guide/5-2-1-stabilization.shtml</a></p>
+                        </td>
+                      </tr>
+                    </tbody></table>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p>&nbsp;</p>
+
+              <h2>Installation</h2>
+
+              <p>Download Deshaker using either link below and place the vdf file in the VirtualDub <i>plugins</i> directory and (re)start VirtualDub. (If you don't see a <i>plugins</i> directory, just create it.)</p>
+
+              <ul>
+                <li>
+                  <a href="http://www.guthspot.se/video/files/Deshaker30.zip"><b>Deshaker 32-bit</b></a> &nbsp;(for 32-bit VirtualDub on any Windows)
+                </li>
+
+                <li>
+                  <a href="http://www.guthspot.se/video/files/Deshaker30_64.zip"><b>Deshaker 64-bit</b></a> &nbsp;(for 64-bit VirtualDub on 64-bit Windows)
+                </li>
+              </ul>
+
+              <p>I strongly recommend using VirtualDub version 1.9.9 or later for Deshaker version 2.5 or later.</p>
+
+              <p>If you have any problems or questions, please start by reading the <a href="#faq">FAQ</a> below.</p>
+
+              <p>&nbsp;</p>
+
+
+              <h2><a name="short guide">The Short Guide</a></h2>
+
+              <p>These are the minimum number of steps you must make in order to stabilize a video clip:</p>
+
+              <ol>
+                <li>
+                  Open your video clip in VirtualDub <span class="gray">(menu: <i>File/Open video file</i>)</span>.<br>
+		  <span class="smaller">(Tip: If VirtualDub can't open your video file directly, you can use <a href="http://avisynth.org/mediawiki/Main_Page">AviSynth</a> to open pretty much anything in VirtualDub. Also, there are several <a href="http://forums.virtualdub.org/index.php?act=ST&amp;f=7&amp;t=19488">input plugins</a> available for VirtualDub.)</span>
+                </li>
+
+                <li>
+                  Add the Deshaker filter <span class="gray">(menu: <i>Video/Filters</i>, click: <i>Add</i>, double-click: <i>Deshaker</i>)</span>.
+                </li>
+
+                <li>
+                  In the Deshaker configuration dialog that appears, select the correct <i>Source pixel aspect</i> and <i>Video type</i>. Also, if your camcorder has a
+                  CMOS sensor instead of a CCD sensor, check <i>Camcorder has a rolling shutter</i>, and if possible, find out the correct rolling shutter amount (see settings below). Then, click <i>OK</i> to close.<br>
+		  <span class="smaller">(Note: Most modern cameras have a CMOS sensor.)</span>
+                </li>
+
+                <li>
+                  Step through the video in some way. One way is to use <i>File/Preview filtered</i>
+ in VirtualDub, which lets you see all processed frames, but is
+                  limited to a processing speed equal to the clip's 
+framerate. To ensure maximum processing speed at all times, use <i>File/Run video analysis pass</i> instead. No useful video is created during this first pass, so there's no need to save
+                  the output video.<br>
+		  <span class="smaller">(Note: If you use <i>File/Preview filtered</i>, it's important that the menu items <i>Options/Drop frames when behind</i> and <i>Options/Sync to audio</i> are unchecked.)</span>
+                </li>
+
+                <li>
+                  Open the Deshaker configuration dialog again <span class="gray">(menu: <i>Video/Filters</i>, double-click: <i>Deshaker</i> line)</span>, and select
+                  <i>Pass 2</i> by clicking on it.
+                </li>
+
+                <li>
+                  Select a video codec <span class="gray">(menu: <i>Video/Compression</i>)</span> and encode the video the usual way <span class="gray">(menu: <i>File/Save as AVI</i>)</span>.
+                </li>
+              </ol>
+
+              <p>The default settings will however result in black 
+borders caused by moving the frames around to compensate for shaky 
+video. There are various settings that can help limit the size of the
+              borders, remove them completely or make them less ugly. 
+Read about these pass 2 settings below.</p>
+
+              <p>&nbsp;</p>
+
+
+              <h2>The Long Guide</h2>
+
+              <p>This section describes all the settings in detail.</p>
+
+              <p>The default parameter settings are chosen to work 
+pretty good under most circumstances. However, you can always get better
+ results by adjusting some settings. For example, some complicated clips
+              might require that you change some pass 1 settings, or you
+ will get jerky video. Also, you'll need to change some pass 2 settings 
+if you want to take care of the black borders.</p>
+
+              <p>Remember that all settings have a purpose, or they 
+wouldn't be there. Most people I hear from seem to use the default 
+settings or change very few of them. And many clips I've seen from other
+              users are far from as good as they could have been. I know
+ the settings may seem a little hard to understand and maybe a little 
+too many, but if you want perfect looking video you should at least try.</p>
+
+              <p>To understand these settings it is necessary for you to understand how the filter works, so here comes a brief description.</p>
+
+              <h3>How the Filter Works</h3>
+
+              <p>During <b>Pass 1</b> the filter tries to find the 
+panning, rotation and zoom that, when applied to the current image, 
+makes it look like the previous image (almost). It does this by taking
+              blocks of pixels in the two images and finding the shift 
+that makes them match as good as possible. First, to find the "big" 
+motion, the images are reduced a lot in scale and the initial shift is 
+calculated from the whole (scale-reduced)
+              images. This shift is then fintuned in a scale twice as 
+big and with four times as many blocks, and so on. Finally we have the 
+block shifts (or motion vectors) in the full image. The filter then 
+finds the best values for panning, rotation
+              and zoom based on these motion vectors and those values 
+are written to the log file.</p>
+
+              <p>At the start of <b>Pass 2</b> the values in the log 
+file are read and optimal camera motion is calculated based on the 
+smoothness settings. The filter then transforms each image of the video
+              clip according to this motion.</p>
+
+              <h3>The Settings</h3>
+
+              <table class="norm" cellspacing="0">
+                <tbody><tr>
+                  <td width="18%">
+                    <h4>Setting (pass 1&amp;2)</h4>
+                  </td>
+
+                  <td width="63%">
+                    <h4>Description</h4>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Source pixel aspect</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>Tells the filter what pixel aspect ratio the 
+source clip has. It's important that you set this correctly, or the 
+rotation (for example) won't be made correctly. You may enter any value 
+if
+                    you can't find the preset you're looking for.</p>
+
+                    <p>If the video size is 720x480, 704x480 or 352x240,
+ it's probably NTSC, and if it's 720x576, 704x576 or 352x288, it's 
+probably PAL. The HD resolutions 1920x1080 and 1280x720 have square
+                    pixels.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Video type</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>Selects between progressive video and interlaced 
+video (for input and output). If the video is interlaced you must also 
+determine if the video has the first or last field on the first
+                    line. In general, DV uses lower field first and all 
+other formats (including HDV) use upper field first. You can easily 
+check that your setting is correct by looking at the motion vectors for 
+the two fields when there's motion in the
+                    clip. If the vectors point in opposite directions 
+most of the time the setting is incorrect.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%"><p>Camcorder has a rolling shutter</p></td>
+
+                  <td width="63%">
+                    <p><a name="rolling shutter setting">Most</a> modern
+ camcorders (those with a CMOS sensor instead of a CCD sensor) don't 
+capture the whole frames at once, but instead use a "rolling shutter". 
+Here the lines
+                    of a frame are captured one after another at 
+slightly different (although usually overlapping) times, which can cause
+ some ugly effects. For example, vertical lines will get slanted when 
+doing a fast horizontal pan, and when panning
+                    up/down everything will get squeezed and stretched.</p>
+
+                    <p>For Deshaker, a rolling shutter means that the 
+camcorder shake parameters (panning, rotation and zoom) aren't 
+necessarily constant over the entire frame, but can change slightly from
+ one line to the
+                    next. If you enable this setting, Deshaker will 
+therefore allow these parameters to change linearly in the vertical 
+direction during pass 1 (and you will see a range of values under the 
+output video). This makes extracting these
+                    parameters more reliable and it also makes it 
+possible for pass 2 to remove the rolling shutter distortions if you 
+keep the setting enabled during that pass too. Note, however, that only 
+rolling shutter distortions that are caused by
+                    moving/shaking the camcorder can be removed. Fast 
+moving objects within the frame will sadly still look as strange as 
+before.</p>
+
+                    <p>Although the actual camcorder shake isn't linear 
+during the capture of a frame, it's usually a good enough approximation 
+to make the distortions disappear almost completely. But I strongly 
+recommend
+                    enabling the internal camcorder stabilizer, to make 
+the distortions more linear. If you have one of those compact CMOS 
+cameras with bad (or no) internal stabilization, and the clip has very 
+fast shakes (for example if the camera is
+                    mounted on a bike or similar), or if you use a 
+fisheye lens, you probably won't be able to get a very good result from 
+Deshaker, since the distortions will be far from linear in these cases. 
+Get a CCD camera capable of high shutter speeds for these kind of
+                    videos.</p>
+
+                    <p>Different camcorder models have different rolling
+ shutter speeds (how fast the shutter rolls downwards). And a certain 
+model could possibly even have different speeds under different 
+conditions. To be
+                    able to handle all speeds properly, you can enter an
+ amount from 0 to 100%. You can try which amount setting looks best, or 
+you can measure it more precisely yourself using the following 
+procedure:</p>
+
+                    <ol>
+                      <li>Place the camcorder on something to make it 
+steady, yet easy to pan left/right at a constant speed, for example on a
+ tripod, or even better, on a turntable. Then, point it towards some 
+vertical line (or edge) that covers the <u>whole height</u> of the frame.</li>
+
+                      <li>Now, using a fast shutter speed (to make the 
+line sharp), record some video of the line when the camcorder is 
+completely still, as well as when it pans left and/or right (direction 
+doesn't matter) at a pretty fast constant speed.</li>
+
+                      <li>Then, for <u>interlaced video</u>: Pick a still frame and a panning frame. The panning frame should contain two occurrences of the line, one in each field.<br>
+                      And for <u>progressive video</u>: Pick a still frame and <u>two consecutive</u> panning frames.</li>
+
+                      <li>Then, find the horizontal position (x-pos) of the vertical line at 5 places, namely at:<br>
+                       &nbsp;<i>St</i> = top of still frame,<br>
+                       &nbsp;<i>Sb</i> = bottom of still frame,<br>
+                       &nbsp;<i>Ft</i> = top of first panning field/frame,<br>
+                       &nbsp;<i>Fb</i> = bottom of first panning field/frame,<br>
+                       &nbsp;<i>Nt</i> = top of next panning field/frame.</li>
+
+                      <li>Now, the rolling shutter amount can be calculated as: 100 * (<i>Fb</i> - <i>Ft</i> + <i>St</i> - <i>Sb</i>) / (<i>Nt</i> - <i>Ft</i>).</li>
+                    </ol>
+
+                    <p>In the above procedure, if you have a fisheye 
+lens, try to pick fields/frames where the line is on opposite sides 
+(left/right) of the center, and preferably at an equal distance from it.
+ Also, when you pick the top and bottom positions, you might want to 
+extrapolate the lines from the center to the top/bottom and use those 
+positions instead.</p>
+
+                    <p>Usually the shutter rolls downwards on the 
+sensor, but there are a few cameras where it rolls upwards instead. In 
+this case you will get a negative rolling shutter amount.</p>
+
+                    <p>The default rolling shutter amount is 88%, which 
+was measured from the Sony HDR-HC1(E) camcorder. (Deshaker versions 
+before 2.4 had 88% fixed.)<br>
+                    If you measure the amount for another camcorder, 
+please let me know so I can publish the values for other users. Here are
+ the ones I've got so far:</p>
+
+                    <ul>
+                      <li><b>Canon EOS 5D Mark II</b>: Probably somewhere between 66% - 72%</li>
+
+                      <li><b>Canon EOS 60D</b> - 1080p25: 47.5% (+/- 1)</li>
+
+                      <li><b>Canon EOS 70D</b> - 1080p25: 61%</li>
+
+                      <li><b>Canon EOS 500D</b>: 71%</li>
+
+                      <li><b>Canon EOS 550D</b>: 66%</li>
+
+                      <li><b>Canon EOS 600D / Rebel T3i</b> - 1080p30: 57% (+/- 1)</li>
+
+                      <li><b>Canon EOS 650D</b> - 720p50: 56.8%</li>
+
+                      <li><b>Canon HV20</b> - 1440x1080p25: 38%</li>
+
+                      <li><b>Canon IXUS 220 HS</b><br>
+                      - 1080p24: Somewhere around 75%<br>
+                      - 720p30: 36%</li>
+
+                      <li><b>Canon IXUS 300 HS</b> - 720p30: 57% - 63%</li>
+
+                      <li><b>Canon LEGRIA HF M36</b> - 1080i50: 82%</li>
+
+                      <li><b>Canon Vixia HF R300</b><br>
+                      - 1920x1080 30p MXP mode: 40%<br>
+                      - 1440x1080 30p FXP mode: 43%</li>
+
+                      <li><b>Canon XF100</b> - 1080p25: 32%</li>
+
+                      <li><b>Casio Exilim EX-F1 Pro</b><br>
+                      - 1080i60: 72%<br>
+                      - 720p30: 22%</li>
+
+                      <li><b>Casio Exilim EX-FC100</b> - 720p30: 64.5%</li>
+
+                      <li><b>Casio Exilim FH-100</b> - 720p30: 33%</li>
+
+                      <li><b>Contour HD1080</b><br>
+                      - 1080p30: 88%<br>
+                      - 720p60: Around 75%<br>
+                      - 720p30: 73%</li>
+
+                      <li><b>Drift Innovation HD170</b> - 1080p: 60%</li>
+
+                      <li><b>DXG 595V</b> - 1080p30: Probably 100%</li>
+
+                      <li><b>EVOLVE 4000HD Sport</b> - 720p30: 92%</li>
+
+                      <li><b>Flip Mino HD</b>: 58.6%</li>
+
+                      <li><b>FlyCamOne HD 720p</b> - 720p30: 47.6%</li>
+
+                      <li><b>GoPro HD Hero</b><br>
+                      - 1080p30: 95%<br>
+                      - 720p60: 60% (although another person reported 81-82% earlier)<br>
+                      - 720p30: 65%</li>
+
+                      <li><b>GoPro HD Hero2</b><br>
+                      - 1080p30, Wide FOV (170°): 83%<br>
+                      - 1080p30, Medium FOV (127°): 82%<br>
+                      - 1080p30, Narrow FOV (90°): 88%<br>
+                      - 720p60: 74%<br>
+                      - 720p30: 85%</li>
+
+                      <li><b>GoPro Hero3 Black Edition</b> - 1080p60, Wide FOV: 94% (+/- 2)</li>
+
+                      <li><b>GoPro Hero3+ Black Edition</b><br>
+                      - 1080p60, Wide FOV: 88.89%<br>
+                      - 1080p60, Narrow FOV: 86.05%<br></li>
+
+                      <li><b>iPhone 3GS</b>: 66%<br>
+                      (Note: Deshaker assumes that the rolling shutter 
+rolls downwards over the frames. For this to happen, the iPhone must 
+record video in landscape mode with the lens in the upper part of the 
+phone. Otherwise you'll probably need to
+                      rotate the video before Deshaker, and rotate it 
+back afterwards.)</li>
+
+                      <li><b>iPhone 4</b>: 97% (+/- 2)<br>
+                      (Note: Deshaker assumes that the rolling shutter 
+rolls downwards over the frames. For this to happen, the iPhone must 
+record video in landscape mode with the lens in the upper part of the 
+phone. Otherwise you'll probably need to
+                      rotate the video before Deshaker, and rotate it 
+back afterwards.)</li>
+
+                      <li><b>iPhone 5</b><br>
+                      - 1080p30: 82.1% (+/- 0.1)<br>
+                      - 1080p24: 65.8% (+/- 0.1)<br>
+                      - 1080p30, stabilization off (3rd party app): 89.6% (+/- 0.1)<br>
+                      - 480p30 (3rd party app): 67.8% (+/- 0.2)<br>
+                      (Note: Deshaker assumes that the rolling shutter 
+rolls downwards over the frames. For this to happen, the iPhone must 
+record video in landscape mode with the lens in the upper part of the 
+phone. Otherwise you'll probably need to
+                      rotate the video before Deshaker, and rotate it 
+back afterwards.)<br>
+                      (Note 2: The stock camera app automatically 
+chooses between 30 fps and 24 fps modes based on lighting conditions, 
+thus it might be necessary to cut the video where the fps changes and 
+process the parts individually.)</li>
+
+                      <li><b>iPod touch 4G</b><br>
+                      - 720p30 (day mode): 98%<br>
+                      - 720p24 (night mode): 100%</li>
+
+                      <li><b>JVC GZ-HM30</b> - 720p30: 45%-50%</li>
+
+                      <li><b>Kodak PlayTouch</b> - 1080p30 (with stabilizer turned on): 73.5% (+/- 1.5)</li>
+
+                      <li><b>Kodak Zi8</b>: Somewhere between 80% - 100%</li>
+
+                      <li><b>Motorola Defy</b> - 848x480 widescreen: 52%</li>
+
+                      <li><b>Nikon 1 J1</b><br>
+                      - 1080i59.94: 80%<br>
+                      - 1080p29.97: 47%<br>
+                      - 720p59.94: 92%</li>
+
+                      <li><b>Nikon Coolpix P510</b><br>
+                      - 1080p30: 82%<br>
+                      - 720p60: 63%<br>
+                      - 720p30: 82%<br>
+                      - "iFrame": 82%<br>
+                      - 480p120: 41%</li>
+
+                      <li><b>Nikon D5100</b> - 720p29.97: 52.6%</li>
+
+                      <li><b>Nikon D7000</b>: 40%</li>
+
+                      <li><b>Nikon D600</b><br>
+                      - 1080p30, FX mode (full frame): 64.1%<br>
+                      - 720p60, FX mode (full frame): 76.3%<br>
+                      - 720p30, FX mode (full frame): 65.7%<br></li>
+
+                      <li><b>Nikon D800</b> - 1080p25: 23.0%</li>
+
+                      <li><b>Nokia N8-00</b> - 720p25: One guy reported 
+60% (+/- 1) using unknown app in August 2011, and one reported 80% (+/- 
+1) using SymDVR in March 2013.</li>
+
+                      <li><b>Olympus E-PL1</b> - 720p30: 59%</li>
+
+                      <li><b>Oregon Scientific ATC5K</b>: 100%</li>
+
+                      <li><b>Panasonic GH1</b> - 1080p24: 66%</li>
+
+                      <li><b>Panasonic GH2</b><br>
+                      - FHD 1080i60: 91.9%<br>
+                      - FHD 1080i50: 75.0%<br>
+                      - FHD Cinema 1080p24: 63.9%<br>
+                      - SD 720p60: 92.3%<br>
+                      - SD 720p50: 78.4%</li>
+
+                      <li><b>Panasonic GH3</b><br>
+                      - 1080p50 (50Mbps, MOV): 78%<br>
+                      - 1080p25 (72Mbps and 50Mbps, MOV): 39%<br>
+                      - 1080p24 (72Mbps, MOV): 38%<br>
+                      - 1080p25 with Extra Tele Conversion (72Mbps and 50Mbps, MOV): 75%<br>
+                      - 1080p24 with Extra Tele Conversion (72Mbps, MOV): 72%</li>
+
+                      <li><b>Panasonic HDC-SD300 EG-K</b>: 73%</li>
+
+                      <li><b>Panasonic HDC-SD900 EG-K</b> - 1080p50: 80.0% (+/- 1.0)</li>
+
+                      <li><b>Panasonic HDC-TM700</b> - 1080p60: 91%</li>
+
+                      <li><b>Panasonic HC-X900M (PAL version)</b> - 1080p50: 73%</li>
+
+                      <li><b>Pentax K-7</b><br>
+                      - 1536x1024p30: -96%<br>
+                      - 720p30: -70%</li>
+
+                      <li><b>Praktica DVC 5.4 HDMI</b> - 1080p30: 100%</li>
+
+                      <li><b>Replay XD1080</b><br>
+                      - 1080p30: 89% (+/- 1)<br>
+                      - 720p60: 97% (+/- 3)</li>
+
+                      <li><b>Samsung Galaxy S2 (GT-I9100)</b><br>
+                      - 1080p, superfine: 63%<br>
+                      - 720p, superfine: 86%</li>
+
+                      <li><b>Samsung Galaxy S3</b> - 1080p30: 90% (+/- 1) (fine details, steady disabled, held horizontally with home button to the right)</li>
+
+                      <li><b>Samsung SPH-A920</b>: 29% (at zoom factor 1x)</li>
+
+                      <li><b>Sanyo CG100</b> - 720p59.94: 73.3%</li>
+
+                      <li><b>Sanyo HD2000</b> (Note: Available light may possibly affect RS amount on the HD2000.)<br>
+                      - Full HR: 22%<br>
+                      - Full HD: 50%<br>
+                      - Full SHQ: 44%<br>
+                      - HD SHQ: 48%<br>
+                      - TV SHQ: 37%</li>
+
+                      <li><b>Sanyo Xacti HD1010</b><br>
+                      - 1080p30: 28%<br>
+                      - 720p60: 48%</li>
+
+                      <li><b>Sony DSC-HX9V</b> - 1080p50: 82%</li>
+
+                      <li><b>Sony HDR-FX7</b>: 86.4% (+/- 2.0)</li>
+
+                      <li><b>Sony HDR-HC1</b>: 88%</li>
+
+                      <li><b>Sony HDR-HC1E</b>: 88%</li>
+
+                      <li><b>Sony HDR-V1U</b>: 86.4% (+/- 2.0)</li>
+
+                      <li><b>Sony HVR-A1E</b>: 82%</li>
+
+                      <li><b>Sony HVR-Z5</b><br>
+                      - 1080p25: 43.3%<br>
+                      - 1080i50: 88.1%</li>
+
+                      <li><b>Sony NEX-3</b> - 720p30: appr. 52%</li>
+
+                      <li><b>Sony NEX-5N</b><br>
+                      - 1080p50: 73.6%<br>
+                      - 1080p25: 73.2%<br>
+                      - 1080i50: 81.0%</li>
+
+                      <li><b>Sony NEX-7</b> - 1080p50: 86%</li>
+
+                      <li><b>Sony NEX-VG20</b><br>
+                      - 1080p25: 77.6%<br>
+                      - 1080i50: 70.1%</li>
+
+                      <li><b>Sony PMW-EX3</b> - 1080p25: 41% (+/- 2)</li>
+
+                      <li><b>Sony TX100V</b> - 1080p50: 59%</li>
+
+                      <li><b>Toshiba Camileo P30</b> (Note: Amount of 
+optical zoom is reported to influence the RS amount. I have no 
+explanation for this. The low value is for no zoom, and the high value 
+is for full optical zoom.)<br>
+                      - 1080p30: 84.4% - 95.2%<br>
+                      - 720p30: 77.6% - 82.2%<br>
+                      - 848x480p60: 80.0% - 85.7%<br></li>
+                    </ul>
+
+                    <p><b>Note:</b> If you set the camera to use digital
+ zoom (or "intelligent zoom" etc.), so that is doesn't use its whole 
+sensor, the rolling shutter amount will usually decrease by the same 
+factor as the zoom. For example, the Panasonic
+                    HDC-SD900 has 12x optical zoom, but it has an option
+ to extend that to 20x, using "intelligent zoom". This means that the 
+rolling shutter amount at 20x zoom will be 80% / (20 / 12) = 48%. (The 
+range 1x - 12x will have a constant RS
+                    amount of 80%, however.)<br>Note, though, that this 
+rule doesn't seem to be true when the sensor samples more pixels per 
+area unit when zooming digitally. Panasonic GH3's ETC mode is an example
+ of this.</p>
+
+                    <p>You cannot use the deep analysis algorithm with rolling shutter video.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Log file</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>The name of the log file to write in pass 1 and read in pass 2.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Append to file</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>If checked, Deshaker appends to the log file 
+instead of overwriting it. This is useful if you want to process certain
+ frames again.</p>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p></p>
+
+              <table class="norm" cellspacing="0">
+                <tbody><tr>
+                  <td width="18%">
+                    <h4>Setting (pass 1)</h4>
+                  </td>
+
+                  <td width="63%">
+                    <h4>Description</h4>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Video output</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="video output">What</a> kind of output to generate during pass 1. If you select <i>Motion vectors</i>
+ you will see the previous frame with arrows, or vectors, showing how to
+ move
+                    the blocks to match the current source image. Only 
+white vectors are used to calculate panning, rotation and zoom factor. 
+For interlaced video both of the fields are shown, the first field above
+ the last. There are also two additional
+                    options that extend the length of the vectors by a 
+multiple of 2 or 5, which can make it easier to see their direction.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Block size</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>The width and height of the blocks used during the image matching.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Scale</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>The maximum scale to do the image matching on. <i>Full</i> is best but very slow.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Use pixels</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>How many pixels in the blocks to actually use when matching. <i>All</i> is best but very slow.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Initial search range</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>In the most reduced scale this percentage gives the maximum shift while matching. Lower = slightly faster.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Differential search range</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>When going from a reduced scale to twice the 
+size, the filter already has approximate shifts. The differential search
+ range is how many pixels up, down, left and right from these
+                    approximate shifts to look when matching. Lower 
+values make processing a lot faster but when objects move quickly over 
+the frames, or if you have very fast/big rotations and/or zooms, 
+matching can fail for some blocks.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Detect rotation/zoom</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="detect rotationzoom">If</a> Deshaker has
+ problems finding a stable background to match on, and you know there is
+ no notable rotation/zoom in the problematic frames, you can turn
+                    off detection of rotation and/or zoom (individually)
+ for these frames (or the entire clip). This will make Deshaker assume 
+there is no rotation/zoom and therefore not accept groups of motion 
+vectors that indicate rotation/zoom. And
+                    this should make it easier for Deshaker to find the 
+background. But as I said, there mustn't be any rotation/zoom in the 
+analyzed frames for this to work. In fact, there might be problems even 
+when the camera is moving forward
+                    quickly, because it looks rather similar to zooming.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Discard motion of blocks that have maximum pixel value difference less than X</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="discard pixelvalue">Video</a> usually 
+contains some noise, even if you can't always see it. And because of 
+temporal smoothing and/or video compression, within the camera or
+                    elsewhere, this noise often has a tendency to look 
+very similar between two consecutive frames. And if a block of pixels 
+doesn't have any real features that can be matched on, Deshaker may 
+happily match on this similar looking noise
+                    instead. To avoid this, you can use this setting to 
+ignore blocks that don't contain a lot of color variation. The optimal 
+value can vary with amount of gain used when filming, and between 
+different cameras. If you see zero-length
+                    motion vectors (appearing as dots) in clear areas 
+like the sky, you probably need to increase this value.<br>
+                    Blocks that have been discarded by this setting show no motion vector in the output video of pass 1.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Discard motion of blocks that have match value less than X</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>If the best match value found while matching a certain block is below X this block is discarded.<br>
+                    Blocks that have been discarded by this setting show no motion vector in the output video of pass 1.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Discard motion of blocks that have 2nd best match larger than best minus X</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>If the second best match value found while 
+matching a certain block is close to the best match value, this means 
+that the best shift found isn't very reliable. It could just as well be
+                    this second shift that's the correct one. For 
+example a blue sky has good match values for all shifts. Setting this 
+parameter correctly discards those unreliable blocks.<br>
+                    Blocks that have been discarded by this setting show no motion vector in the output video of pass 1.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Discard motion of blocks that move more than X pixels in wrong direction</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>When calculating the best values for panning, 
+rotation and zoom based on all motion vectors, the filter soon discovers
+ that some blocks have motion that don't quite fit in with the "main
+                    motion". If a block has a motion vector that is more
+ than X pixels off this main motion it is discarded in order to get more
+ precise values. The motion vectors for these blocks are drawn in red in
+ the output video of pass 1 and are
+                    not used in any way. Since the panning, rotation and
+ zoom are all done in only 2 dimensions, it's possible to get a lot of 
+these blocks that don't seem to fit in with the main motion when the 
+effect of perspective gets big. This
+                    happens when the camera is set to wideangle and not 
+just rotating (along any axis), but actually moving. Here you should use
+ high X values (or maybe limit the matching area to the most distant 
+parts). When zoomed in a lot or when the
+                    camera is stationary, the perspective effect is low 
+and you should use low X values (even 1 or lower) to discard motion of 
+objects moving even very slightly.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p><a name="discard absolute">Discard</a> motion of blocks that move more than X pixels (absolute motion)</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>Simply discards all blocks that have a motion vector that is longer than X pixels. Might be useful in some cases.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Remember discarded areas to next frame</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="remember discarded areas">When</a> 
+enabled, this feature makes Deshaker try to ignore approximately the 
+same areas from one frame to the next. Deshaker will then become a lot 
+more
+                    successful in ignoring moving objects. As long as 
+they enter the scene rather slowly (by not covering too much of the 
+background), Deshaker will usually be able to ignore those objects even 
+if they eventually grow to cover most of the
+                    frame.</p>
+
+                    <p>If you want Deshaker to forget the remembered 
+discarded blocks for current frame (and start fresh), you can just click
+ this setting twice.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%"><p>Deep analysis if less than X percent of vectors are ok</p></td>
+
+                  <td width="63%">
+                    <p><a name="deep analysis setting">When</a> set to 
+0% (which is the default value) this does nothing. To enable it, set it 
+to 25% or something. Then, if less than 25% of the found vectors get 
+white using the
+                    standard algorithm, this deep analysis algorithm 
+kicks in. It does a much better job finding an object to lock on where 
+the standard algorithm can be confused and lock on two separate objects 
+at the same time, usually resulting very
+                    few white vectors and weird values. Use this in 
+combination with the discard setting above to control how much the 
+vectors in the object you want to lock on (usually the background) may 
+vary. For example, the blocks on a moving person
+                    usually don't move "coherently" as the background 
+usually does (if the camcorder is stationary). So by using a low value 
+for the discard setting above (maybe &lt; 1) the person would probably 
+get very few white vectors and this
+                    algorithm would therefore hopefully lock on the 
+background instead, even if it's a rather small part of the frame. This 
+algorithm is very good, but also VERY slow (depending on other settings 
+and how complicated the video is).</p>
+
+                    <p>New since version 3.0 is that deep analysis will 
+only be used whenever we're ignoring remembered areas from previous 
+frame, either because remembering is disabled, or because we get way too
+ few ok
+                    blocks using the standard algorithm. The reason for 
+this new behaviour is that the deep analysis always finds the panning, 
+rotation and zoom that results in the most white vectors, but this is 
+not always good, because this can mean
+                    that the white vectors suddenly jump to a new 
+object/area, which can cause a sudden jump in the video.</p>
+
+                    <p>You cannot use the deep analysis algorithm with rolling shutter video.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Skip frame if less than X percent of all blocks are ok</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>If less than X percent of all blocks are ok in a 
+frame (i.e. the rest of the blocks either have no acceptable match or 
+have been discarded), this frame will be skipped, meaning Deshaker
+                    will make no attempt to stabilize it in pass 2. 
+Skipped frames will be marked with the keyword "skipped" in the log 
+file.</p>
+
+                    <p>You can see the percentage of ok blocks below the output frame during pass 1.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Detect scenes</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="detect scenes">If</a> this setting is 
+enabled, Deshaker will compare the scene detect threshold entered here 
+to a scene detection value that is calculated for each frame, and mark
+                    frames that are above this threshold with the 
+keywork "n_scene" in the log file. This allows pass 2 to make sure 
+smoothing and borders etc. aren't applied across scene changes. The 
+scene detection value can vary between 0 - 1000 and
+                    is shown below the output frame during pass 1.</p>
+
+                    <p>Only frames that are skipped due to too few ok blocks are candidates to become new scenes.</p>
+
+                    <p>A completely blank frame is also considered the 
+beginning of a new scene. These frames are marked with the keyword 
+"blank" in the log file (in addition to "n_scene").</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Ignore pixels outside <i>area</i></p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="ignore image outside area setting">Only</a> <i>area</i> is used during matching. If you check <i>Let area follow motion</i>,
+ the area will move along with the motion vectors
+                    between different frames. You can use it if you want
+ to stabilize on a moving object instead of the background. Just don't 
+expect this to work perfectly :)</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Ignore pixels inside <i>area</i></p>
+                  </td>
+
+                  <td width="63%">
+                    <p><i>area</i> is not used during matching.</p>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p></p>
+
+              <table class="norm" cellspacing="0">
+                <tbody><tr>
+                  <td width="18%">
+                    <h4>Setting (pass 2)</h4>
+                  </td>
+
+                  <td width="63%">
+                    <h4>Description</h4>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Same destination properties as source</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="same destination properties as source">If</a> checked, the destination video will get the same size and pixel aspect ratio as the source and the two settings below will be
+                    ignored.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Destination pixel aspect</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>Tells the filter to generate video with a certain
+ pixel aspect ratio. If you plan to watch the clip on a computer monitor
+ you'll probably want to use square pixels. You may enter any value
+                    if you can't find the preset you're looking for.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Destination video size</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>The size of the output video you want from pass 2.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%"><p>Generate "interlaced progressive" video</p></td>
+
+                  <td width="63%">
+                    <p><a name="interlaced progressive setting">Usually</a>,
+ Deshaker will generate video with the same video type 
+(interlaced/progressive) as the source video. But if you enable this 
+setting, it can turn
+                    interlaced video into progressive video with twice 
+the framerate. Earlier versions of VirtualDub didn't allow for filters 
+to change the frame rate, so the two progressive frames are interlaced 
+into the same output frame. In order to
+                    get the true progressive video, you must separate 
+the fields of this video afterwards. In later versions of VirtualDub you
+ can do that by adding a <i>Bob doubler</i> filter after Deshaker, using the deinterlacing method <i>None -
+                    alternate fields</i>. You could also do it with 
+AVISynth and its SeparateFields function (and a preceeding 
+ComplementParity for "upper field first" video). You should never 
+deinterlace this video in any other way than to simply
+                    separate the fields.</p>
+
+                    <p>The difference between true interlaced output and
+ this interlaced progressive output is that the video becomes twice as 
+high (in order to fit two frames into one) and more importantly that the
+ lower
+                    field (or rather "frame" in this case) isn't 
+calculated with a one line offset as in interlaced video.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Resampling</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>The algorithm to use when calculating pixel colors from the source frame to the destination frame.<br>
+                    As long as the size of the destination video is 
+larger than, or pretty much equal to, the size of the source video, the 
+bicubic resampling here is as good as any resampler you will find. 
+(Don't believe the hype of other resampling
+                    algorithms. The difference is in fact <u>extremely</u> small.)<br>
+                    However, when the destination size is a lot smaller 
+than the source (smaller than appr. half the size of the source maybe), 
+you may get better results if you add a separate high quality resizer 
+(such as "precise bicubic" in
+                    VirtualDub) after Deshaker.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Edge compensation</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="edge compensation setting">A</a> 
+side-effect from stabilizing video is black or strange looking borders 
+caused by moving the image around to compensate the shaking. To reduce 
+or
+                    eliminate this effect you can zoom into the image. 
+The following options do this in different ways:</p>
+
+                    <ul>
+                      <li>
+                        <i>None</i>: No zoom is added.
+                      </li>
+
+                      <li>
+                        <i>Adaptive zoom average</i>: Determines, for each frame, how much zoom is needed to avoid borders. This amount of zoom is then smoothed so the
+                        borders still become visible sometimes.
+                      </li>
+
+                      <li>
+                        <i>Adaptive zoom full</i>: Same as <i>Adaptive zoom average</i>, but this option will add more zoom when needed, to completely eliminate any
+                        borders.
+                      </li>
+
+                      <li>
+                        <i>Fixed zoom</i>: Deshaker will add a constant zoom to completely eliminate any borders. The zoom is only constant within each scene,
+                        however.
+                      </li>
+
+                      <li>
+                        <i>Adaptive zoom average + fixed zoom</i>: First, <i>Adaptive zoom average</i> will be used. Then, a smaller fixed zoom will be added on top of
+                        this to completely eliminate any borders. This will usually result in less zoom than <i>Fixed zoom</i>. But if you want to eliminate borders completely and you can live with some adaptive zooming, the newer option <i>Adaptive zoom
+                        full</i> is probably a better choice, since it doesn't add as much zoom in less shaky sections.
+                      </li>
+                    </ul>
+
+                    <p><b>Note:</b> If you're using any edge compensation (i.e. anything but <i>None</i>), your can limit the amount of zoom needed to avoid the borders by using lower values for <i>Motion
+                    smoothness</i> and especially <i>Max. correction limits</i>.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Adaptive zoom smoothness</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="adaptive zoom smoothness">If</a> you use one of the adaptive zoom edge compensation options, this setting controls how smooth this zooming will be.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Adaptive zoom amount</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="adaptive zoom amount">If</a> you use one
+ of the adaptive zoom edge compensation options, this setting adjusts 
+the amount (or amplitude) of this zooming. For example, if you set it
+                    to 50%, Deshaker will only add half the adaptive 
+zoom as normal, for each frame. (Note that this may obviously cause 
+borders to become visible even when using <i>Adaptive zoom full</i>.)</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Previous and future frames to fill in borders</p>
+                  </td>
+
+                  <td width="63%">
+                    <p><a name="fill borders setting">This</a> is a kind
+ of additional edge compensation. When the current frame doesn't contain
+ any image data in the "real world area" we want in our output, it
+                    can search in past and future frames and use that 
+image data instead. As long as that area is part of the object (or 
+background) that was stabilized on in pass 1, this usually works 
+perfectly. But when other objects move in these
+                    areas, it can look a bit strange. It's usually 
+better than black anyway, so I strongly recommend using this feature. 
+Just make sure you crop any borders from the source clip before 
+Deshaker. Otherwise this won't work very well at
+                    all.</p>
+
+                    <p>If the current frame is number 50, it searches 
+frames in the following order to find the image data it needs: 50, 49, 
+51, 48, 52, 47, 53, 46, 54 etc. So for each pixel the closest frame
+                    (chronologically) is always used. You can set how 
+many frames to store internally for this feature. More is always better 
+but keep in mind that each frame needs up to 8 MB of memory (for full 
+HD) and it can take a long time to search
+                    through all frames for image data.</p>
+                    <p>Try using this feature on a clip with lots of panning, and zoom out by setting <i>Extra zoom factor</i> to something like 0.6. Then you'll get a panorama like
+                    effect. It's slow, but fun. :)</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%"><p>Soft borders</p></td>
+
+                  <td width="63%">
+                    <p><a name="soft borders">If</a> enabled, <u>all</u>
+ relevant previous and future frames that Deshaker has stored in memory 
+will be used to calculate the border (as opposed to just using the 
+closest frame in
+                    time). For each pixel, it takes an average of the 
+corresponding pixels in all these frames, weighted so that the frames 
+closest to the current frame (in time) get higher importance.</p>
+
+                    <p>This option will also allow you to make the 
+transitions between a frame and the frame(s) beneath it smoother. The 
+transition width value you supply is how far in from the edge of a frame
+ the transition
+                    will start. The transition will be applied also to 
+the current frame, so you'll actually lose some information in the edges
+ of the main frame by using this option. But I'd say it's worth it. If 
+you don't like it, just set the
+                    transition width to 0.</p>
+
+                    <p>Enabling <i>Soft borders</i> improves the 
+appearance of the border quite a lot, especially when there are objects 
+moving there, but it is also very slow when there are lots of border 
+pixels.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%"><p>Extrapolate colors into border</p></td>
+
+                  <td width="63%"><p><a name="extrapolate colors into border">If</a>
+ enabled, any black border pixel that couldn't be fixed in another way, 
+is replaced by a color extrapolated from the edge of the known video
+                  pixels. This option is very slow when there are lots 
+of border pixels, and I strongly recommend using <i>Previous and future frames to fill in borders</i> in combination with this option.</p></td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Extra zoom factor</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>An additional zoom factor to apply to the video. This can for example be used together with <i>fixed zoom</i>
+ edge compensation to zoom out just enough for the borders to become 
+slightly
+                    visible but still remain hidden in the overscan area
+ of the TV. Then you will see more of the video while still not seeing 
+any borders on the TV. Or you can use it to zoom in slightly to get less
+ borders. This setting won't cause
+                    another resampling, so using a little extra zoom to 
+finetune your results is perfectly safe, quality wise. (Btw, all output 
+pixels are always resampled directly from the original source pixels 
+exactly once no matter what settings you
+                    use. So, no double resampling ever. This includes 
+areas taken from previous or future frames.)</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Motion smoothness</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>These values determine how smooth the motion will
+ be. You can set a parameter to 0 to turn off the smoothing completely. 
+This can be useful if you don't want to stabilize zoom for example.
+                    The motion smoothness calculation is not time-based 
+but rather based on frame count, so you'll probably want to use larger 
+values for video with high number of frames per second.
+                    And in this case, the fps for interlaced video will 
+count as twice as high, since each of its frames contains two "sub 
+frames" (fields). If you enter -1 as smoothness you will get "infinite 
+smoothness",
+                    meaning the camera will appear to be stationary at 
+the position of the first frame that was processed in pass 1. This 
+feature usually doesn't work perfectly, though.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="18%">
+                    <p>Max. correction limits</p>
+                  </td>
+
+                  <td width="63%">
+                    <p>To keep the corrections (that cause the black 
+borders) small during fast pans (for example), you can limit the maximum
+ corrections. Especially when using <i>Fixed zoom</i> as edge
+                    compensation these settings keep the zoom from being
+ too large. What these settings really do is automatically lower the 
+motion smoothness values in certain parts of the video when it becomes 
+necessary.</p>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p>&nbsp;</p>
+
+
+              <h3>Human Guidance</h3>
+
+              <p>Sometimes it can get nearly impossible to automatically
+ match two successive images correctly (or rather 'the way you want 
+to'). This usually happens when the images have very little in common
+              or when there's conflicting motion of large objects. In 
+order to make a complete video clip look perfect, you might want to use 
+different settings during pass 1 for different parts of the clip (or 
+even
+              single frames). You can do this in two ways:</p>
+
+              <ul>
+                <li>
+                  You can use the <i>Append to file</i> option to 
+continue writing to the same log file. You can then change the settings,
+ step a few frames, change
+                  again, step some more etc. The frame numbers are 
+written to the log file so you can even go back and redo some frames. If
+ a frame exists more than once in the log file, the last one is used in 
+pass 2.
+                </li>
+
+                <li>
+                  You can edit the log file manually. See below for information about the log file format.
+                </li>
+              </ul>
+
+              <p>&nbsp;</p>
+
+
+              <h3>Log File Format</h3>
+
+              <p>The log file that is created by pass 1, and that you 
+may edit manually if you like, is a text file with the following 
+tab-separated columns:</p>
+
+              <table class="norm" cellspacing="0" width="90%">
+                <tbody><tr>
+                  <td>
+                    <h4>Item</h4>
+                  </td>
+
+                  <td>
+                    <h4>Description</h4>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Frame number</p>
+                  </td>
+
+                  <td>
+                    <p>Frame number of the source video. For interlaced 
+video, the frame number will have an 'A' or 'B' appended, depending on 
+the field.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Pan X</p>
+                  </td>
+
+                  <td>
+                    <p>The number of horizontal panning pixels between (the middle line of) the previous frame and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Pan Y</p>
+                  </td>
+
+                  <td>
+                    <p>The number of vertical panning pixels between (the middle line of) the previous frame and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Rotation</p>
+                  </td>
+
+                  <td>
+                    <p>The number of degrees of rotation between (the middle line of) the previous frame and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Zoom</p>
+                  </td>
+
+                  <td>
+                    <p>The zoom factor between (the middle line of) the previous frame and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Pan X RS</p>
+                  </td>
+
+                  <td>
+                    <p>If rolling shutter is enabled, the number of 
+horizontal panning pixels between (the first line of) the previous frame
+ and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Pan Y RS</p>
+                  </td>
+
+                  <td>
+                    <p>If rolling shutter is enabled, the number of 
+vertical panning pixels between (the first line of) the previous frame 
+and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Rotation RS</p>
+                  </td>
+
+                  <td>
+                    <p>If rolling shutter is enabled, the number of 
+degrees of rotation between (the first line of) the previous frame and 
+current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Zoom RS</p>
+                  </td>
+
+                  <td>
+                    <p>If rolling shutter is enabled, the zoom factor between (the first line of) the previous frame and current frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Skipped</p>
+                  </td>
+
+                  <td>
+                    <p>Reserved for the keyword "skipped" for skipped frames.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>New scene</p>
+                  </td>
+
+                  <td>
+                    <p>Reserved for the keyword "n_scene" for the first frame of a new scene.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Comment start</p>
+                  </td>
+
+                  <td>
+                    <p>A comment start character ('#') will be added 
+here by pass 1, because the remaining columns are not used by pass 2. 
+They are only for your information.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Scene detection value</p>
+                  </td>
+
+                  <td>
+                    <p>The calculated scene detection value for this frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>% ok blocks</p>
+                  </td>
+
+                  <td>
+                    <p>How many blocks (in percent) that were ok in this frame.</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Blank</p>
+                  </td>
+
+                  <td>
+                    <p>Reserved for the keywork "blank", which indicates a blank frame.</p>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p>If a frame number exists more than once in the log file, the last occurence is used by pass 2.</p>
+
+              <p>Frame numbers that are missing in the log file, are treated like skipped frames.</p>
+
+              <p>Any text from a '#' character to the end of that line is ignored by pass 2.</p>
+
+              <p>Pass 2 doesn't require the exact format given above. As
+ long as all required values are there, in correct order, and they are 
+separated by one or more spaces and/or tabs, and any keywords are
+              present somewhere on the line (between the frame number 
+and any '#' character), pass 2 should be able to parse it.</p>
+
+              <p>&nbsp;</p>
+
+              <h3>Stabilizing Interlaced Video</h3>
+
+              <p>Deshaker can deshake interlaced video, but the 
+resulting video will look slightly softer than for progressive video 
+since the fields of interlaced video are resampled individually and they
+ only
+              have half the vertical resolution of a progressive frame. 
+The resampled fields are then reinterlaced in the output video. There is
+ really no sense in trying to detect non-moving pixels and keep them 
+"un-deinterlaced" since you wouldn't be
+              deshaking video shot on a tripod anyway, and without a 
+tripod the pixels will almost always move slightly. (Deinterlacing with 
+motion estimation in some way might give a better result but I'll 
+probably not try implementing that anytime
+              soon. And for certain reasons I don't like the idea of 
+it.)</p>
+
+              <p>If you want, here's another way to stabilize interlaced
+ video that might look better when some parts of the video are 
+completely non-moving.</p>
+
+              <ol>
+                <li>
+                  Use my smooth deinterlacer (or Xesdeeni's AVISynth 
+port of it, or other advanced deinterlacers) to generate 50 or 60 fps 
+full-sized video.
+                </li>
+
+                <li>
+                  Feed it into Deshaker as progressive video (in two passes).
+                </li>
+
+                <li>
+                  Run the resulting video through this little AVISynth script (that I got from Xesdeeni):
+                </li>
+              </ol>
+
+              <p>AVISource("deshaked.avi")<br>
+              SeparateFields()<br>
+              SelectEvery(4, 1, 2) &nbsp; (or SelectEvery(4, 0, 3) depending on the output field polarity)<br>
+              Weave()<br></p>
+
+              <p>If you stop after the second step you'll have smooth 50
+ or 60 fps progressive video that will look great if the 
+media/computer/player/cable/display can handle it.</p>
+
+              <p>&nbsp;</p>
+
+
+              <h3>Script Parameters</h3>
+
+              <p>If you for some reason want to configure Deshaker 
+without using its settings GUI (in a VirtualDub vcf file or an AviSynth 
+avs file, for example),
+              Deshaker takes one single argument; a string with all 
+parameters, separated by '|' characters. (The reason for this is that 
+VirtualDub can't handle too many parameters (or at least it couldn't 
+when I started making Deshaker).)</p>
+
+              <p>If you make some settings in VirtualDub and select <i>File/Save processing settings</i>, you'll find the settings string in the vcf file.</p>
+
+              <p>The items in this string are:</p>
+
+              <table class="norm" cellspacing="0" width="90%">
+                <tbody><tr>
+                  <td width="40px">
+                    <h4>Item no.</h4>
+                  </td>
+
+                  <td>
+                    <h4>Description</h4>
+                  </td>
+
+                  <td width="265px">
+                    <h4>Possible values</h4>
+                  </td>
+
+                  <td width="60px">
+                    <h4>Default value</h4>
+                  </td>
+
+                  <td width="60px">
+                    <h4>Decimals allowed</h4>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>The version no. of the settings string. (It changes whenever the settings string changes.)</p>
+                  </td>
+
+                  <td>
+                    <p>1 - 18</p>
+                  </td>
+
+                  <td>
+                    <p>18</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>2</p>
+                  </td>
+
+                  <td>
+                    <p>Selected pass no.</p>
+                  </td>
+
+                  <td>
+                    <p>1, 2</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>3</p>
+                  </td>
+
+                  <td>
+                    <p>Block size</p>
+                  </td>
+
+                  <td>
+                    <p>1 - 100</p>
+                  </td>
+
+                  <td>
+                    <p>30</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>4</p>
+                  </td>
+
+                  <td>
+                    <p>Differential search range</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>4</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>5</p>
+                  </td>
+
+                  <td>
+                    <p>Source pixel aspect value</p>
+                  </td>
+
+                  <td>
+                    <p>&gt; 0</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>6</p>
+                  </td>
+
+                  <td>
+                    <p>Source pixel aspect selection.<br>(This parameter is only used by the GUI. The <i>Source pixel aspect value</i> specifies the actual pixel aspect to use.)</p>
+                  </td>
+
+                  <td>
+                    <p>-1: A free source pixel aspect value<br>0: Square pixels  (1.0)<br>1: Standard PAL  (1.094)<br>2: Standard NTSC  (0.912)<br>3: Anamorphic PAL  (1.459)<br>4: Anamorphic NTSC  (1.215)<br>5: SVCD PAL  (1.641)<br>6: SVCD NTSC  (1.367)<br>7: HDV 1440x1080 (1.333)</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>7</p>
+                  </td>
+
+                  <td>
+                    <p>Destination pixel aspect value.<br>(Only used if <i>Same destination properties as source</i> is set to 0.)</p>
+                  </td>
+
+                  <td>
+                    <p>&gt; 0</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>8</p>
+                  </td>
+
+                  <td>
+                    <p>Destination pixel aspect selection.<br>(This parameter is only used by the GUI. The <i>Destination pixel aspect value</i> specifies the actual pixel aspect to use.)</p>
+                  </td>
+
+                  <td>
+                    <p>Same as <i>Source pixel aspect selection</i>.</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>9</p>
+                  </td>
+
+                  <td>
+                    <p>Destination width.<br>(Only active if parameter <i>Same destination properties as source</i> = 0.)</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>640</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>10</p>
+                  </td>
+
+                  <td>
+                    <p>Destination height.<br>(Only active if parameter <i>Same destination properties as source</i> = 0.)</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>480</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>11</p>
+                  </td>
+
+                  <td>
+                    <p>Scale</p>
+                  </td>
+
+                  <td>
+                    <p>0: Full<br>1: Half<br>2: Quarter</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>12</p>
+                  </td>
+
+                  <td>
+                    <p>Use pixels</p>
+                  </td>
+
+                  <td>
+                    <p>1: All<br>2: Every 4th<br>3: Every 9th<br>4: Every 16th</p>
+                  </td>
+
+                  <td>
+                    <p>2</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>13</p>
+                  </td>
+
+                  <td>
+                    <p>Motion smoothness - horizontal panning</p>
+                  </td>
+
+                  <td>
+                    <p>-1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>1000</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>14</p>
+                  </td>
+
+                  <td>
+                    <p>Motion smoothness - vertical panning</p>
+                  </td>
+
+                  <td>
+                    <p>-1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>1000</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>15</p>
+                  </td>
+
+                  <td>
+                    <p>Motion smoothness - rotation</p>
+                  </td>
+
+                  <td>
+                    <p>-1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>1000</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>16</p>
+                  </td>
+
+                  <td>
+                    <p>Motion smoothness - zoom</p>
+                  </td>
+
+                  <td>
+                    <p>-1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>1000</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>17</p>
+                  </td>
+
+                  <td>
+                    <p>Discard motion of blocks that move more than X pixels in wrong direction</p>
+                  </td>
+
+                  <td>
+                    <p>&gt; 0</p>
+                  </td>
+
+                  <td>
+                    <p>4</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>18</p>
+                  </td>
+
+                  <td>
+                    <p>Video output</p>
+                  </td>
+
+                  <td>
+                    <p>0: None<br>1: Motion vectors<br>2: Motion vectors, extended 2x<br>3: Motion vectors, extended 5x</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>19</p>
+                  </td>
+
+                  <td>
+                    <p>Edge compensation</p>
+                  </td>
+
+                  <td>
+                    <p>0: None<br>1: Adaptive zoom average<br>3: Fixed zoom<br>4: Adaptive zoom average + fixed zoom<br>6: Adaptive zoom full</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>20</p>
+                  </td>
+
+                  <td>
+                    <p>Resampling</p>
+                  </td>
+
+                  <td>
+                    <p>0: Nearest neighbor<br>1: Bilinear<br>2: Bicubic</p>
+                  </td>
+
+                  <td>
+                    <p>2</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>21</p>
+                  </td>
+
+                  <td>
+                    <p>Skip frame if less than X percent of all blocks are ok</p>
+                  </td>
+
+                  <td>
+                    <p>0 - 100</p>
+                  </td>
+
+                  <td>
+                    <p>8</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>22</p>
+                  </td>
+
+                  <td>
+                    <p>Initial search range</p>
+                  </td>
+
+                  <td>
+                    <p>1 - 99</p>
+                  </td>
+
+                  <td>
+                    <p>30</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>23</p>
+                  </td>
+
+                  <td>
+                    <p>Discard motion of blocks that have match value less than X</p>
+                  </td>
+
+                  <td>
+                    <p>-1000 - 1000</p>
+                  </td>
+
+                  <td>
+                    <p>300</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>24</p>
+                  </td>
+
+                  <td>
+                    <p>Discard motion of blocks that have 2nd best match larger than best minus X</p>
+                  </td>
+
+                  <td>
+                    <p>0 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>4</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>25</p>
+                  </td>
+
+                  <td>
+                    <p>Log file</p>
+                  </td>
+
+                  <td>
+                    <p>A file path</p>
+                  </td>
+
+                  <td>
+                    <p>Depends</p>
+                  </td>
+
+                  <td>
+                    <p>n/a</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>26</p>
+                  </td>
+
+                  <td>
+                    <p>Append to file</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>27</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels outside.<br>(Activates the following four parameters if set to 1.)</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>28</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels outside - left</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>29</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels outside - right</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>30</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels outside - top</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>31</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels outside - bottom</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>32</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels inside.<br>(Activates the following four parameters if set to 1.)</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>33</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels inside - left</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>34</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels inside - right</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>35</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels inside - top</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>36</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels inside - bottom</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>37</p>
+                  </td>
+
+                  <td>
+                    <p>Video type - interlaced</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>38</p>
+                  </td>
+
+                  <td>
+                    <p>Video type - upper field first.<br>(Only used if <i>Video type - interlaced</i> is set to 1.)</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>39</p>
+                  </td>
+
+                  <td>
+                    <p>Extra zoom factor</p>
+                  </td>
+
+                  <td>
+                    <p>&gt; 0</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>40</p>
+                  </td>
+
+                  <td>
+                    <p>Max. correction limits - horizontal panning</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>15</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>41</p>
+                  </td>
+
+                  <td>
+                    <p>Max. correction limits - vertical panning</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>15</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>42</p>
+                  </td>
+
+                  <td>
+                    <p>Max. correction limits - rotation</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>5</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>43</p>
+                  </td>
+
+                  <td>
+                    <p>Max. correction limits - zoom</p>
+                  </td>
+
+                  <td>
+                    <p>1 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>15</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>44</p>
+                  </td>
+
+                  <td>
+                    <p>Use previous and future frames to fill in borders - previous frames enabled</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>45</p>
+                  </td>
+
+                  <td>
+                    <p>Use previous and future frames to fill in borders - future frames enabled</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>46</p>
+                  </td>
+
+                  <td>
+                    <p>Use previous and future frames to fill in borders - previous frames.<br>(Only used if previous frames are enabled.)</p>
+                  </td>
+
+                  <td>
+                    <p>0 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>30</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>47</p>
+                  </td>
+
+                  <td>
+                    <p>Use previous and future frames to fill in borders - future frames.<br>(Only used if future frames are enabled.)</p>
+                  </td>
+
+                  <td>
+                    <p>0 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>30</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>48</p>
+                  </td>
+
+                  <td>
+                    <p>Ignore pixels outside - let area follow motion</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>49</p>
+                  </td>
+
+                  <td>
+                    <p>Deep analysis if less than X percent of vectors are ok.<br>(Only used if <i>Camcorder has a rolling shutter</i> is set to 0.)</p>
+                  </td>
+
+                  <td>
+                    <p>0 - 100</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>50</p>
+                  </td>
+
+                  <td>
+                    <p>Camcorder has a rolling shutter</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>51</p>
+                  </td>
+
+                  <td>
+                    <p>Generate "interlaced progressive" video.<br>(Only valid for interlaced video.)</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>52</p>
+                  </td>
+
+                  <td>
+                    <p>Same destination properties as source</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>53</p>
+                  </td>
+
+                  <td>
+                    <p>Soft borders.<br>(Only valid if using previous and future frames to fill in border.)</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>54</p>
+                  </td>
+
+                  <td>
+                    <p>Extrapolate colors into border</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>0</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>55</p>
+                  </td>
+
+                  <td>
+                    <p>Soft borders - edge transition width.<br>(Only valid if using <i>Soft borders</i>.)</p>
+                  </td>
+
+                  <td>
+                    <p>0 - ?</p>
+                  </td>
+
+                  <td>
+                    <p>10</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>56</p>
+                  </td>
+
+                  <td>
+                    <p>Discard motion of blocks that move more than X pixels (absolute motion)</p>
+                  </td>
+
+                  <td>
+                    <p>&gt; 0</p>
+                  </td>
+
+                  <td>
+                    <p>1000</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>57</p>
+                  </td>
+
+                  <td>
+                    <p>Remember discarded areas to next frame</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>58</p>
+                  </td>
+
+                  <td>
+                    <p>Rolling shutter amount.<br>(Only used if <i>Camcorder has a rolling shutter</i> is set to 1.)</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>88</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>59</p>
+                  </td>
+
+                  <td>
+                    <p>Detect rotation</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>60</p>
+                  </td>
+
+                  <td>
+                    <p>Detect zoom</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>61</p>
+                  </td>
+
+                  <td>
+                    <p>Detect scenes - threshold.<br>(Only used if <i>Detect scenes</i> is set to 1.)</p>
+                  </td>
+
+                  <td>
+                    <p>0 - 1000</p>
+                  </td>
+
+                  <td>
+                    <p>20</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>62</p>
+                  </td>
+
+                  <td>
+                    <p>Adaptive zoom smoothness.<br>(Only used if <i>Edge compensation</i> is set to 1, 4 or 6.)</p>
+                  </td>
+
+                  <td>
+                    <p>&gt; 0</p>
+                  </td>
+
+                  <td>
+                    <p>5000</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>63</p>
+                  </td>
+
+                  <td>
+                    <p>Adaptive zoom amount.<br>(Only used if <i>Edge compensation</i> is set to 1, 4 or 6.)</p>
+                  </td>
+
+                  <td>
+                    <p>Any value</p>
+                  </td>
+
+                  <td>
+                    <p>100</p>
+                  </td>
+
+                  <td>
+                    <p>Yes</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>64</p>
+                  </td>
+
+                  <td>
+                    <p>Discard motion of blocks that have maximum pixel value difference less than X</p>
+                  </td>
+
+                  <td>
+                    <p>0 - 255</p>
+                  </td>
+
+                  <td>
+                    <p>20</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>65</p>
+                  </td>
+
+                  <td>
+                    <p>Detect scenes</p>
+                  </td>
+
+                  <td>
+                    <p>0: No<br>1: Yes</p>
+                  </td>
+
+                  <td>
+                    <p>1</p>
+                  </td>
+
+                  <td>
+                    <p>No</p>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p>&nbsp;</p>
+
+
+              <h2><a name="faq">Frequently Asked Questions</a></h2>
+
+              <p class="faq_q">- It doesn't work at all.</p>
+
+              <p class="faq_a">Please start by carefully following <a href="#short%20guide">The Short Guide</a>
+ above. Also, make sure you're using 32-bit Deshaker for 32-bit 
+VirtualDub, or 64-bit Deshaker for 64-bit VirtualDub. If it still won't
+              work, feel free to email me. Try to explain what you do, 
+and what happens, as precisely as possible.</p>
+
+              <p class="faq_q">- The output video has tiny dots and lines all over it.</p>
+
+              <p class="faq_a">You need to run pass 2 too. And use the original video (not any video from pass 1) for pass 2. Please follow <a href="#short%20guide">The Short Guide</a> above
+              carefully.</p>
+
+              <p class="faq_q">- There are black borders in the stabilized video.</p>
+
+              <p class="faq_a">You can fix that with either one (or more) of the settings: <i>Edge compensation</i>, <i>Previous and future frames to fill in borders</i> and <i>Extrapolate colors into
+              border</i>.</p>
+
+              <p class="faq_q">- The stabilized video is shaky.</p>
+
+              <p class="faq_a">For best results, always try to make sure
+ the white vectors end up on the background in the frames during pass 1,
+ i.e. try to make Deshaker completely
+              ignore objects moving in front of the background. If the 
+white vectors jump around between different objects from frame to frame,
+ you need to do something to get a good result. Either use the <i>Ignore area</i> settings or something else.
+              There are many things you can do. Experiment with the settings!</p>
+
+              <p class="faq_a">If the background consists of several 
+layers at different distances, or if there is basically no visible 
+background at all, it's often best to stabilize
+              on pretty much everything except the fastest moving 
+objects. To do that, increase the value of <i>Discard motion of blocks that move more than X pixels in wrong direction</i>.</p>
+
+              <p class="faq_a">As a last resort, you can make Deshaker 
+skip the problematic frames by either increasing the threshold for 
+skipping frames, or by deleting the corresponding lines from the
+              log file.</p>
+
+              <p class="faq_q">- I get zero-length motion vectors (appearing as dots) in clear areas, such as in the sky, or on a wall.</p>
+
+              <p class="faq_a">Try increasing the value for <i>Discard motion of blocks that have maximum pixel value difference less than X</i>.</p>
+
+              <p class="faq_q">- The stabilized video has a severe 
+"jello" effect. Also, far from all vectors are white even on a solid 
+background during pass 1, when the video
+              shakes a bit.</p>
+
+              <p class="faq_a">Make sure you have enabled the rolling 
+shutter setting if your camera has a rolling shutter. (Most cameras 
+today have a rolling shutter.)</p>
+
+              <p class="faq_q">- I have enabled the rolling shutter setting but Deshaker still won't remove the rolling shutter distortions.</p>
+
+              <p class="faq_a">Deshaker can only remove rolling shutter 
+distortions linearly. If you have one of those compact CMOS cameras with
+ bad (or no) internal stabilization, and the clip has very
+              fast shakes (for example if the camera is mounted on a 
+bike or similar), you probably won't be able to get a very good result 
+from Deshaker, since the distortions will be far from linear in this 
+case. Get a CCD camera capable of high
+              shutter speeds for these kind of videos.</p>
+
+              <p class="faq_q">- I get a slight waving effect when objects move slightly, even when the camera is completely still.</p>
+
+              <p class="faq_a">Try decreasing the value for <i>Discard motion of blocks that move more than X pixels in wrong direction</i>.</p>
+
+              <p class="faq_q">- I get a slight waving effect and distorted geometry when the camera shakes a lot.</p>
+
+              <p class="faq_a">If you're filming with a rather wide 
+angle (or a fisheye lens), this effect is probably due to some 
+geometrical properties of perspective, that Deshaker unfortunately 
+doesn't deal with. The
+              only things you can do to make it better is to shake less 
+during filming, and/or add some zoom, either during filming or in 
+Deshaker. Lowering the motion smoothness values for horizontal and 
+vertical panning can help too.</p>
+
+              <p class="faq_q">- I get some blurring/shimmering in frames where the camera shakes the most.</p>
+
+              <p class="faq_a">What you see is probably motion blur, i.e. motion occuring <u>within</u> a frame. This is present in the source video too, but it doesn't become distracting until Deshaker
+              has removed the motion <u>between</u> the frames. To get 
+rid of this effect you need to use a faster shutter speed while filming.
+ How fast it needs to be depends on the camera and the amount of shake. 
+For a camera with built-in stabilizer,
+              I'd recommend at least 1/200 sec, or so. (Faster if it 
+doesn't have built-in stabilizer.)</p>
+
+              <p class="faq_q">- I get sudden jumps in zoom, or other jumps.</p>
+
+              <p class="faq_a">Make sure Deshaker didn't incorrectly detect new scenes during pass 1.</p>
+
+              <p class="faq_q">- I get unwanted zooming in the stabilized video.</p>
+
+              <p class="faq_a">Deshaker can add two types of zoom. One 
+is for stabilizing zooming that it detects in the video. If this 
+detected zooming isn't really camera zoom (for example, Deshaker
+              usually detects zoom if the camera moves forward), or if 
+you just don't want the camera zoom stabilized, you can turn it off by 
+setting the zoom motion smoothness to 0. It's always a good idea to do 
+this if there's no real zooming in the video.</p>
+              <p class="faq_a">The other kind of zoom that Deshaker can add is adaptive zoom. If you
+              don't like it, choose another <i>Edge compensation</i> option.</p>
+
+              <p class="faq_q">- The output video says "This frame was not processed in pass 1", even though I did run pass 1.</p>
+
+              <p class="faq_a">Unless the <i>Append to file</i> option 
+is enabled, the log file will be emptied as soon as you start processing
+ in pass 1, even if you just happened to process one frame.
+              Make sure this is not the case. Also, make sure you have 
+write access to the log file location. In either case, try opening the 
+log file from pass 1 in notepad and maybe you can figure out what 
+happened.</p>
+
+              <p class="faq_q">- I want to be able to save my Deshaker settings.</p>
+
+              <p class="faq_a"><i>Save processing settings</i> in VirtualDub will save everything, including Deshaker settings. There is no way to save only the Deshaker settings.</p>
+
+              <p class="faq_q">- Can I try different pass 2 settings without running pass 1 again?</p>
+
+              <p class="faq_a">Yes.</p>
+
+              <p class="faq_q">- Deshaker says "Deshaking..." for a very long time.</p>
+
+              <p class="faq_a">Certain settings will make the deshaking procedure a lot more time consuming. Especially low values for <i>Max. correction limits</i> and using <i>Adaptive zoom
+              full</i>.</p>
+
+              <p class="faq_q">- How about porting Deshaker to Mac or Linux or...?</p>
+
+              <p class="faq_a">I'm afraid I doubt that will happen.</p>
+
+              <p class="faq_q">- My question/problem isn't listed in the FAQ.</p>
+
+              <p class="faq_a">Feel free to email me.</p>
+
+              <p>&nbsp;</p>
+
+
+              <h2><a name="version history">Version</a> History</h2>
+
+              <h3>Version 3.0 (2011-08-14)<br>
+              <span style="font-size: .5em;">(64-bit version was released 2012-11-18)</span></h3>
+
+              <ul>
+                <li>
+                  Added better detection of new scenes. Previously, you 
+would get a new scene whenever a frame got skipped due to too few ok 
+blocks. Read more under the
+                  '<a href="#detect%20scenes">Detect scenes</a>' setting above. For skipped frames that are not new scenes, Deshaker will interpolate motion values in pass 2.
+                </li>
+
+                <li>
+                  Default percentage for skipping frames was increased 
+from 5% to 8% because Deshaker now handles skipped frames better.
+                </li>
+
+                <li>
+                  Skipped frames will now be marked "skipped" in the 
+logfile, and such lines won't have any values anymore. Missing frames in
+ the logfile will also be
+                  treated like they are skipped, but they will not 
+become new scenes as before.
+                </li>
+
+                <li>
+                  Default value for initial search range was decreased 
+from 40% to 30%, because an unnecessarily high value can have a slightly
+ negative impact on the
+                  new scene detector, and 40% is way more than you need 
+for most videos.
+                </li>
+
+                <li>
+                  The option to do the matching in pass 1 in grayscale mode was removed because of the new scene detector.
+                </li>
+
+                <li>
+                  Removed the option to discard dark pixels and replaced
+ it with a better way to ignore noise. Read more under the '<a href="#discard%20pixelvalue">Discard motion of blocks that have maximum pixel value difference less than X</a>' setting above.
+                </li>
+
+                <li>
+                  Smoothness for zoom stabilization and adaptive zoom 
+are now controlled separately, so the usual zoom smoothness setting now 
+controls only
+                  stabilization of zooming in the clip. As for 
+controlling adaptive zoom smoothness, read more under the '<a href="#adaptive%20zoom%20smoothness">Adaptive zoom smoothness</a>' setting above.
+                </li>
+
+                <li>
+                  Adaptive zoom now uses a new smoothing algorithm, so 
+it will look slightly different (better?). Its smoothness values are 
+only approximately
+                  comparable to before in how smooth it gets.
+                </li>
+
+                <li>
+                  Added a setting for controlling the amount (amplitude) of adaptive zoom, in percent. Read more under the '<a href="#adaptive%20zoom%20amount">Adaptive
+                  zoom amount</a>' setting above.
+                </li>
+
+                <li>
+                  Added a new edge compensation option <i>Adaptive zoom full</i>, which is similar to the usual <i>Adaptive zoom</i>, except that this one will remove
+                  borders completely (if adaptive zoom amount is 100%). Kind of like <i>Adaptive+fixed</i>, but doesn't add as much zoom in less shaky sections. Read more under the '<a href="#edge%20compensation%20setting">Edge compensation</a>' setting
+                  above.
+                </li>
+
+                <li>
+                  The original <i>Adaptive zoom</i> option changed name to <i>Adaptive zoom average</i>.
+                </li>
+
+                <li>
+                  Removed the somewhat confusing edge compensation options <i>Adaptive zoom only</i> and <i>Adaptive+fixed only</i>.
+ You can now get the same effect by
+                  using another adaptive zoom option and setting the 
+zoom motion smoothness to 0. (When loading old settings files which used
+ these removed options, Deshaker will automatically choose settings that
+ work similarly as before.)
+                </li>
+
+                <li>
+                  All edge compensation options (except <i>None</i>) now checks for rolling shutter distortions too. (Those distortions usually require some extra
+                  slight zoom to completely get rid of borders.)
+                </li>
+
+                <li>
+                  Zoom stabilization and adaptive zoom no longer spill 
+over scene changes. Previously, that would happen when edge compensation
+ was used.
+                </li>
+
+                <li>
+                  Made a tiny adjustment to amount of adaptive zoom, to 
+make zoom factor exactly 1 for a still video sequence, to avoid 
+degrading the quality due to
+                  resampling in such cases.
+                </li>
+
+                <li>
+                  The very last frame (and any frame that has a skipped 
+frame after it) of a rolling shutter video clip will now be compensated 
+for rolling shutter
+                  distortion too, but a little less accurately. 
+Previously, no compensation was made for those single frames.
+                </li>
+
+                <li>
+                  Added two video output modes for pass 1, which make 
+the motion vectors longer, by 2x or 5x. Read more under the '<a href="#video%20output">Video
+                  output</a>' setting above.
+                </li>
+
+                <li>
+                  Added buttons in the configuration dialog to open or 
+delete the current log file, and also to open the current log file 
+folder. (Deleting the log file can
+                  be useful if you use the <i>Append to file</i> option, but want to get rid of old garbage (prior to running pass 1) that may otherwise influence the stabilization.)
+                </li>
+
+                <li>
+                  Deshaker now uses less memory during pass 1 (which should allow for processing larger images/frames).
+                </li>
+
+                <li>
+                  Deshaker will now try a little harder (but not too hard) to keep tracking the same object(s) if <i>Remember discarded areas to next frame</i> is
+                  enabled, even when frames become skipped due to too few ok blocks.
+                </li>
+
+                <li>
+                  Added a somewhat hidden feature to make Deshaker 
+forget the remembered discarded areas for current frame if you click 
+once (or twice) on the
+                  <i>Remember discarded areas to next frame</i> checkbox.
+                </li>
+
+                <li>
+                  While the <i>Deep analysis</i> algorithm is pretty good, it does ignore any remembered discarded areas from previous frame, which is usually bad. So
+                  now, <i>Deep analysis</i> will only be used whenever 
+we're ignoring remembered areas from previous frame, either because 
+remembering is disabled, or because we get way too few ok blocks.
+                </li>
+
+                <li>
+                  The log file now looks somewhat different (although 
+pass 2 can still read the old format). Each tabbed column is now 
+reserved for a single thing. And
+                  a scene detection value and percent ok blocks are now 
+written to the log file, after the comment character "#". And the 
+"new_scene" keyword is now called "n_scene" (to make the log file look 
+nice in notepad :)
+                </li>
+
+                <li>
+                  Improved error handling.
+                </li>
+
+                <li>
+                  Other minor changes and fixes.
+                </li>
+
+                <li>
+                  Added an <a href="#faq">FAQ</a> to this page.
+                </li>
+              </ul>
+
+              <h3>Version 2.7 (2011-01-30)</h3>
+
+              <ul>
+                <li>
+                  In version 2.5, I changed the way the size of the 
+initial block was calculated, to make it more consistent. As a side 
+effect, this meant that for
+                  certain settings (such as the default ones) and 
+certain video sizes (such as interlaced 720x576 and interlaced 720x480),
+ pass 1 would run a lot slower than before. After some testing, I have 
+now made another adjustment to this initial
+                  block size to speed things up. If you feel that this 
+version is less reliable than versions 2.5 and <a href="http://www.guthspot.se/video/files/Deshaker26.zip">2.6</a>, please let me know.
+                </li>
+              </ul>
+
+              <h3>Version 2.6 (2011-01-08)</h3>
+
+              <ul>
+                <li>
+                  Fixed a bug that could cause a crash under some 
+circumstances, such as sometimes when using prefilter cropping in 
+VirtualDub.
+                </li>
+
+                <li>
+                  Ignored areas are no longer completely black.
+                </li>
+
+                <li>
+                  Fixed a bug that didn't let you change the ignored area (easily) when using the option <i>Let area follow motion</i> on progressive video.
+                </li>
+              </ul>
+
+              <h3>Version 2.5 (2010-07-18)</h3>
+
+              <ul>
+                <li>
+                  When using future frames to fill in borders, you no 
+longer need to manually pre-collect frames and delay the audio etc. 
+Everything is now taken care
+                  of automatically, mostly by VirtualDub. This doesn't 
+work for very old versions of VirtualDub, though. In fact, I strongly 
+recommend version 1.9.9 or later.
+                </li>
+
+                <li>
+                  You can now turn off detection of rotation and/or zoom during pass 1. Read more under the '<a href="#detect%20rotationzoom">Detect rotation/zoom</a>'
+                  setting above.
+                </li>
+
+                <li>
+                  When the setting <i>Remember discarded areas to next frame</i>
+ is enabled, the discarded areas are now remembered for all processed 
+frames, so that
+                  when you want to reprocess some frames with other 
+settings during pass 1, Deshaker will know which blocks were discarded 
+in the frame prior to the frame you're starting reprocessing at. This 
+only works as long as the total number of
+                  blocks (horizontally and vertically) don't change, 
+which can happen if you, for example, change the block size.
+                </li>
+
+                <li>
+                  The default edge compensation type was changed from <i>Adaptive zoom</i> to the more basic <i>None</i>,
+ since I want you to decide for yourself if and
+                  how the borders should be taken care of. Also, the 
+default smoothness values were changed from 400 (1500 for zoom) to 1000.
+                </li>
+
+                <li>
+                  The C++ and MFC libraries are now linked statically. 
+(This means you shouldn't need to install the C++ Redistribution Package
+ any longer.)
+                </li>
+
+                <li>
+                  Other smaller changes and bugfixes. For example, I 
+fixed a bug which caused Deshaker to sometimes ignore large areas during
+ pass 1 for certain
+                  (unusual) settings.
+                </li>
+              </ul>
+
+              <h3>Version 2.4 (2008-11-15)</h3>
+
+              <ul>
+                <li>
+                  Added two new edge compensation zoom options; <i>adaptive+fixed</i> and <i>adaptive+fixed only</i>. Read more under the '<a href="#edge%20compensation%20setting">Edge compensation</a>' setting above.
+                </li>
+
+                <li>
+                  The constant zoom that is added for the fixed zoom 
+edge compensation options is now constant only for each scene in a clip.
+ It used to be constant for
+                  the entire clip.
+                </li>
+
+                <li>
+                  If you have a rolling shutter camcorder, you can now 
+specify how severe this effect is for your camcorder model. Read more 
+under the '<a href="#rolling%20shutter%20setting">Camcorder has a rolling shutter</a>' setting above.
+                </li>
+
+                <li>
+                  The default location of the log file has been changed (due to write access limitations).
+                </li>
+              </ul>
+
+              <h3>Version 2.2 (2007-05-21)</h3>
+
+              <ul>
+                <li>
+                  The most time consuming parts of Deshaker are now 
+multi-threaded, which allows for significantly faster processing on 
+systems with more than one
+                  cpu.
+                </li>
+
+                <li>
+                  Added an option to help ignoring large moving objects during matching. Read more under the '<a href="#remember%20discarded%20areas">Remember discarded
+                  areas to next frame</a>' setting above. This new option is enabled by default (but not if you load old settings files).
+                </li>
+
+                <li>
+                  Added an option to ignore motion vectors that are simply too long. Read more under the '<a href="#discard%20absolute">Discard motion of blocks that
+                  move more than X pixels (absolute motion)</a>' setting above.
+                </li>
+
+                <li>
+                  Improved handling of new scenes. When matching fails 
+for a certain frame, the word 'new_scene' is written to the logfile, 
+which allows pass 2 to take
+                  appropriate action.
+                </li>
+
+                <li>
+                  Fixed a bug where some settings would change by themselves under some circumstances.
+                </li>
+
+                <li>
+                  Fixed a bug that was introduced in version 2.0 where 
+the borders would always look a bit bad if you used previous and future 
+frames to fill in the
+                  border but didn't enable soft borders.
+                </li>
+              </ul>
+
+              <h3>Version 2.0 (2006-08-12)</h3>
+
+              <ul>
+                <li>
+                  Renamed the feature for improved border appearance 
+that was added in version 1.9 to "Soft borders" and improved it by 
+allowing soft edge transitions
+                  between frames in the border, which greatly reduces 
+any sharp ugly edges there. Read more under the '<a href="#soft%20borders">Soft borders</a>' setting above.
+                </li>
+
+                <li>
+                  Added an option to ignore dark pixels during matching.
+                </li>
+
+                <li>
+                  Deshaker should no longer crash when being used from 
+AviSynth. But no motion vectors or info texts will be shown in the video
+ due to a limitation in
+                  AviSynth.
+                </li>
+
+                <li>
+                  The info text in the output video during pass 1 now 
+includes the percentage of ok blocks and whether or not deep analysis 
+was used for the
+                  frame.
+                </li>
+
+                <li>
+                  The text of the deep analysis option was changed from 
+'Deep analysis if &gt; X % of blocks discarded' to 'Deep
+                  analysis if &lt; X % of vectors are ok', because it's 
+really a percentage of all found vectors (not a percentage of all 
+blocks). Note also that the value is treated differently. If you used 
+value X before, you should now enter 100-X.
+                  This is taken care of automatically if you load old 
+processing settings.
+                </li>
+              </ul>
+
+              <h3>Version 1.9 (2006-06-18)</h3>
+
+              <ul>
+                <li>
+                  Added an option to improve appearance of the border when using previous and future frames.
+                </li>
+
+                <li>
+                  Added an option to extrapolate colors into the border. Read more under the '<a href="#extrapolate%20colors%20into%20border">extrapolate colors into
+                  border</a>' setting above.
+                </li>
+
+                <li>
+                  Added an option to always produce video with the same properties as the source video. Read more under the '<a href="#same%20destination%20properties%20as%20source">same destination properties as source</a>' setting above.
+                </li>
+
+                <li>
+                  Other minor changes, fixes and speed improvements.
+                </li>
+              </ul>
+
+              <h3>Version 1.8.1 (2006-02-11)</h3>
+
+              <ul>
+                <li>
+                  Fixed a bug (that was introduced in version 1.8) where gaps in the log file would cause black frames.
+                </li>
+              </ul>
+
+              <h3>Version 1.8 (2005-08-30)</h3>
+
+              <ul>
+                <li>
+                  Added correction for distortions caused by camcorders with a rolling shutter. Read more under the '<a href="#rolling%20shutter%20setting">camcorder
+                  has a rolling shutter</a>' setting above.
+                </li>
+
+                <li>
+                  Added a new option for generating progressive video from an interlaced source. Read more under the '<a href="#interlaced%20progressive%20setting">generate interlaced progressive video</a>' setting above.
+                </li>
+              </ul>
+
+              <h3>Version 1.7.1 (2005-07-28)</h3>
+
+              <ul>
+                <li>
+                  Fixed an old bug that suddenly showed itself (by crashing) when I tried VirtualDub-MPEG2 with an HDV clip.
+                </li>
+              </ul>
+
+              <h3>Version 1.7 (2005-07-26)</h3>
+
+              <ul>
+                <li>
+                  Improved the algorithm that extracts panning, rotation
+ and zoom from the motion vectors slightly. Previously, sometimes too 
+few white vectors were
+                  found without a "good reason".
+                </li>
+
+                <li>
+                  Added a new "deep analysis" algorithm that makes the 
+extraction of panning, rotation and zoom a lot more reliable in 
+complicated clips. Unfortunately
+                  I couldn't get it as fast as I would have hoped and 
+therefore it's not enabled in the default settings. Read more about this
+ under the <a href="#deep%20analysis%20setting">deep analysis</a> setting above.
+                </li>
+
+                <li>
+                  Deshaker should no longer crash when running VirtualDub batch jobs (wasn't my fault...).
+                </li>
+
+                <li>
+                  You may now enter fractional numbers for the setting 
+that discards motion of blocks that move &gt; X pixels in wrong 
+direction. (I tend to use values
+                  below 1 a lot to really only follow the background, 
+and also to make the new deep analysis algorithm find the background 
+among moving people etc.)
+                </li>
+
+                <li>
+                  Added a new pixel aspect ratio preset for HDV 
+1440x1080. (HDV 1280x720 has square pixels, as does the HD resolution 
+1920x1080.)
+                </li>
+
+                <li>
+                  Modified the pixel aspect ratio for all NTSC variants 
+very, very slightly. (Standard NTSC was changed from 72/79 to 4320/4739,
+ which is the correct
+                  PAR according to <a href="http://www.uwasa.fi/%7Ef76998/video/conversion/">this page</a>.)
+                </li>
+              </ul>
+
+              <h3>Version 1.6 (2003-11-24)</h3>
+
+              <ul>
+                <li>
+                  Quick fix to make Deshaker work better with VirtualDub 1.5.5+ in interlaced mode too :)
+                </li>
+              </ul>
+
+              <h3>Version 1.5 (2003-11-22)</h3>
+
+              <ul>
+                <li>
+                  Works better with VirtualDub 1.5.5 and later. (Before, log files could be emptied after pass 1.)
+                </li>
+
+                <li>
+                  Added a (pretty useless?) feature to help stabilizing on a moving object. Read about it under the '<a href="#ignore%20image%20outside%20area%20setting">ignore image area outside <i>area</i></a>' setting.
+                </li>
+              </ul>
+
+              <h3>Version 1.4 (2003-06-13)</h3>
+
+              <ul>
+                <li>
+                  Past and future frames can now be used to fill in the 
+black borders. I recommend reading about these new settings <a href="#fill%20borders%20setting">above</a> before using them. (Thanks to Lorin Thwaits for the idea to use future frames!)
+                </li>
+
+                <li>
+                  The settings window now fits 800x600 screen resolution (by using smaller font size when necessary).
+                </li>
+
+                <li>
+                  Now, you can enter -1 as smoothness to get "infitite smoothness" :)
+                </li>
+
+                <li>
+                  Other minor changes.
+                </li>
+              </ul>
+
+              <h3>Version 1.3</h3>
+
+              <ul>
+                <li>
+                  For some kinds of video (for example interlaced NTSC), pass 1 was unnecessarily slow. This issue was fixed.
+                </li>
+              </ul>
+
+              <h3>Version 1.2</h3>
+
+              <ul>
+                <li>
+                  Added support for interlaced video.
+                </li>
+
+                <li>
+                  Added settings that limit the amount of corrections.
+                </li>
+
+                <li>
+                  Added new edge compensation option that completely eliminates the black borders
+                </li>
+
+                <li>
+                  Added an optional extra zoom factor to apply to the video.
+                </li>
+
+                <li>
+                  For some settings, Deshaker can now take quite a long 
+time to calculate motion at the start of pass 2. So a little cancel 
+button will now be shown
+                  during this calculation.
+                </li>
+              </ul>
+
+              <h3>Version 1.1</h3>
+
+              <ul>
+                <li>
+                  Fixed a little bug when calculating rotation and zoom.
+ You shouldn't use log files created with version 1.0. But hopefully you
+ can use log files
+                  created with 1.1 in all future versions.
+                </li>
+              </ul>
+
+              <h3>Version 1.0</h3>
+
+              <p>First release.</p>
+
+              <p>&nbsp;</p>
+            </td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+  </tbody></table>
+
+  <table border="0" cellpadding="12" cellspacing="0" width="100%">
+    <tbody><tr>
+      <td width="100%">
+        <table style="border: 1px solid #808080;" cellpadding="8" cellspacing="0" width="100%">
+          <tbody><tr>
+            <td bgcolor="#F8F8F8" width="100%">
+              <!-- <P style="line-height: 0; margin-top: 8; margin-bottom: 0"> -->
+
+              <table>
+                <tbody><tr>
+                  <td style="padding-bottom:8"><p>If you feel like giving me a little something for my efforts...</p></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                      <input name="cmd" value="_s-xclick" type="hidden"> <input name="hosted_button_id" value="4HFRC65SHDQ8E" type="hidden"> <input name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image">
+                    </form>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <p style="line-height: 100%; margin-top: 16; margin-bottom: 8"><b>© 2014 Gunnar Thalin</b></p>
+
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody><tr>
+                  <td align="right" width="50%"><p><a href="http://www.guthspot.se/">www.guthspot.se</a></p></td>
+                </tr>
+              </tbody></table>
+            </td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+  </tbody></table>
+
+
+</body></html>

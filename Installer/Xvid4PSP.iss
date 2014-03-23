@@ -39,7 +39,25 @@ Source: "embedded\unzip.exe"; Flags: dontcopy
 Source: "..\bin\SafeOpenDialog.exe"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "..\bin\WPF_VideoPlayer.exe"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "..\bin\XviD4PSP.exe"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\docs\Changelog_eng.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\docs\Changelog_installer_eng.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\docs\Changelog_installer_rus.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\docs\Changelog_rus.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\docs\License_eng.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\docs\License_rus.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "{app}\vcredist_x86.exe"; DestDir: "{tmp}"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Chinese.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\English.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Estonian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\French.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\German.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Hebrew.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Hungarian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Italian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Portuguese.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Russian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Spanish.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
+Source: "..\bin\languages\Ukrainian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\aften\aften.exe"; DestDir: "{app}\apps\aften"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\aften\COPYING"; DestDir: "{app}\apps\aften"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\avc2avi\avc2avi.exe"; DestDir: "{app}\apps\avc2avi"; Components: Main; Flags: ignoreversion
@@ -240,10 +258,6 @@ Source: "{app}\apps\xvid_encraw\1.2.2\xvid_encraw.exe"; DestDir: "{app}\apps\xvi
 Source: "{app}\apps\xvid_encraw\1.2.2\xvidcore.dll"; DestDir: "{app}\apps\xvid_encraw\1.2.2"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\xvid_encraw\xvid_encraw.exe"; DestDir: "{app}\apps\xvid_encraw"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\xvid_encraw\xvidcore.dll"; DestDir: "{app}\apps\xvid_encraw"; Components: Main; Flags: ignoreversion
-Source: "{app}\Changelog_eng.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
-Source: "{app}\Changelog_installer_eng.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
-Source: "{app}\Changelog_installer_rus.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
-Source: "{app}\Changelog_rus.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\AviSynthWrapper.dll"; DestDir: "{app}\dlls\AviSynth"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\functions\AudioFunctions.avs"; DestDir: "{app}\dlls\AviSynth\functions"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\functions\VideoFunctions.avs"; DestDir: "{app}\dlls\AviSynth\functions"; Components: Main; Flags: ignoreversion
@@ -399,143 +413,6 @@ Source: "{app}\dlls\AviSynth\plugins\dfttestmod.dll"; DestDir: "{app}\dlls\AviSy
 Source: "{app}\dlls\AviSynth\plugins\dither.avsi"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\dither.dll"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\Dnr2_for_25.dll"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\??????????? ?? ??????? Deshaker.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\???_EN.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AAD (???? ????? Decomb) ??????????? ????????????.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AAD_015a - Read me (chs).html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AddGrain.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AnimeIVTC 2.00-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\asharp.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AutoCrop.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AutoGain.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\autolevels.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Autolevels_ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AutoYUY2Help.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\AVSInpaint.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\aWarpSharp.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\aWarpSharp2 eu-rus.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\aWarpSharp2.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\badframes-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\bifrost.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\BlendBob_ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\changelog.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\chromashift.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Cnr2.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\colormatrix.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\corrector-rus.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\dbilateral.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Deathray readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeBarrel.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeBlock.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeBlock.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeCross.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Deen.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\defish.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\degrainmedian-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeJitter.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeNoise.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\depan-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\depulse.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\depulsec.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DeSaltPepper.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\despot-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Destripe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\dfttest - README.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\dfttest - README_rus.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\dfttest_mod - README.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\directshowsource.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\dither.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\DustReadMeV5.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\EEDI3 - Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\exinpaint-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Exorcist.mht"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\FanFilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\ffmpegsource.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\FFMPEGSOURCE_COPYING.GPL"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\ffms2-avisynth.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\ffms2-changelog.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\fft3dfilter-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\fft3dgpu.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\flash3kyuu_deband.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\FQFocusDefocus.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\frfun3b.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\frfun3d.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\frfun7.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\german.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\gnoise.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\gpl-rus.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\hd2sd.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\hdragc-help.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\hqdn3d.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\HybridFuPP 0991b Readme en.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\HybridQ.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\img\earthlights_small1.png"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\img\earthlights_small2.png"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\InpaintFunc - Avisynth.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\InterFrame.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\InterFrame2.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\LeakKernelDeintHelp.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\loaddll.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\MaskTools.mht"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mc_spuds.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\MosquitoNR.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mrestore.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\MSharpen.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\MSU_FRC.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\MT.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mt_masktools.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mt_masktools.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\MVExtras.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mvtools2.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mvtools2mod.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mvtools2-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\mvtools-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\NicAudio Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\nnedi.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\nnedi2 - Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\nnedi3 - Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\PointSize_readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\QTGMC-3.32.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\QTSource_usage.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\rawsource.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Readme_UnDot.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\RedAverage.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\RemapFrames.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\RemoveDirt.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\RemoveGrain.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\RemoveGrainHD.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\repal.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\ResampleHQ.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\rotate-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\SangNom.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\Sashimi.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\sd2hd.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\smooth_hiq_as.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\SmoothAdjust.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\SmoothDeinterlacer.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\SoftSharpen.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\SoftSharpen.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\SoxFilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TBilateral - ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\tcanny - ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TComb - ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TDecimate - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\tdeint.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\tdeint_rus.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TFM - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TIVTC - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TMM - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TNLMeans - Read Me.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\TomsMoComp.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\unblock.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\unsharpHQ.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\unsharpHQ_v04.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\vaguedenoiser-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\VariableBlur.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\VSFilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\yadifmod.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\yadif-rus.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\Docs\yv12torgb24hq.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\DoubleFPS.avsi"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\Down10.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\Dup.dll"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
@@ -905,7 +782,6 @@ Source: "{app}\dlls\AviSynth\plugins\TDeint.dll"; DestDir: "{app}\dlls\AviSynth\
 Source: "{app}\dlls\AviSynth\plugins\TdeintTMMnnedi2up.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\TEdgeMask.dll"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\TempGaussMC_beta1mod.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
-Source: "{app}\dlls\AviSynth\plugins\TempGaussMC_beta1mod_rus.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\TempGaussMC_beta1mod2.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\TempGaussMC_beta2.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\TempGaussMC_beta2u.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
@@ -976,6 +852,143 @@ Source: "{app}\dlls\AviSynth\plugins\YV12ToYUY2i_26.avs"; DestDir: "{app}\dlls\A
 Source: "{app}\dlls\AviSynth\plugins\YV12ToYUY2imod.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\ZoomBox.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\zzz_denoise.avs"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Deshaker.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AAD.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AAD_eng.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AddGrain.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AnimeIVTC.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\asharp.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AutoCrop.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AutoGain.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\autolevels.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Autolevels_ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AutoYUY2Help.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\AVSInpaint.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\aWarpSharp.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\aWarpSharp2.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\badframes.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\bifrost.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\BlendBob_ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\CCC_EN.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\changelog.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\chromashift.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Cnr2.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\colormatrix.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\corrector.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\dbilateral.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Deathray readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeBarrel.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeBlock.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeBlock.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeCross.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Deen.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\defish.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\degrainmedian.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeJitter.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeNoise.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\depan.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\depulse.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\depulsec.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DeSaltPepper.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\despot.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Destripe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\dfttest - README.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\dfttest_mod - README.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\directshowsource.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\dither.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\DustReadMeV5.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\EEDI3 - Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\exinpaint.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Exorcist.mht"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\FanFilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\ffmpegsource.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\FFMPEGSOURCE_COPYING.GPL"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\ffms2-avisynth.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\ffms2-changelog.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\fft3dfilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\fft3dgpu.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\flash3kyuu_deband.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\FQFocusDefocus.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\frfun3b.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\frfun3d.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\frfun7.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\gnoise.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\gpl.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\hd2sd.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\hdragc-help.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\hqdn3d.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\HybridFuPP 0991b Readme en.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\HybridQ.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\InpaintFunc - Avisynth.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\InterFrame.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\InterFrame2.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\LeakKernelDeintHelp.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\LICENSE LSMASHSource.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\loaddll.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\MaskTools.mht"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\mc_spuds.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\MosquitoNR.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\mrestore.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\MSharpen.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\MSU_FRC.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\MT.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\mt_masktools.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\mt_masktools.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\MVExtras.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\mvtools2.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\mvtools2mod.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\NicAudio Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\nnedi.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\nnedi2 - Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\nnedi3 - Readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\PointSize_readme.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\QTGMC-3.32.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\QTSource_usage.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\rawsource.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Readme_UnDot.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\RedAverage.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\RemapFrames.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\RemoveDirt.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\RemoveGrain.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\RemoveGrainHD.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\repal.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\ResampleHQ.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\rotate.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\SangNom.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\Sashimi.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\sd2hd.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\smooth_hiq_as.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\SmoothAdjust.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\SmoothDeinterlacer.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\SoftSharpen.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\SoftSharpen.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\SoxFilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TBilateral - ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\tcanny - ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TComb - ReadMe.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TDecimate - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\tdeint.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TFM - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TIVTC - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TMM - READ ME.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TNLMeans - Read Me.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\TomsMoComp.htm"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\unblock.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\unsharpHQ.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\unsharpHQ_v04.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\vaguedenoiser.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\VariableBlur.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\VSFilter.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\yadifmod.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\yadif.html"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\yv12torgb24hq.txt"; DestDir: "{app}\dlls\AviSynth\plugins\Docs"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\conditional.jpg"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\despot.jpg"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\earthlights_small1.png"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\earthlights_small2.png"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\inpainted.jpg"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\masked.jpg"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
+Source: "{app}\dlls\AviSynth\plugins\Docs\img\original.jpg"; DestDir: "{app}\dlls\AviSynth\plugins\Docs\img"; Components: Plugins; Flags: ignoreversion
 Source: "{app}\dlls\LAVFilters\avcodec-lav-55.dll"; DestDir: "{app}\dlls\LAVFilters"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\LAVFilters\avfilter-lav-4.dll"; DestDir: "{app}\dlls\LAVFilters"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\LAVFilters\avformat-lav-55.dll"; DestDir: "{app}\dlls\LAVFilters"; Components: Main; Flags: ignoreversion
@@ -999,27 +1012,6 @@ Source: "{app}\dlls\Player\SharpDX.dll"; DestDir: "{app}\dlls\Player"; Component
 Source: "{app}\dlls\VStrip\history.txt"; DestDir: "{app}\dlls\VStrip"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\VStrip\license.txt"; DestDir: "{app}\dlls\VStrip"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\VStrip\vStrip.dll"; DestDir: "{app}\dlls\VStrip"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\??????? ???????????? ?? ????????????? ??????? ??.docx"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\???????? ??????? ???????? ??? ??? ???????? ??? ????????? ???????????? ?? ???????? ????.txt"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\??????????? ??????????? ??????? XviD+ VAQ.txt"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\???????????? ? ?????????? Colormatrix.txt"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\About filtering (by Tempter57).txt"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\LICENSE LSMASHSource.txt"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\docs\MT-modes.txt"; DestDir: "{app}\docs"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Chinese.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\English.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Estonian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\French.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\German.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Hebrew.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Hungarian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Italian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Portuguese.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Russian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Spanish.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\languages\Ukrainian.txt"; DestDir: "{app}\languages"; Components: Main; Flags: ignoreversion
-Source: "{app}\License_eng.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
-Source: "{app}\License_rus.txt"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "{app}\presets\encoding\3GP\audio\AAC-HE ABR 64k.txt"; DestDir: "{app}\presets\encoding\3GP\audio"; Components: Main; Flags: ignoreversion
 Source: "{app}\presets\encoding\3GP\audio\AAC-HE CBR 64k.txt"; DestDir: "{app}\presets\encoding\3GP\audio"; Components: Main; Flags: ignoreversion
 Source: "{app}\presets\encoding\3GP\audio\AAC-LC ABR 128k.txt"; DestDir: "{app}\presets\encoding\3GP\audio"; Components: Main; Flags: ignoreversion

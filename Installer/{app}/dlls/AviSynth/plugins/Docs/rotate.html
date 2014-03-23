@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Rotate</title>
+<link rel="stylesheet" type="text/css" href="../avisynth.css">
+<!--
+Automatically generated, don't change:
+$Id$
+-->
+</head>
+<body>
+<h1>Rotate</h1>
+<h2>Abstract</h2>
+<b>author:</b> Alexander Balakhnin 'Fizick'<br>
+<b>version:</b> 1.3.3<br>
+<b>download:</b> <a href="http:/avisynth.org.ru/">http://avisynth.org.ru/</a> <br>
+<b>category:</b>  Geometric plugins<br>
+<b>requirements:</b> RGB32, YV12 color formats<br>
+<b>license:</b> GPL
+<hr>
+
+<h2>Information</h2>
+<p>
+Rotate plugin makes frames rotation or shear on any given angle.
+</p>
+<p>It may be used for perspective correction of amateur films or for special effect.
+Avisynth internal functions TurnLeft and TurnRight can rotate image on 90 degrees only.
+ The Rotate plugin is faster than Zoom plugin (by WarpEnterprises) and
+<code>EffectRotation</code> (from EffectsMany plugin by vcmohan) and produces good quality images (IMO).
+ Implemented Alan Paeth's method of bitmap rotation by means of 3 shears.
+ Pixel (linear) interpolation is used at every shear.
+ Size (scale) and aspect ratio of source picture are preserved.
+</p>
+
+<h2>Syntax and parameters</h2>
+
+<p><code>Rotate</code> (<var>clip, float "angle", int "color",
+ int "start", int "end", float "endangle", int "width", int "height")</var></p>
+
+<p><code>HShear</code> (<var>clip, float "angle", int "color",
+ int "start", int "end", float "endangle", int "width", int "height")</var></p>
+
+<p><code>VShear</code> (<var>clip, float "angle", int "color",
+ int "start", int "end", float "endangle", int "width", int "height")</var></p>
+
+<p>Rotate is rotation, HShear is horizontal shear, VShear is vertical shear.</p>
+
+<p>first parameter is the source clip.</p>
+
+<p><var>angle</var> is rotation angle in degrees clock wise. Default 0.</p>
+
+<p><var>color</var> is background color of part of clip.
+Integer or hex or global color constant like color_gray (see colors_rgb.avsi).
+Default 0 (color_black).</p>
+
+<p><var>start</var> is first frame number to rotate. Default 0.</p>
+
+<p><var>end</var> is last frame number to rotate. Default is -1 (as final frame).</p>
+
+<p><var>endangle</var> is rotation angle of end frame. Default is same as <var>angle</var>.
+If not the same, then rotation angle of intermediate frames is linear function.</p>
+
+<p><var>width</var> and <var>height</var> are sizes of destination output frame.
+Default 0 is to be equal to input clip size. </p>
+
+
+<h2>Example</h2>
+<pre>
+loadplugin("rotate.dll")
+avisource("g:\test.avi")
+converttoRGB32()
+Rotate(1.0) # 1 degree rotation
+</pre>
+
+<h2>Discussion</h2>
+<p>doom9 forum at <a href="http://forum.doom9.org/showthread.php?t=131307">http://forum.doom9.org/showthread.php?t=131307</a></p>
+
+<h2> License</h2>
+<p>This plugin is free software released under the GNU GPL license. See file gpl.txt.<br>
+Documentation is distributed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CreativeCommons BY-SA 3.0 license.</a><br>
+Please donate for support.
+</p>
+
+<p>Source code is based on ImageRotate class (with MMX optimization) from<br>
+ http://treskunov.net/anton/Software/doc/fast_and_high_quality_true_color_bitmap_rotation_function.html<br>
+ Copyright (c) 2003 by Anton Treskunov<br>
+ Permission to use, copy, modify, distribute and sell this software for any
+ purpose is hereby granted without fee, provided that the above copyright
+ notice appear in all copies and that both that copyright notice and this
+ permission notice appear in supporting documentation.
+</p>
+
+<h2>Revisions</h2>
+
+<p>Version 1.0 (29.10.2007) - initial</p>
+<p>Version 1.1 (30.10.2007) - added YV12 color format (slow, no MMX optimization), fixed bug with fill</p>
+<p>Version 1.2 (18.11.2007) - Precise (interpolated) position of center of rotation (was rounded in original)</p>
+<p>Version 1.3 (16.12.2007) - Removed mid rotation for angle -45...0;  fixed bugs with RGB32;
+   Added HShear and VShear functions;  frames range</p>
+<p>Version 1.3.1 (02.07.2008) - Fixed bug with angle=225 (thanks to mikeytown2 for report)</p>
+<p>Version 1.3.2 (25.07.2008) - Fixed bug with YV12 (thanks to mikeytown2 for report)</p>
+<p>Version 1.3.3 (09.09.2009) - Fixed bug with gradual rotation (thanks to Terrachild for report)</p>
+<p>Version 1.3.4 (22.09.2013) - Fixed bug with gradual rotation for large frame sizes RGB32 (thanks to Efremov for report)</p>
+
+
+<h3><a href="rotate134.zip">Download Rotate plugin version 1.3.4</a></h3>
+
+</body>
+</html>
