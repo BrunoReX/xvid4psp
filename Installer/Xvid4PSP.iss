@@ -70,7 +70,7 @@ Source: "{app}\dlls\AviSynth\plugins\*"; DestDir: "{app}\dlls\AviSynth\plugins";
 Source: "{app}\dlls\AviSynth\AviSynthWrapper.dll"; DestDir: "{app}\dlls\AviSynth"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\LAVFilters\*"; DestDir: "{app}\dlls\LAVFilters"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "{app}\dlls\MediaInfo\*"; DestDir: "{app}\dlls\MediaInfo"; Components: Main; Flags: ignoreversion recursesubdirs
-Source: "{app}\dlls\Player\*"; DestDir: "{app}\dlls\Player"; Components: Main; Flags: ignoreversion recursesubdirs
+Source: "..\ref\*"; DestDir: "{app}\dlls\Player"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "{app}\dlls\VStrip\*"; DestDir: "{app}\dlls\VStrip"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "..\docs\*"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "{app}\presets\*"; DestDir: "{app}\presets"; Components: Main; Flags: ignoreversion recursesubdirs
