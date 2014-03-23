@@ -1,9 +1,7 @@
 #HQDN3D.dll
 #dfttest.dll
 #FFT3DFilter.dll
-#RepairSSE2.dll
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
+#RgTools.dll
 #mvtools.dll
 #medianblur.dll
 #aWarpSharp2.dll

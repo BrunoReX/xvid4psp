@@ -1,19 +1,17 @@
 #ColorMatrix.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #deblock.dll
 #dctfilter.dll
 #mvtools2.dll
 #fft3dfilter.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #NNEDI3.dll
 #Cnr2.dll
 #awarpsharp2.dll
 #AddGrainC.dll
 #flash3kyuu_deband.dll
 #SSE2Tools.dll
-#AutoGain.dll
-#VerticalCleanerSSE2.dll
+#AutoAdjust.dll
 #mt_masktools-26.dll
 #gsharp.avs
 #QTGMC.avs
@@ -42,11 +40,11 @@ AssumeTFF()
 QTGMC(Preset="Slow", Sharpness=0.6, TR2=2, FPSDivisor=2, Edithreads=1)
 mergechroma( last) 
 
-AutoGain(dark_limit=1.5, bright_limit=1.5, gamma_limit=1.35, input_tv=true, output_tv=true)
+AutoAdjust(auto_gain=true, dark_limit=1.5, bright_limit=1.5, gamma_limit=1.35, input_tv=true, output_tv=true)
 
 gnoise(1, 0.7).gnoise(1, 1.25)
  
-SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU 
+SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code 
 
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 # str=4

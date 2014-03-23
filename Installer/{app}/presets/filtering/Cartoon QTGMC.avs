@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #tcanny.dll
 #fft3dfilter.dll
@@ -13,7 +12,6 @@
 #MSharpen.dll
 #flash3kyuu_deband.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #mt_masktools-26.dll
 #QTGMC.avs
 #srestore.avs

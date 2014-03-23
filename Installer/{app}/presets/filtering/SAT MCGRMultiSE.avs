@@ -1,8 +1,7 @@
 #avstp.dll
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Bifrost.dll
 #mvtools2mod.dll
 #mt_masktools-26.dll

@@ -4,8 +4,7 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
 #degrainmedian.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Warpsharp.dll
 #fft3dgpu.dll
 #deen.dll

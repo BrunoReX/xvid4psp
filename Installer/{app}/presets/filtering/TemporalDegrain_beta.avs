@@ -1,6 +1,5 @@
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2.dll
-#RepairSSE2.dll
 #fft3dfilter.dll
 #fft3dgpu.dll
 #dfttest.dll

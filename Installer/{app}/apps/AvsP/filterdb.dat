@@ -1544,9 +1544,9 @@ int "cm"=2 (0 to 3)
 bifrost_Bifrost(
 clip,
 [clip "altclip"],
-float "scenelumathresh"=3.0 (0.0 to 255.0),
+float "luma_thresh"=10.0 (0.0 to 255.0),
 int "variation"=5 (0 to 255),
-bool "conservativemask"=false,
+bool "conservative_mask"=false,
 bool "interlaced"=false
 )
 

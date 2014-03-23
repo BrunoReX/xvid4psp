@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #fft3dfilter.dll
 #nnedi3.dll
@@ -9,7 +8,6 @@
 #vinverse.dll
 #AddGrainC.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #mt_masktools-26.dll
 #QTGMC.avs
 

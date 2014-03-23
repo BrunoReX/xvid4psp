@@ -1,9 +1,7 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE209.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #RemoveDirt.dll
-#RepairSSE3.dll
 #aWarpsharp2.dll
 #mvtools2.dll
 #ReduceFlicker.dll

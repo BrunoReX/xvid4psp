@@ -1,7 +1,6 @@
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #Fluxsmooth.dll
-#RepairSSE2.dll
 #UnDot.dll
 #flash3kyuu_deband.dll
 #SPresso.avs

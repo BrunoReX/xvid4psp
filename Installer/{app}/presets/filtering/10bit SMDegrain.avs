@@ -1,12 +1,11 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #mt_masktools-26.dll
 #dfttestmod.dll
 #AddGrainC.dll
 #dither.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #TEdgeMask.dll
 #flash3kyuu_deband.dll
 #f3kgrain_v0.4.avsi

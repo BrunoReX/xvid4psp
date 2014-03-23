@@ -1,8 +1,7 @@
 #avstp.dll
 #msharpen.dll
 #Cnr2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #EEDI2.dll
 #mvtools2mod.dll
 #dfttestmod.dll

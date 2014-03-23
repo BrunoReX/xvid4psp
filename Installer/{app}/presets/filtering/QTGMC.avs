@@ -1,7 +1,6 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #ColorMatrix.dll
 #TDeInt.dll
 #mvtools2.dll
@@ -17,7 +16,6 @@
 #AddGrainC.dll
 #Depan.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #DepanEstimate.dll
 #mt_masktools-26.dll
 #srestore.avs

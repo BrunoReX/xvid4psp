@@ -1,57 +1,419 @@
-<html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<title></title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7614 2013-02-21 15:55:51Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
 <body>
-<h1>Bifrost 1.1</h1>
-<p>Bifrost is a temporal derainbower for avisynth that works in the yv12 colorspace and is intended for region 1 anime dvds (hasn't been tested with anything else). The advantage of a temporal derainbower is that it can actually recover detail and doesn't just smooth the image and cause color bleeding. The bad part is that it's only possible to process static parts of the image which is why an alternative derainbowing method can be used with the altclip parameter. The most similar filter is probably the temporal processing part of the dotcrawl virtualdub filter but with considerably less checks for artifacts.</p>
+<div class="document">
 
-<h2>Changes</h2>
-<h5>Version 1.1</h5>
+
+<div class="section" id="description">
+<h1>Description</h1>
+<p>Bifrost is a temporal derainbowing filter created by Fredrik Mellbin.</p>
+<p>The original Avisynth plugin (version 1.1) worked on the whole frame or not at all. This version works on blocks, meaning that static parts of the image can be processed even if something moves on screen.</p>
+<p>The VapourSynth plugin will accept any 8 bit YUV formats. The Avisynth plugin is still limited to YV12.</p>
+</div>
+<div class="section" id="usage">
+<h1>Usage</h1>
+<pre class="literal-block">
+bifrost.Bifrost(clip clip[, clip altclip=clip, float luma_thresh=10.0, int variation=5, bint conservative_mask=False, bint interlaced=True, int blockx=4, int blocky=4])
+</pre>
 <ul>
-<li>Corrected several bad assumptions about pitch and no longer requests frames out of range which makes it compatible with avisynth 2.5.7.</li>
-<li>Uses the whole image and not just the upper half to determine if there is too much motion, this reduces artifacts greatly in certain clips but the scenelumathresh argument now has to be twice as big as in previous versions for the same effect.</li>
-<li>Processes the image borders properly instead of just ignoring them.</li>
-<li>Can look two frames in either direction instead of just one frame in both. This makes it possible to remove rainbows in frames right before and after scenechanges.</li>
+<li><p class="first">altclip</p>
+<p>Bifrost will copy from this clip the chroma of the blocks it can't process. This allows moving blocks to be processed with some other filter. <em>altclip</em> must have the same format, dimensions and length as <em>clip</em>.</p>
+</li>
+<li><p class="first">luma_thresh</p>
+<p>Blocks where the luma changes less than this are considered static and may be processed.</p>
+</li>
+<li><p class="first">variation</p>
+<p>Controls how big a chroma change must be in order to be considered a rainbow. Increasing this can reduce false positives.</p>
+</li>
+<li><p class="first">conservative_mask</p>
+<p>If true, only pixels detected as rainbows will be processed. Otherwise, pixels that have rainbows above and below them will also be processed.</p>
+</li>
+<li><p class="first">interlaced</p>
+<p>If true, SeparateFields, DoubleWeave and SelectEvery will be invoked in order to process the top and bottom fields separatedly.</p>
+</li>
+<li><p class="first">blockx</p>
+</li>
+<li><p class="first">blocky</p>
+<p>The dimensions of the blocks. Smaller is probably better. The default 4×4 should be good enough.</p>
+</li>
 </ul>
-
-<h2>Rainbow Types</h2>
-<p>When dealing with telecined material you first have to determine if the rainbows were added before or after it was telecined. To do this use separatefields().selectodd() on the source. Find a frame with lots of rainbowing and see if they change every frame or if there's a duplicate every 5 frames. If you find duplicates it's type 2 rainbows and you have to perform perfect ivtc in yatta and force the right pattern over the entire source clip and then finally use "Decimation by pattern" in the project to finish it. If you find no duplicates (type 1) the process is much simpler and you just put Bifrost() right after the source.
-
-<h2>Usage</h2>
-<p>Using Bifrost multiple times on type 2 rainbows can improve the results.</p>
-<p><b>Type 1:</b></p>
-<p>Mpeg2source("fruits_basket_r1.d2v")<br/>
-Bifrost()<br/>
-Telecide(order=1)<br/>
-Decimate()<br/>
-</p>
-<p><b>Type 1 using altclip and SSIQ:</b></p>
-<p>Mpeg2source("gsc_r1.d2v")<br/>
-Bifrost(scenelumathresh=1.5,altclip=SSIQ(11,100,true),interlaced=true)<br/>
-Telecide(order=1)<br/>
-Decimate()</p>
-
-
-<p><b>Type 2:</b></p>
-<p>Mpeg2source("trigun_r1.d2v")<br/>
-Telecide(order=1,ovr="trigun.tel.txt")<br/>
-Decimate(ovr="trigun.dec.txt")<br/>
-Bifrost(interlaced=false)
-</p>
-<p><b>Type 2 using altclip and SSIQ:</b></p>
-<p>Mpeg2source("bgc_r1.d2v")<br/>
-Telecide(order=1,ovr="bgc.tel.txt")<br/>
-Decimate(ovr="bgc.dec.txt")<br/>
-Bifrost(scenelumathresh=2,altclip=SSIQ(11,300,false),interlaced=false)<br/>
-</p>
-
-<h2>Arguments</h2>
-<p>Bifrost(clip, clip altclip (Returns the first clip if none is specified, has to be yv12), float scenelumathresh (Default 3.0), int variation (Default 5), bool conservativemask (Default false), bool interlaced (Default true))<br />
-Altclip is the clip to return frames from when scenelumathresh is passed. This allows rainbows to be removed even in high motion scenes with other processing.<br/>
-Scenelumathresh is how much every pixel in the frame/field may change on average and still be processed.<br />
-Variation determines how much the chroma must change for it to be considered a rainbow. Increasing it decreases false detection in some cases.<br />
-Conservativemask determines if the area around pixels that are considered rainbows also are processed. Can reduce miscoloring a little when there's both movement and rainbows.<br />
-Interlaced changes between field based and frame based decisions for scenelumathresh and is equivalent to using separatefields and weave.<br /></p>
-
-<h2>The Rest</h2>
-<p>Bifrost was created by Fredrik Mellbin. You can find my avisynth related things at <a href="http://ivtc.org/">ivtc.org</a> and if you want to contact me I can be found in the doom9 forums and in #darkhold on irc.chatsociety.net. The source will probably never be released since it contains nothing of real interest. Only simple chroma averaging and a few thresholds.</p>
+<p>Note: If the dimensions of the image aren't divisible by <em>blockx</em> and <em>blocky</em>, the right and/or bottom edges won't be processed. Pad or crop the image before using Bifrost.</p>
+</div>
+<div class="section" id="types-of-rainbows">
+<h1>Types of rainbows</h1>
+<p>When dealing with telecined material you must determine if the rainbows were added before or after the telecine process. Find a scene with clearly visible rainbows and use the following:</p>
+<pre class="literal-block">
+src = your.Source()
+separated = std.SeparateFields(src)
+even = std.SelectEvery(separated, 2, 0)
+</pre>
+<p>If the rainbows change every frame, they were added after telecine. If there is a duplicate every five frames, they were added before.</p>
+<div class="section" id="rainbows-added-before-telecine">
+<h2>Rainbows added before telecine</h2>
+<p>First you must fix the telecine, then use Bifrost in progressive mode:</p>
+<pre class="literal-block">
+ret = d2v.Source(&quot;rainbows1.d2v&quot;)
+ret = vivtc.VFM(ret, order=1, chroma=False, mchroma=False)
+ret = vivtc.VDecimate(ret, chroma=False)
+ret = bifrost.Bifrost(ret, interlaced=False)
+</pre>
+</div>
+<div class="section" id="rainbows-added-after-telecine">
+<h2>Rainbows added after telecine</h2>
+<p>In this case, Bifrost should be used in interlaced mode, right after the source filter:</p>
+<pre class="literal-block">
+ret = d2v.Source(&quot;rainbows2.d2v&quot;)
+ret = bifrost.Bifrost(ret, interlaced=True)
+# ivtc here
+</pre>
+</div>
+</div>
+<div class="section" id="compilation">
+<h1>Compilation</h1>
+<pre class="literal-block">
+./autogen.sh
+./configure
+make
+</pre>
+<p>DLLs for VapourSynth and for Avisynth 2.5.8+ can be found in the &quot;<a href="https://github.com/dubhater/vapoursynth-bifrost/releases" target="_blank">releases</a>&quot; section.</p>
+</div>
+</div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 #avstp.dll
 #mvtools2mod.dll
-#RemovegrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #AddGrainC.dll
 #Gradfun2db.dll
 #mt_masktools-26.dll

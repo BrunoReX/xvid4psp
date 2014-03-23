@@ -3,10 +3,7 @@
 #vdf_arguments:CamCD:0
 #Depan.dll
 #DepanEstimate.dll
-#RemoveGrainTSSE2.dll
-#RemoveGrainSSE2.dll
-#RepairTSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #RemoveDirtSSE2.dll
 #mvtools2mod.dll
 #mt_masktools-26.dll

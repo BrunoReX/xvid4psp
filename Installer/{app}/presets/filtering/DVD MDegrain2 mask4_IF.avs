@@ -1,6 +1,5 @@
 #degrainmedian.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2SVP.dll
 #fft3dgpu.dll
 #WarpSharp.dll

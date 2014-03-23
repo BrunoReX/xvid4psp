@@ -4,10 +4,9 @@
 #Cnr2.dll
 #Depan.dll
 #DepanEstimate.dll
-#RemoveGrainSSE3.dll
+#RgTools.dll
 #mvtools2.dll
 #WarpSharp.dll
-#RepairSSE3.dll
 #mt_masktools-26.dll
 #FluxSmooth.dll
 #flash3kyuu_deband.dll

@@ -1,8 +1,7 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
 #Cnr2.dll
-#RepairSSE3.dll
-#RemoveGrainSSE3.dll
+#RgTools.dll
 #mvtools2.dll
 #Deblock.dll
 #DctFilter.dll

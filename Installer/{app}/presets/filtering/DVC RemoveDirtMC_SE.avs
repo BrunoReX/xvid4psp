@@ -1,10 +1,7 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
 #Warpsharp.dll
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
-#RepairTSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #RemoveDirt.dll
 #mvtools2.dll
 #hqdn3d.dll

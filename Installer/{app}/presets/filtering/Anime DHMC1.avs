@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #fft3dgpu.dll
 #dfttest.dll
 #Checkmate.dll

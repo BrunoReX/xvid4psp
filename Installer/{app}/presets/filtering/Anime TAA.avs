@@ -7,8 +7,7 @@
 #tcanny.dll
 #MSharpen.dll
 #awarpsharp2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #warpsharp.dll
 #variableblur.dll
 #dfttestmod.dll

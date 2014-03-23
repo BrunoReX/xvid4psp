@@ -4,10 +4,8 @@
 #descratch.dll
 #DeFlicker.dll
 #mt_masktools-26.dll
-#RemovegrainSSE2.dll
-#RemovegrainTSSE2.dll
+#RgTools.dll
 #RemoveDirt.dll
-#RepairSSE2.dll
 #warpsharp.dll
 #AddGrainC.dll
 #GradFun2DB.dll

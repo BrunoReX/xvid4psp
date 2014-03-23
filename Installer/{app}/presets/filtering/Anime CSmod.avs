@@ -6,8 +6,7 @@
 #nnedi3.dll
 #EEDI2.dll
 #tcanny.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #medianblur.dll
 #dfttestmod.dll
 #warpsharp.dll

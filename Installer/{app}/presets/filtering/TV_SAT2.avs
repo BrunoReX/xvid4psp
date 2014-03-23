@@ -3,9 +3,8 @@
 #Deblock.dll
 #dctfilter.dll
 #degrainmedian.dll
-#RemoveGrainSSE3.dll
+#RgTools.dll
 #mvtools2.dll
-#RepairSSE3.dll
 #fft3dgpu.dll
 #Warpsharp.dll
 #mt_masktools-26.dll
@@ -13,7 +12,7 @@
 #AddGrainC.dll
 #SangNom.dll
 #vinverse.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #maa.avs
 #Gradfun2dbmod 1.5.avsi
 #Deblock_QED_MT2.avs
@@ -30,7 +29,7 @@ ConvertToRGB32().CamCD(15,1).converttoyv12()  # удаление радужности и цветового 
 # Deblock_QED(uv=3) # деблокинг подключить в случае блочности исходника
 
   SmoothCurve(Ycurve="0-0;8-0;244-255;255-255", Ucurve="0-0;8-0;248-255;255-255", Vcurve="0-0;8-0;248-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 # str=4

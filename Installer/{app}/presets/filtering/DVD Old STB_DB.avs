@@ -1,9 +1,7 @@
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2.dll
 #mt_masktools-26.dll
 #WarpSharp.dll
-#VerticalCleaner.dll
 #Gradfun2db.dll
 #AddGrainC.dll
 #flash3kyuu_deband.dll

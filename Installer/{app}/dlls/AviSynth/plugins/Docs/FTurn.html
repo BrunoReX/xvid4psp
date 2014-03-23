@@ -1,0 +1,13 @@
+<h2 id="fturn.">fturn.</h2>
+<h3 id="what">What</h3>
+<p>Fast implementation of TurnLeft(), TurnRight() and Turn180() AviSynth functions.</p>
+<h3 id="how">How</h3>
+<pre><code>FTurnLeft(chroma=true, mt=true)
+FTurnRight(chroma=true, mt=true)
+FTurn180(chroma=true)</code></pre>
+<h3 id="why">Why</h3>
+<p>Great performance improvements for antialiasing scripts like maa. You can disable chroma processing in case you don't need it (almost often in antialiasing scripts).</p>
+<h3 id="requirements">Requirements</h3>
+<p>SSE2 is required. The plugin is also optimized for SSSE3 so you can assume a slightly better performance if your CPU has it.</p>
+<h3 id="license">License</h3>
+<p>This project is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>. Binaries are <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL v2</a> because if I understand licensing stuff right (please tell me if I don't) they must be.</p>

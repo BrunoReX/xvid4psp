@@ -3,9 +3,8 @@
 #vdf_arguments:CamCD:0
 #mt_masktools-26.dll
 #NNEDI3.dll
-#RemoveGrainSSE2.dll
-#RepairSSE3.dll
-#SmoothAdjust-ICL-x86.dll
+#RgTools.dll
+#SmoothAdjust.dll
 #mvtools2mod.dll
 #flash3kyuu_deband.dll
 #ttempsmooth.dll
@@ -35,7 +34,7 @@ setmtmode(2)
   Bifrost(interlaced=false)
   
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 blksize = 16
 overlap = blksize/2

@@ -1,9 +1,9 @@
 #avstp.dll
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #medianblur.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #mvtools2mod.dll
 #fluxsmooth.dll
@@ -36,7 +36,7 @@ m2.mdegrain2(sup2,bv1,fv1,bv2,fv2,thSAD=300,plane=0).mergechroma(last)
 # LEVELS
   SmoothContrast(contrast=0.02) 
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
   
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 #str=3 # значение подобрать

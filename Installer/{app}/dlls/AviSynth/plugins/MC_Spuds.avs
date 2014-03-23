@@ -398,7 +398,7 @@ FUNCTION RemoveDustDirt(clip input, int repmode, int clmode, int limitY, int lim
   limitY    = default(limitY, 10)
   limitUV   = default(limitUV, 45)
   
-  clensed   = Clense(input,grey=!chro,cache=4)
+  clensed   = Clense(input,grey=!chro)
   repaired  = Repair(clensed, input, mode=repmode, modeU = modeU)
   degrained = RemoveGrain(repaired, mode=clmode,modeU = !chro ? -1 : clmode)
   degrained = (chro) ? degrained : degrained.mergechroma(input)

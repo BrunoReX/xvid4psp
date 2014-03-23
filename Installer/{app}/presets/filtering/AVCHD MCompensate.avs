@@ -1,8 +1,7 @@
 #avstp.dll
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemovegrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #DePan.dll
 #DePanEstimate.dll

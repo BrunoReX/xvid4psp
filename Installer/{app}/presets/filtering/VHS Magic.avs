@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #nnedi3.dll
 #HQdn3D.dll
@@ -14,7 +13,6 @@
 #awarpsharp2.dll
 #mt_masktools-26.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #sbr.avs
 #minblur.avs
 #TemporalDegrain_beta.avs

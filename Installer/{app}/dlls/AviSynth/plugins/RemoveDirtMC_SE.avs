@@ -129,9 +129,9 @@ function RemoveDirtSE(clip input, clip fcomp, clip bcomp, int "repmode", int "cl
       
 	repmode = default(repmode, 16)
 	clmode  = default(clmode,   5)
-	clensed = interleave(fcomp,input,bcomp).Clense(cache=-1).selectevery(3,1)
-	sbegin  = ForwardClense(input, cache=-1)
-	send   = BackwardClense(input, cache=-1)
+	clensed = interleave(fcomp,input,bcomp).Clense().selectevery(3,1)
+	sbegin  = ForwardClense(input)
+	send   = BackwardClense(input)
 	alt = Repair(SCSelect(input, sbegin, send, clensed, debug=false), input, mode=repmode) 
 	restore = Repair(clensed, input, mode=repmode)
 	corrected = RestoreMotionBlocks(clensed, restore, neighbour=input, alternative=alt, gmthreshold=50, dist=1,\

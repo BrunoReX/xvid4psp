@@ -1,7 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE209.dll
-#RemoveGrainSSE2.dll
-#RepairSSE3.dll
+#RgTools.dll
 #ReduceFlicker.dll
 #mvtools2mod.dll
 #mt_masktools-26.dll

@@ -3,8 +3,7 @@
 #fft3dgpu.dll
 #degrainmedian.dll
 #VagueDenoiser.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #AddGrainC.dll
 #GradFun2DB.dll
 #mt_masktools-26.dll

@@ -1,7 +1,6 @@
 #avstp.dll
 #FluxSmooth.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #mvtools2mod.dll
 #NNEDI3.dll

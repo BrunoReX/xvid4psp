@@ -3,8 +3,7 @@
 #Depan.dll
 #DepanEstimate.dll
 #WarpSharp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2.dll
 #mt_masktools-26.dll
 #DeJitter.dll

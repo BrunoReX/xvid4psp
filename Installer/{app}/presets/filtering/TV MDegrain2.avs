@@ -1,15 +1,14 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE3.dll
+#RgTools.dll
 #degrainmedian.dll
 #mvtools2.dll
-#RepairSSE3.dll
 #ttempsmooth.dll
 #mt_masktools-26.dll
 #vinverse.dll
 #AddGrainC.dll
 #GradFun2DB.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #minblur.avs
 #ContraSharpening.avs
 #GradFun2DBmod 1.5.avsi
@@ -37,7 +36,7 @@ denoiced = source.MDegrain2(source_super,vb1,vf1,vb2,vf2,thSAD=400).ttempsmooth(
 ContraSharpening(denoiced,source)
 
 SmoothCurve(Ycurve="0-0;8-0;244-255;255-255", Ucurve="0-0;8-0;248-255;255-255", Vcurve="0-0;8-0;248-255;255-255", interp=0) 
-SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # DeBanding
 GradFun2DBmod(thr=1.4,thrC=1.4,mode=2,str=0.8,strC=0.0,temp=50,adapt=64)

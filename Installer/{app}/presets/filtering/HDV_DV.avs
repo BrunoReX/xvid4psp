@@ -1,7 +1,6 @@
 #ColorMatrix.dll
 #AutoYUY2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #GradFun2DB.dll
 #medianblur.dll
 #FluxSmooth.dll

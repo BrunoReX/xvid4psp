@@ -1,7 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
-#RemoveGrainHD.dll
+#RgTools.dll
 #dfttestmod.dll
 #flash3kyuu_deband.dll
 #Dither.dll

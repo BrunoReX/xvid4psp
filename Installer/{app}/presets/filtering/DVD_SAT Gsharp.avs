@@ -1,13 +1,12 @@
 #ColorMatrix.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #deblock.dll
 #NNEDI3.dll
 #degrainmedian.dll
 #awarpsharp2.dll
 #AddGrainC.dll
 #mt_masktools-26.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #mvtools2mod.dll
 #Bifrost.dll
 #Dither.dll
@@ -45,7 +44,7 @@ clamped.selectevery(2,-1).trim(1,0)
   Bifrost(interlaced=false)
   
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 source = last
 

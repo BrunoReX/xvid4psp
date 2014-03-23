@@ -15,7 +15,7 @@
 
 <table class="n">
 <tr><td class="n"><b>Authors:     </b></td><td class="n">&nbsp;</td><td class="n">Firesledge (aka Cretindesalpes)</td></tr>
-<tr><td class="n"><b>Version:     </b></td><td class="n">&nbsp;</td><td class="n">1.22.1</td></tr>
+<tr><td class="n"><b>Version:     </b></td><td class="n">&nbsp;</td><td class="n">1.25.1</td></tr>
 <tr><td class="n"><b>Download:    </b></td><td class="n">&nbsp;</td><td class="n"><a href="http://ldesoras.free.fr/prod.html#src_ditheravsi">http://ldesoras.free.fr/prod.html</a></td></tr>
 <tr><td class="n"><b>Category:    </b></td><td class="n">&nbsp;</td><td class="n">Deep color tools</td></tr>
 <tr><td class="n"><b>Requirements:</b></td><td class="n">&nbsp;</td><td class="n"><ul class="n">
@@ -740,7 +740,8 @@ Value differences falling over this thershold are gradually attenuated, up to
 	float elastc (elast)
 	int   y (3),
 	int   u (3),
-	int   v (3)
+	int   v (3),
+	clip  ref
 )</pre>
 
 <p>This function is equivalent to GradFun2db and helps removing the existing
@@ -831,6 +832,12 @@ bits.</p>
 
 <p class="var">lsb_in</p>
 <p>When set to true, works on 16-bit input.</p>
+
+<p class="var">ref</p>
+<p>Reference clip used to limit changes.
+Allows cascading multiple GradFun3 calls (for example by combining small and large radius settings) without going too far from the original picture.
+<var>ref</var> must have the same format as the input clip.
+When not specified, the reference clip is the input.</p>
 
 <p class="var">other parameters</p>
 <p>The other parameters are directly transmitted to
@@ -1291,7 +1298,7 @@ Function show_chroma_ss (string colorspace, string cplace, string dispname, bool
 \	)
 }
 -->
-<p style="text-align: center;"><img src="colorspace-subsampling.png" alt="Chroma placement" /></p>
+<p style="text-align: center;"><img src="img\colorspace-subsampling.png" alt="Chroma placement" /></p>
 
 <p class="var">kernelh, kernelv</p>
 <p><var>kernel</var>
@@ -1376,6 +1383,7 @@ Possible values are:</p>
 <table>
 <tr><td><b><code>"601"</code></b></td><td>ITU-R BT.601 / ITU-R BT.470-2 / SMPTE 170M. For Standard Definition content.</td></tr>
 <tr><td><b><code>"709"</code></b></td><td>ITU-R BT.709. For High Definition content.</td></tr>
+<tr><td><b><code>"2020"</code></b></td><td>ITU-R BT.2020, non constant luminance mode. For UHDTV content.</td></tr>
 <tr><td><b><code>"240"</code></b></td><td>SMPTE 240M</td></tr>
 <tr><td><b><code>"FCC"</code></b></td><td>FCC (where does that come from?)</td></tr>
 <tr><td><b><code>"YCgCo"</code></b></td><td>YCgCo</td></tr>
@@ -1475,6 +1483,7 @@ Possible values are:</p>
 <table>
 <tr><td><b><code>"601"</code></b></td><td>ITU-R BT.601 / ITU-R BT.470-2 / SMPTE 170M. For Standard Definition content.</td></tr>
 <tr><td><b><code>"709"</code></b></td><td>ITU-R BT.709. For High Definition content.</td></tr>
+<tr><td><b><code>"2020"</code></b></td><td>ITU-R BT.2020, non constant luminance mode. For UHDTV content.</td></tr>
 <tr><td><b><code>"240"</code></b></td><td>SMPTE 240M</td></tr>
 <tr><td><b><code>"FCC"</code></b></td><td>FCC (where does that come from?)</td></tr>
 <tr><td><b><code>"YCgCo"</code></b></td><td>YCgCo</td></tr>
@@ -1487,7 +1496,7 @@ if &ge; 600 lines).</p>
 <p>Indicates that the input clip is interlaced.</p>
 
 <p class="var">tv_range</p>
-<p><code>true</code> if input clip has TV range pixel values,
+<p><code>true</code> if output clip has TV range pixel values,
 <code>false</code> if it uses the full range (PC scale).</p>
 
 <p class="var">cplace</p>
@@ -1716,7 +1725,7 @@ Even if reduced, the output clip is still in the regular stack16 format.</p>
 	clip src,
 	bool bigendian (false)
 )</pre></td>
-<td><pre class="proto">Dither_convey_yuv4xxp16_on_yvxx (
+<td class="n"><pre class="proto">Dither_convey_yuv4xxp16_on_yvxx (
 	clip src,
 	bool bigendian (false)
 )</pre></td>
@@ -1832,7 +1841,7 @@ As in the original <code>RemoveGrain</code>, the borders rows and columns (1-pix
 <p>The smoothing mode.
 It can apply to all the planes or to the Y plane only, depending on the
 values of <var>modeU</var> and <var>modeV</var>.
-All the <code>RemoveGrain</code> modes have not been ported yet.
+Some of the <code>RemoveGrain</code> modes have not been ported yet (25 and above).
 The available ones are listed below.</p>
 <table>
 <tr><td align="right"><b>&minus;1</b></td><td>The plane is not touched at all and may contain garbage on output.</td></tr>
@@ -1841,10 +1850,24 @@ The available ones are listed below.</p>
 <tr><td align="right"><b> 2</b></td><td>Clips the pixel with the second minimum and maximum of the 8 neighbour pixels.</td></tr>
 <tr><td align="right"><b> 3</b></td><td>Clips the pixel with the third minimum and maximum of the 8 neighbour pixels.</td></tr>
 <tr><td align="right"><b> 4</b></td><td>Clips the pixel with the fourth minimum and maximum of the 8 neighbour pixels, which is equivalent to a median filter.</td></tr>
+<tr><td align="right"><b> 5</b></td><td>Line-sensitive clipping giving the minimal change.</td></tr>
+<tr><td align="right"><b> 6&ndash;8</b></td><td>Line-sensitive clipping, intermediate.</td></tr>
+<tr><td align="right"><b> 9</b></td><td>Line-sensitive clipping on a line where the neighbours pixels are the closest.</td></tr>
+<tr><td align="right"><b>10</b></td><td>Replaces the target pixel with the closest neighbour.</td></tr>
 <tr><td align="right"><b>11</b></td><td>[1 2 1] horizontal and vertical kernel blur. Similar to <code>Blur(1)</code>.</td></tr>
 <tr><td align="right"><b>12</b></td><td>Same as mode 11.</td></tr>
+<tr><td align="right"><b>13</b></td><td>Bob mode, interpolates top field from the line where the neighbours pixels are the closest.</td></tr>
+<tr><td align="right"><b>14</b></td><td>Bob mode, interpolates bottom field from the line where the neighbours pixels are the closest.</td></tr>
+<tr><td align="right"><b>15</b></td><td>Bob mode, interpolates top field. Same as 13 but with a more complicated interpolation formula.</td></tr>
+<tr><td align="right"><b>16</b></td><td>Bob mode, interpolates bottom field. Same as 14 but with a more complicated interpolation formula.</td></tr>
+<tr><td align="right"><b>17</b></td><td>Clips the pixel with the minimum and maximum of respectively the maximum and minimum of each pair of opposite neighbour pixels.</td></tr>
+<tr><td align="right"><b>18</b></td><td>Line-sensitive clipping using opposite neighbours whose greatest distance from the current pixel is minimal.</td></tr>
 <tr><td align="right"><b>19</b></td><td>Replaces the pixel with the average of its 8 neighbours.</td></tr>
 <tr><td align="right"><b>20</b></td><td>Averages the 9 pixels ([1 1 1] horizontal and vertical blur). Similar to <code>Blur(1.58)</code>.</td></tr>
+<tr><td align="right"><b>21</b></td><td>Clips pixels using the averages of opposite neighbour</td></tr>
+<tr><td align="right"><b>22</b></td><td>Same as mode 21 but simpler and faster.</td></tr>
+<tr><td align="right"><b>23</b></td><td>Small edge and halo removal, but reputed useless.</td></tr>
+<tr><td align="right"><b>24</b></td><td>Small edge and halo removal, but reputed useless.</td></tr>
 </table>
 
 <p class="var">modeU, modeV</p>
@@ -1879,7 +1902,6 @@ Must have the same format as <var>src1</var>.</p>
 <p>The repairing mode.
 It can apply to all the planes or to the Y plane only, depending on the
 values of <var>modeU</var> and <var>modeV</var>.
-All the <code>Repair</code> modes have not been ported yet.
 The available ones are listed below.
 These modes are similar to the <code>RemoveGrain</code> modes but include
 the center pixel of the reference clip for min/max calculation.
@@ -1888,7 +1910,13 @@ the center pixel of the reference clip for min/max calculation.
 <tr><td align="right"><b>&minus;1</b></td><td>The plane is not touched at all and may contain garbage on output.</td></tr>
 <tr><td align="right"><b> 0</b></td><td>The plane is copied without being processed.</td></tr>
 <tr><td align="right"><b> 1&ndash;4</b></td><td>Clips the source pixel with the Nth minimum and maximum found on the 3&times;3-pixel square from the reference clip.</td></tr>
+<tr><td align="right"><b> 5</b></td><td>Line-sensitive clipping giving the minimal change.</td></tr>
+<tr><td align="right"><b> 6&ndash;8</b></td><td>Line-sensitive clipping, intermediate.</td></tr>
+<tr><td align="right"><b> 9</b></td><td>Line-sensitive clipping on a line where the neighbours pixels are the closest.</td></tr>
+<tr><td align="right"><b>10</b></td><td>Replaces the target pixel with the closest pixel from the 3&times;3-pixel reference square.</td></tr>
 <tr><td align="right"><b>11&ndash;14</b></td><td>Same as modes 1&ndash;4 but uses <code>min(Nth_min, c)</code> and <code>max(Nth_max, c)</code> for the clipping, where <code>c</code> is the value of the center pixel of the reference clip.</td></tr>
+<tr><td align="right"><b>15, 16</b></td><td>Clips the source pixels using a clipping pair from the <code>RemoveGrain</code> modes 5 and 6.</td></tr>
+<tr><td align="right"><b>17, 18</b></td><td>Clips the source pixels using a clipping pair from the <code>RemoveGrain</code> modes 17 and 18.</td></tr>
 </table>
 
 <p class="var">modeU, modeV</p>
@@ -1914,11 +1942,11 @@ If not defined, they use the same value as <var>mode</var>.</p>
 
 <p>This filter performs quantile clipping, and more specifically can work as a
 median filter.
-The temporal component is currently not implemented and the filter is quite
-slow (not optimised at all).</p>
+It is quite slow, not optimised at all.</p>
 
 <p class="var">rx, ry</p>
 <p>Horizontal and vertical radius of the workarea.
+Positive values.
 The middle pixel value is clipped by the lower and higher quantiles found in
 the defined group of pixels.
 With <var>rx&nbsp;= 2</var> and <var>ry&nbsp;= 3</var>, the input area is
@@ -1926,8 +1954,8 @@ With <var>rx&nbsp;= 2</var> and <var>ry&nbsp;= 3</var>, the input area is
 
 <p class="var">rt</p>
 <p>Temporal radius.
-Not used currently.
-Keep it to 0.</p>
+Positive value.
+If set to 0, the filter is spatial only.</p>
 
 <p class="var">ql, qh</p>
 <p>Low and high clipping quantiles.
@@ -2307,19 +2335,19 @@ difference.</p>
 	clip src1,
 	clip src2,
 	clip mask,
+	bool luma (false),
 	int  y (3),
 	int  u (2 or 3),
-	int  v (2 or 3),
-	bool luma (false)
+	int  v (2 or 3)
 )</pre></td>
 <td class="n"><pre class="proto">Dither_merge16_8 (
 	clip src1,
 	clip src2,
 	clip mask,
+	bool luma (false),
 	int  y (3),
 	int  u (2 or 3),
-	int  v (2 or 3),
-	bool luma (false)
+	int  v (2 or 3)
 )</pre></td>
 </tr>
 </table>
@@ -2396,6 +2424,7 @@ from <code>Dither_convert_yuv_to_rgb</code> for example.</p>
 <tr><td><b><code>"170"</code></b></td><td>SMPTE 170M, same as <code>"709"</code></td></tr>
 <tr><td><b><code>"240"</code></b></td><td>SMPTE 240M (1987)</td></tr>
 <tr><td><b><code>"srgb"</code></b></td><td>sRGB curve</td></tr>
+<tr><td><b><code>"2020"</code></b></td><td>ITU-R BT.2020 transfer curve, for 12-bit content. For sources of lower bitdepth, use the <code>"709"</code> curve.</td></tr>
 </table>
 
 <!-- MATLAB code:
@@ -2406,7 +2435,7 @@ y240m = (x <= 0.099  ) .* (x / 4.0  ) + (x > 0.099  ) .* (((x + 0.1115) / 1.1115
 plot (x, ysrgb, x, y240m, x, y709);
 grid on; legend ('sRGB', 'SMPTE 240M', 'BT.709', 2); title ('Transfer characteristics');
 -->
-<p style="text-align: center;"><img src="transfer.png" alt="Transfer characteristics" /></p>
+<p style="text-align: center;"><img src="img\transfer.png" alt="Transfer characteristics" /></p>
 
 <p class="var">gcor</p>
 <p>Gamma correction, applied on the linear part.</p>
@@ -2511,6 +2540,36 @@ scripts around there.</p>
 
 
 <h2><a id="changelog"></a>VII) Changelog</h2>
+
+<p><b>v1.25.1, 2014.03.03</b></p>
+<ul>
+	<li>Fixed a regression introduced in <code>Dither_merge16</code>.</li>
+</ul>
+
+<p><b>v1.25.0, 2014.03.02</b></p>
+<ul>
+	<li>64-bit version. Source code projects ported to MSVC 2012.</li>
+	<li>Added modes 5&ndash;10 to <code>Dither_repair16</code>.</li>
+	<li>Added <var>ref</var> clip to <code>GradFun3</code>.</li>
+	<li>The order of the <var>luma</var>, <var>y</var>, <var>u</var> and <var>v</var> parameters in <code>Dither_merge16</code> is now the same as in <code>Dither_merge16_8</code>. The documentation has been fixed accordingly.</li>
+	<li>Slight speed improvement in <code>Dither_srgb_display</code> when there is no resizing nor gamma correction.</li>
+	<li>Fixed a problem in <code>Dither_lut16</code> with expressions containing two consecutive “x” arguments.</li>
+	<li>Fixed artefacts (overflow occuring when input pixels are close to 0) and inaccuracy in mode 20 of <code>Dither_removegrain16</code>.</li>
+</ul>
+
+<p><b>v1.24.0, 2013.10.27</b></p>
+<ul>
+	<li>Added all modes up to 24 to <code>Dither_removegrain16</code>, thanks to tp7. Most of them are SSE2-optimised.</li>
+	<li>Added modes 15&ndash;18 to <code>Dither_repair16</code> (not optimised for SSE2).</li>
+</ul>
+
+<p><b>v1.23.0, 2013.08.04</b></p>
+<ul>
+	<li>Partial implementation of the BT.2020 color conversions. Only the non-constant luminance matrix is implemented.</li>
+	<li>Optimized <code>Dither_merge16</code> for SSE2.</li>
+	<li>Fixed the <var>radiusc</var> type in <code>GradFun3</code> (int), so it now should work correctly in Avisynth 2.6 alpha 4.</li>
+	<li>Fixed a bug in <code>Dither_merge16</code> affecting the chroma of YV12 clips with <var>luma=true</var>. Thanks to tp7 for reporting these issues.</li>
+</ul>
 
 <p><b>v1.22.1, 2013.01.09</b></p>
 <ul>

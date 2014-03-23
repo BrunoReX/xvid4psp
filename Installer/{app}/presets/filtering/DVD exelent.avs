@@ -1,8 +1,7 @@
 #degrainmedian.dll
 #WarpSharp.dll
 #mt_masktools-26.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #flash3kyuu_deband.dll
 #Ylevels.avs
 #LimitedSharpenFaster Mod.avs

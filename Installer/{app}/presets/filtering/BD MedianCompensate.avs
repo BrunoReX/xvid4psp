@@ -1,6 +1,6 @@
 #avstp.dll
 #medianblur.dll
-#RemoveGrainSSE3.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #mvtools2mod.dll
 #flash3kyuu_deband.dll

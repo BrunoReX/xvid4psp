@@ -1,5 +1,4 @@
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #TDeInt.dll
 #mvtools2.dll
 #dfttest.dll
@@ -10,7 +9,6 @@
 #AddGrainC.dll
 #average.dll
 #flash3kyuu_deband.dll
-#VerticalCleaner.dll
 #mt_masktools-26.dll
 #srestore.avs
 #QTGMC.avs

@@ -4,12 +4,11 @@
 #Depan.dll
 #DepanEstimate.dll
 #WarpSharp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #degrainmedian.dll
 #fft3dgpu.dll
 #deflicker.dll
 #mvtools2mod.dll
-#RepairSSE2.dll
 #mt_masktools-26.dll
 #FluxSmooth.dll
 #AddGrainC.dll

@@ -1,7 +1,6 @@
 #avstp.dll
 #FluxSmooth.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #mvtools2mod.dll
 #VagueDenoiser.dll
@@ -10,7 +9,7 @@
 #dither.dll
 #AddGrainC.dll
 #GradFun2DB.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #mt_xxpand_multi.avsi
 #Dither.avsi
@@ -52,7 +51,7 @@ f3kdb(16, 52, 36, 36, 0, 0, dynamic_grain=true, dither_algo=3, input_mode=1, out
 # Dither_add_grain16 (var=0.1, uvar=0, soft=2)
 DitherPost(mode=6,ampo=0,ampn=1)
 
-SmoothLevels(gamma=1.0, useopt=-1)
+SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # Для обработки HDTV и прочих видеоматериалов с танцующим(пляшущим) характером шума
 

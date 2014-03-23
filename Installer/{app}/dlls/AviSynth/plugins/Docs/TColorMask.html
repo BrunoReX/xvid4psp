@@ -1,0 +1,238 @@
+<h2 id="tcolormask.">tcolormask.</h2>
+<p>Yet another simple AviSynth plugin created for the sake of creating a simple AviSynth plugin.</p>
+<p>This is a port of the great tophf's script <a href="http://pastebin.com/vAa8fyjp">t_colormask</a>. It masks colors but unlike the old ColorKeyMask it works on YV12. The main reason for this plugin is performance. The API and output are not identical, please reffer to the <strong>Difference</strong> section for details.</p>
+<p>Provided binary is built with ICL.</p>
+<h3 id="usage">Usage</h3>
+<p>All parameters (except the colors) are set to their default values.</p>
+<pre><code>tcolormask(&quot;$FFFFFF /*pure white hex*/ 
+000000 //also black
+$808080&quot;, tolerance=10, bt601=false, gray=false, lutthr=9, mt=true)</code></pre>
+<ul>
+<li><em>colors</em> - string of colors. Line and block comments are allowed.</li>
+<li><em>tolerance</em> - pixel value will pass if its absolute difference with color is less than tolerance (luma) or half the tolerance (chroma).</li>
+<li><em>bt601</em> - use bt601 matrix for conversion of colors.</li>
+<li><em>gray</em> - set chroma of output clip to 128.</li>
+<li><em>lutthr</em> - if specified more than lutthr colors, lut will be used instead of direct SIMD computations.</li>
+<li><em>mt</em> - enable multithreading. It actually uses only two threads as any more threading doesn't seem to be useful.</li>
+</ul>
+<h3 id="difference">Difference</h3>
+<p>Unlike the old script, this plugin uses a single string to specify all colors and doesn't do any blurring. Wrapper functions are provided for convenience in the <strong>bin/tcolormask_wrappers.avs</strong> script.</p>
+<p>Also since we process chroma and luma together to avoid having to merge planes later, output is not <a href="http://screenshotcomparison.com/comparison/27079">identical</a>. Basically it appears a bit less blurred and doesn't contain any non-binary values produced by chroma resizing. This will not be fixed and there's no workaround. You'll most likely be blurring the output clip anyway.</p>
+<h3 id="performance">Performance</h3>
+<p>This plugin uses direct SIMD computations to do its dirty work. SIMD appears to be faster than LUT for the most common cases, but unfortunately its speed depends on the number of specified colors and at some point it does get slower than LUT. That's why the alternative is also provided. If specified more than <em>lutthr</em> (9 by default) colors, the plugin will use the LUT routine to avoid performance degradation.</p>
+<p>All tests used YV12 1080p image cached by the <em>loop</em> function.</p>
+<table>
+    <tr>
+        <th>
+            
+Colors
+</th>
+        <th>
+            
+Calls
+</th>
+        <th>
+            
+Old, fps
+</th>
+        <th>
+            
+SIMD ST, fps
+</th>
+        <th>
+            
+LUT ST, fps
+</th>
+        <th>
+            
+SIMD MT, fps
+</th>
+        <th>
+            
+LUT MT, fps
+</th>
+    </tr>
+    <tr>
+        <td>
+            
+1
+</td>
+        <td>
+            
+1
+</td>
+        <td>
+            
+52
+</td>
+        <td>
+            
+585
+</td>
+        <td>
+            
+150
+</td>
+        <td>
+            
+835
+</td>
+        <td>
+            
+265
+</td>
+    </tr>
+    <tr>
+        <td>
+            
+1
+</td>
+        <td>
+            
+10
+</td>
+        <td>
+            
+2
+</td>
+        <td>
+            
+82
+</td>
+        <td>
+            
+16
+</td>
+        <td>
+            
+122
+</td>
+        <td>
+            
+31
+</td>
+    </tr>
+    <tr>
+        <td>
+            
+6
+</td>
+        <td>
+            
+1
+</td>
+        <td>
+            
+52
+</td>
+        <td>
+            
+229
+</td>
+        <td>
+            
+150
+</td>
+        <td>
+            
+396
+</td>
+        <td>
+            
+265
+</td>
+    </tr>
+    <tr>
+        <td>
+            
+6
+</td>
+        <td>
+            
+10
+</td>
+        <td>
+            
+2
+</td>
+        <td>
+            
+26
+</td>
+        <td>
+            
+16
+</td>
+        <td>
+            
+47
+</td>
+        <td>
+            
+31
+</td>
+    </tr>
+    <tr>
+        <td>
+            
+24
+</td>
+        <td>
+            
+1
+</td>
+        <td>
+            
+52
+</td>
+        <td>
+            
+71
+</td>
+        <td>
+            
+150
+</td>
+        <td>
+            
+130
+</td>
+        <td>
+            
+265
+</td>
+    </tr>
+    <tr>
+        <td>
+            
+24
+</td>
+        <td>
+            
+10
+</td>
+        <td>
+            
+2
+</td>
+        <td>
+            
+7
+</td>
+        <td>
+            
+16
+</td>
+        <td>
+            
+14
+</td>
+        <td>
+            
+31
+</td>
+    </tr>
+</table>
+
+<h3 id="license">License</h3>
+<p>This project is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>. Binaries are <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL v2</a> because if I understand licensing stuff right (please tell me if I don't) they must be.</p>

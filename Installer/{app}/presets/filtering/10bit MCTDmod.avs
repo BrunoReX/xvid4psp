@@ -1,9 +1,8 @@
 #avstp.dll
 #FFT3DFilter.dll
 #FFT3dgpu.dll
-#RepairSSE2.dll
+#RgTools.dll
 #dfttestmod.dll
-#RemoveGrainSSE2.dll
 #mvtools2T.dll
 #TTempsmooth.dll
 #EEDI2.dll
@@ -18,7 +17,7 @@
 #dither.dll
 #TEdgeMask.dll
 #flash3kyuu_deband.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #f3kgrain_v0.4.avsi
 #GrainFactoryLite_v1.2.avsi
 #LumaDBLite_v0.7.avsi

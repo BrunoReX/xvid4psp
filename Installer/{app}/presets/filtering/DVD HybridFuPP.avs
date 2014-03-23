@@ -2,9 +2,8 @@
 #UnFilter.dll
 #mvtools2.dll
 #deblock.dll
-#RemovegrainSSE2.dll
+#RgTools.dll
 #fft3dfilter.dll
-#RepairSSE2.dll
 #flash3kyuu_deband.dll
 #mt_masktools-26.dll
 #AddGrainC.dll

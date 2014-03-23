@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #TDeInt.dll
 #mvtools2mod.dll
 #dfttestmod.dll
@@ -14,7 +13,6 @@
 #Deblock.dll
 #aWarpSharp2.dll
 #average.dll
-#VerticalCleaner.dll
 #mt_masktools-26.dll
 #TEdgeMask.dll
 #flash3kyuu_deband.dll

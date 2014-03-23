@@ -1,7 +1,6 @@
 #WarpSharp.dll
 #mt_masktools-26.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Gradfun2db.dll
 #LimitedSharpenFaster mod.avs
 

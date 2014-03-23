@@ -3,8 +3,7 @@
 #avstp.dll
 #Depan.dll
 #DepanEstimate.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #splineresize.dll
 #mvtools2mod.dll
 #Warpsharp.dll

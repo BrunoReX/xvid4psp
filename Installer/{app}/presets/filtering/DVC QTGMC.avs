@@ -2,8 +2,7 @@
 #vdf_arguments:CamCD:0
 #Depan.dll
 #DepanEstimate.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #ColorMatrix.dll
 #Bifrost.dll
 #awarpsharp2.dll
@@ -16,7 +15,6 @@
 #LimitedSupport_09Jan06B.dll
 #deen.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #mt_masktools-26.dll
 #AddGrainC.dll
 #GradFun2DB.dll

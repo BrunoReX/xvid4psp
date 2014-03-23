@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #AvsFilterNet.dll
 #fft3dgpu.dll
 #AddGrainC.dll

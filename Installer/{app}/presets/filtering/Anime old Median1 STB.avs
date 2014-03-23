@@ -1,9 +1,7 @@
 #avstp.dll
 #DePan.dll
 #DePanEstimate.dll
-#RemoveGrainSSE209.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2.dll
 #fft3dfilter.dll
 #medianblur.dll

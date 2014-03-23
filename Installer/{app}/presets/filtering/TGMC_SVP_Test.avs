@@ -1,7 +1,6 @@
 #svpflow2.dll
 #svpflow1.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #mvtools2SVP.dll
 #nnedi3.dll
@@ -10,7 +9,7 @@
 #awarpsharp2.dll
 #AddGrainC.dll
 #GradFun2DB.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #TGMC_SVP_Test.avs
 #GradFun2DBmod 1.5.avsi
 
@@ -26,7 +25,7 @@ mergechroma( awarpsharp2(depth=12,thresh=255,blur=3) )
 FluxSmoothST(3,5)
 
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 # str=2 # значение подобрать

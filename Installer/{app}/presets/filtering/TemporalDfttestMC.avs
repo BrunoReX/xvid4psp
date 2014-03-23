@@ -1,6 +1,5 @@
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2.dll
-#RepairSSE2.dll
 #degrainmedian.dll
 #dfttest.dll
 #MaskTools.dll

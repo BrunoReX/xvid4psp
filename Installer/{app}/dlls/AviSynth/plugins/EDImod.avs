@@ -6,7 +6,7 @@ nn=input.NNEDI2(dh=true,field=1)
 ee=input.EEDI2()
 
 Interleave(ee,ee.RemoveGrain(12,-1),ee.RemoveGrain(4,-1))
-Clense(input, grey=true, cache=4)
+Clense(input, grey=true)
 SelectEvery(3,1)
 
 MT_MakeDiff(last,last.RemoveGrain(12,-1))

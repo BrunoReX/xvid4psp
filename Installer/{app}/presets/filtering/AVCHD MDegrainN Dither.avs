@@ -5,8 +5,7 @@
 #DePanEstimate.dll
 #Cnr2.dll
 #fft3dgpu.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #mvtools2SVP.dll
 #AddGrainC.dll

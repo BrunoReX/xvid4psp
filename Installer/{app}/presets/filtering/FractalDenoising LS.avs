@@ -1,8 +1,7 @@
 #frfun7.dll
 #WarpSharp.dll
 #mt_masktools-26.dll
-#RemoveGrainSSE3.dll
-#RepairSSE3.dll
+#RgTools.dll
 #flash3kyuu_deband.dll
 #Ylevels.avs
 #LimitedSharpenFaster mod.avs

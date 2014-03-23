@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Warpsharp.dll
 #mvtools2mod.dll
 #AddGrainC.dll
@@ -9,7 +8,7 @@
 #TEdgeMask.dll
 #mt_masktools-26.dll
 #flash3kyuu_deband.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #dither.avsi
 #f3kgrain_v0.4.avsi
 #GrainFactoryLite_v1.2.avsi
@@ -18,7 +17,7 @@
 #DenoiseMD.avs
 #HighPassSharp.avs
 #FineSharp.avs
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 #LimitedSharpenFaster mod.avs
 
 

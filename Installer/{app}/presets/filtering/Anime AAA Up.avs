@@ -2,8 +2,7 @@
 #nnedi3.dll
 #mt_masktools-26.dll
 #awarpsharp2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #warpsharp.dll
 #SangNom.dll

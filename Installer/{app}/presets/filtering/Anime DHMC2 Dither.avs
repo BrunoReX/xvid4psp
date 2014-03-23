@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #dfttestmod.dll
 #Cnr2.dll
 #EEDI2.dll

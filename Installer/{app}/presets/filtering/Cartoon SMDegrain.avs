@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #dfttestmod.dll
 #EEDI2.dll
 #mvtools2mod.dll
@@ -10,7 +9,7 @@
 #TDeint.dll
 #TMM.dll
 #TIVTC.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #yadifmod.dll
 #SangNom.dll
 #Warpsharp.dll

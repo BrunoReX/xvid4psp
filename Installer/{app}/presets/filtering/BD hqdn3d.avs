@@ -1,4 +1,4 @@
-#RemovegrainSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #UnDot.dll
 #flash3kyuu_deband.dll

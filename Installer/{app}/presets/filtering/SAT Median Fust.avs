@@ -1,8 +1,8 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #medianblur.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #flash3kyuu_deband.dll
 #fluxsmooth.dll
@@ -23,7 +23,7 @@
 
 # SmoothContrast(contrast=0.02) 
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
   
 # DeBanding
 f3kdb(sample_mode=2,dynamic_grain=true,keep_tv_range=true,dither_algo=3,y=52,cb=36,cr=36,grainY=0,grainC=0)

@@ -1,8 +1,7 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
 #fft3dfilter.dll
-#RepairSSE2.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #GradFun2DB.dll
 #SimpleResize.dll

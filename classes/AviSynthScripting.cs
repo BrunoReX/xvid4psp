@@ -187,19 +187,16 @@ namespace XviD4PSP
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\EEDI2.dll\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\mt_masktools-2" + ((SysInfo.AVSVersionFloat < 2.6f) ? "5" : "6") + ".dll\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\mvtools.dll\")" + Environment.NewLine;
-               m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\Repair.dll\")" + Environment.NewLine;
-               m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\RemoveGrain.dll\")" + Environment.NewLine;
+               m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\RgTools.dll\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\nnedi3.dll\")" + Environment.NewLine;
            }
            else if (m.deinterlace == DeinterlaceType.QTGMC || m.deinterlace == DeinterlaceType.QTGMC_2)
            {
                m.script += "Import(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\QTGMC.avs\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\mvtools2.dll\")" + Environment.NewLine;
-               m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\RemoveGrainSSE2.dll\")" + Environment.NewLine;
-               m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\RepairSSE2.dll\")" + Environment.NewLine;
+               m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\RgTools.dll\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\mt_masktools-2" + ((SysInfo.AVSVersionFloat < 2.6f) ? "5" : "6") + ".dll\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\fft3dfilter.dll\")" + Environment.NewLine;
-               m.script += "#LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\VerticalCleaner.dll\")" + Environment.NewLine;
                m.script += "LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\nnedi3.dll\")" + Environment.NewLine;
                m.script += "#LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\EEDI3.dll\")" + Environment.NewLine;
                m.script += "#LoadPlugin(\"" + startup_path + "\\dlls\\AviSynth\\plugins\\EEDI2.dll\")" + Environment.NewLine;

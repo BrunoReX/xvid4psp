@@ -2,10 +2,8 @@
 #dfttest.dll
 #FFT3DFilter.dll
 #FFT3DGPU.dll
-#RepairSSE2.dll
+#RgTools.dll
 #despot.dll
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
 #mvtools2.dll
 #medianblur.dll
 #aWarpSharp2.dll

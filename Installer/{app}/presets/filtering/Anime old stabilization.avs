@@ -1,8 +1,7 @@
 #avstp.dll
 #DePan.dll
 #DePanEstimate.dll
-#RemoveGrainSSE2.dll
-#RepairSSE3.dll
+#RgTools.dll
 #deen.dll
 #EEDI2.dll
 #NNEDI3.dll

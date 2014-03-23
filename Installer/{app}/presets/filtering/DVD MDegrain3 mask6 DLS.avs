@@ -1,8 +1,7 @@
 #avstp.dll
 #degrainmedian.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
-#RepairSSE2.dll
 #fft3dgpu.dll
 #AvsFilterNet.dll
 #WarpSharp.dll

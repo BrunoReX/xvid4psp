@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #dfttestmod.dll
 #Cnr2.dll
 #deen_1.0.dll
@@ -12,7 +11,7 @@
 #nnedi3.dll
 #Toon-v1.1.dll
 #SangNom.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #Warpsharp.dll
 #Bifrost.dll
 #Checkmate.dll
@@ -35,7 +34,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 #minblur.avs
 #Dither.avsi
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 #mt_xxpand_multi.avsi
 #FastLineDarken 1.4x MT MOD.avsi
 #HighPassSharp.avs

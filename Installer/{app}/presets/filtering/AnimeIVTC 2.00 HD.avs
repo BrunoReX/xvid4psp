@@ -1,7 +1,6 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #RSharpen.dll
-#RepairSSE2.dll
 #ReduceFlicker.dll
 #mvtools2.dll
 #nnedi3.dll
@@ -24,7 +23,7 @@
 #EEDI2.dll
 #medianblur.dll
 #FFT3DFilter.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #MSharpen.dll
 #Gradfun2db.dll

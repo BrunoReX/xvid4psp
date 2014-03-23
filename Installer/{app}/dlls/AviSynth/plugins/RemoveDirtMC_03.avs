@@ -1,6 +1,6 @@
 function RemoveDirt(clip input, int limit, bool _grey)
 {
-  clensed=input.Clense(grey=_grey, cache=4)
+  clensed=input.Clense(grey=_grey)
   alt=input.RemoveGrain(2)
   return RestoreMotionBlocks(clensed,input,alternative=alt,pthreshold=6,cthreshold=8,gmthreshold=40,dist=3,dmode=2,debug=false,noise=limit,noisy=4, grey=_grey)
 

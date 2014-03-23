@@ -1,12 +1,10 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
+#RgTools.dll
 #RemoveDirt.dll
-#RepairSSE3.dll
 #mt_masktools-26.dll
 #mvtools2.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #RemovedirtMC_03.avs
 #degrainmedian.dll
 #vinverse.dll
@@ -23,7 +21,7 @@ setmtmode(2)
 Vinverse() # удаление остатков гребёнки
 
 ConvertToRGB32().CamCD(5,1).converttoyv12() 
-SmoothLevels(useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+SmoothLevels(useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 source = last
 filtered = source.RemoveDirt(false,16)

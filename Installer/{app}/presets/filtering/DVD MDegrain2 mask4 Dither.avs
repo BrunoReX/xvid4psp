@@ -1,8 +1,7 @@
 #avstp.dll
 #fft3dgpu.dll
 #fft3dfilter.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #dfttestmod.dll
 #WarpSharp.dll

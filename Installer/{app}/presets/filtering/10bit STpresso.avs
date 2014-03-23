@@ -1,10 +1,9 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Fluxsmooth.dll
 #Dither.dll
 #mt_masktools-26.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #AddGrainC.dll
 #TEdgeMask.dll
@@ -15,7 +14,7 @@
 #mt_xxpand_multi.avsi
 #SPresso.avs
 #STpresso.avs
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 #Dither.avsi
 #mt_xxpand_multi.avsi
  

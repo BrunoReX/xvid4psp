@@ -1,7 +1,6 @@
 #Average.dll
 #Corrector.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #TIVTC.dll
 #TMM.dll

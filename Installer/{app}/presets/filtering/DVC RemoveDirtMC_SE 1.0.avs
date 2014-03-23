@@ -3,11 +3,8 @@
 #Depan.dll
 #DepanEstimate.dll
 #deflicker.dll
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
+#RgTools.dll
 #Warpsharp.dll
-#RepairTSSE2.dll
-#RepairSSE2.dll
 #RemoveDirt.dll
 #mvtools2.dll
 #mt_masktools-26.dll

@@ -6,8 +6,7 @@
 #nnedi3.dll
 #Depan.dll
 #DepanEstimate.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #fft3dfilter.dll
 #DeFlicker.dll
 #mvtools2mod.dll

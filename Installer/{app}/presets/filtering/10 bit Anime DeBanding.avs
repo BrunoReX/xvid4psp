@@ -1,5 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #dither.dll
 #tcanny.dll
@@ -10,11 +10,11 @@
 #checkmate.dll
 #MSharpen.dll
 #mt_masktools-26.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #dither.avsi
 #aa.avs
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 #mt_xxpand_multi.avsi
 
 

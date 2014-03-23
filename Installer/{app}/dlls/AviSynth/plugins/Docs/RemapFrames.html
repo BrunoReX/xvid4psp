@@ -115,7 +115,7 @@
 <div id="header">
 	<h1>RemapFrames</h1>
 	<p id="versionText">
-		v0.3.1 (<span class="date">2005-08-26</span>)
+		v0.4.1 (<span class="date">2014-01-16</span>)
 	</p>
 	<p id="description">
 		An AviSynth plug-in that remaps the frame indices in a clip as specified by an input text file or by an input string.
@@ -148,6 +148,22 @@
 	less powerful than <code>RemapFrames</code> but use a much simpler,
 	more basic syntax.
 	</p>
+
+	<p>
+	<code>remf</code>, <code>remfs</code> and <code>rfs</code> are
+	shortcuts for <code>RemapFrames</code>, <code>RemapFramesSimple</code>
+	and <code>ReplaceFramesSimple</code> with slight differences.
+	The <var>mappings</var> parameter comes before <var>filename</var> for
+	a more compact &quot;inline&quot; call.
+	These parameters are completely optional; when none of them is specified,
+	an empty string is assumed. And when an empty string is detected, the
+	filter is completely bypassed (no extra memory use).
+	Also, these versions don't check aggressively the frame ranges.
+	If a referenced frame doesn't exist, it's simply ignored or its index
+	is replaced with the closest valid frame index.
+	This allows working on partial ranges of a clip with a unique set
+	of mappings.
+	</p>
 </div>
 
 <h2 id="RemapFrames_syntax">Syntax</h2>
@@ -156,6 +172,13 @@
 RemapFrames(clip <var>baseClip</var>, string &quot;<var>filename</var>&quot;, string &quot;<var>mappings</var>&quot;, clip &quot;<var>sourceClip</var>&quot;)
 RemapFramesSimple(clip <var>c</var>, string &quot;<var>filename</var>&quot;, string &quot;<var>mappings</var>&quot;)
 ReplaceFramesSimple(clip <var>baseClip</var>, clip <var>sourceClip</var>, string &quot;<var>filename</var>&quot;, string &quot;<var>mappings</var>&quot;)
+
+remf(clip <var>baseClip</var>, string &quot;<var>mappings</var>&quot;, string &quot;<var>filename</var>&quot;, clip &quot;<var>sourceClip</var>&quot;)
+remfs(clip <var>c</var>, string &quot;<var>mappings</var>&quot;, string &quot;<var>filename</var>&quot;)
+rfs(clip <var>baseClip</var>, clip <var>sourceClip</var>, string &quot;<var>mappings</var>&quot;, string &quot;<var>filename</var>&quot;)
+
+rfs_transform (string <var>mappings</var>, string &quot;<var>op</var>&quot;, bool &quot;<var>open</var>&quot;, bool &quot;<var>discrete</var>&quot;)
+rfs_merge (string &quot;<var>s0</var>&quot;, string &quot;<var>s1</var>&quot;, &hellip;, string &quot;<var>s9</var>&quot;)
 </pre>
 </div>
 
@@ -412,6 +435,135 @@ ReplaceFramesSimple(c, deinterlaced, mappings=&quot;30 40 50&quot;)
 </div>
 
 
+<h2 id="rfs_transform">rfs_transform</h2>
+<div class="subBody">
+	<h3 id="rfs_transform_params">Parameters</h3>
+	<div class="subBody">
+		<table cellspacing="10">
+			<tr valign="top">
+				<td><code>&quot;<var>mappings</var>&quot;</code></td>
+				<td>
+A frame mapping string that can be used in <code>ReplaceFramesSimple</code> or <code>rfs</code>.
+				</td>
+			</tr>
+			<tr valign="top">
+				<td><code>&quot;<var>op</var>&quot;</code></td>
+				<td>
+String containing the operation to perform on the original mappings.
+Default: <code>&quot;x&quot;</code>.
+				</td>
+			</tr>
+			<tr valign="top">
+				<td><code>&quot;<var>open</var>&quot;</code></td>
+				<td>
+Indicates if ranges and single frames should be converted to half-open intervals before being tranformed then converted back to closed intervals.
+This flag is ignored when <var>discrete</var> is set to <code>true</code>.
+Default: <code>true</code>.
+				</td>
+			</tr>
+			<tr valign="top">
+				<td><code>&quot;<var>discrete</var>&quot;</code></td>
+				<td>
+Indicates if ranges should be split into individual frames before being transformed, and possibly grouped in ranges afterwards.
+Default: <code>false</code>.
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<h3 id="rfs_transform_usage">Usage</h3>
+	<div class="subBody">
+	    <p>
+<code>rfs_transform</code> is a helper function transforming a set of mappings for <code>ReplaceFramesSimple</code> using an arithmetic operation.
+This is useful when one needs to substitute frames after a framerate change or any kind of timeline manipulation.
+	    </p>
+		<p>
+The operation is noted in Reverse Polish Notation (or Postfix).
+All calculation are done in double-precision floating point data.
+The resulting frame is rounded to the nearest (even) integer.
+The logical operations return 0 or 1 and assume the input is false if exactly equal to 0, true otherwise.
+Here is a list of the available operators:
+        </p>
+        <ul>
+            <li><code>neg ! round floor ceil</code></li>
+            <li><code>+ - * / mod min max == != > >= &lt; &lt;= &amp;&amp; || ^^</code></li>
+            <li><code>clip ?</code></li>
+        </ul>
+        <p>
+There are three input variables:
+        </p>
+<ul>
+<li><var>x</var>: the current frame index being processed,</li>
+<li><var>r</var>: indicates if it's the frame is the beginning of a range (0) or the end (1),</li>
+<li><var>y</var>: the other range boudary.</li>
+</ul>
+        <p>
+Excepted in discrete mode, single frames are considered as a ranges containing one frame.
+In half-open interval mode, the end of the range is augmented of 1 before the calculation.
+This ensures that the ranges and their implicit complementary intervals are treated equaly, with more consistency.
+This is an easy solution to avoid gaps at the range boundaries when the timeline is dilated.
+        </p>
+        <p>
+When a range is reverted (time inversion), the function automatically swaps the resulting range boundaries and keep everything consistent.
+        </p>
+        <p>
+Frames indexes are truncated if they go below 0, but there is no upper bound check.
+In half-open mode, the end of the clip is indexed by the frame after the last frame (whose number equals the total number of frames), whereas in closed mode, the end is the last frame (total number of frames minus 1).
+        </p>
+
+        <p>Examples:</p>
+
+<pre class="example">
+# Shifts the mappings 10 frames forward
+rfs_transform (&quot;[100 199] 300 [400 999]&quot;, op=&quot;x 10 +&quot;)
+# result: "[110 209] 310 [410 1009]"
+</pre>
+
+<pre class="example">
+# Dilates the mappings 5 times
+rfs_transform (&quot;[100 199] 300 [400 999]&quot;, op=&quot;x 5 *&quot;)
+# result: "[500 999] [1500 1504] [2000 4999]"
+</pre>
+
+	</div>
+</div>
+
+
+<h2 id="rfs_merge">rfs_merge</h2>
+<div class="subBody">
+	<h3 id="rfs_merge_params">Parameters</h3>
+	<div class="subBody">
+		<table cellspacing="10">
+			<tr valign="top">
+				<td><code>&quot;<var>s0</var>&quot;</code>, &hellip;, <code>&quot;<var>s9</var>&quot;</code></td>
+				<td>
+Strings that can be used in <code>ReplaceFramesSimple</code> or <code>rfs</code>.
+Default: undefined.
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<h3 id="rfs_merge_usage">Usage</h3>
+	<div class="subBody">
+	    <p>
+<code>rfs_merge</code> is a helper function merging several mappings for <code>ReplaceFramesSimple</code> together.
+It just concatenates these strings and inserts spaces in between, but it is probably more convenient than a simple concatenation because it handles properly the undefined strings.
+If all strings are undefined, the result is also an undefined string.
+	    </p>
+
+        <p>Example:</p>
+
+<pre class="example">
+# Shifts the mappings 10 frames forward
+rfs_transform (&quot;[100 199]&quot;, &quot;300&quot;, &quot;[400 999]&quot;)
+# result: "[100 199] 300 [400 999]"
+</pre>
+
+	</div>
+</div>
+
+
 <h2 id="AdaptingScripts">Adapting Existing Scripts</h2>
 <table>
 	<tr valign="top" align="left">
@@ -477,6 +629,25 @@ ReplaceFramesSimple(src, filtered,
 <div id="historylist">
 <ul>
 	<li>
+		0.4.1
+		<ul>
+			<li>
+				It is now allowed for a downstream filter to request a frame out of range.
+			</li>
+			<li>
+				<code>rfs_transform</code> now accepts an undefined mapping string as input.
+			</li>
+		</ul>
+	</li>
+	<li>
+		0.4.0
+		<ul>
+			<li>
+				Added <code>remf</code>, <code>remfs</code>, <code>rfs</code>, <code>rfs_merge</code> and <code>rfs_transform</code>.
+			</li>
+		</ul>
+	</li>
+	<li>
 		0.3.1
 		<ul>
 			<li>
@@ -529,6 +700,7 @@ ReplaceFramesSimple(src, filtered,
 Copyright &copy; 2005 James D. Lin<br />
 Some portions copyright &copy; 2000 Andrei Alexandrescu and Petru Marginean.<br />
 Some portions written by Charles B. Falconer.<br />
+Some portions written by Laurent de Soras.<br />
 <a class="unemphasized" href="http://forum.doom9.org/showthread.php?s=&amp;threadid=78004">Thanks to rhombus for the idea</a>.
 </p>
 </div>

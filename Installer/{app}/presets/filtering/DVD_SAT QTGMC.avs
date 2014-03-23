@@ -1,11 +1,10 @@
 #avstp.dll
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Bifrost.dll
 #mvtools2mod.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #fft3dfilter.dll
 #nnedi3.dll
 #Warpsharp.dll
@@ -15,7 +14,6 @@
 #awarpsharp2.dll
 #flash3kyuu_deband.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #mt_masktools-26.dll
 #vinverse.dll
 #maa.avs
@@ -46,7 +44,7 @@ mergechroma( awarpsharp2(depth=12,thresh=255,blur=3) )
 
 # LEVELS
 # SmoothContrast(contrast=0.02)
-SmoothLevels(useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+SmoothLevels(useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 # str=4

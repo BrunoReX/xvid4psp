@@ -1,12 +1,10 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #ColorMatrix.dll
 #mvtools2mod.dll
 #nnedi3.dll
 #AutoYUY2.dll
 #AddGrainC.dll
-#VerticalCleaner.dll
 #mt_masktools-26.dll
 #flash3kyuu_deband.dll
 #unfilter.dll

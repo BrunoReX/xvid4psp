@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #nnedi3.dll
 #dfttestmod.dll
@@ -10,7 +9,6 @@
 #mt_masktools-25.dll
 #flash3kyuu_deband.dll
 #SSE2Tools.dll
-#VerticalCleanerSSE2.dll
 #dither.avsi
 #mt_xxpand_multi.avsi
 #QTGMC-3.33d.avsi

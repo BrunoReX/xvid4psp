@@ -3,9 +3,7 @@
 #NNEDI2.dll
 #NNEDI3.dll
 #fft3dfilter.dll
-#RemoveGrainSSE3.dll
-#RepairSSE3.dll
-#VerticalCleaner.dll
+#RgTools.dll
 #AutoYUY2.dll
 #ColorMatrix.dll
 #AddGrainC.dll

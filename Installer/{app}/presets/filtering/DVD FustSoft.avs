@@ -1,8 +1,7 @@
 #Undot.dll
 #mt_masktools-26.dll
 #degrainmedian.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #flash3kyuu_deband.dll
 #LimitedSharpenFaster Mod.avs
 

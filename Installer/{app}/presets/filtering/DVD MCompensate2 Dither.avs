@@ -1,6 +1,5 @@
 #avstp.dll
-#RemovegrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #dfttestmod.dll
 #mvtools2mod.dll
 #medianblur.dll

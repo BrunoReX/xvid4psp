@@ -1,8 +1,7 @@
 #HQDN3D.dll
 #dfttest.dll
 #FFT3DFilter.dll
-#RepairSSE2.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools.dll
 #removedirt.dll
 #unfilter.dll

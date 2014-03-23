@@ -1,8 +1,7 @@
 #avstp.dll
 #FFT3DFilter.dll
 #FFT3dgpu.dll
-#RepairSSE2.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #TTempsmooth.dll
 #EEDI2.dll

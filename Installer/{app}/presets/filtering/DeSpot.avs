@@ -1,8 +1,6 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
+#RgTools.dll
 #RemoveDirt.dll
-#RepairSSE3.dll
 #Warpsharp.dll
 #mvtools2mod.dll
 #DeSpot.dll

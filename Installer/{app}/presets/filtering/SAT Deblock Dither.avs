@@ -1,15 +1,14 @@
 #avstp.dll
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE2.dll
-#RepairSSE3.dll
+#RgTools.dll
 #deen_1.0.dll
 #Deblock.dll
 #dctfilter.dll
 #mt_masktools-26.dll
 #defreq.dll
 #warpsharp.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #mvtools2mod.dll
 #Dither.dll
@@ -35,7 +34,7 @@ setmtmode(2)
 
   # LEVELS
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 # str=3

@@ -1,7 +1,6 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #RSharpen.dll
-#RepairSSE2.dll
 #ReduceFlicker.dll
 #mvtools2.dll
 #nnedi3.dll

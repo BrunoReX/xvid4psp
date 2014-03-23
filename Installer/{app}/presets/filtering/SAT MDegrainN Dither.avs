@@ -3,14 +3,13 @@
 #vdf_arguments:CamCD:0
 #nnedi3.dll
 #fft3dgpu.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #Bifrost.dll
 #AddGrainC.dll
 #mvtools2mod.dll
 #dfttestmod.dll
 #mt_masktools-26.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #dither.dll
 #dither.avsi
@@ -66,7 +65,7 @@ lsb_out = lsbctr.DitherPost(mode=6, ampo=1, ampn=1) # for XviD encode
 lsb_out 
 
 # SmoothCurve(Ycurve="0-0;16-0;235-255;255-255", Ucurve="0-0;16-0;240-255;255-255", Vcurve="0-0;16-0;240-255;255-255", interp=0) 
-  SmoothLevels(gamma=1.0, useopt=-1) # -1 -automatic choice, 1- SSE2 CPU, 2 - Sandy Bridge CPU
+  SmoothLevels(gamma=1.0, useopt=0) # 0 = automatic choice; 1 = use C code; 2 = use SSE2 code; 3 = use AVX2 code
 
 # ==== цветокоррекция при преобладании жёлто-зелёных цветов ====
 # str=3

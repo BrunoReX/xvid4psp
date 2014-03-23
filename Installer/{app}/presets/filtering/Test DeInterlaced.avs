@@ -1,6 +1,5 @@
 #ColorMatrix.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #reduceflicker.dll
 #mvtools2.dll
 #TIVTC.dll
@@ -14,7 +13,6 @@
 #mt_masktools-26.dll
 #SangNom.dll
 #LeakKernelDeint.dll
-#VerticalCleanerSSE3.dll
 #QTGMC.avs
 
 

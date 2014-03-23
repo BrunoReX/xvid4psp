@@ -7,12 +7,11 @@
 #tcanny.dll
 #MSharpen.dll
 #mvtools2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #warpsharp.dll
 #variableblur.dll
 #dfttestmod.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #AddGrainC.dll
 #Toon-v1.1.dll

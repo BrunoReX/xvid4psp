@@ -1,7 +1,6 @@
 #mvtools2.dll
 #mt_masktools-26.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #medianBlur.dll
 #flash3kyuu_deband.dll
 #FSx.avs

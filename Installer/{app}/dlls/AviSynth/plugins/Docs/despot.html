@@ -12,8 +12,9 @@
 <h1>DeSpot</h1>
 <h4>DeSpot - Conditional Temporal Spot Removing Filter</h4>
 <p>Plugin for <a href="http://www.avisynth.org">Avisynth 2.5</a><br>
-Version 3.6.1<br>
+Version 3.6.3<br>
 Copyright (C)2003-2009 Alexander G. Balakhnin aka Fizick.<br>
+Modified by Firesledge from version 3.6.2<br />
 <a href="http://avisynth.org.ru">http://avisynth.org.ru</a></p>
 
 <p>This filter is designed to remove temporal noise in the form of dots (spots) and streaks found in some videos.
@@ -78,7 +79,7 @@ int "merode", bool "interlaced", bool "median", int "p1", int "p2", int "pwidth"
 int "pheight", bool "ranked", int "sign", int "maxpts", int "p1percent",
 int "dilate", bool "fitluma", int "blur", int "tsmooth", int "show", int "mark_v", 
 bool "show_chroma", bool "motpn", int "seg", bool "color", int "mscene", int "minpts",
-clip "extmask", bool "planar"</var>)
+clip "extmask", bool "planar", string "outfile", bool "mc", int "spotmax1", int "spotmax2"</var>)
 </p>
 <h4>Parameters for DeSpot in spots removing mode are any of the following:</h4>
 <p><var>p1</var> (default 24)<br>
@@ -177,6 +178,21 @@ MaskTools2 plugin by Manao, MVTools v2 and some others.
 This trick will not be needed in Avisynth v2.6 with native support of planar YV16 format.
 This paramenter is ignored for YV12 clips. 
 Default is planar=false (and you will get error for YUY2).</p>
+<p><var>outfile</var>: name of a generated file containing the detected spot locations.
+The file is in the .ASS subtitle file format.
+Spots are located with their bouding boxes drawn as magenta rectangles (dilated by 2 pixels in each direction relative to the actual bounding boxes, for clarity).
+The default <code>Outline</code> style can be later changed to <code>Mask</code> in an ASS editor (like Aegisub) to produce a mask made of rectangles filled with white.
+The file is overwritten at each filter run, so make a copy before editing it!</p>
+<p><var>mc</var>: Uses a 3-fold interleaved stream to allow motion-compensated analysis.
+Only the second frame every three frames is processed and returned.
+The input stream should be in the form: <code>Interleave (forward, original, backward)</code>,
+where <code>forward</code> and <code>backward</code> are the frames N-1 and N+1 reconstructed with motion compensation.
+See the MVTools 2 plug-in for more information.</p>
+<p><var>spotmax1</var>: When using <var>outfile</var>, sets a first limit on the number of spots.
+If it is greater than the parameter, locations are checked.
+If the spots look “packed”, it is likely a detection error and all spots are discareded (from the outfile file only, they are still processed)</p>
+<p><var>spotmax2</var>: Hard limit on the number of spots per frame to send to the outfile.
+If greater, all spots from the frame are discarded.</p>
 
 <h3>TUNING THE PARMS</h3>
 <p>In order for the filter to work right the various parameters MUST be set correctly. There is no good default values.</p>
@@ -261,6 +277,7 @@ This is probably the most important step.</p>
 <p>DeSpot since version 3.2 is  optimized by hand for Integer SSE (Pentium3, Athlon is needed now).<br>
 Speed increasing up to about 30%.</p>
 <h3>COMPILING</h3>
+<p>Firesledge's versions above 3.6.1 are compiled with MSVC++ 2005 (the Express version should work too) with MS Platform SDK.</p>
 <p>Fizick's version above 1.1 is compiled by free MS VC++ Toolkit 2003 with MS Platform SDK.</p>
 <p>Note: copy lost nmake.exe and cvtres.exe from Bin\win64 dir to Bin dir.</p>
 <p>MS VC6, VC7 also may be used.</p>
@@ -268,7 +285,7 @@ Speed increasing up to about 30%.</p>
 <p>Old versions of the C-plugin up to 1.3 may be compiled with GCC-g++ 3.3.1, MinGW 3.0.0-1, MSYS 1.09. New versions above 2.0 can not be compiled so.</p>
 <p>Now I use despot.cbp project for CodeBlock IDE.</p>
 <h3>COMBINED USAGE</h3>
-<p>Very good results are may be obtained with combined this filter with motion estimation and compensation:
+<p>Very good results may be obtained with combined this filter with motion estimation and compensation:
 global motion with <a href="depan.htm">DePan</a> plugin, or local motion with
 <a href="mvtools.htm">MVTools</a> plugin.</p>
 <p>In this case the pixels from previous and next frames  are moved to best fit to current frame,
@@ -352,6 +369,16 @@ Documentation is distributed under <a href="http://creativecommons.org/licenses/
 
 <h3>VERSIONS CHANGES LOG</h3>
 <ul>
+  <li>Version 3.6.3.0 (October 8, 2013):
+    <ul>
+      <li>Added the <var>mc</var>, <var>spotmax1</var> and <var>spotmax2</var> parameters.</li>
+    </ul>
+  </li>
+  <li>Version 3.6.2.0 (August 19, 2011):
+    <ul>
+      <li>Added the <var>outfile</var> parameter.</li>
+    </ul>
+  </li>
   <li>Version 3.6.1.0 (June 11, 2010):
     <ul>
       <li>Fixed documentation example with MT_Binarize (Thanks to yauz for report).</li>
@@ -545,8 +572,12 @@ ConditionalMedianMap to DeSpotMedianMap.</li>
   </li>
 </ul>
 
-<h3><a href="despot3610.zip">Download DeSpot version 3.6.1.0</a></h3>
-<p><a href="../">Return to main page</a></p>
+<hr />
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 </body>
 </html>

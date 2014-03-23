@@ -1,5 +1,4 @@
-#RemovegrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mt_masktools-26.dll
 #AddGrainC.dll
 #flash3kyuu_deband.dll

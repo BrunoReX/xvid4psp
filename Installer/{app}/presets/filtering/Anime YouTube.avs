@@ -5,8 +5,7 @@
 #aWarpSharp.dll
 #Deblock.dll
 #mt_masktools-26.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #AddGrainC.dll
 #dither.dll
 #TEdgeMask.dll

@@ -1,5 +1,7 @@
 
-                                       dfttest v1.8 by tritical
+                                       dfttest v1.9.4
+                                       Original code by tritical
+                                       16-bit modification by Firesledge
 
 Info:
 
@@ -18,7 +20,8 @@ Syntax:
            int tosize, int swin, int twin, float sbeta, float tbeta, bool zmean,
            string sfile, string sfile2, string pminfile, string pmaxfile, float f0beta,
            string nfile, int threads, int opt, string nstring, string sstring,
-           string ssx, string ssy, string sst, int dither)
+           string ssx, string ssy, string sst, int dither, bool lsb, bool lsb_in,
+           bool quiet)
 
 
 ---------------------------------------------------------------------------------------------------
@@ -546,46 +549,96 @@ Parameters:
        default:  0
 
 
+   lsb -
+
+       When set to true, dfttest outputs 16-bit pixel components by separating the most
+       significant bytes (MSB) and the least significant bytes (LSB). The top part of the
+       frame contains the MSB of all pixels and the bottom part their LSB. Therefore the
+       output frame height is doubled. Use this if you want to perform the dithering
+       later, with a separate tool.
+
+       default:  false
+
+
+   lsb_in -
+
+       When set to true, the input is supposed to have 16-bit pixel components, of the
+       same format as the output given with lsb = true. The sigma scale remains relative
+       to the MSB, meaning that a given value will have the same visual results with
+       16-bit and 8-bit clips.
+
+       default:  false
+
+
+   quiet -
+
+       Prevents dfttest to write a filter spectrum file when sigma is specified with
+       sstring/ssx/ssy/sst.
+
+       default:  true
+
+
 ---------------------------------------------------------------------------------------------------
 
 Changes:
 
-   06/22/2010  v1.8
+   2013-08-04  v1.9.4
+       + Compatible the new Avisynth 2.6 colorspaces, excepted Y8.
+
+   2012-04-20  v1.9.3
+       - Does no longer issue a tbsize-related error with null-length clips.
+
+   2012-03-23  v1.9.2
+       - The quiet parameter is not true by default.
+
+   2012-03-11  v1.9.1
+       - Fixed a stupid regression (from v1.8 mod16a) on the dither parameter.
+
+   2011-11-28  v1.9
+       + Added the quiet parameter to deactivate the filter spectrum output.
+
+   2011-05-12  v1.8 mod16b
+       + Added the lsb_in parameter to input 16 bit data.
+
+   2010-06-26  v1.8 mod16a
+       + Added the lsb parameter to output 16 bit data.
+
+   2010-06-22  v1.8
 
        + added dither parameter and functionality
        + attach date string to filter_spectrum.txt and noise_spectrum.txt output
        + changed sstring handling and added option to function like fft3dfilter
 
-   06/21/2010  v1.7
+   2010-06-21  v1.7
 
        + added nstring/sstring/ssx/ssy/sst parameters and functionality
        + allow space as delimiter in input files
        - fixed missing emms in sse routine for f0beta != (1.0 or 0.5) and ftype=0
 
-   06/04/2009  v1.6
+   2009-06-04  v1.6
 
        - fixed window normalization causing tmode=0 to always result in a rectangular
             temporal window, and smode=0 to always result in a rectangular spatial
             window.
        - changed default for twin to 7
 
-   04/11/2009  v1.5
+   2009-04-11  v1.5
 
        + added f0beta in ftype=0
        + added nfile parameter (noise power estimation)
        + normalization of sigma/sigma2/pmin/pmax based on non-coherent power gain
 
-   04/06/2009  v1.4
+   2009-04-06  v1.4
 
        - fix threading issue that could result in corrupted output
 
-   01/27/2009  v1.3
+   2009-01-27  v1.3
 
        + more assembly optimizations
        + tmode=1 caching (don't need to recalculate all involved temporal blocks on every frame)
        - replicate temporal dimension at beginning/end, don't mirror
 
-   01/24/2009  v1.2
+   2009-01-24  v1.2
 
        + added filter types 3/4 and corresponding parameters (sigma2,pmin,pmax,
             sfile2,pminfile,pmaxfile)
@@ -596,13 +649,13 @@ Changes:
        - sigma now defaults to 2.0
        - tbsize now defaults to 5
 
-   11/22/2007  v1.1
+   2007-11-22  v1.1
 
        + more sse optimizations
        - fixed a bug causing the bottom part of the frame to be incorrectly
             processed with some sbsize/sosize combinations
 
-   11/21/2007  v1.0
+   2007-11-21  v1.0
 
        - initial release
 

@@ -7,11 +7,10 @@
 #tcanny.dll
 #MSharpen.dll
 #awarpsharp2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #warpsharp.dll
 #variableblur.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #dfttestmod.dll
 #AddGrainC.dll
 #dither.dll

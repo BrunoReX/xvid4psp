@@ -1,6 +1,5 @@
 #avstp.dll
-#RemovegrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #deen_1.0.dll
 #Warpsharp.dll
 #mvtools2mod.dll

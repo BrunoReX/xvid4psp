@@ -3,10 +3,9 @@
 #Cnr2.dll
 #Depan.dll
 #DepanEstimate.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2.dll
 #WarpSharp.dll
-#RepairSSE2.dll
 #mt_masktools-26.dll
 #FluxSmooth.dll
 #fft3dgpu.dll

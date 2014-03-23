@@ -1,7 +1,6 @@
 #TIVTC.dll
 #mt_masktools-26.dll
-#removegrainSSE2.dll
-#repairSSE2.dll
+#RgTools.dll
 #flash3kyuu_deband.dll
 #frfun7.dll
 #sbr.avs

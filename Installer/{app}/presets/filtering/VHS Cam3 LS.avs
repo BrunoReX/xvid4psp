@@ -1,8 +1,6 @@
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE209.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2.dll
 #nnedi3.dll
 #mt_masktools-26.dll

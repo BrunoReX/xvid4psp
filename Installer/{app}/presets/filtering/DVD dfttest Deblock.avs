@@ -1,9 +1,8 @@
 #avstp.dll
 #ccd_sse2.vdf
 #vdf_arguments:CamCD:0
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
-#RepairSSE2.dll
 #dfttest.dll
 #MaskTools.dll
 #WarpSharp.dll

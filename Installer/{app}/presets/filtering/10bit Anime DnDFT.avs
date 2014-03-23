@@ -1,7 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
-#RemoveGrainHD.dll
+#RgTools.dll
 #Dither.dll
 #tcanny.dll
 #awarpsharp2.dll
@@ -9,13 +7,13 @@
 #mvtools2mod.dll
 #dfttestmod.dll
 #flash3kyuu_deband.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #AddGrainC.dll
 #TEdgeMask.dll
 #SangNom.dll
 #Toon-v1.1.dll
 #aa.avs
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 #dither.avsi
 #f3kgrain_v0.4.avsi
 #GrainFactoryLite_v1.2.avsi

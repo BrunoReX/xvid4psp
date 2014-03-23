@@ -4,8 +4,7 @@
 #nnedi3.dll
 #TMM.dll
 #vinverse.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #dfttestmod.dll
 #awarpsharp2.dll
 #mt_masktools-26.dll

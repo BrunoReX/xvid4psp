@@ -1,7 +1,6 @@
 #degrainmedian.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #RSharpenSSE2.dll
-#RepairSSE2.dll
 #ReduceFlicker.dll
 #mvtoolsMT.dll
 #mvtools2.dll

@@ -1,7 +1,6 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
-#RepairSSE2.dll
 #degrainmedian.dll
 #dfttest.dll
 #MaskTools149.dll

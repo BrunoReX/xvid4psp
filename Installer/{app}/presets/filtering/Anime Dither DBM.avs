@@ -7,8 +7,7 @@
 #TMM.dll
 #vinverse.dll
 #dfttestmod.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #EEDI2.dll
 #mvtools2mod.dll
 #mt_masktools-26.dll

@@ -2,8 +2,7 @@
 #DePan.dll
 #DePanEstimate.dll
 #dfttestmod.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #checkmate.dll
 #Deen.dll
 #mvtools2mod.dll
@@ -15,7 +14,7 @@
 #AddGrainC.dll
 #TEdgeMask.dll
 #flash3kyuu_deband.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #TIVTC.dll
 #frfun7.dll
 #f3kgrain_v0.4.avsi
@@ -29,7 +28,7 @@
 #HighPassSharp.avs
 #maa.avs
 #mt_xxpand_multi.avsi
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 #FastLineDarken 1.4x MT MOD.avsi
 #LimitedSharpenFaster mod.avs
 

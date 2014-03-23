@@ -2,8 +2,7 @@
 #fft3dgpu.dll
 #WarpSharp.dll
 #mt_masktools-26.dll
-#RemoveGrainSSE2.dll
-#RepairSSE3.dll
+#RgTools.dll
 #flash3kyuu_deband.dll
 #LimitedSharpenFaster Mod.avs
 

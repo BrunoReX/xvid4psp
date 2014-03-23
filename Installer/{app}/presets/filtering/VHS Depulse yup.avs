@@ -1,6 +1,4 @@
-#RemoveGrainTSSE2.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2.dll
 #nnedi3.dll
 #flash3kyuu_deband.dll

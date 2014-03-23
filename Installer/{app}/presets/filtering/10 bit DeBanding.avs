@@ -1,18 +1,18 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #AddGrainC.dll
 #dither.dll
 #dfttestmod.dll
 #TEdgeMask.dll
 #mt_masktools-26.dll
 #flash3kyuu_deband.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #dither.avsi
 #f3kgrain_v0.4.avsi
 #GrainFactoryLite_v1.2.avsi
 #LumaDBLite_v0.7.avsi
 #mt_xxpand_multi.avsi
-#O16mod_v1.6.1.avsi
+#O16mod.avsi
 
 
 SetMTMode(2)

@@ -1,10 +1,10 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
+#RgTools.dll
 #AddGrainC.dll
 #dither.dll
 #frfun7.dll
 #dfttestmod.dll
-#SmoothAdjust-ICL-x86.dll
+#SmoothAdjust.dll
 #flash3kyuu_deband.dll
 #mt_masktools-26.dll
 #HighPassSharp.avs

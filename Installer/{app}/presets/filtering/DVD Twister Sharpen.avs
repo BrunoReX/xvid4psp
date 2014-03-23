@@ -1,6 +1,5 @@
 #avstp.dll
-#RemoveGrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #MedianBlur.dll
 #FluxSmooth.dll
 #mt_masktools-26.dll

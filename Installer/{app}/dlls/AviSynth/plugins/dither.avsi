@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #	High bitdepth tools for Avisynth
-#       v1.22.1
+#       v1.25.1
 #	Author: Firesledge
 #
 #	See the documentation for the function description.
@@ -66,8 +66,8 @@ Function GradFun3 (clip src, float "thr", int "radius", float "elast",
 \	int "mask", int "mode", float "ampo", float "ampn", int "pat",
 \	bool "dyn", float "dthr", int "smode", float "wmin", float "thr_det",
 \	float "thr_edg", int "debug", int "subspl", bool "lsb", bool "lsb_in",
-\	bool "staticnoise", float "thrc", float "radiusc", float "elastc",
-\	int "y", int "u", int "v")
+\	bool "staticnoise", float "thrc", int "radiusc", float "elastc",
+\	int "y", int "u", int "v", clip "ref")
 {
 	thr     = Default (thr,       0.35)
 	thrc    = Default (thrc,       thr)
@@ -83,6 +83,7 @@ Function GradFun3 (clip src, float "thr", int "radius", float "elast",
 	subspl  = Default (subspl,       0)
 	lsb     = Default (lsb,      false)
 	lsb_in  = Default (lsb_in,   false)
+	ref     = Default (ref,        src)
 
 	# Input range check. The other parameters are checked by the plugins.
 	Assert (radius  > 0, "GradFun3: "+chr(34)+"radius" +chr(34)+" must be strictly positive.")
@@ -95,6 +96,7 @@ Function GradFun3 (clip src, float "thr", int "radius", float "elast",
 
 	src_8  = (lsb_in) ? src.DitherPost (mode=-1) : src
 	src_16 = (lsb_in) ? src : src.Dither_convert_8_to_16 ()
+	ref_16 = (lsb_in) ? ref : ref.Dither_convert_8_to_16 ()
 	yv411_flag = src.Dither_isyv411 ()
 
 	# Main debanding
@@ -109,8 +111,8 @@ Function GradFun3 (clip src, float "thr", int "radius", float "elast",
 	vp2    = (chroma_flag) ? 1 : vp
 
 	src_16
-	flt_y  =                 Dither_gf3_smooth (last, src_8, smode, radius,  thr,  elast,  lsb_in, wmin, subspl, yp, up2, vp2)
-	flt_c  = (chroma_flag) ? Dither_gf3_smooth (last, src_8, smode, radiusc, thrc, elastc, lsb_in, wmin, subspl, 1,  up,  vp) : flt_y
+	flt_y  =                 Dither_gf3_smooth (last, src_8, ref_16, smode, radius,  thr,  elast,  lsb_in, wmin, subspl, yp, up2, vp2)
+	flt_c  = (chroma_flag) ? Dither_gf3_smooth (last, src_8, ref_16, smode, radiusc, thrc, elastc, lsb_in, wmin, subspl, 1,  up,  vp) : flt_y
 	flt    = (chroma_flag) ? flt_y.MergeChroma (flt_c) : flt_y
 
 	# Edge/detail mask
@@ -189,10 +191,10 @@ Function Dither_convert_yuv_to_rgb (clip src, string "matrix", bool "interlaced"
 	Assert ((mat_i >= 0),
 \		"Dither_convert_to_rgb: unexpected matrix " + matrix + ".")
 
-	#                     BT.601   BT.709  SMPTE 240M  FCC    YCgCo
-	kr = Select (mat_i,   0.299,   0.2126,   0.212,   0.30,    0.0)
-	kg = Select (mat_i,   0.587,   0.7152,   0.701,   0.59,    0.0)
-	kb = Select (mat_i,   0.114,   0.0722,   0.087,   0.11,    0.0)
+	#                     BT.601   BT.709  SMPTE 240M  FCC    YCgCo  BT.2020
+	kr = Select (mat_i,   0.299,   0.2126,   0.212,   0.30,    0.0,  0.2627)
+	kg = Select (mat_i,   0.587,   0.7152,   0.701,   0.59,    0.0,  0.6780)
+	kb = Select (mat_i,   0.114,   0.0722,   0.087,   0.11,    0.0,  0.0593)
 
 	offset_y = (tv_range) ?          16.0 : 0.0
 	scale_y  = (tv_range) ? (255.0 / 219) : 1.0
@@ -372,10 +374,10 @@ Function Dither_convert_rgb_to_yuv (clip src, clip "g", clip "b",
 	Assert ((mat_i >= 0),
 \		"Dither_convert_to_rgb: unexpected matrix" + matrix + ".")
 
-	#                     BT.601   BT.709  SMPTE 240M  FCC    YCgCo
-	kr = Select (mat_i,   0.299,   0.2126,   0.212,   0.30,    0.0)
-	kg = Select (mat_i,   0.587,   0.7152,   0.701,   0.59,    0.0)
-	kb = Select (mat_i,   0.114,   0.0722,   0.087,   0.11,    0.0)
+	#                     BT.601   BT.709  SMPTE 240M  FCC    YCgCo  BT.2020
+	kr = Select (mat_i,   0.299,   0.2126,   0.212,   0.30,    0.0,  0.2627)
+	kg = Select (mat_i,   0.587,   0.7152,   0.701,   0.59,    0.0,  0.6780)
+	kb = Select (mat_i,   0.114,   0.0722,   0.087,   0.11,    0.0,  0.0593)
 
 	offset_y = (tv_range) ?          16.0 : 0.0
 	scale_y  = (tv_range) ? (219 / 255.0) : 1.0
@@ -544,6 +546,8 @@ Function Dither_srgb_display (clip src, int "debug",
 	src_left = Default (src_left, 0.0)
 	src_top  = Default (src_top,  0.0)
 
+	gam_flag = (gamma != 2.2)
+
 	# If we must use YV12 instead of Y8 for temporary clips
 	chrss   = (VersionNumber () < 2.60) ? 2 : 1
 	Assert (! Defined (w) || (w % chrss) == 0, "Dither_srgb_display: w must be a multiple of 2.")
@@ -642,7 +646,7 @@ Function Dither_srgb_display (clip src, int "debug",
 	# Conversion to linear RGB
 	src
 	Dither_convert_yuv_to_rgb (matrix=matrix, tv_range=tv_range, output="rgb48y", lsb_in=lsb_in, chromak=chromak, noring=noring, cplace=cplace)
-	Dither_y_gamma_to_linear (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709")
+	(rsz || gam_flag) ? Dither_y_gamma_to_linear (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709") : last
 
 	# Optionnal resizing
 	(rsz) ? Dither_resize16nr (dw, dh,
@@ -652,7 +656,7 @@ Function Dither_srgb_display (clip src, int "debug",
 \	: last
 
 	# Conversion to sRGB. Actually it just reencodes to BT.709.
-	Dither_y_linear_to_gamma (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709", gcor=gamma/2.2)
+	(rsz || gam_flag) ? Dither_y_linear_to_gamma (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709", gcor=gamma/2.2) : last
 
 	(lsb) ? last : DitherPost (mode=6, u=1, v=1)
 	MergeRGB (SelectEvery (3, 0), SelectEvery (3, 1), SelectEvery (3, 2), pixel_type="RGB32")
@@ -1179,10 +1183,10 @@ Function Dither_lut16_lsb (clip msb, clip lsb,
 
 Function Dither_lut16_expr (string expr, bool gmsb)
 {
-	# We use spaces to enclose " x " because we don't want operators
+	# We use spaces to enclose " x" because we don't want operators
 	# like "max" or "exp" to have their "x" replaced…
 	repstr = (gmsb) ? " x 256 * y + " : " y 256 * x + "
-	expr = Dither_replace_string (" " + expr + " ", " x ", repstr)
+	expr = Dither_replace_string (" " + expr, " x", repstr)
 	part = Dither_expr_part (gmsb)
 	expr = expr + part
 
@@ -1390,14 +1394,15 @@ Function Dither_linear_and_gamma (clip src, bool l2g_flag,
 \	: (curve == "601" ) ? 1
 \	: (curve == "170" ) ? 1
 \	: (curve == "240" ) ? 2
+\	: (curve == "2020") ? 3
 \	: Assert (false, "Dither_linear_and_gamma: wrong curve value.")
 
 	#                                  BT-709/601
-	#                         sRGB     SMPTE 170M  SMPTE 240M
-	k0    = Select (c_num, " 0.04045", " 0.081  ", " 0.0912 ")
-	phi   = Select (c_num, "12.92   ", " 4.5    ", " 4.0    ")
-	alpha = Select (c_num, " 0.055  ", " 0.099  ", " 0.1115 ")
-	gamma = Select (c_num, " 2.4    ", " 2.22222", " 2.22222")
+	#                         sRGB     SMPTE 170M  SMPTE 240M    BT-2020
+	k0    = Select (c_num, " 0.04045", " 0.081  ", " 0.0912 ", " 0.08145")
+	phi   = Select (c_num, "12.92   ", " 4.5    ", " 4.0    ", " 4.5    ")
+	alpha = Select (c_num, " 0.055  ", " 0.099  ", " 0.1115 ", " 0.0993 ")
+	gamma = Select (c_num, " 2.4    ", " 2.22222", " 2.22222", " 2.22222")
 
 	expr = (tv_range_in) ? "x 4096 - 56064 /" : "x 65536 /"
 
@@ -1407,6 +1412,7 @@ Function Dither_linear_and_gamma (clip src, bool l2g_flag,
 \	      + g2l + " " + alpha + " + 1 " + alpha + " + / " + gamma + " ^   ?"
 	g2l = g2l + " " + String (gcor) + " ^"
 
+	# E' = (E <= k0 / phi)   ?   E * phi   :   (E ^ (1 / gamma)) * (alpha + 1) - alpha
 	l2g = expr + " " + String (gcor) + " ^"
 	l2g =   l2g + " " + k0 + " " + phi + " / <= "
 \	      + l2g + " " + phi + " * "
@@ -1584,12 +1590,12 @@ Function Dither_switch_planes16 (clip c_before, clip c_after, int "y", int "u", 
 
 
 
-Function Dither_gf3_smooth (clip src_16, clip src_8, int smode, int radius, float thr, float elast, bool lsb_in, float wmin, int subspl, int yp, int up, int vp)
+Function Dither_gf3_smooth (clip src_16, clip src_8, clip ref_16, int smode, int radius, float thr, float elast, bool lsb_in, float wmin, int subspl, int yp, int up, int vp)
 {
 	src_16
-	  (smode == 0) ? Dither_gf3_smoothgrad_multistage (radius, thr, elast, yp, up, vp)
-\	: (smode == 1) ? Dither_gf3_dfttest (src_8, radius, thr, elast, lsb_in, yp, up, vp)
-\	: (smode == 2) ? Dither_gf3_bilateral_multistage (radius, thr, elast, wmin, subspl, yp, up, vp)
+	  (smode == 0) ? Dither_gf3_smoothgrad_multistage (ref_16, radius, thr, elast, yp, up, vp)
+\	: (smode == 1) ? Dither_gf3_dfttest (src_8, ref_16, radius, thr, elast, lsb_in, yp, up, vp)
+\	: (smode == 2) ? Dither_gf3_bilateral_multistage (ref_16, radius, thr, elast, wmin, subspl, yp, up, vp)
 \	: (smode == 3) ? Dither_gf3_smoothgrad_multistage_3 (radius, thr, elast, yp, up, vp)
 \	:                Assert (false, "GradFun3: wrong smode value.") 
 }
@@ -1597,7 +1603,7 @@ Function Dither_gf3_smooth (clip src_16, clip src_8, int smode, int radius, floa
 
 
 # Valid values for y, u and v: 1 and 3
-Function Dither_gf3_smoothgrad_multistage (clip src,
+Function Dither_gf3_smoothgrad_multistage (clip src, clip ref,
 \	int radius, float thr, float elast, int y, int u, int v)
 {
 	ela_2 = Dither_max (elast * 0.83, 1)
@@ -1608,9 +1614,9 @@ Function Dither_gf3_smoothgrad_multistage (clip src,
 
 	src
 
-	(r2 >= 1) ? SmoothGrad (radius=r2, thr=thr,      elast=elast         , y=y, u=u, v=v) : last
-	(r3 >= 1) ? SmoothGrad (radius=r3, thr=thr*0.7,  elast=ela_2, ref=src, y=y, u=u, v=v) : last
-	(r4 >= 1) ? SmoothGrad (radius=r4, thr=thr*0.46, elast=ela_3, ref=src, y=y, u=u, v=v) : last
+	(r2 >= 1) ? SmoothGrad (radius=r2, thr=thr,      elast=elast, ref=ref, y=y, u=u, v=v) : last
+	(r3 >= 1) ? SmoothGrad (radius=r3, thr=thr*0.7,  elast=ela_2, ref=ref, y=y, u=u, v=v) : last
+	(r4 >= 1) ? SmoothGrad (radius=r4, thr=thr*0.46, elast=ela_3, ref=ref, y=y, u=u, v=v) : last
 }
 
 
@@ -1633,7 +1639,7 @@ Function Dither_gf3_smoothgrad_multistage_3 (clip src,
 
 
 # Valid values for y, u and v: 1 and 3
-Function Dither_gf3_dfttest (clip src, clip src_8,
+Function Dither_gf3_dfttest (clip src, clip src_8, clip ref,
 \	int radius, float thr, float elast, bool lsb_in,
 \	int y, int u, int v)
 {
@@ -1648,13 +1654,13 @@ Function Dither_gf3_dfttest (clip src, clip src_8,
 \		Y=(y==3), U=(u==3), V=(v==3)
 \	)
 
-	Dither_limit_dif16 (last, src, thr=thr, elast=elast, y=y, u=u, v=v)
+	Dither_limit_dif16 (last, ref, thr=thr, elast=elast, y=y, u=u, v=v)
 }
 
 
 
 # Valid values for y, u and v: 1 and 3
-Function Dither_gf3_bilateral_multistage (clip src,
+Function Dither_gf3_bilateral_multistage (clip src, clip ref,
 \	int radius, float thr, float elast, float wmin, int subspl,
 \	int y, int u, int v)
 {
@@ -1666,11 +1672,11 @@ Function Dither_gf3_bilateral_multistage (clip src,
 	r1       = radius * 1 / 3
 
 	src
-	(r4 >= 2) ? Dither_bilateral16 (radius=r4, thr=thr_1, flat=0.75, wmin=wmin, ref=src, subspl=subspl  , y=y, u=u, v=v) : last
-	(r2 >= 2) ? Dither_bilateral16 (radius=r2, thr=thr_2, flat=0.25, wmin=wmin, ref=src, subspl=subspl_2, y=y, u=u, v=v) : last
-	(r1 >= 2) ? Dither_bilateral16 (radius=r1, thr=thr_2, flat=0.50, wmin=wmin, ref=src, subspl=subspl_2, y=y, u=u, v=v) : last
+	(r4 >= 2) ? Dither_bilateral16 (radius=r4, thr=thr_1, flat=0.75, wmin=wmin, ref=ref, subspl=subspl  , y=y, u=u, v=v) : last
+	(r2 >= 2) ? Dither_bilateral16 (radius=r2, thr=thr_2, flat=0.25, wmin=wmin, ref=ref, subspl=subspl_2, y=y, u=u, v=v) : last
+	(r1 >= 2) ? Dither_bilateral16 (radius=r1, thr=thr_2, flat=0.50, wmin=wmin, ref=ref, subspl=subspl_2, y=y, u=u, v=v) : last
 
-	Dither_limit_dif16 (last, src, thr=thr, elast=elast, y=y, u=u, v=v)
+	Dither_limit_dif16 (last, src, ref=ref, thr=thr, elast=elast, y=y, u=u, v=v)
 }
 
 
@@ -1811,6 +1817,7 @@ Function Dither_matrix_to_index (string matrix)
 \	: (matrix == "240")   ?  2
 \	: (matrix == "FCC")   ?  3
 \	: (matrix == "YCgCo") ?  4
+\	: (matrix == "2020")  ?  5
 \	:                       -1)
 }
 

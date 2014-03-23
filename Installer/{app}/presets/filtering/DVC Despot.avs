@@ -7,9 +7,7 @@
 #DeSpot.dll
 #deflicker.dll
 #Removedirt.dll
-#RemoveGrainSSE2.dll
-#RemoveGrainTSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #mvtools2mod.dll
 #Warpsharp.dll
 #mt_masktools-26.dll

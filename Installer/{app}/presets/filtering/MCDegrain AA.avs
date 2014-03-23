@@ -1,6 +1,5 @@
 #avstp.dll
-#RemovegrainSSE2.dll
-#RepairSSE2.dll
+#RgTools.dll
 #AddGrainC.dll
 #EEDI2.dll
 #mt_masktools-26.dll
