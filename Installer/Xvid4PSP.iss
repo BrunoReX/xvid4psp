@@ -33,6 +33,7 @@ AllowNoIcons=yes
 LicenseFile=embedded\License.txt
 WizardImageFile=embedded\WizardImage.bmp
 WizardSmallImageFile=embedded\WizardSmallImage.bmp
+Compression=none
 
 [Files]
 Source: "embedded\unzip.exe"; Flags: dontcopy
@@ -134,6 +135,7 @@ Name: "helixyuv"; Description: "Helix YUV Codecs 1.3.0.0"; Types: "custom compac
 Name: "pmp"; Description: "PMP Splitter 1.0.1.1"; Types: "custom full";
 Name: "msvcr"; Description: "Microsoft Visual C/C++ Libraries"; Types: "custom full";
 Name: "xvid4psp5tasks"; Description: "XviD4PSP5 *.tsks file association"; Types: "custom full";
+Name: "lamemp3"; Description: "LAME MP3 Encoder (requires internet connection)"; Types: "full";
 Name: "neroaac"; Description: "Nero AAC Encoder (requires internet connection)"; Types: "full";
 
 [InstallDelete]
@@ -142,15 +144,16 @@ Type: filesandordirs; Name: "{group}\Tools";
 
 [UninstallDelete]
 Type: files; Name: "{app}\apps\AVI-Mux\logfile.*";
-Type: files; Name: "{app}\apps\MP4Box\Yamb.cfg";
-Type: files; Name: "{app}\apps\MKVtoolnix\*.*";
-Type: files; Name: "{app}\apps\neroAacEnc\*.*";
 Type: files; Name: "{app}\apps\AvsP\*.*";
-Type: files; Name: "{app}\apps\AvsP\tools\*.*";
 Type: files; Name: "{app}\apps\AvsP\macros\*.*";
-Type: files; Name: "{app}\License.txt";
-Type: files; Name: "{app}\apps\x264\vfw4x264.exe";
+Type: files; Name: "{app}\apps\AvsP\tools\*.*";
+Type: files; Name: "{app}\apps\lame\*.*";
+Type: files; Name: "{app}\apps\MKVtoolnix\*.*";
+Type: files; Name: "{app}\apps\MP4Box\Yamb.cfg";
+Type: files; Name: "{app}\apps\neroAacEnc\*.*";
 Type: files; Name: "{app}\apps\x264\avs4x264_source.7z";
+Type: files; Name: "{app}\apps\x264\vfw4x264.exe";
+Type: files; Name: "{app}\License.txt";
 Type: dirifempty; Name: "{app}\apps";
 Type: dirifempty; Name: "{app}";
 
@@ -429,6 +432,9 @@ begin
 
     if IsComponentSelected('neroaac') then
       idpAddFile('http://ftp6.nero.com/tools/NeroAACCodec-1.5.1.zip', ExpandConstant('{tmp}\NeroAACCodec-1.5.1.zip'));
+
+    if IsComponentSelected('lamemp3') then
+      idpAddFile('http://www.rarewares.org/files/mp3/lame3.99.5.zip', ExpandConstant('{tmp}\lame3.99.5.zip'));
   end;
 end;
 
@@ -440,13 +446,13 @@ begin
   begin
     if IsTaskSelected('reset_settings') then
       ResetSettings();
-	  
+
+    ExtractTemporaryFile('unzip.exe');
+
     if IsComponentSelected('neroaac') then
-    begin
-      ExtractTemporaryFile('unzip.exe');
       Exec(ExpandConstant('{tmp}\unzip.exe'), '-j -o "'+ExpandConstant('{tmp}\NeroAACCodec-1.5.1.zip')+'"', ExpandConstant('{app}\apps\neroAacEnc'), SW_HIDE, ewWaitUntilTerminated, ResultCode);
-    end;
+
+    if IsComponentSelected('lamemp3') then
+      Exec(ExpandConstant('{tmp}\unzip.exe'), '-o "'+ExpandConstant('{tmp}\lame3.99.5.zip')+'" -x */*', ExpandConstant('{app}\apps\lame'), SW_HIDE, ewWaitUntilTerminated, ResultCode);
   end;
 end;
-
-
