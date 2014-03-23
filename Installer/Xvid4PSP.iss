@@ -99,6 +99,7 @@ Root: HKCR; Subkey: "XviD4PSP5Tasks\DefaultIcon"; ValueType: String; ValueData: 
 Root: HKCR; Subkey: "XviD4PSP5Tasks\shell\open\command"; ValueType: String; ValueData: """{app}\XviD4PSP.exe"" ""%1"""; Components: XviD4PSP5Tasks;
 
 [INI]
+FileName: "{app}\apps\MKVtoolnix\custom.ini"; Section: "Mkvtlnix_Path"; Key: "path"; String: "{app}\apps\MKVtoolnix"; 
 FileName: "{app}\apps\MP4Box\Yamb.cfg"; Section: "Main"; Flags: uninsdeletesection 
 FileName: "{app}\apps\MP4Box\Yamb.cfg"; Section: "Main"; Key: "MKVextract_path"; String: "{app}\apps\MKVtoolnix\mkvextract.exe";
 FileName: "{app}\apps\MP4Box\Yamb.cfg"; Section: "Main"; Key: "MP4Box_path"; String: "{app}\apps\MP4Box\MP4Box.exe";
