@@ -129,14 +129,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "reset_settings"; Description: "{cm:ResetSettings}"; GroupDescription: "{cm:Other}";
 
 [Components]
-Name: "main"; Description: "XviD4PSP 5.10.330.0"; Types: "custom compact full";
+Name: "main"; Description: "XviD4PSP 5.10.330.0"; Types: "custom compact full"; Flags: fixed;
 Name: "plugins"; Description: "AviSynth Additional Plugins"; Types: "custom full";
 Name: "helixyuv"; Description: "Helix YUV Codecs 1.3.0.0"; Types: "custom compact full";
 Name: "pmp"; Description: "PMP Splitter 1.0.1.1"; Types: "custom full";
 Name: "msvcr"; Description: "Microsoft Visual C/C++ Libraries"; Types: "custom full";
 Name: "xvid4psp5tasks"; Description: "XviD4PSP5 *.tsks file association"; Types: "custom full";
-Name: "lamemp3"; Description: "LAME MP3 Encoder (requires internet connection)"; Types: "full";
-Name: "neroaac"; Description: "Nero AAC Encoder (requires internet connection)"; Types: "full";
+Name: "lamemp3"; Description: "LAME MP3 Encoder (requires internet connection)"; Types: "full"; ExtraDiskSpaceRequired: 1392367;
+Name: "neroaac"; Description: "Nero AAC Encoder (requires internet connection)"; Types: "full"; ExtraDiskSpaceRequired: 3555668;
 
 [InstallDelete]
 Type: files; Name: "{group}\*XviD4PSP 5*";
