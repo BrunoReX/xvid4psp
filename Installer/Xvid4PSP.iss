@@ -33,7 +33,6 @@ AllowNoIcons=yes
 LicenseFile=embedded\License.txt
 WizardImageFile=embedded\WizardImage.bmp
 WizardSmallImageFile=embedded\WizardSmallImage.bmp
-Compression=none
 
 [Files]
 Source: "embedded\unzip.exe"; Flags: dontcopy
