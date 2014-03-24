@@ -16,7 +16,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1024)
 
 m_edge = mt_edge("sobel", 7, 20).mt_inflate()

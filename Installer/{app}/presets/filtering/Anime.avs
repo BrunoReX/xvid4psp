@@ -30,7 +30,7 @@
 # AAD(mode=1,tff=true,debug=false,finalpass=true,ivtc2pass=true,ivtc3pass=true,ultimate=false)
 # TFM(mode=5, PP=6, slow=2, scthresh=12.0, cthresh=9, MI=80).TDecimate(mode=1, hybrid=0, vfrDec=1)
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # набор необходимых масок

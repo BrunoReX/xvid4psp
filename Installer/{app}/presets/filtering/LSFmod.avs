@@ -4,7 +4,7 @@
 #Gradfun2db.dll
 #LimitedSharpenFaster mod.avs
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(256)
 
 #LSFmod(defaults="old",strength=70)

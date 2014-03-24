@@ -9,7 +9,7 @@
 #Gradfun2DBMod 1.5.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 #ColorYUV(gain_y=1,cont_y=5,cont_u=3,cont_v=3,gain_v=0,gain_u=-0,off_u=-0,off_v=-0)

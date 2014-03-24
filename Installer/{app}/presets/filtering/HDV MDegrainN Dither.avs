@@ -24,9 +24,9 @@
 # setmemorymax(1280)
 
 # ==== удаление цветового шума камкодера ====
-setmtmode(5)
+# setmtmode(5)
 FFT3DGPU(bw=32, bh=32, oh=16, ow=16, sigma=3.0, sigma2=2.0, sigma3=10.0, sigma4=3.0, bt=4, plane=3, sharpen=0.3)
-setmtmode(2)
+# setmtmode(2)
 
 # ConvertToRGB32().CamCD(9,1).converttoyv12()  # удаление цветового шума 2-й вариант
 # Cnr2("oxx",8,14,191,75,255,20,255,false)     # цветового шума 3-й вариант

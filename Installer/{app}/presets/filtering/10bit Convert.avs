@@ -9,7 +9,7 @@
 
  
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(640)
 
 W = width(last)

@@ -11,7 +11,7 @@
 #FineSharp.avs
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1280)
 
 RemoveGrain(0)            # No-Op filter, just to do frame request
@@ -52,7 +52,7 @@ lsb_out
 # Наличие фильтра DeBanding по умолчанию: включен
 # Тип шарпера : HighPassSharp или FineSharp
 # Скорость обработки: медленная                     
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 
 
 
 

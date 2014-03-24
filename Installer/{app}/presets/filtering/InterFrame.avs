@@ -8,7 +8,7 @@
 #DoubleFPS.avsi
 
 
-  setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 Try { InterFrame() }

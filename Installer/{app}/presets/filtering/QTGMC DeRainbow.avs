@@ -13,7 +13,7 @@
 #QTGMC.avs
 
 
-SetMTmode(2)
+# SetMTmode(2)
 # setmemorymax(640)
   
 AssumeTFF() 

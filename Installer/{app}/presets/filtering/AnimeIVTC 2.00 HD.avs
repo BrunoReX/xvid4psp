@@ -37,7 +37,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1024)
 
   AnimeIVTC(mode=1,aa=0)

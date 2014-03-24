@@ -37,10 +37,10 @@ ch21 = chroma?2:1
 search = 5
 
  source = last
- setmtmode(5)
+ #setmtmode(5)
   preNR = source.fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=4,sigma=3.0,sigma2=2.0,sigma3=2.5,sigma4=1.0,sharpen=0.3,plane=4)
 # preNR = source.NLMeansCL(A=4, S=2, B=1, aa=1.0, h=1.8, plane=4) # for VC NVIDIA
-  setmtmode(2)
+# setmtmode(2)
 # preNR = source.fft3dfilter(bw=32,bh=32,ow=16,oh=16,bt=1,sigma=2.75,sigma2=2.0,sigma3=1.75,sigma4=0.8,sharpen=0.3,plane=4,ncpu=1)
 preNR_super = preNR.MSuper(hpad=hpad, vpad=vpad, pel=2, sharp=2, rfilter=2, chroma=chroma)
 source_super = source.MSuper(hpad=hpad, vpad=vpad, pel=2, sharp=2, chroma=chroma, levels=1)

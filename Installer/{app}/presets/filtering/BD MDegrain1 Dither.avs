@@ -13,7 +13,7 @@
 #Contrasharpening.avs
 
 
-setMTMode(2)
+# setMTMode(2)
 # setmemorymax(1024)
 
 RemoveGrain(0)            # No-Op filter, just to do frame request
@@ -68,4 +68,4 @@ lsb_out
 # Тип шарпера: Contrasharpening, HighPassSharp или FineSharp
 # Наличие фильтра DeBanding по умолчанию: включен 
 # Скорость обработки: ниже среднего                    
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 

@@ -18,7 +18,7 @@
 #ContraSharpening.avs
 #LimitedSharpenFaster Mod.avs
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
@@ -37,9 +37,9 @@ thSAD2 = 150
 
 source = last
 
-setmtmode(5)
+# setmtmode(5)
 preNR = source.fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=1,sigma=2.5,sigma2=1.8,sigma3=2.3,sigma4=0.8,sharpen=0.3,plane=4)
-setmtmode(2)
+# setmtmode(2)
 
 # preNR = source.dfttest(sigma=8,tbsize=1,lsb=true,threads=1).ditherpost(mode=6)
 smooth = preNR.GradFun2DB()

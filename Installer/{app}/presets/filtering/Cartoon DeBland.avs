@@ -15,7 +15,7 @@
 
 
 
-SetMTmode(2)
+# SetMTmode(2)
 # setmemorymax(640)
 
 vinverse()
@@ -32,9 +32,9 @@ cf1 = MCompensate(source, ssuper, f1v, thSCD1=400)
 cb1 = MCompensate(source, ssuper, b1v, thSCD1=400)
 cb2 = MCompensate(source, ssuper, b2v, thSCD1=400)
 interleave(cb2, cb1, source, cf1)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=4,sigma=2.0,sigma2=2.5,sigma3=3.5,sigma4=3.0,plane=4,mode=1,precision=2) 
-setmtmode(2)
+# setmtmode(2)
 selectevery(4,2)
 
 # SHARPENING

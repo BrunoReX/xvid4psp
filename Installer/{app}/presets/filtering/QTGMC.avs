@@ -24,7 +24,7 @@
 
    ColorMatrix(interlaced=true, clamp=0, threads=0)
    ConvertToYV12(interlaced=true)
-   setmtmode(2)
+   #setmtmode(2)
 #  setmemorymax(768)
 
 #  W = 720 # 1440 or 1920

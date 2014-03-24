@@ -15,7 +15,7 @@
 #LimitedSharpenFaster mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 DeScratch(mindif=4, maxgap=20, minlen=300, blurlen=50, keep=100, border=0, maxangle=0) # удаление царапин и полос старых киноплёнок

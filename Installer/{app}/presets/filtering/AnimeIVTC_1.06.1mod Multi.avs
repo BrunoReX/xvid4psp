@@ -60,7 +60,7 @@
 #MCBob_mod.avs
 
 
-  SetMTmode(1,0)
+# SetMTmode(1,0)
 # setmemorymax(768)
 
 # ColorYUV(gain_y=0,gain_v=0,gain_u=-0,off_u=-0,off_v=-0).levels(0,1.0,255,0,255) #levels(16,1.0,240,0,255)
@@ -95,9 +95,9 @@
   cf1 = sD.mvcompensate(mVectors.mvmultiextract(1),thSCD1=300,idx=1)
   interleave(cb1, sD, cf1)
 # dfttest(sigma=6,tbsize=3,dither=1)
-  setmtmode(5)
+# setmtmode(5)
   fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=3,sigma=3.75,sigma2=2.75,sigma3=3.0,sigma4=1.0,plane=4,mode=1,precision=2)
-  setmtmode(2)
+# setmtmode(2)
   Selectevery(3,1)
   non_hl = mt_merge(last, aa_clp, m_aa)
   mt_merge(non_hl, dh_clp, m_halo)

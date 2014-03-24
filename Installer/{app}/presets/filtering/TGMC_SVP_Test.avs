@@ -14,7 +14,7 @@
 #GradFun2DBmod 1.5.avsi
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(640)
 
 AssumeTFF() 

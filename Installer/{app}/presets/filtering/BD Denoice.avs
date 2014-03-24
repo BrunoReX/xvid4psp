@@ -4,7 +4,7 @@
 #flash3kyuu_deband.dll
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(256)
 
 o  = last

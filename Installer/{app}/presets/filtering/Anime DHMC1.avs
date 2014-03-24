@@ -32,7 +32,7 @@
 #LimitedSharpenFaster Mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 #ColorYUV(gain_y=0,cont_y=0,gain_v=0,gain_u=-0,off_u=-0,off_v=-0).levels(0,1.0,255,0,255) 
@@ -69,9 +69,9 @@ cb1 = MCompensate(source, ssuper, vb1, thSCD1=300)
 interleave(cf1, source, cb1)
 # checkmate(100)
 # dfttest(sigma=8,tbsize=3,dither=1)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=3,sigma=3.0,sigma2=2.0,sigma3=2.5,sigma4=1.0,plane=4,mode=1,precision=2)
-setmtmode(2)
+# setmtmode(2)
 Selectevery(3,1)
 
 non_hl = mt_merge(last, aa_clp, m_aa)

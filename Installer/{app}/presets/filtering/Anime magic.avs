@@ -21,7 +21,7 @@
 #aa.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 dclip = hqdn3d(20, lt=0, ct=0)

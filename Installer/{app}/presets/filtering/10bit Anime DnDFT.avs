@@ -23,7 +23,7 @@
 #ContraSharpen_mod_16.avsi
  
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1333)
 
 source = last
@@ -37,9 +37,9 @@ denoised = src16.dfttest(sigma=5.0, sigma2=6.0, tbsize=3, threads=1, lsb_in=true
 sharp = denoised.CSmod16(src16, lsb_in=true, lsb=true, chroma=true, preblur=2, edgemode=2, mergesrc=true)
 
 # ==== DeBanding ===
-# SetMTMode(5)
+# setmtmode(5)
 # db1 = sharp.LumaDBL(g1str=7, g2str=4, g3str=2, g1soft=3, g2soft=40, g3soft=60, lsb=true, lsb_in=true) 
-# SetMTMode(2)
+# setmtmode(2)
 
 db1 = sharp.GradFun3(smode=2, radius=20, thr=0.45, thrc=0.45, mask=0, lsb_in=true, lsb=true, Y=3, U=3, V=3)
 db2 = db1.f3kdb(20, 64, 64, 64, 0, 0, input_mode=1, output_mode=1).Dither_limit_dif16(sharp, thr=0.60, Y=3, U=3, V=3)

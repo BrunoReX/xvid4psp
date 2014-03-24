@@ -14,7 +14,7 @@
 #LimitedSharpenFaster Mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
@@ -45,9 +45,9 @@ maskmotion  =  mt_lutxy(maskmotion1,maskmotion2,expr="x 0 == 0 x y < y x ? ?")
 maskstatic  = mt_invert(maskmotion)
 
 interleave(cb2, cb1, source, cf1)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=16,bh=16,oh=8,ow=8,sigma=1.75,sigma2=1.5,sigma3=2.3,sigma4=0.8,bt=4,plane=planes,mode=1,precision=2)
-setmtmode(2)
+# setmtmode(2)
 selectevery(4,2)
 output = mt_merge(last, source, maskstar)
 # don't sharpen motion, dark area or starfield areas

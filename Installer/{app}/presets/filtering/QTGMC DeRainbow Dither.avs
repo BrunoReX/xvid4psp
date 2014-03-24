@@ -14,7 +14,7 @@
 #QTGMC-3.33d.avsi
 
 
-SetMTmode(2)
+# SetMTmode(2)
 # setmemorymax(640)
   
 AssumeTFF() 

@@ -15,7 +15,7 @@
 #GradFun2DBmod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(600)
 
 # vinverse() # удаление остатков гребёнки

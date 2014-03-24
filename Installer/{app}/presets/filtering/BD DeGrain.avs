@@ -8,7 +8,7 @@
 #minblur.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1024)
 
 pel1 = 1   # you can use pel=2, 
@@ -74,4 +74,4 @@ f3kdb(sample_mode=2,dynamic_grain=false,keep_tv_range=false,dither_algo=3,y=52,c
 
 
 # Для обработки BD с высоким уровнем яркостного шума
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(3,3) и рекомендуемое ограничение потребления памяти при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(3,3) и рекомендуемое ограничение потребления памяти при threads=4 

@@ -12,9 +12,9 @@
 
 
 # setmemorymax(1024)
-setmtmode(5)
+# setmtmode(5)
 FFT3DGPU(wintype=1,bt=1,bw=32,bh=32,oh=16,ow=16,degrid=1,sigma=3.0,sigma2=3.0,sigma3=10.0,sigma4=3.0,plane=3,sharpen=0.3,mode=1,precision=2)
-setmtmode(2)
+# setmtmode(2)
 
 # Частичная стабилизация изображения
 source = last

@@ -7,7 +7,7 @@
 #LimitedSharpenFaster Mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(256)
 
 degrainmedian(limitY=5,limitUV=6,mode=2)

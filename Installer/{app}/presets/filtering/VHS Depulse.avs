@@ -16,7 +16,7 @@
 #LimitedSharpenFaster Mod.avs
  
  
- setmtmode(2)
+ #setmtmode(2)
 # setmemorymax(640)
 # ==== Подавление цветового шума и радужности изображения ====
  ConvertToRGB32()

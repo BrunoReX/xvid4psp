@@ -13,7 +13,7 @@
 #mt_xxpand_multi.avsi
  
 
-SetMTMode(2)
+# SetMTMode(2)
 setmemorymax(1280)
 
 W = width(last)

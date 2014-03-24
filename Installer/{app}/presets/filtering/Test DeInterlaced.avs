@@ -16,7 +16,7 @@
 #QTGMC.avs
 
 
-SetMTmode(2)
+# SetMTmode(2)
 # setmemorymax(1024)
 
 AssumeTFF() # для DVD, HDV, AVCHD

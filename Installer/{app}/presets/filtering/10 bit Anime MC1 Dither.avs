@@ -23,7 +23,7 @@
 #EdgeCleaner.avs
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1024)
 
 MergeChroma(aWarpSharp2(chroma=4))

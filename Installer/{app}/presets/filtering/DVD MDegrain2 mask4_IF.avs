@@ -42,9 +42,9 @@ ch21 = chroma?2:1
 search = 5
 
 source = last
-setmtmode(5)
+# setmtmode(5)
 preNR = source.fft3dgpu(wintype=1,degrid=1,bw=16,bh=16,ow=8,oh=8,bt=4,sigma=2.75,sigma2=1.75,sigma3=2.0,sigma4=0.5,plane=4)
-setmtmode(2)
+# setmtmode(2)
 preNR_super = preNR.MSuper(hpad=hpad, vpad=vpad, pel=2, sharp=2, rfilter=2, chroma=chroma)
 source_super = source.MSuper(hpad=hpad, vpad=vpad, pel=2, sharp=2, chroma=chroma, levels=1)
 vb2 = MAnalyse(preNR_super, isb=true, truemotion=false, delta=2, blksize=blksize, overlap=overlap, search=search, chroma=chroma, lambda=lambda)

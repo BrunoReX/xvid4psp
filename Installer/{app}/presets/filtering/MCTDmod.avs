@@ -19,7 +19,7 @@
 #LimitedSharpenFaster MOD.avs
 #MCTDmod.avsi
 
-Setmtmode(2)
+# Setmtmode(2)
 # setmemorymax(768)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)

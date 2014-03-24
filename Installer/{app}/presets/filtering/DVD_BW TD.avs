@@ -12,7 +12,7 @@
 #Gradfun2dbmod 1.5.avsi
  
  
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 #GPU     = default( GPU,   false ) # bcgjkmpeqnt FFT3DGPU если у вас мощный и быстрый GPU

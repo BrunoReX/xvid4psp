@@ -11,7 +11,7 @@
 #Gradfun2dbmod 1.5.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # vinverse() # удаление остатков гребёнки
@@ -39,9 +39,9 @@ vb1 = MAnalyse(preNR_super, isb=true,truemotion=false,delta=1,blksize=16,overlap
 vf1 = MAnalyse(preNR_super,isb=false,truemotion=false,delta=1,blksize=16,overlap=4,lambda=2000,pelsearch=2,search=3,DCT=5)
 vf2 = MAnalyse(preNR_super,isb=false,truemotion=false,delta=2,blksize=16,overlap=4,lambda=2000,pelsearch=2,search=3,DCT=5)
 source.MDegrain2(source_super,vb1,vf1,vb2,vf2,thSAD=350)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(wintype=1,bt=3,bw=16,bh=16,ow=8,oh=8,degrid=1,sigma=3.0,sigma2=2.5,sigma3=2.0,sigma4=6,plane=4,sharpen=0.5)
-setmtmode(2)
+# setmtmode(2)
 Gradfun2dbmod(thr=1.4,thrC=1.8,mode=2,str=0.8,temp=50)
 
 

@@ -7,7 +7,7 @@
 #SDIAdapt.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 Global thicknessline=2# thickness horizontal spike in pixels at field scale (not frame)

@@ -16,7 +16,7 @@ RemoveGrain(0)            # No-Op filter, just to do frame request
 ChangeFPS(last,last,true) # initiate a small forward buffer
 RemoveGrain(0)            # not sure if this 2nd one is needed. But surely it doesn't hurt
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1024)
 
 source = last.assumeframebased()
@@ -71,4 +71,4 @@ lsb_out
 # Тип шарпера: Contrasharpening или HighPassSharp
 # Наличие фильтра DeBanding по умолчанию: включен 
 # Скорость обработки: ниже среднего                    
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 

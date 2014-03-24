@@ -23,7 +23,7 @@
 #TAA.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 emask  = mt_edge("sobel",7,7,5,5).mt_inflate()

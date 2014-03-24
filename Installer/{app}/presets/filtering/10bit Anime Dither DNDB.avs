@@ -33,7 +33,7 @@
 #LimitedSharpenFaster mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
 MergeChroma(aWarpSharp2(chroma=4)) 

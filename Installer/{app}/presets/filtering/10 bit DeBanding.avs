@@ -15,7 +15,7 @@
 #O16mod.avsi
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(768)
 
 W = width(last)

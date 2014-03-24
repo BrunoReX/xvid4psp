@@ -46,7 +46,7 @@
 
 # AAD () # Auto Anime Decomb
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 # ColorYUV(levels="TV->PC") 

@@ -16,7 +16,7 @@
 #GradFun2DBmod 1.5.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 W = 720
@@ -37,9 +37,9 @@ stab = stab1.crop(24,18,-24,-18)
 # Шумоподавление
 base = stab.tweak(sat=1.05)#.deflicker()
 
-setmtmode(5)
+# setmtmode(5)
 filtered = base.degrainmedian(mode=1,limity=3,limituv=4).fft3dgpu(wintype=1,degrid=1,bw=24,bh=24,ow=12,oh=12,bt=1,sigma=12.0,sigma2=6.0,sigma3=4,sigma4=2.0,plane=4)
-setmtmode(2)
+# setmtmode(2)
 
 dark   = 32
 bright = 196

@@ -14,7 +14,7 @@
 #VinverseDenoise.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(512)
 
 o = last

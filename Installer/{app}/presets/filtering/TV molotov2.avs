@@ -12,7 +12,7 @@
 #GradFun2DB.dll
 #GradFun2DBmod 1.5.avsi
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # vinverse() # удаление остатков гребёнки

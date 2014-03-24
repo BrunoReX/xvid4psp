@@ -18,7 +18,7 @@
 #LimitedSharpenFaster mod.avs
 
   
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(640)
 
 ConvertToRGB32()

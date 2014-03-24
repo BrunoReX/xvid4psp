@@ -29,7 +29,7 @@ min = bob1.mt_logic(bob1.selectevery(1,-1),"min",U=3,V=3).mt_logic(bob1.selectev
 clamped = bob2.mt_clamp(max,min,0,0,U=3,V=3)
 clamped.selectevery(2,-1).trim(1,0)
 
-setmtmode(2)
+# setmtmode(2)
 # ConvertToRGB32().CamCD(3,1).ConvertToYV12() # удаление радужности и цветового шума
   Bifrost(interlaced=false)
   

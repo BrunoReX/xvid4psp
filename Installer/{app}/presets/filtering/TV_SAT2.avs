@@ -19,7 +19,7 @@
 #LimitedSharpenFaster Mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
@@ -49,10 +49,10 @@ s2 = sigma * 0.625
 s3 = sigma * 0.375
 s4 = sigma * 1.5
 
-setmtmode(5)
+# setmtmode(5)
 preNR = spat.fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=4,sigma=sigma,sigma2=s2,sigma3=s3,sigma4=s4,plane=4)
 
-setmtmode(2)
+# setmtmode(2)
 preNR_super = preNR.MSuper(pel=2, sharp=2,rfilter=4, chroma=false)
 source_super = source.MSuper(pel=2, sharp=2, chroma=false, levels=1)
 vb2 = MAnalyse(preNR_super, isb=true,truemotion=false,delta=2,blksize=16,overlap=8,lambda=2000,search=3,chroma=false,DCT=5)

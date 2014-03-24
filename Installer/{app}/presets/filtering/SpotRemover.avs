@@ -15,7 +15,7 @@
 #LimitedSharpenFaster mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # Удаление полос и царапин

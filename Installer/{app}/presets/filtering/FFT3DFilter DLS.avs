@@ -12,9 +12,9 @@
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
 
 # удаление цветового шума
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=16,bh=16,oh=8,ow=8,sigma=2.0,sigma2=1.75,sigma3=3.0,sigma4=2.0,bt=1,plane=3,sharpen=0.3,mode=1,precision=2)
-setmtmode(2)
+# setmtmode(2)
 
 # удаление €ркостного шума
 fft3dfilter(wintype=1,degrid=1,bw=32,bh=32,oh=16,ow=16,sigma=2.0,sigma2=1.5,sigma3=1.75,sigma4=1.0,bt=5,plane=0,ncpu=1)

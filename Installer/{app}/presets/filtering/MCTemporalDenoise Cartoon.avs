@@ -32,7 +32,7 @@ ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=1,off_u=-0
 string = "FFT3DGPU(sigma=3.0,sigma2=3.0,sigma3=10,sigma4=3.0,plane=3,bt=1,sharpen=0.3)"
 # string = "FFT3DGPU(sigma=3.5,plane=3,bt=1).DeHalo_Alpha().FastLineDarkenMOD(strength=55, thinning=24)" # для аниме
 
-Setmtmode(2)
+# Setmtmode(2)
 # string = "dfttest(tbsize=1,ftype=1,sigma=8).DeHalo_Alpha().FastLineDarkenMOD(strength=55, thinning=24)"
 
 # ==== 1 variant ====

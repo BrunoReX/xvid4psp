@@ -19,7 +19,7 @@
 #SmoothContrast.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 ColorMatrix(interlaced=true, clamp=0, threads=0)

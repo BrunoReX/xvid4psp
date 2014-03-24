@@ -18,7 +18,7 @@
 #mt_xxpand_multi.avsi
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1000)
 
 MergeChroma(aWarpSharp2(chroma=4))

@@ -11,7 +11,7 @@
 #Ylevels.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # Deblock with Re-Sharp

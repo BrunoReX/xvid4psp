@@ -12,7 +12,7 @@
 #GradFun2DBmod 1.5.avsi
  
  
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
  
 # vinverse().srestore(omode=2, cache=9).tdecimate() #  устранение блендов

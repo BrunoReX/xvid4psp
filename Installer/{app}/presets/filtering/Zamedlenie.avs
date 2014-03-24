@@ -3,7 +3,7 @@
 #EEDI2.dll
 #InterFrame.avsi
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(512)
 
 Try { InterFrame() }

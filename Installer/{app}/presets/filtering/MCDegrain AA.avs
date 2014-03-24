@@ -10,7 +10,7 @@
 
 # crop(960,464,-0,-256)  # need only this section for the given sample. 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 o = last 

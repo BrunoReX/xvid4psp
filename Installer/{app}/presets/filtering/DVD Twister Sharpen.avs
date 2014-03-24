@@ -18,7 +18,7 @@
 #LimitedSharpenFaster.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
@@ -78,4 +78,4 @@ YlevelsS(0,1.0,255,0,255,false)
 # Тип шарпера: sharpen + median sharpen + Limitedsharpenfaster
 # Наличие фильтра DeBanding по умолчанию: включен
 # Скорость обработки: очень медленный
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(5,3), а вслучае ошибки вообще setmtmode(5,2) при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(5,3), а вслучае ошибки вообще #setmtmode(5,2) при threads=4 

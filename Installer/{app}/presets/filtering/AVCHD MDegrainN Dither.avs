@@ -23,7 +23,7 @@
 #HighPassSharp.avs
 
 
-  setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
 Try { InterFrame() }
@@ -37,9 +37,9 @@ RemoveGrain(0)            # No-Op filter, just to do frame request
 ChangeFPS(last,last,true) # initiate a small forward buffer
 
 # ==== удаление цветового шума камкодера ====
-  setmtmode(5)
+# setmtmode(5)
   fft3dgpu(bw=32,bh=32,oh=16,ow=16,bt=4,sigma=3.0,sigma2=2.0,sigma3=8.0,sigma4=3.0,plane=3,sharpen=0.3,mode=1,precision=2)
-  setmtmode(2)
+# setmtmode(2)
 # ConvertToRGB32().CamCD(7,1).converttoyv12()  # удаление цветового шума 2-й вариант
 # Cnr2("oxx",8,14,191,75,255,20,255,false)     # цветового шума 3-й вариант
 

@@ -17,7 +17,7 @@
 #MinMapBlur.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1024)
 
 Undot()

@@ -9,7 +9,7 @@
 
 
 
-setMTMode(2)
+# setMTMode(2)
 # setmemorymax(512)
 
 src = last

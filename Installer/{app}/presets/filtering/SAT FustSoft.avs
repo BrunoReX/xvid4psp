@@ -8,9 +8,9 @@
 
 
 # setmemorymax(256)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=16,bh=16,oh=8,ow=8,sigma=2.5,sigma2=1.75,sigma3=6.8,sigma4=2.5,bt=1,sharpen=0.3,plane=3)
-setmtmode(2)
+# setmtmode(2)
 # Bifrost(interlaced=false)
 
 Temporalsoften(3,2,0,6,2)

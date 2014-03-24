@@ -9,7 +9,7 @@
 #Gradfun2dbmod 1.5.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 nnedi3(field=-2)

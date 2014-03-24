@@ -25,7 +25,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 # SeparateFields().Deblock().Weave() # DeBlock

@@ -30,7 +30,7 @@
 #Down10.avs
 
 
-Setmtmode(2)
+# Setmtmode(2)
 # setmemorymax(1280)
 
 W = width(last)

@@ -17,7 +17,7 @@
 #HighPassSharp.avs
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1280)
 
 # MSRmod( W=1280, H=720, HPS=true, str=4, r=0.15, GF3=false, lsb=true)

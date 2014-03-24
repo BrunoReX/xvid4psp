@@ -22,7 +22,7 @@ RemoveGrain(0)            # No-Op filter, just to do frame request
 ChangeFPS(last,last,true) # initiate a small forward buffer
 RemoveGrain(0)            # not sure if this 2nd one is needed. But surely it doesn't hurt
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
 # ==== удаление цветового шума камкодера ====
@@ -58,9 +58,9 @@ cf1 = MCompensate(base, ssuper, f1v, thSAD=135, thSCD1=300)
 cb1 = MCompensate(base, ssuper, b1v, thSAD=135, thSCD1=300)
 cb2 = MCompensate(base, ssuper, b2v, thSAD=135, thSCD1=300)
 interleave(cb2, cb1, base, cf1)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=32,bh=32,ow=16,oh=16,bt=4,sigma=2.3,sigma2=1.75,sigma3=2.75,sigma4=1.8,plane=0,mode=1,precision=2) 
-setmtmode(2)
+# setmtmode(2)
 selectevery(4,2)
 mt_merge(last, base, blendv, luma=true)
 

@@ -25,7 +25,7 @@
 #TAA.avsi
 #Down10.avs
 
-setmtmode(2)
+# setmtmode(2)
 setmemorymax(1536)
 
 W = width(last)

@@ -33,7 +33,7 @@
 # TDeint(mode=1,order=-1) # mode=0 deinterlace, mode=1 doubleframerate, order=0 BFF, order=1 TFF
 # yadifmod(mode=1,order=-1, edeint=nnedi3(field=-2)) # mode=1 means double framerate,field=-2 means double rate (alternates each frame)
 
-setmtmode(2)
+# setmtmode(2)
 ConvertToRGB32()
 CamCD(7,1)       # подавление цветового шума камкодеров
 converttoyv12()

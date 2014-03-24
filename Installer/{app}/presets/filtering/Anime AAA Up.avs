@@ -20,7 +20,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
 nnedi3_rpow2(rfactor=2, nsize=0, nns=4, qual=2, etype=0, pscrn=4, cshift="lanczosresize", threads=1)

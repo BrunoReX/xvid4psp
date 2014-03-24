@@ -19,7 +19,7 @@
 #Limitedsharpenfaster mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
   BlowUp_mod(nnu=true,exsharp=true,thSAD=256,thSAD2=96,tr=2,LSF=false,var=1.0,uvar=0.0,smode=2,W=1280,H=544)

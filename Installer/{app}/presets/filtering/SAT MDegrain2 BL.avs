@@ -20,7 +20,7 @@
 # ==== DeRainbow & Color denoiced ====
 # setmtmode(5)
 # fft3dgpu(bw=16,bh=16,oh=8,ow=8,sigma=1.75,sigma2=1.3,sigma3=4.0,sigma4=1.5,bt=1,sharpen=0.6,plane=3,mode=1,precision=2)
-  setmtmode(2)
+# setmtmode(2)
 # ConvertToRGB32().CamCD(2,1).ConvertToYV12()
   Bifrost(interlaced=false)
 

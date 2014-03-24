@@ -10,9 +10,9 @@
 # setmemorymax(512)
 
 # удаление цветового шума
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=16,bh=16,oh=8,ow=8,sigma=2.5,sigma2=1.5,sigma3=8.0,sigma4=2.5,bt=1,sharpen=0.3,plane=3)
-setmtmode(2)
+# setmtmode(2)
 
 # удаление €ркостного шума
 fft3dfilter(bw=32,bh=32,oh=16,ow=16,sigma=1.5,sigma2=1.1,sigma3=1.3,sigma4=0.5,bt=3,sharpen=0.6,plane=0,ncpu=1)

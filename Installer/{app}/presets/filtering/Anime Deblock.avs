@@ -34,7 +34,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(768)
 
 #ColorYUV(gain_y=15,cont_y=8,gain_v=0,gain_u=-0,off_u=-0,off_v=-0).levels(0,1.0,255,0,255)

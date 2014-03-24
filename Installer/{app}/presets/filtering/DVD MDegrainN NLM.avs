@@ -14,7 +14,7 @@
 #LimitedSharpenFaster Mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
@@ -29,10 +29,10 @@ chr31 = chroma?3:1
 search = 5
 
 source = last
-setmtmode(5)
+# setmtmode(5)
 preNR = source.NLMeansCL(A=4, S=2, B=1, aa=1.0, h=1.0, plane=planes) # for NVIDIA
 # preNR = source.fft3dgpu(bw=16,bh=16,ow=8,oh=8,bt=1,sigma=2.0,sigma2=1.3,sigma3=1.5,sigma4=0.5,plane=planes,mode=1,precision=2) # for VC ATI
-setmtmode(2)
+# setmtmode(2)
 
 preNR_super = preNR.MSuper(hpad=hpad, vpad=vpad, pel=2, sharp=2, rfilter=2, chroma=chroma)
 vb2 = MAnalyse(preNR_super, isb=true, delta=2, blksize=blksize, overlap=overlap, truemotion=false, chroma=chroma, search=search)

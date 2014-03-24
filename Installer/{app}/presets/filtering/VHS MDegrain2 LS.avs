@@ -23,7 +23,7 @@
 #Gradfun2dbmod 1.5.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # подавление цветового шума и радужности изображения

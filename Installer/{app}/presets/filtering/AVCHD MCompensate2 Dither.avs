@@ -23,7 +23,7 @@
 #GradFun2DBmod 1.5.avsi
 
 
-  setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
   RemoveGrain(0)            # No-Op filter, just to do frame request
@@ -33,7 +33,7 @@
 # ==== удаление цветового шума камкодера ====
 # setmtmode(5)
 # fft3dgpu(wintype=1,bt=1,bw=32,bh=32,oh=16,ow=16,degrid=1,sigma=3.0,sigma2=2.0,sigma3=8.0,sigma4=3.0,plane=3,mode=1,precision=2,sharpen=0.3)
-  setmtmode(2)
+# setmtmode(2)
 # ConvertToRGB32().CamCD(5,1).converttoyv12()  # удаление цветового шума 2-й вариант
 # Cnr2("oxx",8,14,191,75,255,20,255,false)     # цветового шума 3-й вариант
 

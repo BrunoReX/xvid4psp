@@ -8,7 +8,7 @@
 #HighPassSharp.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1280)
 
 RemoveGrain(0)            # No-Op filter, just to do frame request
@@ -27,9 +27,9 @@ cf1 = MCompensate(source, ssuper, f1v, thSAD=96, thSCD1=300)
 cb1 = MCompensate(source, ssuper, b1v, thSAD=96, thSCD1=300)
 cb2 = MCompensate(source, ssuper, b2v, thSAD=96, thSCD1=300)
 interleave(cb2, cb1, source, cf1)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=32,bh=32,ow=16,oh=16,bt=4,sigma=1.2,sigma2=1.5,sigma3=2.2,sigma4=0.8,plane=4,mode=1,precision=2) 
-setmtmode(2)
+# setmtmode(2)
 selectevery(4,2)
 mt_merge(last, source, blendv, luma=true)
 

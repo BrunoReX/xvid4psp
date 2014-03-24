@@ -13,7 +13,7 @@
 #LimitedSharpenFaster Mod.avs
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 Chubbyrain2().Checkmate(tthr2=0) # убрать радужность изображения

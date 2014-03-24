@@ -14,7 +14,7 @@
 #Gradfun2DBmod 1.5.avsi
 #LimitedSharpenFaster Mod.avs
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 # ColorYUV(gain_y=0,cont_y=0,cont_u=0,cont_v=0,gain_v=0,gain_u=-0,off_y=0,off_u=-0,off_v=-0)
@@ -27,9 +27,9 @@ multi_vec = MAnalyse (psuper, multi=true, delta=tr, blksize=8, overlap=4, chroma
 den = source.MDegrainN (ssuper, multi_vec, tr, thSAD=400, thSAD2=150, lsb=true)
 
 f = den.DitherPost(mode=-1)
-setmtmode(5)
+# setmtmode(5)
 output = f.fft3dgpu(bw=24,bh=24,ow=12,oh=12,bt=3,sigma=2.5,sigma2=1.75,sigma3=2.5,sigma4=2,plane=4)
-setmtmode(2)
+# setmtmode(2)
 
 sharp = output.LSFmod(defaults="slow", preblur="ON", strength=100)
 DB8 = sharp.Gradfun2DBmod(thr=1.51,thrC=1.8,mode=2,str=1.0,strC=0.0,temp=50,adapt=64)

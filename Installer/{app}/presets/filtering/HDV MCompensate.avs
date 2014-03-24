@@ -14,7 +14,7 @@
 #HighPassSharp.avs
 
 
-setmtmode(2) 
+# setmtmode(2) 
 # setmemorymax(1333)
 
 # ==== удаление цветового шума камкодера ====
@@ -48,9 +48,9 @@ cf1 = MCompensate(base, ssuper, f1v, thSAD=125, thSCD1=256)
 cb1 = MCompensate(base, ssuper, b1v, thSAD=125, thSCD1=256)
 cb2 = MCompensate(base, ssuper, b1v, thSAD=125, thSCD1=256)
 interleave(cb2, cb1, base.MDegrain1(ssuper, b1v,f1v,thSAD=96,plane=0), cf1)
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(bw=24,bh=24,ow=12,oh=12,bt=3,sigma=2.3,sigma2=1.6,sigma3=2.0,sigma4=0.5,plane=0,mode=1,precision=2) 
-setmtmode(2)
+# setmtmode(2)
 # fft3dfilter(wintype=1,degrid=1,bw=32,bh=32,ow=16,oh=16,bt=4,sigma=2.3,sigma2=1.6,sigma3=2.5,sigma4=0.5,plane=0,ncpu=1)
 selectevery(4,2)
 mt_merge(last, base, blendv, luma=true, U=3, V=3)

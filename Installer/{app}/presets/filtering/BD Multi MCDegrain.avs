@@ -10,7 +10,7 @@ RemoveGrain(0)            # No-Op filter, just to do frame request
 ChangeFPS(last,last,true) # initiate a small forward buffer
 RemoveGrain(0)            # not sure if this 2nd one is needed. But surely it doesn't hurt
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1024)
 
 o   = last
@@ -47,7 +47,7 @@ f3kdb(sample_mode=2,dynamic_grain=true,keep_tv_range=true,dither_algo=3,y=64,cb=
 # Наличие фильтра DeBanding по умолчанию: включен
 # Установите кроп и ресайз в начале скрипта, кодирование производите в режиме lossless !!!
 # Скорость обработки: черезвычайно медленная                    
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(5,3), а вслучае ошибки вообще setmtmode(5,2) при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(5,3), а вслучае ошибки вообще #setmtmode(5,2) при threads=4 
 
 
 

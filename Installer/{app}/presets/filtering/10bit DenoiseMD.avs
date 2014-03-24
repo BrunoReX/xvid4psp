@@ -21,7 +21,7 @@
 #LimitedSharpenFaster mod.avs
 
 
-SetMTMode(2)
+# SetMTMode(2)
 # setmemorymax(1536)
 
 W = width(last)
@@ -30,10 +30,10 @@ H = height(last)
 DenoiseMD2(lsb=true, sigma=6.0, blksize=16, thcomp=96, str=0.8)
  
 # ==== DeBanding ====
-# SetMTMode(5)
+# setmtmode(5)
 # DB = last.LumaDBL(g1str=7, g2str=4, g3str=2, g1soft=5, g2soft=10, g3soft=20, g1size=1.2, g2size=0.9, g3size=0.6, lsb=true, lsb_in=true) 
 # DB = last.LumaDBL(g1str=7, g2str=4, g3str=2, g1soft=5, g2soft=10, g3soft=20, g1size=1.2, g2size=0.9, g3size=0.6, lsb=true, lsb_in=true, ditherC="f3kdb_dither()")
-# SetMTMode(2)
+# setmtmode(2)
 
   f3kdb(16, 64, 40, 40, 0, 0, dynamic_grain=true, input_mode=1, output_mode=1)
 # GradFun3(smode=1, thr=0.5,  radius=16, lsb=true, lsb_in=true)

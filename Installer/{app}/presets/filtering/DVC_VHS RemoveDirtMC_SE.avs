@@ -18,7 +18,7 @@
 #SeeSaw.avs
 #Gradfun2dbmod 1.5.avsi
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 ConvertToRGB32().CamCD(9,1).converttoyv12()

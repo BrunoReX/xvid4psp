@@ -5,7 +5,7 @@
 #flash3kyuu_deband.dll
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(600) 
 InterFrame (GPU=false, Preset="Medium", Tuning ="Film", OverrideAlgo=23, InputType="2D", Cores=4)
 # InterFrame (GPU=false, Preset="Medium", Tuning ="Film", NewNum=48000, NewDen=1001, OverrideAlgo=23, InputType="2D", Cores=4)

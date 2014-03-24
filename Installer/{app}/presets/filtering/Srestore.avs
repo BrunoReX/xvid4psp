@@ -15,7 +15,7 @@
 
 
 
-SetMTmode(2)
+# SetMTmode(2)
 # setmemorymax(768)
 
 o = last

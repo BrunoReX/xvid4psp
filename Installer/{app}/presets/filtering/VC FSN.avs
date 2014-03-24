@@ -24,7 +24,7 @@ S2=Strength/3
 S3=Strength/15
 p=100
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 ConvertToRGB32()

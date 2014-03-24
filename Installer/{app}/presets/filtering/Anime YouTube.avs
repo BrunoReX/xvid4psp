@@ -17,7 +17,7 @@
 #FastLineDarken 1.4x MT MOD.avsi
 
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(256)
 
 Deblock()
@@ -32,9 +32,9 @@ aWarpSharp(depth=4,blurlevel=4,thresh=0.7,cm=1)
 Crop(4,0,-4,0)
 FastLineDarkenMod()
 DeHalo_Alpha()
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(wintype=1,degrid=1,bw=16,bh=16,ow=8,oh=8,bt=1,sigma=8,plane=4,mode=1,precision=1,sharpen=1.3)
-setmtmode(2)
+# setmtmode(2)
 
 Spline36Resize(last.width/2,last.height/2)
 

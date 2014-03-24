@@ -30,7 +30,7 @@
 #TAA.avsi
 
 
-Setmtmode(2)
+# Setmtmode(2)
 # setmemorymax(768)
 
 MCTD( 

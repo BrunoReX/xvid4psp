@@ -12,7 +12,7 @@
 #flash3kyuu_deband.dll
 #LimitedSharpenfaster.avs
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(640)
 
 W = 720
@@ -45,9 +45,9 @@ cb1 = MCompensate(stab, super, bw, thSCD1=400)
 cf1 = MCompensate(stab, super, fw, thSCD1=400)
 interleave(cb1, stab.MDegrain1(super, bw, fw, thSAD=400).MDegrain1(super, bw, fw, thSAD=400), cf1)
 
-setmtmode(5)
+# setmtmode(5)
 fft3dgpu(sigma=S1,sigma2=S2,sigma3=S3,sigma4=S4,bw=24,bh=24,ow=12,oh=12,bt=3,plane=0,mode=1,precision=2)
-setmtmode(2)
+# setmtmode(2)
 SelectEvery(3,1)
 den = last
 super1 = den.MSuper(pel=2, chroma=true, levels=1)

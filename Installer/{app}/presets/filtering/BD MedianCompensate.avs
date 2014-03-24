@@ -12,7 +12,7 @@ RemoveGrain(0)            # No-Op filter, just to do frame request
 ChangeFPS(last,last,true) # initiate a small forward buffer
 RemoveGrain(0)            # not sure if this 2nd one is needed. But surely it doesn't hurt
 
-setmtmode(2)
+# setmtmode(2)
 # setmemorymax(1024)
 
 o = last
@@ -35,4 +35,4 @@ f3kdb(sample_mode=2,dynamic_grain=true,keep_tv_range=true,dither_algo=3,y=64,cb=
 YlevelsS(0,1.0,255,0,255)
 
 
-# перед строкой загрузки видео вписуйте в скрипт setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 
+# перед строкой загрузки видео вписуйте в скрипт #setmtmode(5,2) и рекомендуемое ограничение потребления памяти при threads=4 
