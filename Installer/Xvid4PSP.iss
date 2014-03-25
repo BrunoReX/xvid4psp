@@ -63,7 +63,7 @@ Source: "{app}\apps\x264\*"; DestDir: "{app}\apps\x264"; Components: Main; Flags
 Source: "{app}\apps\x264_10b\*"; DestDir: "{app}\apps\x264_10b"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "{app}\apps\x264\COPYING"; DestDir: "{app}\apps\x262"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\x264\COPYING"; DestDir: "{app}\apps\x264_10b"; Components: Main; Flags: ignoreversion
-Source: "{app}\apps\xvid_encraw\*"; DestDir: "{app}\apps\xvid_encraw\1.2.2"; Components: Main; Flags: ignoreversion recursesubdirs
+Source: "{app}\apps\xvid_encraw\*"; DestDir: "{app}\apps\xvid_encraw"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "..\bin\Launcher.exe"; DestDir: "{app}\apps"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\functions\*.avs"; DestDir: "{app}\dlls\AviSynth\functions"; Components: Main; Flags: ignoreversion
 Source: "{app}\dlls\AviSynth\plugins\*"; DestDir: "{app}\dlls\AviSynth\plugins"; Components: Plugins; Flags: ignoreversion recursesubdirs
