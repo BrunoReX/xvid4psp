@@ -78,6 +78,7 @@ Source: "..\bin\languages\*"; DestDir: "{app}\languages"; Components: Main; Flag
 Source: "..\bin\SafeOpenDialog.exe"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "..\bin\WPF_VideoPlayer.exe"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 Source: "..\bin\XviD4PSP.exe"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
+Source: "..\bin\XviD4PSP.pdb"; DestDir: "{app}"; Components: Main; Flags: ignoreversion
 
 Source: "{sys}\avsfilter.dll"; DestDir: "{sys}"; Components: Main; Flags: restartreplace uninsrestartdelete
 Source: "{sys}\AvsRecursion.dll"; DestDir: "{sys}"; Components: Main; Flags: restartreplace uninsrestartdelete
@@ -128,7 +129,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "reset_settings"; Description: "{cm:ResetSettings}"; GroupDescription: "{cm:Other}";
 
 [Components]
-Name: "main"; Description: "XviD4PSP 5.10.330.0"; Types: "custom compact full"; Flags: fixed;
+Name: "main"; Description: "XviD4PSP 5"; Types: "custom compact full"; Flags: fixed;
 Name: "plugins"; Description: "AviSynth Additional Plugins"; Types: "custom full";
 Name: "helixyuv"; Description: "Helix YUV Codecs 1.3.0.0"; Types: "custom compact full";
 Name: "pmp"; Description: "PMP Splitter 1.0.1.1"; Types: "custom full";
