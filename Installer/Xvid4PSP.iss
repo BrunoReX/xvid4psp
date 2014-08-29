@@ -61,6 +61,7 @@ Source: "{app}\apps\VirtualDubMod\*"; DestDir: "{app}\apps\VirtualDubMod"; Compo
 Source: "{app}\apps\x262\*"; DestDir: "{app}\apps\x262"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "{app}\apps\x264\*"; DestDir: "{app}\apps\x264"; Components: Main; Flags: ignoreversion recursesubdirs
 Source: "{app}\apps\x264_10b\*"; DestDir: "{app}\apps\x264_10b"; Components: Main; Flags: ignoreversion recursesubdirs
+Source: "{app}\apps\x264\avs4x264.exe"; DestDir: "{app}\apps\x264_10b"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\x264\COPYING"; DestDir: "{app}\apps\x262"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\x264\COPYING"; DestDir: "{app}\apps\x264_10b"; Components: Main; Flags: ignoreversion
 Source: "{app}\apps\xvid_encraw\*"; DestDir: "{app}\apps\xvid_encraw"; Components: Main; Flags: ignoreversion recursesubdirs
