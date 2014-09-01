@@ -423,17 +423,11 @@ namespace XviD4PSP
                         if (flag == "aic")
                             m.ffmpeg_options.aic = true;
 
-                        //if (flag == "trell") //тут
-                          //  m.ffmpeg_options.trellis = true;
-
                         if (flag == "mv0")
                             m.ffmpeg_options.mvectors = "MV0";
 
                         if (flag == "mv4")
                             m.ffmpeg_options.mvectors = "MV4";
-
-                        if (flag == "umv")
-                            m.ffmpeg_options.mvectors = "Unlimited";
 
                         if (flag == "qprd")
                             m.ffmpeg_options.qprd = true;
@@ -504,7 +498,7 @@ namespace XviD4PSP
             if (m.encodingmode == Settings.EncodingModes.OnePass ||
                 m.encodingmode == Settings.EncodingModes.TwoPass ||
                 m.encodingmode == Settings.EncodingModes.ThreePass)
-                line += "-b " + m.outvbitrate * 1000;
+                line += "-b:v " + m.outvbitrate * 1000;
             else if (m.encodingmode == Settings.EncodingModes.TwoPassSize ||
                 m.encodingmode == Settings.EncodingModes.ThreePassSize)
                 line += "-sizemode " + m.outvbitrate * 1000;
@@ -558,9 +552,7 @@ namespace XviD4PSP
             if (m.ffmpeg_options.qpel)
                 flags += "+qpel";
 
-            if (m.ffmpeg_options.mvectors == "Unlimited")
-                flags += "+umv";
-            else if (m.ffmpeg_options.mvectors == "MV4")
+            if  (m.ffmpeg_options.mvectors == "MV4")
                 flags += "+mv4";
             else if (m.ffmpeg_options.mvectors == "MV0")
                 flags += "+mv0";

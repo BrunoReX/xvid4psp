@@ -254,7 +254,7 @@ namespace XviD4PSP
             if (m.encodingmode == Settings.EncodingModes.OnePass ||
                 m.encodingmode == Settings.EncodingModes.TwoPass ||
                 m.encodingmode == Settings.EncodingModes.ThreePass)
-                line += "-b " + m.outvbitrate * 1000;
+                line += "-b:v " + m.outvbitrate * 1000;
             else if (m.encodingmode == Settings.EncodingModes.TwoPassSize ||
                 m.encodingmode == Settings.EncodingModes.ThreePassSize ||
                 m.encodingmode == Settings.EncodingModes.OnePassSize)

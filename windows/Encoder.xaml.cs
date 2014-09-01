@@ -2669,6 +2669,7 @@ namespace XviD4PSP
             }
 
             string addaudio = "";
+            string addaudio_i = "";
             if (m.outaudiostreams.Count > 0)
             {
                 string aformat = "";
@@ -2678,11 +2679,13 @@ namespace XviD4PSP
                     addaudio = " -ss " + TimeSpan.FromMilliseconds(outstream.delay * -1.0).ToString();
                     if (addaudio.Contains(".")) addaudio = addaudio.Remove(addaudio.Length - 4, 4);
                 }
-                if (!File.Exists(outstream.audiopath)) addaudio += " -i \"" + m.infilepath + "\"" + aformat + " -acodec copy" + mux_a;
-                else addaudio += " -i \"" + outstream.audiopath + "\"" + aformat + " -acodec copy" + mux_a;
+                if (!File.Exists(outstream.audiopath)) addaudio_i = " -i \"" + m.infilepath + "\"";
+                else addaudio_i = " -i \"" + outstream.audiopath + "\"";
+
+                addaudio += aformat + " -acodec copy" + mux_a;
             }
 
-            info.Arguments = "-i \"" + m.outvideofile + "\" -vcodec copy" + mux_v + addaudio + mux_o + rate + " \"" + m.outfilepath + "\"";
+            info.Arguments = "-i \"" + m.outvideofile + "\"" + addaudio_i + " -vcodec copy" + mux_v + addaudio + mux_o + rate + " \"" + m.outfilepath + "\"";
 
             //прописываем аргументы командной строки
             SetLog("");

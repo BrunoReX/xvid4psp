@@ -2,5 +2,5 @@ video codec:
 MPEG4
 
 video cli:
--vcodec mpeg4 -an -b 1500000 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag DIVX -flags +aic+umv
--vcodec mpeg4 -an -b 1500000 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag DIVX -flags +aic+umv
+-vcodec mpeg4 -an -b:v 1500000 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag DIVX -flags +aic
+-vcodec mpeg4 -an -b:v 1500000 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag DIVX -flags +aic

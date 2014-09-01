@@ -2,4 +2,4 @@ video codec:
 MPEG1
 
 video cli:
--vcodec mpeg1video -an -b 2500000 -bf 2 -mbd bits -vtag MPEG
+-vcodec mpeg1video -an -b:v 2500000 -bf 2 -mbd bits -vtag MPEG

@@ -2,4 +2,4 @@ video codec:
 MPEG2
 
 video cli:
--vcodec mpeg2video -an -b 8000000 -maxrate 9200000 -bufsize 1835000 -bf 2 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag MPEG -flags +umv
+-vcodec mpeg2video -an -b:v 8000000 -maxrate 9200000 -bufsize 1835000 -bf 2 -mbd bits -cmp 2 -subcmp 2 -mbcmp 2 -ildctcmp 2 -precmp 2 -skipcmp 2 -trellis 1 -vtag MPEG
