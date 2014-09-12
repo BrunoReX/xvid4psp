@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #	High bitdepth tools for Avisynth
-#       v1.25.1
+#       v1.26.3
 #	Author: Firesledge
 #
 #	See the documentation for the function description.
@@ -189,7 +189,7 @@ Function Dither_convert_yuv_to_rgb (clip src, string "matrix", bool "interlaced"
 	matrix    = Default (matrix, (h >= 600) ? "709" : "601")
 	mat_i     = Dither_matrix_to_index (matrix)
 	Assert ((mat_i >= 0),
-\		"Dither_convert_to_rgb: unexpected matrix " + matrix + ".")
+\		"Dither_convert_yuv_to_rgb: unexpected matrix " + matrix + ".")
 
 	#                     BT.601   BT.709  SMPTE 240M  FCC    YCgCo  BT.2020
 	kr = Select (mat_i,   0.299,   0.2126,   0.212,   0.30,    0.0,  0.2627)
@@ -506,7 +506,7 @@ Function Dither_srgb_display (clip src, int "debug",
 \	float "dar", int "darnum", int "darden",
 \	float "src_left", float "src_top", float "src_width", float "src_height",
 \	float "gamma", bool "center", bool "lsb", string "cplace",
-\	int "bkgcolor")
+\	int "bkgcolor", bool "sigmoid")
 {
 	Assert (src.IsYUV (), "Dither_srgb_display: only YUV or Y input.")
 	Assert (   (! Defined (par) && (! Defined (parnum) && ! Defined (parden)))
@@ -646,7 +646,7 @@ Function Dither_srgb_display (clip src, int "debug",
 	# Conversion to linear RGB
 	src
 	Dither_convert_yuv_to_rgb (matrix=matrix, tv_range=tv_range, output="rgb48y", lsb_in=lsb_in, chromak=chromak, noring=noring, cplace=cplace)
-	(rsz || gam_flag) ? Dither_y_gamma_to_linear (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709") : last
+	(rsz || gam_flag) ? Dither_y_gamma_to_linear (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709", sigmoid=sigmoid) : last
 
 	# Optionnal resizing
 	(rsz) ? Dither_resize16nr (dw, dh,
@@ -656,7 +656,7 @@ Function Dither_srgb_display (clip src, int "debug",
 \	: last
 
 	# Conversion to sRGB. Actually it just reencodes to BT.709.
-	(rsz || gam_flag) ? Dither_y_linear_to_gamma (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709", gcor=gamma/2.2) : last
+	(rsz || gam_flag) ? Dither_y_linear_to_gamma (tv_range_in=false, tv_range_out=false, u=1, v=1, curve="709", gcor=gamma/2.2, sigmoid=sigmoid) : last
 
 	(lsb) ? last : DitherPost (mode=6, u=1, v=1)
 	MergeRGB (SelectEvery (3, 0), SelectEvery (3, 1), SelectEvery (3, 2), pixel_type="RGB32")
@@ -1184,7 +1184,7 @@ Function Dither_lut16_lsb (clip msb, clip lsb,
 Function Dither_lut16_expr (string expr, bool gmsb)
 {
 	# We use spaces to enclose " x" because we don't want operators
-	# like "max" or "exp" to have their "x" replaced…
+	# like "max" or "exp" to have their "x" replaced...
 	repstr = (gmsb) ? " x 256 * y + " : " y 256 * x + "
 	expr = Dither_replace_string (" " + expr, " x", repstr)
 	part = Dither_expr_part (gmsb)
@@ -1363,23 +1363,29 @@ Function Dither_lutxyz8_lsb (clip src1, clip src2, clip src3,
 
 Function Dither_y_gamma_to_linear (clip src,
 \	bool "tv_range_in", bool "tv_range_out", string "curve", int "u", int "v",
-\	float "gcor")
+\	float "gcor", bool "sigmoid", float "thr", float "cont")
 {
 	src
-	Dither_linear_and_gamma (false, tv_range_in, tv_range_out, curve, u, v, gcor)
+	Dither_linear_and_gamma (false,
+\		tv_range_in, tv_range_out, curve, u, v,
+\		gcor, sigmoid, thr, cont
+\	)
 }
 
 Function Dither_y_linear_to_gamma (clip src,
 \	bool "tv_range_in", bool "tv_range_out", string "curve", int "u", int "v",
-\	float "gcor")
+\	float "gcor", bool "sigmoid", float "thr", float "cont")
 {
 	src
-	Dither_linear_and_gamma (true, tv_range_in, tv_range_out, curve, u, v, gcor)
+	Dither_linear_and_gamma (true,
+\		tv_range_in, tv_range_out, curve, u, v,
+\		gcor, sigmoid, thr, cont
+\	)
 }
 
 Function Dither_linear_and_gamma (clip src, bool l2g_flag,
 \	bool "tv_range_in", bool "tv_range_out", string "curve", int "u", int "v",
-\	float "gcor")
+\	float "gcor", bool "sigmoid", float "thr", float "cont")
 {
 	tv_range_in  = Default (tv_range_in,  true)
 	tv_range_out = Default (tv_range_out, true)
@@ -1387,6 +1393,7 @@ Function Dither_linear_and_gamma (clip src, bool l2g_flag,
 	u            = Default (u,               2)
 	v            = Default (v,               2)
 	gcor         = Default (gcor,          1.0)
+	sigmoid      = Default (sigmoid,     false)
 
 	c_num =
 \	  (curve == "srgb") ? 0
@@ -1410,17 +1417,73 @@ Function Dither_linear_and_gamma (clip src, bool l2g_flag,
 	g2l =   g2l + " " + k0 +" <= "
 \	      + g2l + " " + phi +" / "
 \	      + g2l + " " + alpha + " + 1 " + alpha + " + / " + gamma + " ^   ?"
-	g2l = g2l + " " + String (gcor) + " ^"
+	g2l = (gcor != 1.0) ? g2l + " 0 >=   " + g2l + " " + String (gcor) + " ^   " + g2l + "   ?" : g2l
+	g2l = (sigmoid) ? Dither_build_sigmoid_expr (g2l , true , thr, cont) : g2l
 
+	l2g = (sigmoid) ? Dither_build_sigmoid_expr (expr, false, thr, cont) : expr
+	l2g = (gcor != 1.0) ? l2g + " 0 >=   " + l2g + " " + String (gcor) + " ^   " + l2g + "   ?" : l2g
 	# E' = (E <= k0 / phi)   ?   E * phi   :   (E ^ (1 / gamma)) * (alpha + 1) - alpha
-	l2g = expr + " " + String (gcor) + " ^"
 	l2g =   l2g + " " + k0 + " " + phi + " / <= "
 \	      + l2g + " " + phi + " * "
 \	      + l2g + " 1 " + gamma + " / ^ " + alpha + " 1 + * " + alpha + " -   ?"
 
 	expr = (l2g_flag) ? l2g : g2l
 	expr = expr + ((tv_range_out) ? " 56064 * 4096 +" : " 65536 *")
+	src.Dither_lut16 (expr=expr, y=3, u=u, v=v)
+}
+
+
+
+Function Dither_sigmoid_direct (clip src, float "thr", float "cont", int "u", int "v")
+{
+	u = Default (u, 2)
+	v = Default (v, 2)
+
+	expr = "x 65536 /"
+	expr = Dither_build_sigmoid_expr (expr, false, thr, cont)
+	expr = expr + " 65536 *"
 	src.Dither_lut16 (yexpr=expr, y=3, u=u, v=v)
+}
+
+
+
+Function Dither_sigmoid_inverse (clip src, float "thr", float "cont", int "u", int "v")
+{
+	u = Default (u, 2)
+	v = Default (v, 2)
+
+	expr = "x 65536 /"
+	expr = Dither_build_sigmoid_expr (expr, true , thr, cont)
+	expr = expr + " 65536 *"
+	src.Dither_lut16 (yexpr=expr, y=3, u=u, v=v)
+}
+
+
+
+# Sigmoidal functions:
+# x0 = 1 / (1 + exp (cont *  thr     ))
+# x1 = 1 / (1 + exp (cont * (thr - 1)))
+# y  = (1 / (1 + exp (cont * (thr - x))) - x0) / (x1 - x0)
+# x  = thr - log (1 / (y * (x1 - x0) + x0) - 1) / cont
+Function Dither_build_sigmoid_expr (string in, bool inv, float "thr", float "cont")
+{
+	thr   = Default (thr,  0.5)
+	cont  = Default (cont, 6.5)
+	Assert ((cont > 0), "Dither_build_sigmoid_expr: cont must be strictly positive.")
+	Assert ((thr >= 0 && thr <= 1), "Dither_build_sigmoid_expr: thr must be in the 0-1 range.")
+	x0v = 1 / (1 + exp (cont *  thr     ))
+	x1v = 1 / (1 + exp (cont * (thr - 1)))
+
+	x0   = String (      x0v)
+	x1m0 = String (x1v - x0v)
+	cont = String (cont)
+	thr  = String (thr)
+
+	expr = (inv)
+\	? thr + " 1 " + in + " " + x1m0 + " * " + x0 + " + 0.000001 max / 1 - 0.000001 max log " + cont + " / -"
+\	: "1 1 " + cont + " " + thr + " " + in + " - * exp + / " + x0 + " - " + x1m0 + " /"
+
+	return (expr)
 }
 
 
@@ -1533,15 +1596,15 @@ Function DitherPre_internal_next (clip msblsbi, clip m, string flt, int k, int b
 
 
 
-Function Dither_replace_string (string str, string findstr, string repstr)
+Function Dither_replace_string (string str, string fstr, string rstr)
 {
-	strl     = LCase (str)
-	findstrl = LCase (findstr)
-	lenf     = StrLen (findstr)
+	strl  = LCase (str)
+	fstrl = LCase (fstr)
+	lenf  = StrLen (fstr)
 
-	pos = FindStr (strl, findstrl)
+	pos = FindStr (strl, fstrl)
 	pos2 = (pos <= 0) ? 1 : pos
-	rep  = (pos <= 0) ? "" : LeftStr (str, pos-1) + repstr + Dither_replace_string (MidStr (str, pos + lenf), findstr, repstr)
+	rep  = (pos <= 0) ? "" : LeftStr (str, pos-1) + rstr + Dither_replace_string (MidStr (str, pos + lenf), fstr, rstr)
 
 	return ((pos <= 0) ? str : rep)
 }
