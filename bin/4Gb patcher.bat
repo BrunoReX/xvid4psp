@@ -10,6 +10,7 @@
 :check_vs2012
 @if "%VS110COMNTOOLS%"=="" goto check_vs2013
 @call "%VS110COMNTOOLS%vsvars32.bat"
+@goto editb
 
 :check_vs2013
 @if "%VS120COMNTOOLS%"=="" goto error_no_vs
