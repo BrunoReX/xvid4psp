@@ -578,7 +578,7 @@ namespace XviD4PSP
                 object value = GetValue("ADecoders");
                 if (value == null || value.ToString().Length == 0)
                 {
-                    return "ac3=NicAC3Source; mpa=NicMPG123Source; mp1=NicMPG123Source; mp2=NicMPG123Source; mp3=bassAudioSource; wav=RaWavSource; w64=RaWavSource; dts=NicDTSSource; wma=bassAudioSource; *=bassAudioSource";
+                    return "ac3=NicAC3Source; mpa=NicMPG123Source; mp1=NicMPG123Source; mp2=NicMPG123Source; mp3=NicMPG123Source; wav=RaWavSource; w64=RaWavSource; dts=NicDTSSource; wma=DirectShowSource; *=DirectShowSource";
                 }
                 else
                 {
