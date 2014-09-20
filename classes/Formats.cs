@@ -1094,7 +1094,7 @@ namespace XviD4PSP
                 this.IsEditable = true;
                 #endregion
             }
-            else if (format == Format.ExportFormats.Mp4AppleTV)
+            else if ((format == Format.ExportFormats.Mp4AppleTV) || (format == Format.ExportFormats.Mp4AppleTV2))
             {
                 #region MP4 Apple TV
                 this.VCodecs = new string[] { "x264", "MPEG4", "XviD" };
@@ -1106,6 +1106,54 @@ namespace XviD4PSP
                 this.MinW = 16; this.MinH = 16;
                 this.MidW = 1280; this.MidH = 720;
                 this.MaxW = 1280; this.MaxH = 720;
+                this.ModW = 16; this.ModH = 8;
+                this.Resolution_IsEditable = true;
+                this.LockedAR_Methods = new string[] { "Disabled", "SAR", "Crop", "Black" };
+                this.LockedAR_Method = "Disabled";
+                this.Anamorphic = false;
+                this.Anamorphic_IsEditable = true;
+                this.Interlaced = false;
+                this.Interlaced_IsEditable = true;
+
+                this.ACodecs = new string[] { "AAC", "QAAC" };
+                this.ACodecs_IsEditable = true;
+                this.Samplerates = new string[] { "Auto" };
+                this.Samplerates_IsEditable = true;
+                this.LimitedToStereo = false;
+                this.LimitedToStereo_IsEditable = true;
+
+                this.Muxers = new string[] { "mp4box", "ffmpeg" };
+                this.Muxer = "mp4box";
+                this.CLI_ffmpeg = "";
+                this.CLI_mp4box = "";
+
+                this.Extensions = new string[] { "mp4", "m4v" };
+                this.Extension = "mp4";
+                this.Splitting = "Disabled";
+                this.DontMuxStreams = false;
+                this.DontMuxStreams_IsEditable = true;
+                this.DirectEncoding = true;
+                this.DirectEncoding_IsEditable = true;
+                this.DirectRemuxing = true;
+                this.DirectRemuxing_IsEditable = true;
+                this.LimitedTo4Gb = false;
+                this.LimitedTo4Gb_IsEditable = true;
+
+                this.IsEditable = true;
+                #endregion
+            }
+            else if (format == Format.ExportFormats.Mp4AppleTV3)
+            {
+                #region MP4 Apple TV
+                this.VCodecs = new string[] { "x264", "MPEG4", "XviD" };
+                this.VCodecs_IsEditable = true;
+                this.Framerates = new string[] { "11.000", "15.000", "18.000", "20.000", "23.976", "24.000", "25.000", "29.970" };
+                this.Framerates_IsEditable = true;
+                this.Aspects = new string[] { "1.3333 (4:3)", "1.7778 (16:9)", "1.8500", "2.3529" };
+                this.Aspects_IsEditable = true;
+                this.MinW = 16; this.MinH = 16;
+                this.MidW = 1920; this.MidH = 1080;
+                this.MaxW = 1920; this.MaxH = 1080;
                 this.ModW = 16; this.ModH = 8;
                 this.Resolution_IsEditable = true;
                 this.LockedAR_Methods = new string[] { "Disabled", "SAR", "Crop", "Black" };

@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--bitrate 768 --level 4.0 --ref 2 --partitions none --me dia --subme 1

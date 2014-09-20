@@ -1,0 +1,5 @@
+audio codec:
+AAC
+
+audio cli:
+-cbr 64000 -he

@@ -1,0 +1,5 @@
+audio codec:
+MP3
+
+audio cli:
+-m s -V 0 -q 0 --replaygain-accurate
