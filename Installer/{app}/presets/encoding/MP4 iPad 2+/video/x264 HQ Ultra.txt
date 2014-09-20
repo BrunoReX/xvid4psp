@@ -1,0 +1,5 @@
+video codec:
+x264
+
+video cli:
+--crf 21 --level 4.1 --ref 2 --partitions p8x8,b8x8,i4x4,p4x4 --subme 6 --me umh

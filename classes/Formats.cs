@@ -1094,7 +1094,7 @@ namespace XviD4PSP
                 this.IsEditable = true;
                 #endregion
             }
-            else if ((format == Format.ExportFormats.Mp4AppleTV) || (format == Format.ExportFormats.Mp4AppleTV2))
+            else if (format == Format.ExportFormats.Mp4AppleTV || format == Format.ExportFormats.Mp4AppleTV2 || format == Format.ExportFormats.Mp4iPad)
             {
                 #region MP4 Apple TV
                 this.VCodecs = new string[] { "x264", "MPEG4", "XviD" };
@@ -1142,7 +1142,7 @@ namespace XviD4PSP
                 this.IsEditable = true;
                 #endregion
             }
-            else if (format == Format.ExportFormats.Mp4AppleTV3)
+            else if (format == Format.ExportFormats.Mp4AppleTV3 || format == Format.ExportFormats.Mp4iPad2)
             {
                 #region MP4 Apple TV
                 this.VCodecs = new string[] { "x264", "MPEG4", "XviD" };

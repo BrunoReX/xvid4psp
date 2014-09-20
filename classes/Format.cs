@@ -39,6 +39,8 @@ namespace XviD4PSP
            Mp4AppleTV,
            Mp4AppleTV2,
            Mp4AppleTV3,
+           Mp4iPad,
+           Mp4iPad2,
            Mp4Prada,
            Mp4PS3,
            Mp4PSPAVCTV,
@@ -88,6 +90,8 @@ namespace XviD4PSP
            if (formatenum == ExportFormats.Mp4AppleTV) return "MP4 Apple TV";
            if (formatenum == ExportFormats.Mp4AppleTV2) return "MP4 Apple TV 2";
            if (formatenum == ExportFormats.Mp4AppleTV3) return "MP4 Apple TV 3";
+           if (formatenum == ExportFormats.Mp4iPad) return "MP4 iPad";
+           if (formatenum == ExportFormats.Mp4iPad2) return "MP4 iPad 2+";
            if (formatenum == ExportFormats.Mp4Prada) return "MP4 Prada";
            if (formatenum == ExportFormats.Mp4PS3) return "MP4 PS3 or XBOX360";
            if (formatenum == ExportFormats.Mp4PSPAVC) return "MP4 PSP AVC";
@@ -136,6 +140,8 @@ namespace XviD4PSP
            if (stringformat == "MP4 Apple TV") return ExportFormats.Mp4AppleTV;
            if (stringformat == "MP4 Apple TV 2") return ExportFormats.Mp4AppleTV2;
            if (stringformat == "MP4 Apple TV 3") return ExportFormats.Mp4AppleTV3;
+           if (stringformat == "MP4 iPad") return ExportFormats.Mp4iPad;
+           if (stringformat == "MP4 iPad 2+") return ExportFormats.Mp4iPad2;
            if (stringformat == "MP4 Prada") return ExportFormats.Mp4Prada;
            if (stringformat == "MP4 PS3 or XBOX360") return ExportFormats.Mp4PS3;
            if (stringformat == "MP4 PSP AVC") return ExportFormats.Mp4PSPAVC;
@@ -1106,6 +1112,8 @@ namespace XviD4PSP
                 m.format == ExportFormats.Mp4AppleTV ||
                 m.format == ExportFormats.Mp4AppleTV2 ||
                 m.format == ExportFormats.Mp4AppleTV3 ||
+                m.format == ExportFormats.Mp4iPad ||
+                m.format == ExportFormats.Mp4iPad2 ||
                 m.format == ExportFormats.Mp4BlackBerry8100 ||
                 m.format == ExportFormats.Mp4BlackBerry8800 ||
                 m.format == ExportFormats.Mp4BlackBerry8830 ||
@@ -1685,7 +1693,9 @@ namespace XviD4PSP
                m.format == ExportFormats.Mp4 ||
                m.format == ExportFormats.Mp4AppleTV ||
                m.format == ExportFormats.Mp4AppleTV2 ||
-               m.format == ExportFormats.Mp4AppleTV3)
+               m.format == ExportFormats.Mp4AppleTV3 ||
+               m.format == ExportFormats.Mp4iPad ||
+               m.format == ExportFormats.Mp4iPad2)
                return 3;
 
            else if (m.format == ExportFormats.Mp4PSPAVC ||
@@ -1762,6 +1772,8 @@ namespace XviD4PSP
                m.format == ExportFormats.Mp4AppleTV ||
                m.format == ExportFormats.Mp4AppleTV2 ||
                m.format == ExportFormats.Mp4AppleTV3 ||
+               m.format == ExportFormats.Mp4iPad ||
+               m.format == ExportFormats.Mp4iPad2 ||
                m.format == ExportFormats.Flv)
                return true;
            else
@@ -1777,6 +1789,8 @@ namespace XviD4PSP
                m.format == ExportFormats.Mp4AppleTV ||
                m.format == ExportFormats.Mp4AppleTV2 ||
                m.format == ExportFormats.Mp4AppleTV3 ||
+               m.format == ExportFormats.Mp4iPad ||
+               m.format == ExportFormats.Mp4iPad2 ||
                m.format == ExportFormats.Flv)
                return true;
            else
@@ -1839,6 +1853,8 @@ namespace XviD4PSP
                m.format == ExportFormats.Mp4AppleTV ||
                m.format == ExportFormats.Mp4AppleTV2 ||
                m.format == ExportFormats.Mp4AppleTV3 ||
+               m.format == ExportFormats.Mp4iPad ||
+               m.format == ExportFormats.Mp4iPad2 ||
                m.format == ExportFormats.Mov ||
                m.format == ExportFormats.Mp4Archos5G ||
                m.format == ExportFormats.Mp4ToshibaG900)
@@ -1859,12 +1875,14 @@ namespace XviD4PSP
                m.format == ExportFormats.Mp4PSPAVCTV ||
                m.format == ExportFormats.Mov)
                return "3.0";
-           else if (m.format == ExportFormats.Mp4AppleTV2)
+           else if (m.format == ExportFormats.Mp4AppleTV2 ||
+               m.format == ExportFormats.Mp4iPad)
                return "3.1";
            else if (m.format == ExportFormats.Mp4PS3 ||
                m.format == ExportFormats.M2TS ||
                m.format == ExportFormats.TS ||
-               m.format == ExportFormats.BluRay)
+               m.format == ExportFormats.BluRay ||
+               m.format == ExportFormats.Mp4iPad2)
                return "4.1";
            else if (m.format == ExportFormats.Mp4Archos5G ||
                m.format == ExportFormats.Mp4AppleTV3)
