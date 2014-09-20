@@ -106,8 +106,8 @@ FileName: "{app}\apps\MP4Box\Yamb.cfg"; Section: "Main"; Key: "MKVextract_path";
 FileName: "{app}\apps\MP4Box\Yamb.cfg"; Section: "Main"; Key: "MP4Box_path"; String: "{app}\apps\MP4Box\MP4Box.exe";
 
 [Run]
-Filename: "{app}\XviD4PSP.exe"; WorkingDir: "{app}"; Description: "{cm:LaunchProgram,XviD4PSP 5}"; Flags: postinstall unchecked skipifsilent nowait
-Filename: "{tmp}\vcredist_x86.exe"; Parameters: "/q:a"; WorkingDir: "{app}"; Description: "{cm:vcredist}"; Flags: shellexec postinstall skipifsilent nowait
+Filename: "{app}\XviD4PSP.exe"; WorkingDir: "{app}"; Description: "{cm:LaunchProgram,XviD4PSP 5}"; Flags: postinstall unchecked skipifsilent nowait runascurrentuser
+Filename: "{tmp}\vcredist_x86.exe"; Parameters: "/q:a"; WorkingDir: "{app}"; Description: "{cm:vcredist}"; Flags: shellexec postinstall skipifsilent nowait runascurrentuser
 Filename: "{app}\Changelog_{cm:ChangelogLang}.txt"; WorkingDir: "{app}"; Description: "{cm:ViewChangelog}"; Flags: shellexec postinstall skipifsilent nowait
 Filename: "{app}\Changelog_installer_{cm:ChangelogLangInst}.txt"; WorkingDir: "{app}"; Description: "{cm:ViewChangelogInst}"; Flags: shellexec postinstall unchecked skipifsilent nowait
 Filename: "{app}\License_{cm:LicenseLang}.txt"; WorkingDir: "{app}"; Description: "{cm:ViewLicense}"; Flags: shellexec postinstall unchecked skipifsilent nowait
@@ -127,7 +127,7 @@ Name: "{group}\Tools\VirtualDubMod"; Filename: "{app}\apps\VirtualDubMod\Virtual
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
-Name: "reset_settings"; Description: "{cm:ResetSettings}"; GroupDescription: "{cm:Other}";
+Name: "reset_settings"; Description: "{cm:ResetSettings}"; GroupDescription: "{cm:Other}"; Flags: unchecked;
 
 [Components]
 Name: "main"; Description: "XviD4PSP 5"; Types: "custom compact full"; Flags: fixed;
