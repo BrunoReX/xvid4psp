@@ -2,17 +2,17 @@ This is a FFmpeg Win32 static build by Kyle Schwarz.
 
 Zeranoe's FFmpeg Builds Home Page: <http://ffmpeg.zeranoe.com/builds/>
 
-This build was compiled on: Mar 17 2014, at: 22:01:34
+This build was compiled on: Sep 24 2014, at: 22:26:49
 
-FFmpeg version: 2014-03-18 git-aa86ccc
-  libavutil      52. 67.100 / 52. 67.100
-  libavcodec     55. 52.102 / 55. 52.102
-  libavformat    55. 34.101 / 55. 34.101
-  libavdevice    55. 11.100 / 55. 11.100
-  libavfilter     4.  3.100 /  4.  3.100
-  libswscale      2.  5.101 /  2.  5.101
-  libswresample   0. 18.100 /  0. 18.100
-  libpostproc    52.  3.100 / 52.  3.100
+FFmpeg version: 2014-09-24 git-4f4f08e
+  libavutil      54.  7.101 / 54.  7.101
+  libavcodec     56.  1.101 / 56.  1.101
+  libavformat    56.  5.100 / 56.  5.100
+  libavdevice    56.  1.100 / 56.  1.100
+  libavfilter     5.  1.102 /  5.  1.102
+  libswscale      3.  1.100 /  3.  1.100
+  libswresample   1.  1.100 /  1.  1.100
+  libpostproc    53.  1.100 / 53.  1.100
 
 This FFmpeg build was configured with:
   --enable-gpl
@@ -26,8 +26,10 @@ This FFmpeg build was configured with:
   --enable-iconv
   --enable-libass
   --enable-libbluray
+  --enable-libbs2b
   --enable-libcaca
   --enable-libfreetype
+  --enable-libgme
   --enable-libgsm
   --enable-libilbc
   --enable-libmodplug
@@ -48,6 +50,7 @@ This FFmpeg build was configured with:
   --enable-libvorbis
   --enable-libvpx
   --enable-libwavpack
+  --enable-libwebp
   --enable-libx264
   --enable-libx265
   --enable-libxavs
@@ -56,22 +59,24 @@ This FFmpeg build was configured with:
 
 This build was compiled with the following external libraries:
   bzip2 1.0.6 <http://bzip.org/>
-  Fontconfig 2.10.95 <http://freedesktop.org/wiki/Software/fontconfig>
+  Fontconfig 2.11.1 <http://freedesktop.org/wiki/Software/fontconfig>
   Frei0r 20130909-git-10d8360 <http://frei0r.dyne.org/>
-  GnuTLS 3.2.11 <http://gnutls.org/>
+  GnuTLS 3.2.15 <http://gnutls.org/>
   libiconv 1.14 <http://gnu.org/software/libiconv/>
-  libass 0.10.2 <http://code.google.com/p/libass/>
-  libbluray 0.5.0 <http://videolan.org/developers/libbluray.html>
+  libass 0.11.2 <http://code.google.com/p/libass/>
+  libbluray 0.6.1 <http://videolan.org/developers/libbluray.html>
+  libbs2b 3.1.0 <http://bs2b.sourceforge.net/>
   libcaca 0.99.beta18 <http://caca.zoy.org/wiki/libcaca>
-  FreeType 2.5.2 <http://freetype.sourceforge.net/>
+  FreeType 2.5.3 <http://freetype.sourceforge.net/>
+  Game Music Emu 0.6.0 <http://code.google.com/p/game-music-emu/>
   GSM 1.0.13-4 <http://packages.debian.org/source/squeeze/libgsm>
   iLBC 20120913-git-b5f9b10 <https://github.com/dekkers/libilbc/>
-  Modplug-XMMS 0.8.8.4 <http://modplug-xmms.sourceforge.net/>
+  Modplug-XMMS 0.8.8.5 <http://modplug-xmms.sourceforge.net/>
   LAME 3.99.5 <http://lame.sourceforge.net/>
   OpenCORE AMR 0.1.3 <http://sourceforge.net/projects/opencore-amr/>
   OpenJPEG 1.5.1 <http://www.openjpeg.org/>
   Opus 1.1 <http://opus-codec.org/>
-  RTMPDump 20131205-git-dc76f0a <http://rtmpdump.mplayerhq.hu/>
+  RTMPDump 20140707-git-a1900c3 <http://rtmpdump.mplayerhq.hu/>
   Schroedinger 1.0.11 <http://diracvideo.org/>
   libsoxr 0.1.1 <http://sourceforge.net/projects/soxr/>
   Speex 1.2rc1 <http://speex.org/>
@@ -83,17 +88,18 @@ This build was compiled with the following external libraries:
   Vorbis 1.3.4 <http://vorbis.com/>
   vpx 1.3.0 <http://webmproject.org/>
   WavPack 4.70.0 <http://wavpack.com/>
-  x264 20140313-git-d6b4e63 <http://videolan.org/developers/x264.html>
-  x265 20140314-hg-ed48f84e <http://x265.org/>
+  WebP 0.4.0 <https://developers.google.com/speed/webp/>
+  x264 20140826-git-dd79a61 <http://videolan.org/developers/x264.html>
+  x265 1.3 <http://x265.org/>
   XAVS svn-r55 <http://xavs.sourceforge.net/>
-  Xvid 1.3.2 <http://xvid.org/>
+  Xvid 1.3.3 <http://xvid.org/>
   zlib 1.2.8 <http://zlib.net/>
 
 The source code for this FFmpeg build can be found at: <http://ffmpeg.zeranoe.com/builds/source/>
 
 This build was compiled on Debian jessie/sid (64-bit): <http://www.debian.org/>
 
-GCC 4.8.2 was used to compile this FFmpeg build: <http://gcc.gnu.org/>
+GCC 4.9.1 was used to compile this FFmpeg build: <http://gcc.gnu.org/>
 
 This build was compiled using the MinGW-w64 toolchain: <http://mingw-w64.sourceforge.net/>
 
