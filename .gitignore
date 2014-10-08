@@ -9,5 +9,13 @@
 /.git-rewrite
 /bin
 /obj
+/AutoCrop/bin
+/AutoCrop/obj
 /AviSynthWrapper/bin
 /AviSynthWrapper/obj
+/Launcher/bin
+/Launcher/obj
+/SafeOpenDialog/bin
+/SafeOpenDialog/obj
+/WPF_VideoPlayer/bin
+/WPF_VideoPlayer/obj
