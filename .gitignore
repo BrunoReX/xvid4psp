@@ -9,3 +9,5 @@
 /.git-rewrite
 /bin
 /obj
+/AviSynthWrapper/bin
+/AviSynthWrapper/obj
